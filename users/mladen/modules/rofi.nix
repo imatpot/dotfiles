@@ -1,0 +1,5 @@
+{
+  rofi = {
+    enable = true;
+  };
+}
