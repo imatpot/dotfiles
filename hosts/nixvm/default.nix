@@ -4,7 +4,7 @@
   imports = [
     ./hardware.nix
 
-    ../../common/types/server.nix
+    ../../common/types/desktop.nix
 
     ../../users/mladen
   ];
