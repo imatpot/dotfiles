@@ -40,7 +40,7 @@
     };
   };
 
-  services.xserver.videoDrivers = [ "nouveau" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Minimal compatibility version, or something like that. Ne need to touch
   # https://nixos.org/manual/nixos/stable/options.html#opt-system.stateVersion

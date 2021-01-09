@@ -31,6 +31,7 @@ in {
   # Do not install optional default packages (e.g. perl)
   environment.defaultPackages = [];
 
+  programs.ssh.startAgent = true;
   services.openssh = {
     enable = true;
     permitRootLogin = "yes";
