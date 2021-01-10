@@ -1,5 +1,6 @@
 let
   mod = "super";
+  shutter-options = "-o '%Y-%m-%d_%H%d.png' --remove_cursor ";
 
 in {
   sxhkd = {
@@ -42,8 +43,17 @@ in {
       # Program launcher
       "${mod} + @space" = "rofi -modi drun -show drun -show-icons";
 
-      # Screenshot
-      "Print" = "shutter";
+      # Fullscreen screenshot
+      "Print" = "shutter -f ${shutter-options}";
+
+      # Active window screenshot
+      "alt + Print" = "shutter -a ${shutter-options}";
+
+      # Selection screenshot
+      "shift + Print" = "shutter -s ${shutter-options}";
+
+      # Open shutter in a window
+      "super + Print" = "shutter";
 
       # Reload sxhkd configuration files
       "${mod} + Escape" = "pkill -USR1 -x sxhkd";
