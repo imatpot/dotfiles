@@ -14,9 +14,9 @@
       "frc" = "code ~/.config/fish/config.fish";
       "sfrc" = "source ~/.config/fish/config.fish";
 
-      "nix-generations" = "nix-env -p /nix/var/nix/profiles/system --list-generations";
-      "nixg" = "nix-env -p /nix/var/nix/profiles/system --list-generations";
-      "nxg" = "nix-env -p /nix/var/nix/profiles/system --list-generations";
+      "nix-generations" = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
+      "nixg" = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
+      "nxg" = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
 
       "nxrs" = "sudo nixos-rebuild switch";
       "nixrs" = "sudo nixos-rebuild switch";

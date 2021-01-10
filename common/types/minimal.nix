@@ -52,7 +52,6 @@ in {
     # Some terminal-based system maintenance
     ncdu
     gotop
-    pciutils
 
     neofetch # NixOS flex
   ];

@@ -29,6 +29,10 @@
       # Serif fonts I like
       libertine
       charis-sil
+
+      # Sans fonts I like
+      montserrat
+      roboto
     ];
 
     # Fonts futher down the lists are fallbacks
