@@ -47,9 +47,7 @@ in {
 
     vim
     nano
-
     git
-    thefuck # I have unlucky fingers
 
     # Some terminal-based system maintenance
     ncdu

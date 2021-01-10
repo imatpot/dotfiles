@@ -8,9 +8,6 @@
 
       "ll" = "ls -la --group-directories-first";
       "cd.." = "cd ..";
-
-      "fuck" = "thefuck";
-      "please" = "thefuck";
     };
 
     shellAbbrs = {
@@ -33,6 +30,8 @@
 
       "pub" = "flutter pub";
       "br" = "flutter pub run build_runner --delete-conflicting-outputs";
+
+      "xev" = "nix-shell -p xorg.xev --run 'xev -event keyboard'";
     };
 
     functions = {

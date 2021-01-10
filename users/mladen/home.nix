@@ -15,6 +15,7 @@ with lib; {
         spotify
         discord
         bitwarden
+        shutter
       ];
 
   home-manager.users.mladen = {
