@@ -42,6 +42,9 @@ in {
       # Program launcher
       "${mod} + @space" = "rofi -modi drun -show drun -show-icons";
 
+      # Screenshot
+      "Print" = "shutter";
+
       # Reload sxhkd configuration files
       "${mod} + Escape" = "pkill -USR1 -x sxhkd";
 
