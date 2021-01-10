@@ -1,6 +1,6 @@
 let
   mod = "super";
-  shutter-options = "-o '%Y-%m-%d_%H%d.png' --remove_cursor ";
+  shutter-options = "-o '%Y-%m-%d_%H%d%S.png' --remove_cursor";
 
 in {
   sxhkd = {
