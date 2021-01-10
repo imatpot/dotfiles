@@ -8,6 +8,31 @@ in {
 
     keybindings = {
       # ---------------------- #
+      # Media controls         #
+      # ---------------------- #
+
+      # Mute
+      "XF86AudioMute" = "amixer -q set Master toggle";
+
+      # Volume down
+      "XF86AudioLowerVolume" = "amixer -q set Master 5%- unmute";
+
+      # Volume up
+      "XF86AudioRaiseVolume" = "amixer -q set Master 5%+ unmute";
+
+      # Previous
+      "XF86AudioPrev" = "playerctl previous";
+
+      # Play / Pause
+      "XF86AudioPlay" = "playerctl play-pause";
+
+      # Next
+      "XF86AudioNext" = "playerctl next";
+
+      # Stop
+      "XF86AudioStop" = "playerctl stop";
+
+      # ---------------------- #
       # WM-independent hotkeys #
       # ---------------------- #
 
@@ -28,7 +53,7 @@ in {
       "${mod} + alt + {q,r}" = "bspc {quit,wm -r}";
 
       # Close and kill
-      "${mod} + {_,shift + }w" = "bspc node -{c,k}";
+      "${mod} + {_,shift + }q" = "bspc node -{c,k}";
 
       # Alternate between the tiled and monocle layouts
       "${mod} + m" = "bspc desktop -l next";

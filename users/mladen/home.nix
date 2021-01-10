@@ -4,7 +4,6 @@ let
   home-manager-tar = https://github.com/nix-community/home-manager/tarball/release-20.09;
 
 in
-
 with lib; {
   imports = [
     (import "${builtins.fetchTarball home-manager-tar}/nixos")
