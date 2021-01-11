@@ -2,6 +2,7 @@
 
 let
   home-manager-tar = https://github.com/nix-community/home-manager/tarball/release-20.09;
+  polybar = import ./services/polybar.nix { inherit pkgs; };
 
 in
 with lib; {
@@ -29,7 +30,10 @@ with lib; {
         (import ./services/sxhkd.nix).sxhkd;
 
       polybar = mkIf config.services.xserver.enable
-        (import ./services/polybar.nix).polybar;
+        polybar.polybar;
+
+      picom = mkIf config.services.xserver.enable
+        (import ./services/picom.nix).picom;
     };
 
     programs = {
