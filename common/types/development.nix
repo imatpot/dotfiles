@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./minimal.nix
+    ./base.nix
     ../modules/docker.nix
   ];
 
