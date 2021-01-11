@@ -3,6 +3,7 @@
 let
   home-manager-tar = https://github.com/nix-community/home-manager/tarball/release-20.09;
   polybar = import ./services/polybar.nix { inherit pkgs; };
+  picom = import ./services/picom.nix { inherit pkgs; };
 
 in
 with lib; {
@@ -33,7 +34,7 @@ with lib; {
         polybar.polybar;
 
       picom = mkIf config.services.xserver.enable
-        (import ./services/picom.nix).picom;
+        picom.picom;
     };
 
     programs = {
