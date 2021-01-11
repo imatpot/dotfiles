@@ -33,6 +33,9 @@
       # Sans fonts I like
       montserrat
       roboto
+
+      # Icon font -- https://www.nerdfonts.com/
+      nerdfonts
     ];
 
     # Fonts futher down the lists are fallbacks
