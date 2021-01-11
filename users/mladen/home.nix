@@ -22,23 +22,23 @@ with lib; {
     home.keyboard.layout = "ch(de_nodeadkeys)";
 
     xsession = mkIf config.services.xserver.enable
-      (import ./modules/xsession.nix).xsession;
+      (import ./programs/xsession.nix).xsession;
 
     services = {
       sxhkd = mkIf config.services.xserver.enable
-        (import ./modules/sxhkd.nix).sxhkd;
+        (import ./services/sxhkd.nix).sxhkd;
 
       polybar = mkIf config.services.xserver.enable
-        (import ./modules/polybar.nix).polybar;
+        (import ./services/polybar.nix).polybar;
     };
 
     programs = {
-      inherit (import ./modules/git.nix) git;
-      inherit (import ./modules/fish.nix) fish;
-      inherit (import ./modules/starship.nix) starship;
+      inherit (import ./programs/git.nix) git;
+      inherit (import ./programs/fish.nix) fish;
+      inherit (import ./programs/starship.nix) starship;
 
       rofi = mkIf config.services.xserver.enable
-        (import ./modules/rofi.nix).rofi;
+        (import ./programs/rofi.nix).rofi;
     };
   };
 }
