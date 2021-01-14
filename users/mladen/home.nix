@@ -18,6 +18,7 @@ with lib; {
         discord
         bitwarden
         shutter
+        feh
       ];
 
   home-manager.users.mladen = {

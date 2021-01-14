@@ -11,7 +11,7 @@
       "colors" = {
         bright = "#fff";
         dim = "#333";
-        background = "#bb000000";
+        background = "#ee000000";
       };
 
       "bar/top" = {
@@ -28,7 +28,7 @@
 
         modules-left = "bspwm"; # TODO: Active media (Spotify)
         modules-center = "window";
-        modules-right = "audio date";
+        modules-right = "audio date time";
 
         background = "\${colors.background}";
 
@@ -72,16 +72,22 @@
 
         sink = "alsa_output.usb-Logitech_G433_Gaming_Headset_000000000000-00.analog-stereo";
 
-        label-volume = "%{T3}墳%{T2} %percentage%%";
-        label-muted = "%{T3}婢%{T2} %percentage%%";
+        label-volume = "%{T3}墳%{T2}  %percentage%%";
+        label-muted = "%{T3}婢%{T2}  %percentage%%";
         label-muted-foreground = "\${colors.dim}";
       };
 
       "module/date" = {
         type = "internal/date";
         date = "%F";
+        label = "  %date%";
+        label-font = 2;
+      };
+
+      "module/time" = {
+        type = "internal/date";
         time = "%H:%M";
-        label = "%date%  %time%";
+        label = "  %time%";
         label-font = 2;
       };
     };

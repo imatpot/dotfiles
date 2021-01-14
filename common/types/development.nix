@@ -10,19 +10,21 @@
 
   # Unstables are more up-to-date
   environment.systemPackages =
-    with pkgs;
+    with pkgs.unstable;
 
     let
       common = [
-        unstable.nodejs
-        unstable.python39
+        nodejs
+        python39
 
-        unstable.flutter
-        unstable.texlive.combined.scheme-basic
+        flutter
+        texlive.combined.scheme-basic
+
+        rnix-lsp
       ];
       xorg = [
-        unstable.vscode
-        unstable.android-studio
+        vscode
+        android-studio
       ];
 
     in common ++ (
