@@ -17,6 +17,9 @@
         nodejs
         python39
 
+        rustup
+        gcc
+
         flutter
         texlive.combined.scheme-small
 
