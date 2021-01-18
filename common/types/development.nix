@@ -18,7 +18,7 @@
         python39
 
         flutter
-        texlive.combined.scheme-basic
+        texlive.combined.scheme-small
 
         rnix-lsp
       ];

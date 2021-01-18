@@ -41,7 +41,10 @@ in {
       "${mod} + Return" = "alacritty";
 
       # Program launcher
-      "${mod} + @space" = "rofi -modi drun -show drun -show-icons";
+      "${mod} + @space" = "rofi -modi drun -show drun -show-icons -scroll-method 1 -diable-history";
+
+      # Emoji picker
+      "${mod} + period" = "rofi -modi emoji -show emoji";
 
       # Fullscreen screenshot
       "Print" = "shutter -f ${shutter-options}";

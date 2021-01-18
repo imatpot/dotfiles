@@ -4,6 +4,7 @@ let
   home-manager-tar = https://github.com/nix-community/home-manager/tarball/release-20.09;
   polybar = import ./services/polybar.nix { inherit pkgs; };
   picom = import ./services/picom.nix { inherit pkgs; };
+  firefox = import ./programs/firefox.nix { inherit pkgs; };
 
 in
 with lib; {
@@ -19,6 +20,8 @@ with lib; {
         bitwarden
         shutter
         feh
+
+        rofi-emoji # I need to do modules differently... rofi.nix
       ];
 
   home-manager.users.mladen = {
@@ -45,6 +48,9 @@ with lib; {
 
       rofi = mkIf config.services.xserver.enable
         (import ./programs/rofi.nix).rofi;
+
+      firefox = mkIf config.services.xserver.enable
+        firefox.firefox;
     };
   };
 }
