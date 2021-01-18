@@ -30,9 +30,10 @@
         android-studio
       ];
 
-    in common ++ (
-      if config.services.xserver.enable
+    in
+      common ++ (
+        if config.services.xserver.enable
         then xorg
         else []
-    );
+      );
 }

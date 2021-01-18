@@ -2,7 +2,8 @@ let
   mod = "super";
   shutter-options = "-o '%Y-%m-%d_%H%d%S.png' --remove_cursor";
 
-in {
+in
+{
   sxhkd = {
     enable = true;
     extraPath = "/run/current-system/sw/bin";

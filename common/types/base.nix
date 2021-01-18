@@ -4,7 +4,8 @@ let
   unstable-tar = https://github.com/nixos/nixpkgs/tarball/nixos-unstable;
   nur-tar = https://github.com/nix-community/NUR/tarball/master;
 
-in {
+in
+{
   nixpkgs.config = {
     allowUnfree = true;
 

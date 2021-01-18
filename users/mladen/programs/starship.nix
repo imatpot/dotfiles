@@ -2,7 +2,7 @@
   starship = {
     enable = true;
 
-    settings =  {
+    settings = {
       character = {
         symbol = "»";
       };

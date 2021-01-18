@@ -14,7 +14,8 @@
   # Set up a static IP
   networking = {
     useDHCP = false;
-    interfaces.eno1 = {  # TODO: eno1 is likely not the correct name
+    interfaces.eno1 = {
+      # TODO: eno1 is likely not the correct name
       useDHCP = false;
       ipv4.addresses = [
         {
