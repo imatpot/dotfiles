@@ -12,7 +12,7 @@
 
   networking = {
     hostName = "hsrv";
-    hostId = "669d3002";
+    hostId = "3295f9f8";
 
     # Set up static IP
     useDHCP = false;
@@ -40,6 +40,15 @@
         "1.0.0.1"
       ];
     };
+  };
+
+  # Ignore laptop lid
+  services.logind.lidSwitch = "ignore";
+
+  # Run garbage collection every day at 03:00
+  nix.gc = {
+    automatic = true;
+    dates = "03:00";
   };
 
   # Minimal compatibility version. Ne need to touch.
