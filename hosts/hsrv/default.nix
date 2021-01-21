@@ -5,17 +5,18 @@
     ./hardware.nix
 
     ../../common/types/server.nix
+    ../../common/modules/zfs.nix
 
     ../../users/mladen
   ];
 
-  networking.hostName = "hsrv";
-
-  # Set up a static IP
   networking = {
+    hostName = "hsrv";
+    hostId = "669d3002";
+
+    # Set up static IP
     useDHCP = false;
-    interfaces.eno1 = {
-      # TODO: eno1 is likely not the correct name
+    interfaces.enp0s31f6 = {
       useDHCP = false;
       ipv4.addresses = [
         {
@@ -27,7 +28,7 @@
 
     defaultGateway = {
       address = "192.168.1.1";
-      interface = "eno1"; # TODO: This is likely not the correct name
+      interface = "enp0s31f6";
     };
 
     networkmanager = {
@@ -40,8 +41,6 @@
       ];
     };
   };
-
-  services.xserver.videoDrivers = [ "nouveau" ];
 
   # Minimal compatibility version. Ne need to touch.
   # https://nixos.org/manual/nixos/stable/options.html#opt-system.stateVersion
