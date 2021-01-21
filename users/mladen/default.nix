@@ -12,6 +12,7 @@
       "video"
       "audio"
       "users"
+      "docker"
     ];
 
     isNormalUser = true;
