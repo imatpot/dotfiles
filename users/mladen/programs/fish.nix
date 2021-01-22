@@ -35,6 +35,7 @@
     };
 
     functions = {
+      mkcd = "mkdir $argv[1] && cd $argv[1]";
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
       gitp = ''
         if [ $argv[1] = "ush" ]
