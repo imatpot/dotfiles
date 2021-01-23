@@ -14,6 +14,9 @@
     hostName = "hsrv";
     hostId = "3295f9f8";
 
+    # Needed to run a Docker container with those ports exposed with `--network host`
+    firewall.allowedTCPPorts = [ 80 81 443 ];
+
     # Set up static IP
     useDHCP = false;
     interfaces.enp0s31f6 = {
