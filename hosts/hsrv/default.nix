@@ -5,6 +5,7 @@
     ./hardware.nix
 
     ../../common/types/server.nix
+    ../../common/modules/samba.nix
     ../../common/modules/zfs.nix
 
     ../../users/mladen
@@ -14,8 +15,10 @@
     hostName = "hsrv";
     hostId = "3295f9f8";
 
-    # Needed to run a Docker container with those ports exposed with `--network host`
-    firewall.allowedTCPPorts = [ 80 81 443 ];
+    # It is secured well enough from my computer illiterate family.
+    # Other required ports are explicitly redirecting to the host.
+    # It's just more convenient to deal with it this way ¯\_(?)_/¯
+    firewall.enable = false;
 
     # Set up static IP
     useDHCP = false;
