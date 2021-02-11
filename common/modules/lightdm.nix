@@ -1,20 +1,20 @@
 {
   displayManager = {
-    defaultSession = "none+bspwm";
+    defaultSession = "gnome";
 
     lightdm = {
       enable = true;
 
-      # greeters.tiny = {
-      #   enable = true;
+      greeters.tiny = {
+        enable = false;
 
-      #   label = {
-      #     user = "username";
-      #     pass = "password";
-      #   };
+        label = {
+          user = "username";
+          pass = "password";
+        };
 
-      #   extraConfig = ''''; # TODO: Make Tiny prettier
-      # };
+        extraConfig = ''''; # TODO: Make Tiny prettier
+      };
     };
   };
 }

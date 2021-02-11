@@ -42,6 +42,18 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # Mount Samba share of my server at home
+  fileSystems."/mnt/home-server" = {
+    device = "//192.168.1.69/share";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+    in
+      [ "${automount_opts},credentials=/home/mladen/smb-secrets" ];
+  };
+
   # Minimal compatibility version, or something like that. Ne need to touch
   # https://nixos.org/manual/nixos/stable/options.html#opt-system.stateVersion
   system.stateVersion = "20.09";

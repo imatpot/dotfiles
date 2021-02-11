@@ -5,7 +5,7 @@
     # TODO: Download files declaretively (also not into Downloads)
     startupPrograms = [
       "sxhkd"
-      "feh --bg-center /home/mladen/Downloads/nixos-nord.png"
+      "feh --bg-center /home/mladen/Downloads/firewatch.png"
     ];
 
     monitors = {
@@ -27,7 +27,7 @@
     rules = {
       discord = {
         desktop = "^2";
-        follow = true;
+        follow = false;
       };
     };
   };

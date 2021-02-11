@@ -1,11 +1,20 @@
 { pkgs, ... }:
 
+let
+  gnome = import ./gnome.nix { inherit pkgs; };
+
+in
 {
+  environment.systemPackages = gnome.gnomeRelatedPackages;
+
   services.xserver = {
     enable = true;
 
-    inherit (import ./lightdm.nix) displayManager;
-    inherit (import ./bspwm.nix) windowManager;
+    inherit (import ./gdm.nix) displayManager;
+    # inherit (import ./lightdm.nix) displayManager;
+    # inherit (import ./bspwm) windowManager;
+
+    desktopManager = gnome.desktopManager;
   };
 
   fonts = {

@@ -3,6 +3,6 @@
     enable = true;
     numlock.enable = true;
 
-    inherit (import ./bspwm.nix) windowManager;
+    # inherit (import ./bspwm.nix) windowManager;
   };
 }
