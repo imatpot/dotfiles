@@ -9,6 +9,10 @@
     ../../users/mladen
   ];
 
+  # I have some newer hardware
+  # There is an issue in the stable channel with 5.10 at the time of writing, hence unstable
+  boot.kernelPackages = pkgs.unstable.linuxPackages_5_10;
+
   networking.hostName = "shinobi";
 
   networking = {

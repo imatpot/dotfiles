@@ -22,7 +22,8 @@
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.arc-menu
 
-      # Gotta wait for NixOS 21.05 to add the "\u characters in JSON" support
+      # Gotta wait for NixOS 21.05 to add the "\u characters in JSON" support... :(
       # nur.repos.piegames.gnome38Extensions.shelltile-657
+      # nur.repos.piegames.gnome36Extensions.no-screen-blank-2413
     ];
 }

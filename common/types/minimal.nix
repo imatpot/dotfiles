@@ -7,9 +7,6 @@
     ../wheel-nopasswd.nix
   ];
 
-  # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_5_9;
-
   # Do not install optional default packages (e.g. perl)
   environment.defaultPackages = [];
 
