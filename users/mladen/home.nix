@@ -21,7 +21,7 @@ in
         ];
 
     services = {
-      inherit (import ./services/syncthing.nix) syncthing;
+      syncthing = mkIf config.services.xserver.enable (import ./services/syncthing.nix).syncthing;
     };
 
     home-manager.users.mladen = {
