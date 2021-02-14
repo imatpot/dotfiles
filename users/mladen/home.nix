@@ -3,6 +3,7 @@
 let
   home-manager = https://github.com/nix-community/home-manager/tarball/release-20.09;
   firefox = import ./programs/firefox.nix { inherit pkgs; };
+  gui = config.services.xserver.enable;
 
 in
   with lib; {
@@ -12,7 +13,7 @@ in
 
     environment.systemPackages =
       with pkgs;
-      mkIf config.services.xserver.enable
+      mkIf gui
         [
           spotify
           discord
@@ -21,7 +22,7 @@ in
         ];
 
     services = {
-      syncthing = mkIf config.services.xserver.enable (import ./services/syncthing.nix).syncthing;
+      syncthing = mkIf gui (import ./services/syncthing.nix).syncthing;
     };
 
     home-manager.users.mladen = {
@@ -35,8 +36,7 @@ in
         inherit (import ./programs/fish.nix) fish;
         inherit (import ./programs/starship.nix) starship;
 
-        firefox = mkIf config.services.xserver.enable
-          firefox.firefox;
+        firefox = mkIf gui firefox.firefox;
       };
     };
   }
