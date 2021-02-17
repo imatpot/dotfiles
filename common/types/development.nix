@@ -21,7 +21,10 @@
         gcc
 
         flutter
-        texlive.combined.scheme-small
+
+        # Yes, it's big.
+        # But it works offline, which I need on the go sometimes.
+        texlive.combined.scheme-full
 
         rnix-lsp
       ];
