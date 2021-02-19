@@ -3,6 +3,7 @@
 let
   home-manager = https://github.com/nix-community/home-manager/tarball/release-20.09;
   firefox = import ./programs/firefox.nix { inherit pkgs; };
+  npm-tweaks = import ./programs/npm-tweaks.nix;
   gui = config.services.xserver.enable;
 
 in
@@ -19,6 +20,7 @@ in
           discord
           bitwarden
           shutter
+          libreoffice
         ];
 
     services = {
@@ -37,6 +39,14 @@ in
         inherit (import ./programs/starship.nix) starship;
 
         firefox = mkIf gui firefox.firefox;
+      };
+
+      home = {
+        sessionPath = [ npm-tweaks.path ];
+
+        file = {
+          ".npmrc".text = npm-tweaks.npmrc;
+        };
       };
     };
   }
