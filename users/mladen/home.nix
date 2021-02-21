@@ -37,6 +37,7 @@ in
         inherit (import ./programs/git.nix) git;
         inherit (import ./programs/fish.nix) fish;
         inherit (import ./programs/starship.nix) starship;
+        inherit (import ./programs/alacritty.nix) alacritty;
 
         firefox = mkIf gui firefox.firefox;
       };
