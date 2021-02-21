@@ -21,6 +21,7 @@ in
           bitwarden
           shutter
           libreoffice
+          gimp
         ];
 
     services = {
