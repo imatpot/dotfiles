@@ -14,6 +14,7 @@
 
   environment.systemPackages = with pkgs; [
     wget
+    bind
     vim
     nano
     git

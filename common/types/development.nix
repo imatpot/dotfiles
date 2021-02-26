@@ -1,19 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-{
-  imports = [
-    ./base.nix
-    ../modules/docker.nix
-  ];
+let
+  gui = config.services.xserver.enable;
 
-  programs.adb.enable = true;
+in
+  with lib; {
+    imports = [
+      ./base.nix
+      ../modules/docker.nix
+    ];
 
-  # Unstables are more up-to-date
-  environment.systemPackages =
-    with pkgs.unstable;
+    programs.adb.enable = true;
 
-    let
-      common = [
+    # Unstables are more up-to-date
+    environment.systemPackages =
+      with pkgs.unstable; [
         nodejs
         python39
 
@@ -27,16 +28,11 @@
         texlive.combined.scheme-full
 
         rnix-lsp
-      ];
-      xorg = [
-        vscode
-        android-studio
-      ];
-
-    in
-      common ++ (
-        if config.services.xserver.enable
-        then xorg
-        else []
+      ] ++ (
+        if gui then
+          [
+            vscode
+            android-studio
+          ] else []
       );
-}
+  }

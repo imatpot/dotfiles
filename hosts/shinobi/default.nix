@@ -46,7 +46,7 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Mount Samba share of my server at home
+  # Mount Samba share from my home server
   fileSystems."/mnt/home-server" = {
     device = "//192.168.1.69/share";
     fsType = "cifs";
