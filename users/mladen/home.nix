@@ -10,8 +10,10 @@ in
       (import "${builtins.fetchTarball home-manager}/nixos")
     ];
 
-    environment.systemPackages =
-      with pkgs; mkIf gui
+    environment.systemPackages = with pkgs;[
+      any-nix-shell
+    ] ++ (
+      if gui then
         [
           spotify
           discord
@@ -22,7 +24,8 @@ in
           shutter
           gimp
           audacity
-        ];
+        ] else []
+    );
 
     services = mkIf gui {
       inherit (import ./services/syncthing.nix) syncthing;

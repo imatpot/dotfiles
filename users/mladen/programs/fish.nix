@@ -99,6 +99,12 @@
       #
 
       starship init fish | source
+
+      #
+      # USE IN NIX-SHELL
+      #
+
+      any-nix-shell fish --info-right | source
     '';
   };
 }

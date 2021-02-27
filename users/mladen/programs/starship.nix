@@ -21,7 +21,10 @@
       git_status = {
         modified = "*";
         untracked = "!";
-        deleted = "×";
+        deleted = "-";
+        diverged = "⇄";
+        ahead = "˄";
+        behind = "˅";
         style = "bold purple";
       };
     };
