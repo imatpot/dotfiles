@@ -49,7 +49,7 @@
     };
 
     # TODO: Only add Starship when module is active
-    loginShellInit = ''
+    interactiveShellInit = ''
       #
       # COLOR THEME
       #
@@ -104,7 +104,7 @@
       # USE IN NIX-SHELL
       #
 
-      any-nix-shell fish --info-right | source
+      any-nix-shell fish | source
     '';
   };
 }

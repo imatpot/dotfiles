@@ -1,10 +1,14 @@
+{ pkgs }:
+
 {
   starship = {
     enable = true;
+    package = pkgs.unstable.starship;
 
     settings = {
       character = {
-        symbol = "»";
+        success_symbol = "»";
+        error_symbol = "»";
       };
 
       directory = {
@@ -14,8 +18,8 @@
       };
 
       git_branch = {
-        format = " [$symbol$branch]($style) ";
         style = "bold blue";
+        format = "[$symbol$branch]($style) ";
       };
 
       git_status = {
@@ -26,6 +30,10 @@
         ahead = "˄";
         behind = "˅";
         style = "bold purple";
+      };
+
+      nix_shell = {
+        format = "in [$symbol$state( $name)]($style) ";
       };
     };
   };

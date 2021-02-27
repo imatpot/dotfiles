@@ -36,7 +36,7 @@ in
         {
           inherit (import ./programs/git.nix) git;
           inherit (import ./programs/fish.nix) fish;
-          inherit (import ./programs/starship.nix) starship;
+          inherit (import ./programs/starship.nix { inherit pkgs; }) starship;
         }
         (
           mkIf gui {
