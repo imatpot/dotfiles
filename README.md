@@ -10,7 +10,8 @@ Needs some getting used to, but it absolutely rocks!
 It's fair to say that this is WIP, and probably forever will be.
 
 If you *do* miraculously decide to use this on your own devices, feel free.
-Don't blame me when something breaks though.
+Don't blame me when something breaks though. But at least NixOS got your back!
+Trust me, these rollbacks are golden.
 
 ## How to use
 
