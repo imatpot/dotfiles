@@ -23,11 +23,6 @@
       "nxrs-r" = "sudo nixos-rebuild switch && reboot";
       "nixrs-r" = "sudo nixos-rebuild switch && reboot";
 
-      "clb" = "git branch --merged | grep -v \* | xargs git branch -D";
-
-      "py" = "python3";
-      "pip" = "pip3";
-
       "pub" = "flutter pub";
       "br" = "flutter pub run build_runner --delete-conflicting-outputs";
 
@@ -36,7 +31,7 @@
 
     functions = {
       mkcd = "mkdir $argv[1] && cd $argv[1]";
-      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+      gitignore = "curl -sL https://www.gitignore.io/api/$argv > .gitignore";
       gitp = ''
         if [ $argv[1] = "ush" ]
             git push $argv[2..-1]
@@ -45,6 +40,19 @@
         else
             echo "r/ihadastroke"
         end
+      '';
+
+      # Because 'lorri init' and changing the import is too much effort, right?
+      # Also don't you dare insult my precious 4 printf-s in a row >:(
+      mkshell = ''
+        printf 'eval "$(lorri direnv)"\n' > .envrc
+
+        printf "{ pkgs ? import (fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable) {} }:\n\n" > shell.nix
+        printf "pkgs.mkShell {\n" >> shell.nix
+        printf "  buildInputs = with pkgs; [];\n" >> shell.nix
+        printf "}\n" >> shell.nix
+
+        direnv allow
       '';
     };
 
@@ -95,16 +103,14 @@
       set fish_pager_color_secondary $nord1
 
       #
-      # START STARSHIP
+      # HOOKS
       #
 
       starship init fish | source
-
-      #
-      # USE IN NIX-SHELL
-      #
-
       any-nix-shell fish | source
+
+      set -x DIRENV_LOG_FORMAT "" # Stop the mildly infuriating spam it generates
+      direnv hook fish | source
     '';
   };
 }

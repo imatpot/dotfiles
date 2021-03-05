@@ -35,5 +35,7 @@ in
     ncdu
     gotop
     neofetch # NixOS flex
+
+    unstable.nix-output-monitor # Makes logs a lot more readable
   ];
 }

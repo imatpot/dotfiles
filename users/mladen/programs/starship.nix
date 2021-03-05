@@ -33,7 +33,8 @@
       };
 
       nix_shell = {
-        format = "in [$symbol$state( $name)]($style) ";
+        format = "in [$symbol]($style)";
+        # format = "in [$symbol$state( $name)]($style) ";
       };
     };
   };
