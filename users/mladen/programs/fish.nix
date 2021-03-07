@@ -22,11 +22,6 @@
       "nixrs" = "sudo nixos-rebuild switch";
       "nxrs-r" = "sudo nixos-rebuild switch && reboot";
       "nixrs-r" = "sudo nixos-rebuild switch && reboot";
-
-      "pub" = "flutter pub";
-      "br" = "flutter pub run build_runner --delete-conflicting-outputs";
-
-      "xev" = "nix-shell -p xorg.xev --run 'xev -event keyboard'";
     };
 
     functions = {
@@ -49,7 +44,9 @@
 
         printf "{ pkgs ? import (fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable) {} }:\n\n" > shell.nix
         printf "pkgs.mkShell {\n" >> shell.nix
-        printf "  buildInputs = with pkgs; [];\n" >> shell.nix
+        printf "  buildInputs = with pkgs; [\n" >> shell.nix
+        printf "    bashInteractive\n" >> shell.nix
+        printf "  ];\n" >> shell.nix
         printf "}\n" >> shell.nix
 
         direnv allow

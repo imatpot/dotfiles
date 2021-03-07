@@ -2,9 +2,14 @@
   alacritty = {
     enable = true;
 
-    # https://github.com/arcticicestudio/nord-alacritty
 
     settings = {
+      selection = {
+        save_to_clipboard = true;
+      };
+
+      # https://github.com/arcticicestudio/nord-alacritty
+
       colors = {
         primary = {
           background = "#2e3440";
