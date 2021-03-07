@@ -48,13 +48,18 @@
 
   # Mount Samba share from my home server
   fileSystems."/mnt/home-server" = {
-    device = "//192.168.1.69/share";
     fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "rw,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-    in
-      [ "${automount_opts},credentials=/home/mladen/smb-secrets" ];
+    device = "//192.168.1.69/share";
+    options = [
+      "noauto"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "uid=1000"
+      "gid=1000"
+      "credentials=/home/mladen/smb-secrets"
+    ];
   };
 
   # Minimal compatibility version, or something like that. Ne need to touch
