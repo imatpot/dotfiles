@@ -48,7 +48,7 @@ in
 
       home = {
         sessionPath = [
-          "/home/mladen/dev/bin"
+          "/home/mladen/dev/src/scripts/bin"
         ];
 
         keyboard = {
