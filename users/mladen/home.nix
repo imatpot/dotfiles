@@ -47,6 +47,10 @@ in
       ];
 
       home = {
+        sessionPath = [
+          "/home/mladen/dev/bin"
+        ];
+
         keyboard = {
           layout = "ch";
           variant = "de_nodeadkeys";
