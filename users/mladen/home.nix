@@ -46,22 +46,11 @@ in
         )
       ];
 
-      home = mkMerge [
-        {
-          keyboard = {
-            layout = "ch";
-            variant = "de_nodeadkeys";
-          };
-        }
-        (
-          let
-            npm-tweaks = import ./programs/npm-tweaks.nix;
-          in
-            {
-              inherit (npm-tweaks) sessionPath;
-              inherit (npm-tweaks) file;
-            }
-        )
-      ];
+      home = {
+        keyboard = {
+          layout = "ch";
+          variant = "de_nodeadkeys";
+        };
+      };
     };
   }
