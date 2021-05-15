@@ -63,6 +63,8 @@ in
         monospace = [
           "JetBrains Mono"
           "Fira Code"
+          "Ubuntu Mono"
+          "Ubuntu Nerd Font Mono"
           "Sudo"
           "Inconsolata"
         ];
