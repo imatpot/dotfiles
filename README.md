@@ -1,6 +1,6 @@
 # NixOS Configuration
 
-[![NixOS 20.09](https://img.shields.io/badge/NixOS-v20.09-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
+[![NixOS 21.05](https://img.shields.io/badge/NixOS-21.05%20(Okapi)-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
 
 NixOS is a truly fascinating distro.
 Needs some getting used to, but it absolutely rocks!
