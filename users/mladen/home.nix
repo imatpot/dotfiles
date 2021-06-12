@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = https://github.com/nix-community/home-manager/tarball/release-20.09;
+  home-manager = https://github.com/nix-community/home-manager/tarball/release-21.05;
   gui = config.services.xserver.enable;
 
 in
@@ -24,6 +24,7 @@ in
           shutter
           gimp
           audacity
+          inkscape
         ] else []
     );
 

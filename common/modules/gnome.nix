@@ -1,16 +1,16 @@
 { pkgs, ... }:
 
 {
-  desktopManager.gnome3 = {
+  desktopManager.gnome = {
     enable = true;
   };
 
   services.dbus.packages = with pkgs; [
-    gnome3.dconf
+    gnome.dconf
   ];
 
   gnomeRelatedPackages = with pkgs; [
-    gnome3.gnome-tweak-tool
+    gnome3.gnome-tweaks
     gnome3.gnome-shell-extensions
     nordic
     papirus-icon-theme
@@ -19,7 +19,7 @@
     gnomeExtensions.dash-to-panel
     gnomeExtensions.emoji-selector
     gnomeExtensions.clipboard-indicator
-    gnomeExtensions.arc-menu
+    gnomeExtensions.arcmenu
 
     # Gotta wait for NixOS 21.05 to add the "\u characters in JSON" support... :(
     # nur.repos.piegames.gnome38Extensions.shelltile-657
