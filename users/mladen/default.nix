@@ -1,23 +1,50 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-{
-  imports = [
-    ./home.nix
-  ];
+let
+  gui = config.services.xserver.enable;
 
-  users.users.mladen = {
-    description = "Mladen Brankovic";
-    extraGroups = [
-      "wheel"
-      "video"
-      "audio"
-      "users"
-      "docker"
+in
+  with lib; {
+    imports = [
+      ./home.nix
     ];
 
-    isNormalUser = true;
-    createHome = true;
+    hardware.keyboard.zsa.enable = true;
 
-    shell = pkgs.fish; # I like fish. Don't judge me.
-  };
-}
+    environment.systemPackages = with pkgs;[
+      any-nix-shell
+    ] ++ (
+      if gui then
+        [
+          spotify
+          discord
+          bitwarden
+          libreoffice
+          shutter
+          gimp
+          audacity
+          inkscape
+          wally-cli
+        ] else []
+    );
+
+    services = mkIf gui {
+      inherit (import ./services/syncthing.nix) syncthing;
+    };
+
+    users.users.mladen = {
+      description = "Mladen Brankovic";
+      extraGroups = [
+        "wheel"
+        "video"
+        "audio"
+        "users"
+        "docker"
+      ];
+
+      isNormalUser = true;
+      createHome = true;
+
+      shell = pkgs.fish; # I like fish. Don't judge me.
+    };
+  }

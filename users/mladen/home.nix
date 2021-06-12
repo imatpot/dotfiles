@@ -10,28 +10,6 @@ in
       (import "${builtins.fetchTarball home-manager}/nixos")
     ];
 
-    environment.systemPackages = with pkgs;[
-      any-nix-shell
-    ] ++ (
-      if gui then
-        [
-          spotify
-          discord
-          bitwarden
-
-          libreoffice
-
-          shutter
-          gimp
-          audacity
-          inkscape
-        ] else []
-    );
-
-    services = mkIf gui {
-      inherit (import ./services/syncthing.nix) syncthing;
-    };
-
     home-manager.users.mladen = {
       programs = mkMerge [
         {
@@ -41,7 +19,7 @@ in
         }
         (
           mkIf gui {
-            inherit (import ./programs/alacritty.nix) alacritty;
+            inherit (import ./programs/kitty.nix) kitty;
             inherit (import ./programs/firefox.nix { inherit pkgs; }) firefox;
           }
         )
