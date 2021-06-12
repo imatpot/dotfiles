@@ -11,7 +11,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    kitty
+    alacritty
     firefox-bin
     ungoogled-chromium
   ];

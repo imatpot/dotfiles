@@ -19,7 +19,7 @@ in
         }
         (
           mkIf gui {
-            inherit (import ./programs/kitty.nix) kitty;
+            inherit (import ./programs/alacritty.nix) alacritty;
             inherit (import ./programs/firefox.nix { inherit pkgs; }) firefox;
           }
         )
