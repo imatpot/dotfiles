@@ -18,7 +18,6 @@ in
   };
 
   environment.systemPackages = with pkgs.unstable; [
-    direnv
     rnix-lsp
   ] ++ (
     if gui then [ vscode ] else []

@@ -1,16 +1,11 @@
 { config, ... }:
 
-{
-  # Not yet installed automatically in NixOS v20.09 (Nightingale)
-  # https://github.com/NixOS/nixpkgs/pull/85464
-  environment.systemPackages = [ config.services.samba.package ];
+# $ sudo smbpasswd -a yourusername
 
-  services.samba = {
+{  services.samba = {
     enable = true;
     enableNmbd = true;
 
-    # $ sudo smbpasswd -a yourusername
-    syncPasswordsByPam = true;
 
     # This adds to the [global] section
     extraConfig = ''

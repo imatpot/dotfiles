@@ -34,6 +34,7 @@ in
   environment.systemPackages = with pkgs; [
     ncdu
     gotop
+    direnv
     neofetch # NixOS flex
 
     unstable.nix-output-monitor # Makes logs a lot more readable
