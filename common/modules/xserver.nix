@@ -26,6 +26,7 @@ in
       noto-fonts-extra
 
       # Monospace fonts I like
+      cascadia-code
       jetbrains-mono
       fira-code
       sudo-font
