@@ -22,6 +22,13 @@ in
     ./minimal.nix
   ];
 
+  nix = {
+    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   programs.ssh.startAgent = true;
   services.openssh = {
     enable = true;

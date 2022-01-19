@@ -23,12 +23,5 @@
       focused_border_color = "#aaaaaa";
       urgent_border_color = "#660000";
     };
-
-    rules = {
-      discord = {
-        desktop = "^2";
-        follow = false;
-      };
-    };
   };
 }

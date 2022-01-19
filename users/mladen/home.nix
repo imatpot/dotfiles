@@ -32,7 +32,7 @@ in
 
         keyboard = {
           layout = "ch";
-          variant = "de_nodeadkeys";
+          variant = "de_sundeadkeys";
         };
       };
     };

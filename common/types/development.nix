@@ -19,6 +19,7 @@ in
 
   environment.systemPackages = with pkgs.unstable; [
     rnix-lsp
+    nixpkgs-fmt
   ] ++ (
     if gui then [ vscode ] else []
   );
