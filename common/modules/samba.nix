@@ -6,7 +6,6 @@
     enable = true;
     enableNmbd = true;
 
-
     # This adds to the [global] section
     extraConfig = ''
       server string = NixOS SMB
@@ -15,7 +14,7 @@
 
     shares = {
       share = {
-        path = "/mnt/share";
+        path = "/home/mladen";
         public = "no";
         writable = "yes";
         browseable = "yes";
