@@ -46,7 +46,8 @@ in
     };
 
     users.users.mladen = {
-      description = "Mladen Brankovic";
+      description = "Mladen Branković";
+      initialPassword = "changeme";
       extraGroups = [
         "wheel"
         "video"
