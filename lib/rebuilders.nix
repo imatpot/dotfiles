@@ -8,7 +8,7 @@ let
 
 in {
   nixosRebuild = systems:
-    utils.forEachSystem systems (pkgs:
+    utils.withEachSystemPkgs systems (pkgs:
       let nixos-rebuild = rebuild pkgs "nixos";
       in rec {
         default = switch;
@@ -18,7 +18,7 @@ in {
       });
 
   homeManagerRebuild = systems:
-    utils.forEachSystem systems (pkgs:
+    utils.withEachSystemPkgs systems (pkgs:
       let home-manager-rebuild = rebuild pkgs "home-manager";
       in rec {
         default = switch;

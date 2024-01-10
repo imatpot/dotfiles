@@ -3,6 +3,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nur.url = "github:nix-community/nur";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs@{ self, ... }:
@@ -11,6 +16,7 @@
       macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
       allSystems = linuxSystems ++ macosSystems;
       lib = inputs.nixpkgs.lib // import ./lib { inherit inputs; };
+
     in {
       nixosConfigurations = {
         nixos = lib.mkHost {
@@ -23,6 +29,6 @@
       packages = lib.nixosRebuild linuxSystems
         // lib.homeManagerRebuild macosSystems;
 
-      formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
+      formatter = lib.withEachSystemPkgs allSystems (pkgs: pkgs.nixfmt);
     };
 }
