@@ -18,7 +18,8 @@
         "mousewheel.min_line_scroll_amount" = 25;
 
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        "extensions.webextensions.ExtensionStorageIDB.migrated.addon@darkreader.org" = true;
+        "extensions.webextensions.ExtensionStorageIDB.migrated.addon@darkreader.org" =
+          true;
         "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
         "ui.systemUsesDarkTheme" = 1;
         "devtools.theme" = "dark";
@@ -42,7 +43,8 @@
         "browser.crashReports.unsubmittedCheck.enabled" = false;
         "browser.disableResetPrompt" = true;
         "browser.newtab.preload" = false;
-        "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+        "browser.newtabpage.activity-stream.section.highlights.includePocket" =
+          false;
         "browser.newtabpage.enabled" = false;
         "browser.newtabpage.enhanced" = false;
         "browser.newtabpage.introShown" = true;
@@ -85,7 +87,8 @@
         "network.allow-experiments" = false;
         "network.captive-portal-service.enabled" = false;
         "network.trr.mode" = 5;
-        "services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSite" = false;
+        "services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSite" =
+          false;
         "toolkit.telemetry.archive.enabled" = false;
         "toolkit.telemetry.bhrPing.enabled" = false;
         "toolkit.telemetry.cachedClientID" = "";

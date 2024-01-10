@@ -1,3 +1,1 @@
-{
-  windowManager.bspwm.enable = true;
-}
+{ windowManager.bspwm.enable = true; }

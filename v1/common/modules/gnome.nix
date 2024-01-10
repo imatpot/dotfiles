@@ -1,13 +1,9 @@
 { pkgs, ... }:
 
 {
-  desktopManager.gnome = {
-    enable = true;
-  };
+  desktopManager.gnome = { enable = true; };
 
-  services.dbus.packages = with pkgs; [
-    gnome.dconf
-  ];
+  services.dbus.packages = with pkgs; [ gnome.dconf ];
 
   gnomeRelatedPackages = with pkgs; [
     gnome3.gnome-tweaks

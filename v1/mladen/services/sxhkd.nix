@@ -2,8 +2,7 @@ let
   mod = "super";
   shutter-options = "-o '%Y-%m-%d_%H%d%S.png' --remove_cursor";
 
-in
-{
+in {
   sxhkd = {
     enable = true;
     extraPath = "/run/current-system/sw/bin";
@@ -42,7 +41,8 @@ in
       "${mod} + Return" = "alacritty";
 
       # Program launcher
-      "${mod} + @space" = "rofi -modi drun -show drun -show-icons -scroll-method 1 -diable-history";
+      "${mod} + @space" =
+        "rofi -modi drun -show drun -show-icons -scroll-method 1 -diable-history";
 
       # Emoji picker
       "${mod} + period" = "rofi -modi emoji -show emoji";
@@ -86,23 +86,28 @@ in
       # ---------------------- #
 
       # Set window state
-      "${mod} + {t,shift + t,s,f}" = "bspc node -t {tiled,pseudo_tiled,floating,fullscreen}";
+      "${mod} + {t,shift + t,s,f}" =
+        "bspc node -t {tiled,pseudo_tiled,floating,fullscreen}";
 
       # Set node flags
-      "${mod} + ctrl + {m,x,y,z}" = "bspc node -g {marked,locked,sticky,private}";
+      "${mod} + ctrl + {m,x,y,z}" =
+        "bspc node -g {marked,locked,sticky,private}";
 
       # ---------------------- #
       # Focus and swap         #
       # ---------------------- #
 
       # Focus node in the given direction
-      "${mod} + {_,shift + }{j,k,i,l}" = "bspc node -{f,s} {west,south,north,east}";
+      "${mod} + {_,shift + }{j,k,i,l}" =
+        "bspc node -{f,s} {west,south,north,east}";
 
       # Focus node for the given path jump
-      "${mod} + {p,b,comma,period}" = "bspc node -f @{parent,brother,first,second}";
+      "${mod} + {p,b,comma,period}" =
+        "bspc node -f @{parent,brother,first,second}";
 
       # Focus next or previous window in the current desktop
-      "${mod} + {_,shift + }c" = "bspc node -f {next,prev}.local.!hidden.window";
+      "${mod} + {_,shift + }c" =
+        "bspc node -f {next,prev}.local.!hidden.window";
 
       # Focus next or previous desktop in the current monitor
       "${mod} + bracket{left,right}" = "bspc desktop -f {prev,next}.local";
@@ -111,7 +116,8 @@ in
       "${mod} + {grave,Tab}" = "bspc {node,desktop} -f last";
 
       # Focus older or newer node in focus history
-      "${mod} + {o,i}" = "bspc wm -h off; bspc node {older,newer} -f; bspc wm -h on";
+      "${mod} + {o,i}" =
+        "bspc wm -h off; bspc node {older,newer} -f; bspc wm -h on";
 
       # Focus or send to given desktop
       "${mod} + {_,shift + }{1-9,0}" = "bspc {desktop -f,node -d} '^{1-9,10}'";
@@ -130,17 +136,20 @@ in
       "${mod} + ctrl + space" = "bspc node -p cancel";
 
       # Cancel preselection for focused desktop
-      "${mod} + ctrl + shift + space" = "bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel";
+      "${mod} + ctrl + shift + space" =
+        "bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel";
 
       # ---------------------- #
       # Move and resize        #
       # ---------------------- #
 
       # Expand window by moving one of its side outward
-      "${mod} + alt + {j,k,i,l}" = "bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}";
+      "${mod} + alt + {j,k,i,l}" =
+        "bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}";
 
       # Contract window by moving one of its side inward
-      "${mod} + alt + shift + {j,k,i,l}" = "bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}";
+      "${mod} + alt + shift + {j,k,i,l}" =
+        "bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}";
 
       # Move floating window
       "${mod} + {Left,Down,Up,Right}" = "bspc node -v {-20 0,0 20,0 -20,20 0}";

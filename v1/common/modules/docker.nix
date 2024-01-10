@@ -13,7 +13,5 @@
     };
   };
 
-  environment.systemPackages = with pkgs.unstable; [
-    docker-compose
-  ];
+  environment.systemPackages = with pkgs.unstable; [ docker-compose ];
 }

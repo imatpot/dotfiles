@@ -10,7 +10,7 @@
       amend = "commit -a --amend";
       uncommit = "reset HEAD^1 --mixed";
       unadd = "reset";
-      clear-branches = "git branch --merged | grep -v \* | xargs git branch -D";
+      clear-branches = "git branch --merged | grep -v * | xargs git branch -D";
     };
 
     signing = {

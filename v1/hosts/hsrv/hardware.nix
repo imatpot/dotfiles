@@ -4,33 +4,31 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "pool/root/nixos";
-      fsType = "zfs";
-    };
+  fileSystems."/" = {
+    device = "pool/root/nixos";
+    fsType = "zfs";
+  };
 
-  fileSystems."/home" =
-    { device = "pool/home";
-      fsType = "zfs";
-    };
+  fileSystems."/home" = {
+    device = "pool/home";
+    fsType = "zfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1DD5-A268";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/1DD5-A268";
+    fsType = "vfat";
+  };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/8fe5aec6-3ce8-42d4-85c8-4d9a8eb50f59"; }
-  ];
+  swapDevices =
+    [{ device = "/dev/disk/by-uuid/8fe5aec6-3ce8-42d4-85c8-4d9a8eb50f59"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }

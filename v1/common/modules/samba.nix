@@ -2,7 +2,8 @@
 
 # $ sudo smbpasswd -a yourusername
 
-{  services.samba = {
+{
+  services.samba = {
     enable = true;
     enableNmbd = true;
 

@@ -70,7 +70,8 @@
 
         interval = 0; # Disable ramp by scrolling
 
-        sink = "alsa_output.usb-Logitech_G433_Gaming_Headset_000000000000-00.analog-stereo";
+        sink =
+          "alsa_output.usb-Logitech_G433_Gaming_Headset_000000000000-00.analog-stereo";
 
         label-volume = "%{T3}墳%{T2}  %percentage%%";
         label-muted = "%{T3}婢%{T2}  %percentage%%";

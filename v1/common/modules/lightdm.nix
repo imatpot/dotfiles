@@ -13,7 +13,7 @@
           pass = "password";
         };
 
-        extraConfig = ''''; # TODO: Make Tiny prettier
+        extraConfig = ""; # TODO: Make Tiny prettier
       };
     };
   };

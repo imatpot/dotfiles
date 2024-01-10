@@ -18,12 +18,10 @@
     interfaces.eno1 = {
       useDHCP = false;
 
-      ipv4.addresses = [
-        {
-          address = "192.168.1.100";
-          prefixLength = 24;
-        }
-      ];
+      ipv4.addresses = [{
+        address = "192.168.1.100";
+        prefixLength = 24;
+      }];
     };
 
     defaultGateway = {
@@ -34,11 +32,7 @@
     networkmanager = {
       enable = true;
 
-      insertNameservers = [
-        "192.168.1.69"
-        "1.1.1.1"
-        "1.0.0.1"
-      ];
+      insertNameservers = [ "192.168.1.69" "1.1.1.1" "1.0.0.1" ];
     };
   };
 

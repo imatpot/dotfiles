@@ -1,10 +1,8 @@
 { pkgs, ... }:
 
-let
-  gnome = import ./gnome.nix { inherit pkgs; };
+let gnome = import ./gnome.nix { inherit pkgs; };
 
-in
-{
+in {
   environment.systemPackages = gnome.gnomeRelatedPackages;
 
   services.xserver = {
@@ -51,16 +49,8 @@ in
     # Fonts futher down the lists are fallbacks
     fontconfig = {
       defaultFonts = {
-        serif = [
-          "Noto Serif"
-          "Linux Libertine"
-          "Charis SIL"
-        ];
-        sansSerif = [
-          "Noto Sans"
-          "Linux Biolinum"
-          "Inconsolata"
-        ];
+        serif = [ "Noto Serif" "Linux Libertine" "Charis SIL" ];
+        sansSerif = [ "Noto Sans" "Linux Biolinum" "Inconsolata" ];
         monospace = [
           "JetBrains Mono"
           "Fira Code"
@@ -69,9 +59,7 @@ in
           "Sudo"
           "Inconsolata"
         ];
-        emoji = [
-          "Noto Color Emoji"
-        ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

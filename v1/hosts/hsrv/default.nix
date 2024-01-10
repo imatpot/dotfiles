@@ -17,19 +17,17 @@
 
     # It is secured well enough from my computer illiterate family.
     # Other required ports are explicitly redirecting to the host.
-    # It's just more convenient to deal with it this way ¯\_(?)_/¯
+    # It's just more convenient to deal with it this way ï¿½\_(?)_/ï¿½
     firewall.enable = false;
 
     # Set up static IP
     useDHCP = false;
     interfaces.enp0s31f6 = {
       useDHCP = false;
-      ipv4.addresses = [
-        {
-          address = "192.168.1.69";
-          prefixLength = 24;
-        }
-      ];
+      ipv4.addresses = [{
+        address = "192.168.1.69";
+        prefixLength = 24;
+      }];
     };
 
     defaultGateway = {
