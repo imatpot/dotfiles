@@ -9,6 +9,7 @@
     let
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
+      allSystems = linuxSystems ++ macosSystems;
       lib = inputs.nixpkgs.lib // import ./lib { inherit inputs; };
     in {
       nixosConfigurations = {
@@ -21,5 +22,7 @@
 
       packages = lib.nixosRebuild linuxSystems
         // lib.homeManagerRebuild macosSystems;
+
+      formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
     };
 }
