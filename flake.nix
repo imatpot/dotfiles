@@ -1,5 +1,9 @@
 {
-  inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; };
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nur.url = "github:nix-community/nur";
+  };
 
   outputs = { self, nixpkgs }: {
     nixosConfigurations = {
