@@ -5,30 +5,21 @@
     nur.url = "github:nix-community/nur";
   };
 
-  outputs = { self, nixpkgs }: {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./configuration.nix ];
+  outputs = inputs@{ self, ... }:
+    let
+      linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
+      macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
+      lib = inputs.nixpkgs.lib // import ./lib { inherit inputs; };
+    in {
+      nixosConfigurations = {
+        nixos = lib.mkHost {
+          system = "x86_64-linux";
+          hostname = "nixos";
+          stateVersion = "";
+        };
       };
+
+      packages = lib.nixosRebuild linuxSystems
+        // lib.homeManagerRebuild macosSystems;
     };
-
-    packages.x86_64-linux =
-      let
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        nixos-rebuild = subcommand: pkgs.writeScriptBin
-          "nixos-rebuild-${subcommand}"
-          "sudo nixos-rebuild ${subcommand} --flake ${./.}";
-      in
-      rec {
-        default = switch;
-
-        build = nixos-rebuild "build";
-        boot = nixos-rebuild "boot";
-        switch = nixos-rebuild "switch";
-
-        repl = nixos-rebuild "repl";
-        dry-build = nixos-rebuild "dry-build";
-      };
-  };
 }
