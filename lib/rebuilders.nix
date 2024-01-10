@@ -4,7 +4,7 @@ let
   utils = import ./utils.nix { inherit inputs; };
   rebuild = pkgs: genre: subcommand:
     pkgs.writeScriptBin "${genre}-rebuild-${subcommand}"
-    "sudo ${genre}-rebuild ${subcommand} --flake ${./.}";
+    "sudo ${genre}-rebuild ${subcommand} --flake .";
 
 in {
   nixosRebuild = systems:

@@ -83,6 +83,8 @@
       vscode
       rnix-lsp
       nixpkgs-fmt
+      comma
+      nom
       #  thunderbird
     ];
   };
