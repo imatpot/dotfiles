@@ -1,19 +1,17 @@
 { inputs, ... }:
 
 let
-  importAndMerge = files: args:
-    if (files == [ ]) then
-      { }
-    else
-      importAndMerge (builtins.tail files) args
-      // import (builtins.head files) args;
+  importer = import ./importer.nix { };
 
-  externalLibs = inputs.nixpkgs.lib // inputs.home-manager.lib;
+  self = importer.importAndMerge [
+    ./utils.nix
+    ./importer.nix
+    ./systems.nix
+    ./hosts.nix
+    ./users.nix
+  ] {
+    inherit inputs;
+    lib = import ./. { inherit inputs; };
+  };
 
-  localLibs =
-    importAndMerge [ ./utils.nix ./systems.nix ./hosts.nix ./users.nix ] {
-      inherit inputs;
-      lib = import ./. { inherit inputs; };
-    };
-
-in externalLibs // localLibs // { inherit importAndMerge; }
+in inputs.nixpkgs.lib // inputs.home-manager.lib // self

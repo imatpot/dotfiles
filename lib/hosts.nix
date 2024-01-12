@@ -18,7 +18,7 @@
 
             extraSpecialArgs = {
               inherit inputs hostname system stateVersion;
-              lib' = lib; # TODO: Merge with lib passed from home-manager itself
+              lib' = lib; # TODO: Fix conflict with home-manager generated lib
             };
 
             # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4

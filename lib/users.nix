@@ -6,7 +6,8 @@
   mkUser = { username, stateVersion, system ? "x86_64-linux", hostname ? null }:
     let
       home = import ../users/${username}/home.nix {
-        inherit lib system hostname stateVersion;
+        inherit system hostname stateVersion;
+        lib' = lib; # TODO: Fix conflict with home-manager generated lib
       };
     in inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = lib.pkgsForSystem system;
