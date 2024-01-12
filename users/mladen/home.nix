@@ -8,7 +8,7 @@ in {
 
     username = "mladen";
     homeDirectory =
-      if lib'.isMacOS system then "/Users/mladen" else "/home/mladen";
+      if lib'.isDarwin system then "/Users/mladen" else "/home/mladen";
 
     file."system.info".text = "${hostString} (${system})";
 

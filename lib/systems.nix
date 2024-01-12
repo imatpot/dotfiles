@@ -2,5 +2,5 @@
 
 {
   isLinux = lib.hasSuffix "linux";
-  isMacOS = lib.hasSuffix "darwin";
+  isDarwin = lib.hasSuffix "darwin";
 }
