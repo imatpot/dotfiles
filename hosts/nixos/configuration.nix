@@ -5,11 +5,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware.nix
-  ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
@@ -81,8 +76,8 @@
       vim
       git
       vscode
-      rnix-lsp
-      nixpkgs-fmt
+      nixfmt
+      nil
       comma
       nom
       #  thunderbird

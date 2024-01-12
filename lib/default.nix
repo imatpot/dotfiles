@@ -10,9 +10,10 @@ let
 
   externalLibs = inputs.nixpkgs.lib // inputs.home-manager.lib;
 
-  localLibs = importAndMerge [ ./utils.nix ./hosts.nix ./users.nix ] {
-    inherit inputs;
-    lib = import ./. { inherit inputs; };
-  };
+  localLibs =
+    importAndMerge [ ./utils.nix ./systems.nix ./hosts.nix ./users.nix ] {
+      inherit inputs;
+      lib = import ./. { inherit inputs; };
+    };
 
 in externalLibs // localLibs // { inherit importAndMerge; }
