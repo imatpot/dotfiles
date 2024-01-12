@@ -1,20 +1,16 @@
-{ ... }:
+{ lib, ... }:
 
-{
-  home-manager.users = {
-    mladen.home = {
-      inherit stateVersion;
-      file."mladen.success".text = "gay";
-    };
-
-    # "mladen@nixos".home = {
-    #   inherit stateVersion;
-    #   file."mladen.nixos.success".text = "";
-    # };
-
-    # "mladen@mcdonalds".home = {
-    #   inherit stateVersion;
-    #   file."mladen.mcdonalds.success".text = "";
-    # };
+let
+  common = {
+    username = "mladen";
+    stateVersion = "24.05";
   };
+
+in {
+  "mladen" = lib.mkUser common;
+
+  "mladen@mcdonalds" = lib.mkUser (common // {
+    system = "aarch64-darwin";
+    hostname = "mcdonalds";
+  });
 }

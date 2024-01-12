@@ -15,26 +15,13 @@
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
       allSystems = linuxSystems ++ macosSystems;
-      lib = inputs.nixpkgs.lib // inputs.home-manager.lib // import ./lib { inherit inputs; };
 
-    in {
-      nixosConfigurations = {
-        nixos = lib.mkHost {
-          system = "x86_64-linux";
-          hostname = "nixos";
-          stateVersion = "23.11";
-        };
-      };
+    in rec {
+      lib = import ./lib { inherit inputs; };
 
-      homeConfiguration = {
-        mladen = lib.homeManagerConfiguration {
-          modules = [ ./users/mladen ];
-        };
-      };
+      nixosConfigurations = lib.importAllHosts;
+      homeConfigurations = lib.importAllUsers;
 
-      packages = lib.nixosRebuild linuxSystems
-        // lib.homeManagerRebuild macosSystems;
-
-      formatter = lib.withEachSystemPkgs allSystems (pkgs: pkgs.nixfmt);
+      formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
     };
 }
