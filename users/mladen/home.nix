@@ -3,6 +3,8 @@
 let hostString = if hostname == null then "unknown host" else hostname;
 
 in {
+  system.programs.npm.enable = true;
+
   home = {
     inherit stateVersion;
 
