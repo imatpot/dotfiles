@@ -1,26 +1,16 @@
 { inputs, outputs, hostname, system, stateVersion, users ? [ ], ... }:
 
-let
-  userConfigs = outputs.lib.genAttrs users (username:
-    outputs.lib.resolveImports ../../users/${username}/home.nix {
-      inherit inputs outputs hostname system stateVersion;
-    });
+{
+  home-manager = {
+    users = outputs.lib.genAttrs users
+      (username: import ../../users/${username}/home.nix);
 
-  userDefinedSystemConfig = outputs.lib.mergeAttrs
-    (builtins.map (userConfig: userConfig.system)
-      (builtins.attrValues userConfigs));
+    sharedModules = [ ../home-manager/system-config-support.nix ];
 
-  homeManager = {
-    home-manager = {
-      users = userConfigs;
+    extraSpecialArgs = { inherit inputs outputs system hostname stateVersion; };
 
-      extraSpecialArgs = { inherit outputs; };
-      sharedModules = [ ../home-manager/system-config-support.nix ];
-
-      # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4
-      useGlobalPkgs = false;
-      useUserPackages = false;
-    };
+    # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4
+    useGlobalPkgs = false;
+    useUserPackages = false;
   };
-
-in outputs.lib.mergeAttrs [ userDefinedSystemConfig homeManager ]
+}

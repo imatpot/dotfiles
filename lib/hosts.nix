@@ -2,17 +2,13 @@
 
 {
   mkHost = { hostname, system, stateVersion, users ? [ ] }:
-    let
-      homeManagerConfig = import ../modules/nixos/home-manager.nix {
-        inherit inputs outputs hostname system stateVersion users;
-      };
-    in outputs.lib.nixosSystem {
+    outputs.lib.nixosSystem {
       inherit system;
 
       modules = [
         {
           _module.args = {
-            inherit inputs outputs hostname system stateVersion;
+            inherit inputs outputs hostname system stateVersion users;
           };
         }
 
@@ -20,7 +16,7 @@
         ../hosts/${hostname}/hardware.nix
 
         inputs.home-manager.nixosModules.home-manager
-        homeManagerConfig
+        ../modules/nixos/home-manager.nix
       ];
     };
 }
