@@ -1,3 +1,3 @@
 { lib, inputs, ... }:
 
-lib.importAndMerge [ ./nixos ] { inherit lib inputs; }
+lib.importAndMerge [ ./adele ] { inherit lib inputs; }

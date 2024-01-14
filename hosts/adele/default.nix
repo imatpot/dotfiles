@@ -1,9 +1,9 @@
 { lib, ... }:
 
 {
-  nixos = lib.mkHost {
+  adele = lib.mkHost {
     system = "x86_64-linux";
-    hostname = "nixos";
+    hostname = "adele";
     stateVersion = "24.05";
     users = [ "mladen" ];
   };

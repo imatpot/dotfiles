@@ -10,6 +10,10 @@
       inherit system;
 
       modules = [
+        {
+          _module.args = { inherit inputs hostname system stateVersion; };
+        }
+
         ../hosts/${hostname}/configuration.nix
         ../hosts/${hostname}/hardware.nix
 
