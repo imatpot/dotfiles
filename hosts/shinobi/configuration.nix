@@ -8,7 +8,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.useOSProber = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = hostname; # Define your hostname.
@@ -69,7 +73,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mladen = {
     isNormalUser = true;
-    description = "Mladen";
+    description = "mladen";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
