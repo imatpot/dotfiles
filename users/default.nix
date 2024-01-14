@@ -1,3 +1,3 @@
-{ lib, inputs, ... }:
+{ lib, ... }:
 
-lib.importAndMerge [ ./mladen ] { inherit lib inputs; }
+lib.importAndMerge [ ./mladen ] { inherit lib; }

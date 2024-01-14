@@ -1,9 +1,9 @@
-{ lib, lib', inputs, hostname, system, stateVersion, users ? [ ], ... }:
+{ lib, inputs, hostname, system, stateVersion, users ? [ ], ... }:
 
 let
   userConfigs = lib.genAttrs users (username:
     lib.resolveImports ../../users/${username}/home.nix {
-      inherit lib' inputs hostname system stateVersion;
+      inherit lib inputs hostname system stateVersion;
     });
 
   userDefinedSystemConfig = lib.mergeAttrs

@@ -1,15 +1,14 @@
-{ lib, lib', inputs, ... }:
+{ lib, inputs, ... }:
 
 {
-  importAllUsers = import ../users { inherit lib inputs; };
-
   mkUser = { username, stateVersion, system ? "x86_64-linux", hostname ? null }:
-    inputs.home-manager.lib.homeManagerConfiguration {
+    let
+      userConfig = lib.resolveImports ../users/${username}/home.nix {
+        inherit lib inputs username system hostname stateVersion;
+      };
+    in lib.homeManagerConfiguration {
       pkgs = lib.pkgsForSystem system;
-      extraSpecialArgs = { inherit lib' system hostname stateVersion; };
-      modules = [
-        ../modules/home-manager/system-config-support.nix
-        ../users/${username}/home.nix
-      ];
+      modules =
+        [ ../modules/home-manager/system-config-support.nix userConfig ];
     };
 }
