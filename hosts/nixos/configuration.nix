@@ -80,6 +80,7 @@
       nil
       comma
       nom
+      discord
       #  thunderbird
     ];
   };

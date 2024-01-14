@@ -1,17 +1,22 @@
 { inputs, ... }:
 
 let
-  importer = import ./importer.nix { };
+  primitiveUtils = import ./utils.nix {
+    inherit inputs;
+    lib = inputs.nixpkgs.lib;
+  };
 
-  self = importer.importAndMerge [
+  lib = primitiveUtils.importAndMerge [
     ./utils.nix
-    ./importer.nix
     ./systems.nix
     ./hosts.nix
     ./users.nix
-  ] {
+  ] rec {
     inherit inputs;
     lib = import ./. { inherit inputs; };
+
+    # TODO: Find a way to avoid NixOS & Home Manager generated libs from overriding this in modules
+    lib' = lib;
   };
 
-in inputs.nixpkgs.lib // inputs.home-manager.lib // self
+in primitiveUtils.mergeAttrs [ inputs.nixpkgs.lib inputs.home-manager.lib lib ]
