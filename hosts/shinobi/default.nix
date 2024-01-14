@@ -1,7 +1,7 @@
-{ lib, ... }:
+{ outputs, ... }:
 
 {
-  shinobi = lib.mkHost {
+  shinobi = outputs.lib.mkHost {
     system = "x86_64-linux";
     hostname = "shinobi";
     stateVersion = "24.05";

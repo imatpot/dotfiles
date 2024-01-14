@@ -1,10 +1,10 @@
-{ lib, inputs, ... }:
+{ inputs, ... }:
 
 rec {
   pkgsForSystem = system: import inputs.nixpkgs { inherit system; };
 
   forEachSystem = systems: fn:
-    lib.genAttrs systems (system: fn (pkgsForSystem system));
+    inputs.nixpkgs.lib.genAttrs systems (system: fn (pkgsForSystem system));
 
   # Merges a list of attributes into one, including lists and nested attributes.
   # Use this instead of lib.mkMerge if the merge type isn't allowed somewhere.
@@ -12,15 +12,15 @@ rec {
   mergeAttrs = attrs:
     let
       merge = path:
-        lib.zipAttrsWith (n: values:
+        inputs.nixpkgs.lib.zipAttrsWith (n: values:
           if builtins.tail values == [ ] then
             builtins.head values
           else if builtins.all builtins.isList values then
-            lib.unique (lib.concatLists values)
+            inputs.nixpkgs.lib.unique (inputs.nixpkgs.lib.concatLists values)
           else if builtins.all builtins.isAttrs values then
             merge (path ++ [ n ]) values
           else
-            lib.last values);
+            inputs.nixpkgs.lib.last values);
     in merge [ ] attrs;
 
   # Imports and merges all modules in a path's module's `imports` recursively.

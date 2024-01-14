@@ -12,15 +12,16 @@
 
   outputs = inputs@{ self, ... }:
     let
+      inherit (self) outputs;
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
       allSystems = linuxSystems ++ macosSystems;
 
     in rec {
-      lib = import ./lib { inherit inputs; };
+      lib = import ./lib { inherit inputs outputs; };
 
-      nixosConfigurations = import ./hosts { inherit lib inputs; };
-      homeConfigurations = import ./users { inherit lib inputs; };
+      nixosConfigurations = import ./hosts { inherit inputs outputs; };
+      homeConfigurations = import ./users { inherit inputs outputs; };
 
       formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
     };
