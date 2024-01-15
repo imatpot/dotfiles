@@ -4,7 +4,7 @@ rec {
   # Merges a list of attributes into one, including lists and nested attributes.
   # Use this instead of lib.mkMerge if the merge type isn't allowed somewhere.
   # https://stackoverflow.com/a/54505212
-  fuseAttrs = attrs:
+  deepMerge = attrs:
     let
       merge = path:
         lib.zipAttrsWith (n: values:
@@ -24,7 +24,7 @@ rec {
   resolveImports = file: args:
     let module = import file args;
     in if module ? imports then
-      fuseAttrs ([ module ]
+      deepMerge ([ module ]
         ++ (builtins.map (submodule: resolveImports submodule args)
           module.imports))
     else
@@ -33,5 +33,15 @@ rec {
   # Imports and merges a list of module paths.
   importAndMerge = files: args:
     let modules = builtins.map (file: import file args) files;
-    in fuseAttrs modules;
+    in deepMerge modules;
+
+  # Extend nixpkgs.lib.types with deep-mergible attribute sets.
+  types = {
+    deepMergedAttrs = lib.mkOptionType {
+      name = "deep-merged attribute set";
+      merge = path: definitions:
+        let values = builtins.map (definition: definition.value) definitions;
+        in deepMerge values;
+    };
+  };
 }

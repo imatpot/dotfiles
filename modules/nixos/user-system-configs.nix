@@ -7,4 +7,4 @@ let
 
   systemConfigs = builtins.map getSystemConfig users;
 
-in lib.fuseAttrs systemConfigs
+in lib.deepMerge systemConfigs

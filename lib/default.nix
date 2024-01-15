@@ -20,7 +20,7 @@ let
     lib = simpleLib;
   };
 
-  coreLib = utils.fuseAttrs [ simpleLib utils systems pkgs ];
+  coreLib = utils.deepMerge [ simpleLib utils systems pkgs ];
 
   # Depends on systems.pkgsForSystem
   users = import ./users.nix {
@@ -28,7 +28,7 @@ let
     lib = coreLib;
   };
 
-  userLib = utils.fuseAttrs [ coreLib users ];
+  userLib = utils.deepMerge [ coreLib users ];
 
   # Depends on users.mkUser
   hosts = import ./hosts.nix {
@@ -36,6 +36,6 @@ let
     lib = userLib;
   };
 
-  finalLib = utils.fuseAttrs [ userLib hosts ];
+  finalLib = utils.deepMerge [ userLib hosts ];
 
 in finalLib

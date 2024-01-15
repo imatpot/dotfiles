@@ -3,13 +3,7 @@
 {
   options = {
     system = lib.mkOption {
-      type = lib.mkOptionType {
-        name = "fusiable attribute set";
-        merge = path: definitions:
-          let values = builtins.map (v: v.value) definitions;
-          in lib.fuseAttrs values;
-      };
-
+      type = lib.types.deepMergedAttrs;
       default = { };
 
       description = ''
