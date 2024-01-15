@@ -21,7 +21,7 @@
         inputs.home-manager.nixosModules.home-manager
 
         (import ../modules/nixos/home-manager.nix {
-          inherit lib hostname system stateVersion users;
+          inherit lib inputs hostname system stateVersion users;
         })
 
         (import ../modules/nixos/user-system-configs.nix {
