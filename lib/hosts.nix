@@ -19,6 +19,7 @@
         ../hosts/${hostname}/hardware.nix
 
         inputs.home-manager.nixosModules.home-manager
+        inputs.sops-nix.nixosModules.sops
 
         (import ../modules/common/nixpkgs.nix { inherit lib; })
 

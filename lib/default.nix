@@ -20,7 +20,9 @@ let
     lib = simpleLib;
   };
 
-  coreLib = utils.deepMerge [ simpleLib utils systems pkgs ];
+  secrets = import ./secrets.nix { };
+
+  coreLib = utils.deepMerge [ simpleLib utils systems pkgs secrets ];
 
   # Depends on systems.pkgsForSystem
   users = import ./users.nix {

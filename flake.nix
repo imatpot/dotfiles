@@ -8,9 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = inputs@{ self, ... }:
+  outputs = inputs:
     let
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];

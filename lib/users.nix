@@ -15,6 +15,8 @@
       modules = [
         ../users/${username}/home.nix
 
+        inputs.sops-nix.homeManagerModules.sops
+
         (import ../modules/common/nixpkgs.nix { inherit lib; })
 
         (import ../modules/home-manager/system-config-support.nix {
