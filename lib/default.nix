@@ -1,3 +1,5 @@
+# Let's build the flake's lib with the correct dependency tree
+
 { inputs, ... }:
 
 let
@@ -13,19 +15,20 @@ let
     lib = primitiveLib;
   };
 
-  lib' = utils.fuseAttrs [
+  coreLib = utils.fuseAttrs [
     inputs.nixpkgs.lib
     inputs.home-manager.lib
     utils
     systems
   ];
 
+  # Depends on systems.pkgsForSystem
   users = import ./users.nix {
     inherit inputs;
-    lib = lib';
+    lib = coreLib;
   };
 
-  lib'' = utils.fuseAttrs [
+  userLib = utils.fuseAttrs [
     inputs.nixpkgs.lib
     inputs.home-manager.lib
     utils
@@ -33,9 +36,10 @@ let
     users
   ];
 
+  # Depends on users.mkUser
   hosts = import ./hosts.nix {
     inherit inputs;
-    lib = lib'';
+    lib = userLib;
   };
 
 in utils.fuseAttrs [
