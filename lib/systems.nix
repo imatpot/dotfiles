@@ -1,6 +1,6 @@
-{ outputs, ... }:
+{ lib, ... }:
 
 {
-  isLinux = outputs.lib.hasSuffix "linux";
-  isDarwin = outputs.lib.hasSuffix "darwin";
+  isLinux = lib.hasSuffix "linux";
+  isDarwin = lib.hasSuffix "darwin";
 }

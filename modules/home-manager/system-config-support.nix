@@ -1,13 +1,13 @@
-{ outputs, ... }:
+{ lib, ... }:
 
 {
   options = {
-    system = outputs.lib.mkOption {
-      type = outputs.lib.mkOptionType {
+    system = lib.mkOption {
+      type = lib.mkOptionType {
         name = "fusiable attribute set";
         merge = path: definitions:
           let values = builtins.map (v: v.value) definitions;
-          in outputs.lib.fuseAttrs values;
+          in lib.fuseAttrs values;
       };
 
       default = { };

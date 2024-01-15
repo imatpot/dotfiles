@@ -1,4 +1,4 @@
-{ outputs, ... }:
+{ lib, ... }:
 
 let
   common = {
@@ -7,9 +7,9 @@ let
   };
 
 in {
-  "mladen" = outputs.lib.mkUser common;
+  "mladen" = lib.mkUser common;
 
-  "mladen@mcdonalds" = outputs.lib.mkUser (common // {
+  "mladen@mcdonalds" = lib.mkUser (common // {
     system = "aarch64-darwin";
     hostname = "mcdonalds";
   });

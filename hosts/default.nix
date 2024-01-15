@@ -1,3 +1,3 @@
-{ inputs, outputs, ... }:
+{ lib, ... }:
 
-outputs.lib.importAndMerge [ ./adele ./shinobi ] { inherit inputs outputs; }
+lib.importAndMerge [ ./adele ./shinobi ] { inherit lib; }

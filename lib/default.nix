@@ -1,10 +1,48 @@
-{ inputs, outputs, ... }:
+{ inputs, ... }:
 
 let
-  utils = import ./utils.nix { inherit inputs outputs; };
+  primitiveLib = inputs.nixpkgs.lib // inputs.home-manager.lib;
 
-  lib = utils.importAndMerge [ ./systems.nix ./hosts.nix ./users.nix ] {
-    inherit inputs outputs;
+  utils = import ./utils.nix {
+    inherit inputs;
+    lib = primitiveLib;
   };
 
-in utils.mergeAttrs [ inputs.nixpkgs.lib inputs.home-manager.lib utils lib ]
+  systems = import ./systems.nix {
+    inherit inputs;
+    lib = primitiveLib;
+  };
+
+  lib' = utils.fuseAttrs [
+    inputs.nixpkgs.lib
+    inputs.home-manager.lib
+    utils
+    systems
+  ];
+
+  users = import ./users.nix {
+    inherit inputs;
+    lib = lib';
+  };
+
+  lib'' = utils.fuseAttrs [
+    inputs.nixpkgs.lib
+    inputs.home-manager.lib
+    utils
+    systems
+    users
+  ];
+
+  hosts = import ./hosts.nix {
+    inherit inputs;
+    lib = lib'';
+  };
+
+in utils.fuseAttrs [
+  inputs.nixpkgs.lib
+  inputs.home-manager.lib
+  utils
+  systems
+  hosts
+  users
+]

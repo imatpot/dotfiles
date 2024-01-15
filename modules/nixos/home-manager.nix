@@ -1,13 +1,12 @@
-{ inputs, outputs, hostname, system, stateVersion, users ? [ ], ... }:
+{ lib, hostname, system, stateVersion, users ? [ ], ... }:
 
 {
   home-manager = {
-    users = outputs.lib.genAttrs users
-      (username: import ../../users/${username}/home.nix);
+    users = lib.genAttrs users (username:
+      (lib.mkUser { inherit username hostname system stateVersion; }).config);
 
-    sharedModules = [ ../home-manager/system-config-support.nix ];
-
-    extraSpecialArgs = { inherit inputs outputs system hostname stateVersion; };
+    sharedModules =
+      [ (import ../home-manager/system-config-support.nix { inherit lib; }) ];
 
     # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4
     useGlobalPkgs = false;
