@@ -1,7 +1,6 @@
-{ pkgs, username, ... }:
+{ hostname, ... }:
 
 {
-  system.users.users.${username}.packages = [ pkgs.neofetch ];
-
+  system.programs.zsh.enable = hostname == "shinobi";
   home.file."debug.info".text = "zsh";
 }

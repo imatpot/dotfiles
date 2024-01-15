@@ -6,6 +6,7 @@ in {
   imports = [ ./debug.nix ];
 
   system.programs.npm.enable = true;
+
   home = {
     inherit stateVersion;
 
