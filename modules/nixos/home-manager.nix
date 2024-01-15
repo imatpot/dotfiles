@@ -5,8 +5,10 @@
     users =
       lib.genAttrs users (username: import ../../users/${username}/home.nix);
 
-    sharedModules =
-      [ (import ../home-manager/system-config-support.nix { inherit lib; }) ];
+    sharedModules = [
+      (import ../common/nixpkgs.nix { inherit lib; })
+      (import ../home-manager/system-config-support.nix { inherit lib; })
+    ];
 
     extraSpecialArgs = {
       inherit inputs system hostname stateVersion;

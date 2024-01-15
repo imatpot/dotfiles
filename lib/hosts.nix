@@ -20,6 +20,8 @@
 
         inputs.home-manager.nixosModules.home-manager
 
+        (import ../modules/common/nixpkgs.nix { inherit lib; })
+
         (import ../modules/nixos/home-manager.nix {
           inherit lib inputs hostname system stateVersion users;
         })

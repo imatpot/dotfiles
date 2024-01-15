@@ -3,24 +3,24 @@
 { inputs, ... }:
 
 let
-  primitiveLib = inputs.nixpkgs.lib // inputs.home-manager.lib;
+  simpleLib = inputs.nixpkgs.lib // inputs.home-manager.lib;
 
   utils = import ./utils.nix {
     inherit inputs;
-    lib = primitiveLib;
+    lib = simpleLib;
   };
 
   systems = import ./systems.nix {
     inherit inputs;
-    lib = primitiveLib;
+    lib = simpleLib;
   };
 
-  coreLib = utils.fuseAttrs [
-    inputs.nixpkgs.lib
-    inputs.home-manager.lib
-    utils
-    systems
-  ];
+  pkgs = import ./pkgs.nix {
+    inherit inputs;
+    lib = simpleLib;
+  };
+
+  coreLib = utils.fuseAttrs [ simpleLib utils systems pkgs ];
 
   # Depends on systems.pkgsForSystem
   users = import ./users.nix {
@@ -28,13 +28,7 @@ let
     lib = coreLib;
   };
 
-  userLib = utils.fuseAttrs [
-    inputs.nixpkgs.lib
-    inputs.home-manager.lib
-    utils
-    systems
-    users
-  ];
+  userLib = utils.fuseAttrs [ coreLib users ];
 
   # Depends on users.mkUser
   hosts = import ./hosts.nix {
@@ -42,11 +36,6 @@ let
     lib = userLib;
   };
 
-in utils.fuseAttrs [
-  inputs.nixpkgs.lib
-  inputs.home-manager.lib
-  utils
-  systems
-  hosts
-  users
-]
+  finalLib = utils.fuseAttrs [ userLib hosts ];
+
+in finalLib

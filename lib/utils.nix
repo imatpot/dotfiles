@@ -1,11 +1,6 @@
 { lib, inputs, ... }:
 
 rec {
-  pkgsForSystem = system: import inputs.nixpkgs { inherit system; };
-
-  forEachSystem = systems: fn:
-    lib.genAttrs systems (system: fn (pkgsForSystem system));
-
   # Merges a list of attributes into one, including lists and nested attributes.
   # Use this instead of lib.mkMerge if the merge type isn't allowed somewhere.
   # https://stackoverflow.com/a/54505212
