@@ -1,4 +1,4 @@
-{ lib', hostname, system, stateVersion, ... }:
+{ pkgs, lib', hostname, system, stateVersion, ... }:
 
 let hostString = if hostname == null then "unknown host" else hostname;
 
@@ -20,5 +20,18 @@ in {
 
     file."mcdonalds.info" =
       lib'.mkIf (hostname == "mcdonalds") { text = "this is mcdonalds"; };
+
+    packages = with pkgs; [
+      unstable.vscode
+      unstable.discord
+
+      nixfmt
+      nil
+      comma
+      nom
+      deadnix
+
+      bat
+    ];
   };
 }

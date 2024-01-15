@@ -79,13 +79,6 @@
       firefox
       vim
       git
-      vscode
-      nixfmt
-      nil
-      comma
-      nom
-      discord
-      bat
       #  thunderbird
     ];
   };
