@@ -3,41 +3,31 @@
 { inputs, ... }:
 
 let
-  simpleLib = inputs.nixpkgs.lib // inputs.home-manager.lib;
+  externalLib =
+    inputs.nixpkgs.lib.extend (final: prev: inputs.home-manager.lib);
 
-  utils = import ./utils.nix {
-    inherit inputs;
-    lib = simpleLib;
-  };
+  utilLib = externalLib.extend (final: prev:
+    import ./utils.nix {
+      inherit inputs;
+      lib = externalLib;
+    });
 
-  systems = import ./systems.nix {
-    inherit inputs;
-    lib = simpleLib;
-  };
+  coreLib = utilLib.extend (final: prev:
+    prev.importAndMerge [ ./systems.nix ./pkgs.nix ./secrets.nix ] {
+      inherit inputs;
+      lib = prev;
+    });
 
-  pkgs = import ./pkgs.nix {
-    inherit inputs;
-    lib = simpleLib;
-  };
+  userLib = coreLib.extend (final: prev:
+    prev.importAndMerge [ ./users.nix ] {
+      inherit inputs;
+      lib = prev;
+    });
 
-  secrets = import ./secrets.nix { };
-
-  coreLib = utils.deepMerge [ simpleLib utils systems pkgs secrets ];
-
-  # Depends on systems.pkgsForSystem
-  users = import ./users.nix {
-    inherit inputs;
-    lib = coreLib;
-  };
-
-  userLib = utils.deepMerge [ coreLib users ];
-
-  # Depends on users.mkUser
-  hosts = import ./hosts.nix {
-    inherit inputs;
-    lib = userLib;
-  };
-
-  finalLib = utils.deepMerge [ userLib hosts ];
+  finalLib = userLib.extend (final: prev:
+    prev.importAndMerge [ ./hosts.nix ] {
+      inherit inputs;
+      lib = prev;
+    });
 
 in finalLib
