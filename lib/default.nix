@@ -3,28 +3,22 @@
 { inputs, outputs, ... }:
 
 let
-  external = inputs.nixpkgs.lib.extend (final: prev: inputs.home-manager.lib);
-
-  utils = import ./utils.nix {
+  core = import ./core.nix {
     inherit inputs;
-    lib = external;
+    extlib = inputs.nixpkgs.lib.extend (_: _: inputs.home-manager.lib);
   };
 
-  core = utils.deepMerge [ inputs.nixpkgs.lib inputs.home-manager.lib utils ];
+in core.deepMerge [
+  inputs.nixpkgs.lib
+  inputs.home-manager.lib
 
-  base = utils.deepMerge [
-    core
-    (utils.importAndMerge [ ./systems.nix ./pkgs.nix ./secrets.nix ] {
-      inherit inputs;
-      lib = core;
-    })
-  ];
+  core
 
-  lib = utils.deepMerge [
-    base
-    (utils.importAndMerge [ ./users.nix ./hosts.nix ] {
-      inherit inputs outputs;
-    })
-  ];
-
-in lib
+  (core.importAndMerge [
+    ./systems.nix
+    ./pkgs.nix
+    ./secrets.nix
+    ./users.nix
+    ./hosts.nix
+  ] { inherit inputs outputs; })
+]

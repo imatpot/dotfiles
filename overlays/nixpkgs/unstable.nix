@@ -1,8 +1,8 @@
-{ lib, inputs, ... }:
+{ inputs, outputs, ... }:
 
 final: prev: {
   unstable = import inputs.nixpkgs-unstable {
     system = prev.system;
-    config = lib.nixpkgsDefaultConfig;
+    config = outputs.lib.nixpkgsDefaultConfig;
   };
 }

@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ inputs, outputs, ... }:
 
 rec {
   nixpkgsDefaultConfig = {
@@ -9,7 +9,7 @@ rec {
   nixpkgsDefaultOverlays = let
     overlayArgs = {
       inherit inputs;
-      lib = lib // { inherit nixpkgsDefaultConfig; };
+      outputs = outputs // { lib = { inherit nixpkgsDefaultConfig; }; };
     };
   in [
     (import ../overlays/nixpkgs/unstable.nix overlayArgs)
@@ -19,5 +19,5 @@ rec {
   pkgsForSystem = system: import inputs.nixpkgs { inherit system; };
 
   forEachSystem = systems: fn:
-    lib.genAttrs systems (system: fn (pkgsForSystem system));
+    outputs.lib.genAttrs systems (system: fn (pkgsForSystem system));
 }

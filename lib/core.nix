@@ -1,4 +1,7 @@
-{ lib, inputs, ... }:
+# This is the very core of the lib.
+# IT MUST THEREFORE ONLY DEPEND ON ITSELF OR EXTERNAL LIBS.
+
+{ extlib, inputs, ... }:
 
 rec {
   # Merges a list of attributes into one, including lists and nested attributes.
@@ -7,15 +10,15 @@ rec {
   deepMerge = attrs:
     let
       merge = path:
-        lib.zipAttrsWith (n: values:
+        extlib.zipAttrsWith (n: values:
           if builtins.tail values == [ ] then
             builtins.head values
           else if builtins.all builtins.isList values then
-            lib.unique (inputs.nixpkgs.lib.concatLists values)
+            extlib.unique (inputs.nixpkgs.lib.concatLists values)
           else if builtins.all builtins.isAttrs values then
             merge (path ++ [ n ]) values
           else
-            lib.last values);
+            extlib.last values);
     in merge [ ] attrs;
 
   # Imports and merges all modules in a path's module's `imports` recursively.
@@ -37,7 +40,7 @@ rec {
 
   # Extend nixpkgs.lib.types with deep-mergible attribute sets.
   types = {
-    deepMergedAttrs = lib.mkOptionType {
+    deepMergedAttrs = extlib.mkOptionType {
       name = "deep-merged attribute set";
       merge = path: definitions:
         let values = builtins.map (definition: definition.value) definitions;
