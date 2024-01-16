@@ -1,4 +1,4 @@
-{ config, pkgs, lib', username, hostname, system, stateVersion, ... }:
+{ config, pkgs, lib', hostname, system, stateVersion, ... }:
 
 let hostString = if hostname == null then "unknown host" else hostname;
 
@@ -8,22 +8,23 @@ in {
   system.programs.npm.enable = true;
 
   sops.age.keyFile = if lib'.isDarwin system then
-    "/Users/${username}/Library/Application Support/sops/age/keys.txt"
+    "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
   else
-    "/home/${username}/.config/sops/age/keys.txt";
+    "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
   sops.secrets.example = lib'.mkSecretFile {
-    source = ./secrets/example;
+    source = ./secrets/example.crypt;
     destination = "${config.home.homeDirectory}/secrets/example";
   };
 
   home = {
-    inherit username stateVersion;
+    inherit stateVersion;
+    username = "mladen";
 
     homeDirectory = if lib'.isDarwin system then
-      "/Users/${username}"
+      "/Users/${config.home.username}"
     else
-      "/home/${username}";
+      "/home/${config.home.username}";
 
     file."system.info".text = "${hostString} (${system})";
 

@@ -6,6 +6,7 @@
       lib.genAttrs users (username: import ../../users/${username}/home.nix);
 
     sharedModules = [
+      inputs.sops-nix.homeManagerModules.sops
       (import ../common/nixpkgs.nix { inherit lib; })
       (import ../home-manager/system-config-support.nix { inherit lib; })
     ];
