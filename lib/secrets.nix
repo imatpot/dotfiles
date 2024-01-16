@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  mkSecretFile = { source, destination }: {
+  mkSecretFile = { source, destination, ... }: {
     sopsFile = source;
     path = destination;
     format = "binary";

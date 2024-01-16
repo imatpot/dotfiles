@@ -1,13 +1,15 @@
-{ inputs, outputs, ... }:
+flake@{ inputs, outputs, ... }:
 
 {
-  mkUser = { username, stateVersion, system ? "x86_64-linux", hostname ? null }:
-    outputs.lib.homeManagerConfiguration {
+  mkUser = args@{ username, stateVersion, system ? "x86_64-linux"
+    , hostname ? null, ... }:
+    let
+      # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
+      args' = args // { inherit system hostname; };
+    in outputs.lib.homeManagerConfiguration {
       pkgs = outputs.lib.pkgsForSystem system;
 
-      extraSpecialArgs = {
-        inherit inputs outputs username system hostname stateVersion;
-      };
+      extraSpecialArgs = flake // args';
 
       modules = [
         ../users/${username}/home.nix

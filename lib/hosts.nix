@@ -1,16 +1,15 @@
-{ inputs, outputs, ... }:
+flake@{ inputs, outputs, ... }:
 
 {
-  mkHost = { hostname, system, stateVersion, users ? [ ] }:
-    outputs.lib.nixosSystem {
+  mkHost = args@{ hostname, system, stateVersion, users ? [ ], ... }:
+    let
+      # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
+      args' = args // { inherit users; };
+    in outputs.lib.nixosSystem {
       inherit system;
 
       modules = [
-        {
-          _module.args = {
-            inherit inputs outputs hostname system stateVersion;
-          };
-        }
+        { _module.args = flake // args'; }
 
         ../hosts/${hostname}/configuration.nix
         ../hosts/${hostname}/hardware.nix
@@ -20,13 +19,8 @@
 
         outputs.commonModules.nixpkgs
 
-        (outputs.nixosModules.homeManager {
-          inherit system hostname stateVersion users;
-        })
-
-        (outputs.nixosModules.userSystemConfigs {
-          inherit system hostname stateVersion users;
-        })
+        (outputs.nixosModules.homeManager args')
+        (outputs.nixosModules.userSystemConfigs args')
       ];
     };
 }

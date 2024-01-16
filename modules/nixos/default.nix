@@ -1,8 +1,6 @@
-{ inputs, outputs, ... }:
+flake:
 
 {
-  homeManager = import ./home-manager.nix { inherit inputs outputs; };
-
-  userSystemConfigs =
-    import ./user-system-configs.nix { inherit inputs outputs; };
+  homeManager = import ./home-manager.nix flake;
+  userSystemConfigs = import ./user-system-configs.nix flake;
 }

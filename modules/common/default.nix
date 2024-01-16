@@ -1,5 +1,5 @@
-{ inputs, outputs, ... }:
+flake:
 
 {
-  nixpkgs = import ./nixpkgs.nix { inherit inputs outputs; };
+  nixpkgs = import ./nixpkgs.nix flake;
 }

@@ -1,6 +1,6 @@
 # Let's build the flake's lib with the correct dependency tree
 
-{ inputs, outputs, ... }:
+flake@{ inputs, ... }:
 
 let
   core = import ./core.nix {
@@ -20,5 +20,5 @@ in core.deepMerge [
     ./secrets.nix
     ./users.nix
     ./hosts.nix
-  ] { inherit inputs outputs; })
+  ] flake)
 ]

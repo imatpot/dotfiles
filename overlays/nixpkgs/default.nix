@@ -1,5 +1,3 @@
-{ inputs, outputs, ... }:
+flake@{ outputs, ... }:
 
-outputs.lib.importAndMerge [ ./unstable.nix ./nur.nix ] {
-  inherit inputs outputs;
-}
+outputs.lib.importAndMerge [ ./unstable.nix ./nur.nix ] flake

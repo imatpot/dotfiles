@@ -20,6 +20,7 @@
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
       allSystems = linuxSystems ++ macosSystems;
+
       flake = {
         inherit inputs;
         inherit (inputs.self) outputs;
