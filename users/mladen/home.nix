@@ -7,7 +7,7 @@ in {
 
   system.programs.npm.enable = true;
 
-  sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/aegis" ];
+  sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/aegissh" ];
 
   sops.secrets.example = outputs.lib.mkSecretFile {
     source = "${inputs.vault}/example.json.crypt";
