@@ -42,7 +42,7 @@ rec {
   types = {
     deepMergedAttrs = extlib.mkOptionType {
       name = "deep-merged attribute set";
-      merge = path: definitions:
+      merge = _: definitions:
         let values = builtins.map (definition: definition.value) definitions;
         in deepMerge values;
     };

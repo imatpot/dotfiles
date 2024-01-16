@@ -3,7 +3,7 @@
 rec {
   nixpkgsDefaultConfig = {
     allowUnfree = true;
-    allowUnfreePredicate = pkg: true;
+    allowUnfreePredicate = _: true;
   };
 
   nixpkgsDefaultOverlays =

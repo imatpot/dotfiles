@@ -1,7 +1,7 @@
 flake@{ inputs, outputs, ... }:
 
 {
-  mkHost = args@{ hostname, system, stateVersion, users ? [ ], ... }:
+  mkHost = args@{ hostname, system, users ? [ ], ... }:
     let
       # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
       args' = args // { inherit users; };
