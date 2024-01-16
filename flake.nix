@@ -28,6 +28,12 @@
     in rec {
       lib = import ./lib flake;
 
+      overlays = import ./overlays flake;
+
+      commonModules = import ./modules/common flake;
+      nixosModules = import ./modules/nixos flake;
+      homeManagerModules = import ./modules/home-manager flake;
+
       nixosConfigurations = import ./hosts flake;
       homeConfigurations = import ./users flake;
 

@@ -6,15 +6,8 @@ rec {
     allowUnfreePredicate = pkg: true;
   };
 
-  nixpkgsDefaultOverlays = let
-    overlayArgs = {
-      inherit inputs;
-      outputs = outputs // { lib = { inherit nixpkgsDefaultConfig; }; };
-    };
-  in [
-    (import ../overlays/nixpkgs/unstable.nix overlayArgs)
-    (import ../overlays/nixpkgs/nur.nix overlayArgs)
-  ];
+  nixpkgsDefaultOverlays =
+    [ outputs.overlays.nixpkgs.unstable outputs.overlays.nixpkgs.nur ];
 
   pkgsForSystem = system: import inputs.nixpkgs { inherit system; };
 

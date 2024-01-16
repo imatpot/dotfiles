@@ -1,4 +1,5 @@
-{ system, outputs, hostname, stateVersion, users ? [ ], ... }:
+{ inputs, outputs, ... }:
+{ system, hostname, stateVersion, users ? [ ], ... }:
 
 let
   getSystemConfig = username:

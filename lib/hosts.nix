@@ -18,14 +18,14 @@
         inputs.home-manager.nixosModules.home-manager
         inputs.sops-nix.nixosModules.sops
 
-        (import ../modules/common/nixpkgs.nix { inherit outputs; })
+        outputs.commonModules.nixpkgs
 
-        (import ../modules/nixos/home-manager.nix {
-          inherit inputs outputs hostname system stateVersion users;
+        (outputs.nixosModules.homeManager {
+          inherit system hostname stateVersion users;
         })
 
-        (import ../modules/nixos/user-system-configs.nix {
-          inherit outputs hostname system stateVersion users;
+        (outputs.nixosModules.userSystemConfigs {
+          inherit system hostname stateVersion users;
         })
       ];
     };

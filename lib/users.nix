@@ -14,11 +14,8 @@
 
         inputs.sops-nix.homeManagerModules.sops
 
-        (import ../modules/common/nixpkgs.nix { inherit outputs; })
-
-        (import ../modules/home-manager/system-config-support.nix {
-          inherit outputs;
-        })
+        outputs.commonModules.nixpkgs
+        outputs.homeManagerModules.systemConfigSupport
       ];
     };
 }

@@ -1,4 +1,5 @@
-{ inputs, outputs, hostname, system, stateVersion, users ? [ ], ... }:
+{ inputs, outputs, ... }:
+{ hostname, system, stateVersion, users ? [ ], ... }:
 
 {
   home-manager = {
@@ -7,8 +8,8 @@
 
     sharedModules = [
       inputs.sops-nix.homeManagerModules.sops
-      (import ../common/nixpkgs.nix { inherit outputs; })
-      (import ../home-manager/system-config-support.nix { inherit outputs; })
+      outputs.commonModules.nixpkgs
+      outputs.homeManagerModules.systemConfigSupport
     ];
 
     extraSpecialArgs = { inherit inputs outputs system hostname stateVersion; };
