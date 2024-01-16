@@ -1,10 +1,12 @@
-{ lib, system, hostname, stateVersion, users ? [ ], ... }:
+{ system, outputs, hostname, stateVersion, users ? [ ], ... }:
 
 let
   getSystemConfig = username:
-    let user = lib.mkUser { inherit username system hostname stateVersion; };
+    let
+      user =
+        outputs.lib.mkUser { inherit username system hostname stateVersion; };
     in user.config.system;
 
   systemConfigs = builtins.map getSystemConfig users;
 
-in lib.deepMerge systemConfigs
+in outputs.lib.deepMerge systemConfigs

@@ -1,8 +1,8 @@
-{ lib, ... }:
+{ outputs, ... }:
 
 {
   nixpkgs = {
-    config = lib.nixpkgsDefaultConfig;
-    overlays = lib.nixpkgsDefaultOverlays;
+    config = outputs.lib.nixpkgsDefaultConfig;
+    overlays = outputs.lib.nixpkgsDefaultOverlays;
   };
 }

@@ -20,12 +20,16 @@
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
       allSystems = linuxSystems ++ macosSystems;
+      flake = {
+        inherit inputs;
+        inherit (inputs.self) outputs;
+      };
 
     in rec {
-      lib = import ./lib { inherit inputs; };
+      lib = import ./lib flake;
 
-      nixosConfigurations = import ./hosts { inherit lib inputs; };
-      homeConfigurations = import ./users { inherit lib inputs; };
+      nixosConfigurations = import ./hosts flake;
+      homeConfigurations = import ./users flake;
 
       formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
     };

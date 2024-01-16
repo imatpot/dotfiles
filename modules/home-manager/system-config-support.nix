@@ -1,9 +1,9 @@
-{ lib, ... }:
+{ outputs, ... }:
 
 {
   options = {
-    system = lib.mkOption {
-      type = lib.types.deepMergedAttrs;
+    system = outputs.lib.mkOption {
+      type = outputs.lib.types.deepMergedAttrs;
       default = { };
 
       description = ''

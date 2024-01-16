@@ -1,4 +1,4 @@
-{ config, pkgs, lib', hostname, system, stateVersion, ... }:
+{ config, pkgs, outputs, hostname, system, stateVersion, ... }:
 
 let hostString = if hostname == null then "unknown host" else hostname;
 
@@ -7,12 +7,12 @@ in {
 
   system.programs.npm.enable = true;
 
-  sops.age.keyFile = if lib'.isDarwin system then
+  sops.age.keyFile = if outputs.lib.isDarwin system then
     "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
   else
     "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
-  sops.secrets.example = lib'.mkSecretFile {
+  sops.secrets.example = outputs.lib.mkSecretFile {
     source = ./secrets/example.crypt;
     destination = "${config.home.homeDirectory}/secrets/example";
   };
@@ -21,7 +21,7 @@ in {
     inherit stateVersion;
     username = "mladen";
 
-    homeDirectory = if lib'.isDarwin system then
+    homeDirectory = if outputs.lib.isDarwin system then
       "/Users/${config.home.username}"
     else
       "/home/${config.home.username}";
@@ -31,7 +31,7 @@ in {
     file."home.info".text = "npm";
 
     file."mcdonalds.info" =
-      lib'.mkIf (hostname == "mcdonalds") { text = "this is mcdonalds"; };
+      outputs.lib.mkIf (hostname == "mcdonalds") { text = "this is mcdonalds"; };
 
     packages = with pkgs; [
       unstable.vscode
