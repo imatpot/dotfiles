@@ -1,4 +1,4 @@
-{ config, pkgs, outputs, hostname, system, stateVersion, ... }:
+{ config, pkgs, inputs, outputs, hostname, system, stateVersion, ... }:
 
 let hostString = if hostname == null then "unknown host" else hostname;
 
@@ -7,14 +7,11 @@ in {
 
   system.programs.npm.enable = true;
 
-  sops.age.keyFile = if outputs.lib.isDarwin system then
-    "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
-  else
-    "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/aegis" ];
 
   sops.secrets.example = outputs.lib.mkSecretFile {
-    source = ./secrets/example.crypt;
-    destination = "${config.home.homeDirectory}/secrets/example";
+    source = "${inputs.vault}/example.json.crypt";
+    destination = "${config.home.homeDirectory}/secrets/example.json";
   };
 
   home = {
@@ -30,8 +27,9 @@ in {
 
     file."home.info".text = "npm";
 
-    file."mcdonalds.info" =
-      outputs.lib.mkIf (hostname == "mcdonalds") { text = "this is mcdonalds"; };
+    file."mcdonalds.info" = outputs.lib.mkIf (hostname == "mcdonalds") {
+      text = "this is mcdonalds";
+    };
 
     packages = with pkgs; [
       unstable.vscode

@@ -13,6 +13,11 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    vault = {
+      url = "git+ssh://git@github.com/imatpot/vault";
+      flake = false;
+    };
   };
 
   outputs = inputs:

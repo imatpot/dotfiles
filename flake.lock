@@ -89,7 +89,8 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "vault": "vault"
       }
     },
     "sops-nix": {
@@ -111,6 +112,22 @@
         "owner": "mic92",
         "repo": "sops-nix",
         "type": "github"
+      }
+    },
+    "vault": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705427213,
+        "narHash": "sha256-WfIl0eLgY2VfxgeaDkfx7+XAc9Gnf4M2CeS1psOQB4s=",
+        "ref": "refs/heads/main",
+        "rev": "b94952a15ee5b0f70cc088a865ecd22f33d476c7",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@github.com/imatpot/vault"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/imatpot/vault"
       }
     }
   },
