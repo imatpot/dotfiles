@@ -117,11 +117,11 @@
     "vault": {
       "flake": false,
       "locked": {
-        "lastModified": 1705430546,
-        "narHash": "sha256-8FmXOP9Phx34/GXyKzXk3JJeHqo0d+d5e2yAxcyGPXI=",
+        "lastModified": 1705514279,
+        "narHash": "sha256-6kusXN8JAJRCQw4EsfgYmgbi3GCijFGCxVahqLIMg3I=",
         "ref": "refs/heads/main",
-        "rev": "2428a9b66a0971ab4f1808383c4dc6a98042372b",
-        "revCount": 2,
+        "rev": "e53284cfe74921c0473d4b1e4c501dba5a916f49",
+        "revCount": 4,
         "type": "git",
         "url": "ssh://git@github.com/imatpot/vault"
       },

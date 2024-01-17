@@ -1,46 +1,90 @@
-{ config, pkgs, inputs, outputs, hostname, system, ... }:
+{ pkgs, outputs, system, hostname, ... }:
 
-{
-  imports = [ ./debug.nix ];
+let
+  common = {
+    imports = [
+      ../common/sops.nix
+      ../common/nix.nix
+      ../common/java.nix
+      ../common/neovim.nix
+      ../common/zsh.nix
+      ../common/starship.nix
 
-  system.programs.npm.enable = true;
+      ./config/secrets.nix
 
-  sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/aegissh" ];
+      (import ../common/git.nix {
+        name = "Mladen Branković";
 
-  sops.secrets.example = outputs.lib.mkSecretFile {
-    source = "${inputs.vault}/example.json.crypt";
-    destination = "${config.home.homeDirectory}/secrets/example.json";
-  };
+        email = if hostname == "mcdonalds" then
+          "mladen.brankovic@golog.ch"
+        else
+          "root@brankovic.dev";
 
-  home = {
-    # inherit stateVersion;
-    # username = "mladen";
-
-    # homeDirectory = if outputs.lib.isDarwin system then
-    #   "/Users/${config.home.username}"
-    # else
-    #   "/home/${config.home.username}";
-
-    file."system.info".text =
-      "${if hostname == null then "unknown host" else hostname} (${system})";
-
-    file."home.info".text = "npm";
-
-    file."mcdonalds.info" = outputs.lib.mkIf (hostname == "mcdonalds") {
-      text = "this is mcdonalds";
-    };
-
-    packages = with pkgs; [
-      unstable.vscode
-      unstable.discord
-
-      nixfmt
-      nil
-      comma
-      nom
-      deadnix
-
-      bat
+        signing = if hostname == "mcdonalds" then {
+          key = "588B95BE8E35DD34";
+          signByDefault = true;
+        } else
+          { };
+      })
     ];
+
+    home = {
+      shellAliases = rec {
+        nix-gc = "nix-collect-garbage";
+
+        shell = "nix shell";
+        develop = "nix develop --command zsh";
+
+        mkcd = "fn() { mkdir -p $1 && cd $1; }; fn";
+        ll = "ls -la";
+
+        python = "python3";
+        py = python;
+      };
+
+      packages = with pkgs; [
+        bat
+        flux
+        neofetch
+        tldr
+        gnugrep
+        nmap
+        deno
+        nodejs
+        (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 ])
+        graphviz
+        kubectl
+        cargo
+        rustc
+        typst
+        poppler_utils
+        android-tools
+        cascadia-code
+        fira-code
+        inconsolata-nerdfont
+        jetbrains-mono
+        inriafonts
+        libertine
+        liberation_ttf
+        atkinson-hyperlegible
+        watchexec
+      ];
+    };
   };
-}
+
+  linux = {
+    imports = if outputs.lib.isLinux system then [
+      ../common/discord.nix
+      ../common/vscode.nix
+    ] else
+      [ ];
+  };
+
+  darwin = {
+    imports =
+      if outputs.lib.isDarwin system then [ ../common/utm.nix ] else [ ];
+
+    programs.zsh.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
+  };
+
+in outputs.lib.deepMerge [ common linux darwin ]
