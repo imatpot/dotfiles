@@ -16,11 +16,11 @@ with outputs.lib;
     xkbVariant = mkDefault "legacy";
   };
 
-  environment.systemPackages = mkDefault (with pkgs; [ vim git ]);
+  environment.systemPackages = with pkgs; [ vim git ];
 
-  nix.gc = mkDefault {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 14d";
+  nix.gc = {
+    automatic = mkDefault true;
+    dates = mkDefault "weekly";
+    options = mkDefault "--delete-older-than 14d";
   };
 }

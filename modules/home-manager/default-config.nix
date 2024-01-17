@@ -9,7 +9,7 @@ let
     home = {
       username = mkDefault username;
       stateVersion = mkDefault stateVersion;
-      packages = mkDefault (with pkgs; [ vim git ]);
+      packages = with pkgs; [ vim git ];
     };
   };
 
@@ -25,4 +25,4 @@ let
   } else
     { };
 
-in outputs.lib.deepMerge [ common linux darwin ]
+in deepMerge [ common linux darwin ]

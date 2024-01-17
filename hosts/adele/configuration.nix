@@ -5,13 +5,13 @@
 { config, pkgs, stateVersion, hostname, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = hostname; # Define your hostname.
+  # networking.hostName = hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -22,10 +22,10 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/Zurich";
+  # time.timeZone = "Europe/Zurich";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
+  # i18n.defaultLocale = "en_GB.UTF-8";
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -35,13 +35,13 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
-    layout = "ch";
-    xkbVariant = "legacy";
-  };
+  # services.xserver = {
+  #   layout = "ch";
+  #   xkbVariant = "legacy";
+  # };
 
   # Configure console keymap
-  console.keyMap = "sg";
+  # console.keyMap = "sg";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -71,24 +71,24 @@
     isNormalUser = true;
     description = "Mladen";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-      vim
-      git
-      #  thunderbird
-    ];
+    # packages = with pkgs; [
+    #   firefox
+    #   vim
+    #   git
+    #   #  thunderbird
+    # ];
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs;
-    [
-      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #  wget
-    ];
+  # environment.systemPackages = with pkgs;
+  #   [
+  #     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #     #  wget
+  #   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -115,6 +115,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = stateVersion; # Did you read the comment?
+  # system.stateVersion = stateVersion; # Did you read the comment?
 
 }

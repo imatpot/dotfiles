@@ -1,8 +1,6 @@
-{ config, pkgs, inputs, outputs, hostname, system, stateVersion, ... }:
+{ config, pkgs, inputs, outputs, hostname, system, ... }:
 
-let hostString = if hostname == null then "unknown host" else hostname;
-
-in {
+{
   imports = [ ./debug.nix ];
 
   system.programs.npm.enable = true;
@@ -15,15 +13,16 @@ in {
   };
 
   home = {
-    inherit stateVersion;
-    username = "mladen";
+    # inherit stateVersion;
+    # username = "mladen";
 
-    homeDirectory = if outputs.lib.isDarwin system then
-      "/Users/${config.home.username}"
-    else
-      "/home/${config.home.username}";
+    # homeDirectory = if outputs.lib.isDarwin system then
+    #   "/Users/${config.home.username}"
+    # else
+    #   "/home/${config.home.username}";
 
-    file."system.info".text = "${hostString} (${system})";
+    file."system.info".text =
+      "${if hostname == null then "unknown host" else hostname} (${system})";
 
     file."home.info".text = "npm";
 
