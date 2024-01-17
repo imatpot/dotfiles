@@ -1,3 +1,3 @@
-{ outputs, ... }:
+flake@{ outputs, ... }:
 
-outputs.lib.importAndMerge [ ./mladen ] { inherit outputs; }
+outputs.lib.importAndMerge [ ./mladen ] flake
