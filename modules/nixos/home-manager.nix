@@ -2,13 +2,20 @@ flake@{ inputs, outputs, ... }:
 
 args@{ users ? [ ], ... }:
 
-{
+let
+  mkUserConfig = username: args':
+    outputs.lib.deepMerge [
+      (outputs.homeManagerModules.defaultConfig (args // { inherit username; }))
+      (import ../../users/${username}/home.nix args')
+    ];
+
+in {
   home-manager = {
-    users = outputs.lib.genAttrs users
-      (username: import ../../users/${username}/home.nix);
+    users = outputs.lib.genAttrs users mkUserConfig;
 
     sharedModules = [
       inputs.sops-nix.homeManagerModules.sops
+
       outputs.commonModules.nixpkgs
       outputs.homeManagerModules.systemConfigSupport
     ];

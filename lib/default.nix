@@ -1,5 +1,3 @@
-# Let's build the flake's lib with the correct dependency tree
-
 flake@{ inputs, ... }:
 
 let
