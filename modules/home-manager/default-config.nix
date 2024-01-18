@@ -4,7 +4,7 @@
 
 with outputs.lib;
 
-let
+mkFor system hostname {
   common = {
     programs = {
       # enable only on non-NixOS systems
@@ -23,16 +23,16 @@ let
     };
   };
 
-  linux = if (isLinux system) then {
-    home.homeDirectory = mkDefault "/home/${username}";
-  } else
-    { };
+  systems = {
+    linux = {
+      home.homeDirectory = mkDefault "/home/${username}";
+    };
 
-  darwin = if (isDarwin system) then {
-    home.homeDirectory = mkDefault "/Users/${username}";
-    # aarch64-darwin can also run x86_64 binaries with Rosetta 2, so
-    nix.settings.extra-platforms = mkIf (isDarwin system) [ "x86_64-darwin" ];
-  } else
-    { };
+    darwin = {
+      home.homeDirectory = mkDefault "/Users/${username}";
 
-in deepMerge [ common linux darwin ]
+      # aarch64-darwin can also run x86_64 binaries with Rosetta 2, so
+      nix.settings.extra-platforms = mkIf (isDarwin system) [ "x86_64-darwin" ];
+    };
+  };
+}

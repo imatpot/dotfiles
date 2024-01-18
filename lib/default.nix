@@ -13,10 +13,10 @@ in core.deepMerge [
   core
 
   (core.importAndMerge [
-    ./systems.nix
     ./pkgs.nix
     ./secrets.nix
     ./users.nix
     ./hosts.nix
+    ./conditionals.nix
   ] flake)
 ]

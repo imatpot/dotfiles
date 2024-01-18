@@ -1,6 +1,6 @@
 { pkgs, outputs, system, hostname, ... }:
 
-let
+outputs.lib.mkFor system hostname {
   common = {
     imports = [
       ../common/sops.nix
@@ -58,32 +58,38 @@ let
     };
 
     programs.git = {
-      userName = "Mladen Branković";
-      userEmail = if hostname == "mcdonalds" then
-        "mladen.brankovic@golog.ch"
-      else
-        "root@brankovic.dev";
-      signing = if hostname == "mcdonalds" then {
-        key = "588B95BE8E35DD34";
-        signByDefault = true;
-      } else
-        { };
+      userName = outputs.lib.mkDefault "Mladen Branković";
+      userEmail = outputs.lib.mkDefault "root@brankovic.dev";
     };
   };
 
-  linux = {
-    imports = if outputs.lib.isLinux system then [
-      ../common/discord.nix
-      ../common/vscode.nix
-    ] else
-      [ ];
+  systems = {
+    linux = {
+      imports = if outputs.lib.isLinux system then [
+        ../common/discord.nix
+        ../common/vscode.nix
+      ] else
+        [ ];
+    };
+
+    darwin = {
+      imports =
+        if outputs.lib.isDarwin system then [ ../common/utm.nix ] else [ ];
+
+      home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
+    };
   };
 
-  darwin = {
-    imports =
-      if outputs.lib.isDarwin system then [ ../common/utm.nix ] else [ ];
-
-    programs.zsh.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
+  hosts = {
+    mcdonalds = {
+      programs.git = {
+        userName = "Mladen Branković";
+        userEmail = "mladen.brankovic@golog.ch";
+        signing = {
+          key = "588B95BE8E35DD34";
+          signByDefault = true;
+        };
+      };
+    };
   };
-
-in outputs.lib.deepMerge [ common linux darwin ]
+}
