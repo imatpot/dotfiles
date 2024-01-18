@@ -64,18 +64,10 @@ outputs.lib.mkFor system hostname {
   };
 
   systems = {
-    linux = {
-      imports = if outputs.lib.isLinux system then [
-        ../common/discord.nix
-        ../common/vscode.nix
-      ] else
-        [ ];
-    };
+    linux = { imports = [ ../common/discord.nix ../common/vscode.nix ]; };
 
     darwin = {
-      imports =
-        if outputs.lib.isDarwin system then [ ../common/utm.nix ] else [ ];
-
+      imports = [ ../common/utm.nix ];
       home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
     };
   };

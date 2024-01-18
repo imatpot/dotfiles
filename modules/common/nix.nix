@@ -12,7 +12,6 @@ pkgs: {
         "nix-command"
         "flakes"
         "repl-flake"
-        "parse-toml-timestamps"
       ];
     };
   };

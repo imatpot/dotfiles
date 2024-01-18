@@ -6,8 +6,10 @@ flake@{ inputs, outputs, ... }:
     let
       pkgs = outputs.lib.pkgsForSystem system;
       # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
-      args' = args // { inherit system hostname; };
-      pkgsArgs = args' // { inherit pkgs; };
+      args' = args // {
+        inherit system hostname;
+        osConfig = null; # lib.mkUser is only called with pure Home Manager
+      };
 
     in outputs.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -23,7 +25,7 @@ flake@{ inputs, outputs, ... }:
         outputs.commonModules.nixpkgs
 
         outputs.homeManagerModules.systemConfigSupport
-        (outputs.homeManagerModules.defaultConfig pkgsArgs)
+        outputs.homeManagerModules.defaultConfig
       ];
     };
 }
