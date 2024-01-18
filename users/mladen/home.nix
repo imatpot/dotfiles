@@ -9,23 +9,9 @@ let
       ../common/neovim.nix
       ../common/zsh.nix
       ../common/starship.nix
+      ../common/git.nix
 
       ./config/secrets.nix
-
-      (import ../common/git.nix {
-        name = "Mladen Branković";
-
-        email = if hostname == "mcdonalds" then
-          "mladen.brankovic@golog.ch"
-        else
-          "root@brankovic.dev";
-
-        signing = if hostname == "mcdonalds" then {
-          key = "588B95BE8E35DD34";
-          signByDefault = true;
-        } else
-          { };
-      })
     ];
 
     home = {
@@ -69,6 +55,19 @@ let
         atkinson-hyperlegible
         watchexec
       ];
+    };
+
+    programs.git = {
+      userName = "Mladen Branković";
+      userEmail = if hostname == "mcdonalds" then
+        "mladen.brankovic@golog.ch"
+      else
+        "root@brankovic.dev";
+      signing = if hostname == "mcdonalds" then {
+        key = "588B95BE8E35DD34";
+        signByDefault = true;
+      } else
+        { };
     };
   };
 

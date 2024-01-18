@@ -1,6 +1,4 @@
-{ email, name, signing ? { }, ... }:
-
-{ ... }:
+{ outputs, ... }:
 
 {
   programs.git = {
@@ -8,8 +6,8 @@
 
     diff-so-fancy.enable = true;
 
-    userEmail = email;
-    userName = name;
+    userEmail = outputs.lib.mkDefault (throw "programs.git.userEmail is not set");
+    userName = outputs.lib.mkDefault (throw "programs.git.userName is not set");
 
     aliases = rec {
       aliases = "config --get-regexp alias";
