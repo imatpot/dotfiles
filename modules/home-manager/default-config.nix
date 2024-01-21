@@ -1,6 +1,4 @@
-{ inputs, outputs, ... }:
-
-{ pkgs, username, system, hostname, stateVersion, config, osConfig, ... }:
+{ outputs, username, system, hostname, stateVersion, osConfig, ... }:
 
 with outputs.lib;
 

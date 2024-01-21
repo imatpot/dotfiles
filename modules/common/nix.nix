@@ -1,6 +1,6 @@
-{ inputs, outputs, ... }:
+{ pkgs, ... }:
 
-pkgs: {
+{
   nix = {
     package = pkgs.nix;
 
@@ -8,11 +8,7 @@ pkgs: {
       auto-optimise-store = true;
       warn-dirty = false;
 
-      experimental-features = [
-        "nix-command"
-        "flakes"
-        "repl-flake"
-      ];
+      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
     };
   };
 }

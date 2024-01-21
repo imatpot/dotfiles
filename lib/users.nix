@@ -17,15 +17,15 @@ flake@{ inputs, outputs, ... }:
       extraSpecialArgs = flake // args';
 
       modules = [
-        ../users/${username}/home.nix
-
         inputs.sops-nix.homeManagerModules.sops
 
-        (outputs.commonModules.nix pkgs)
-        outputs.commonModules.nixpkgs
+        ../users/${username}/home.nix
 
-        outputs.homeManagerModules.systemConfigSupport
-        outputs.homeManagerModules.defaultConfig
+        ../modules/common/nix.nix
+        ../modules/common/nixpkgs.nix
+
+        ../modules/home-manager/system-config-support.nix
+        ../modules/home-manager/default-config.nix
       ];
     };
 }
