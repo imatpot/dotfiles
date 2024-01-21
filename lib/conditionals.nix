@@ -15,6 +15,9 @@ with outputs.lib;
         systems.darwin
       else
         { };
-      hostConfig = if hosts ? ${hostname} then hosts.${hostname} else { };
+      hostConfig = if hostname != null && hosts ? ${hostname} then
+        hosts.${hostname}
+      else
+        { };
     in deepMerge [ common systemConfig hostConfig ];
 }
