@@ -2,8 +2,8 @@
 
 let
   common = {
-    name = "mladen";
-    stateVersion = "23.11";
+    username = "mladen";
+    stateVersion = "24.05";
   };
 
 in {

@@ -34,11 +34,11 @@ rec {
       module;
 
   # Imports and merges a list of module paths.
-  importAndMerge = files: args:
-    let modules = builtins.map (file: import file args) files;
+  importAndMerge = paths: args:
+    let modules = builtins.map (file: import file args) paths;
     in deepMerge modules;
 
-  # Extend nixpkgs.lib.types with deep-mergible attribute sets.
+  # Extend `nixpkgs.lib.types` with deep-mergible attribute sets.
   types = {
     deepMergedAttrs = extlib.mkOptionType {
       name = "deep-merged attribute set";
