@@ -1,6 +1,4 @@
-{ outputs, ... }:
-
-args@{ system, users ? [ ], ... }:
+args@{ outputs, users ? [ ], ... }:
 
 let
   getSystemConfig = username:

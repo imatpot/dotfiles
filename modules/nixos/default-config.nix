@@ -1,6 +1,4 @@
-{ outputs, ... }:
-
-{ pkgs, hostname, stateVersion, ... }:
+{ outputs, pkgs, hostname, stateVersion, ... }:
 
 with outputs.lib;
 
