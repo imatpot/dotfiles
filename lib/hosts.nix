@@ -1,13 +1,13 @@
 flake@{ inputs, outputs, ... }:
 
 {
-  mkHost = args@{ hostname, system, users ? [ ], ... }:
+  mkHost = args@{ hostname, system ? "x86_64-linux", users ? [ ], ... }:
     outputs.lib.nixosSystem {
       inherit system;
 
       specialArgs = flake // args // {
         # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
-        inherit users;
+        inherit system users;
       };
 
       modules = [
@@ -20,11 +20,11 @@ flake@{ inputs, outputs, ... }:
         ../modules/common/nix.nix
         ../modules/common/nixpkgs.nix
 
-        ../modules/nixos/home-manager.nix
-        # ../modules/nixos/user-system-configs.nix
-
         ../modules/nixos/nix-legacy-consistency.nix
         ../modules/nixos/default-config.nix
+
+        ../modules/nixos/home-manager.nix
+        ../modules/nixos/user-system-configs.nix
       ];
     };
 }

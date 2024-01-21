@@ -9,7 +9,8 @@ flake@{ inputs, outputs, ... }:
       args' = args // {
         inherit system hostname;
 
-        # mkUser generates pure, system-agnostic Home Manager configurations.
+        # mkUser should generate pure, system-agnostic Home Manager configs.
+        # https://github.com/nix-community/home-manager/blob/ca4126e3c568be23a0981c4d69aed078486c5fce/nixos/common.nix#L18
         osConfig = null;
       };
 

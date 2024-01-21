@@ -1,12 +1,12 @@
-args@{ outputs, users ? [ ], ... }:
+args@{ outputs, users, ... }:
 
 let
-  getSystemConfig = username:
-    let
-      user = outputs.lib.mkUser
-        (outputs.lib.deepMerge [ args { inherit username; } ]);
-    in user.config.system;
+  userConfigs = builtins.map (name:
+    outputs.lib.mkUser {
+      inherit name;
+      inherit (args) system hostname stateVersion;
+    }) users;
 
-  systemConfigs = builtins.map getSystemConfig users;
+  systemConfigs = builtins.map (user: user.config.system) userConfigs;
 
 in outputs.lib.deepMerge systemConfigs

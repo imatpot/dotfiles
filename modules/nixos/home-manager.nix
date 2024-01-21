@@ -1,4 +1,4 @@
-{ inputs, outputs, hostname, system, stateVersion, users ? [ ], ... }:
+args@{ inputs, outputs, users ? [ ], ... }:
 
 let
   importUserConfig = name: {
@@ -20,7 +20,7 @@ in {
       # The `config` passed from NixOS would override Home Manager's `config`,
       # so  we re-expose every attribute except `config`.
       # https://github.com/nix-community/home-manager/blob/ca4126e3c568be23a0981c4d69aed078486c5fce/nixos/common.nix#L20
-      inherit inputs outputs hostname system stateVersion;
+      inherit (args) inputs outputs hostname system stateVersion;
     };
 
     sharedModules = [
