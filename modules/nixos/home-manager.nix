@@ -5,7 +5,7 @@ args@{ users ? [ ], ... }:
 let
   mkUserConfig = username: args':
     outputs.lib.deepMerge [
-      (outputs.homeManagerModules.defaultConfig (args // { inherit username; }))
+      (outputs.homeManagerModules.defaultConfig (args' // { inherit username; }))
       (import ../../users/${username}/home.nix args')
     ];
 

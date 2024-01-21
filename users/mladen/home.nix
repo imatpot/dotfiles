@@ -58,8 +58,8 @@ outputs.lib.mkFor system hostname {
     };
 
     programs.git = {
-      userName = outputs.lib.mkDefault "Mladen Branković";
-      userEmail = outputs.lib.mkDefault "root@brankovic.dev";
+      userName = "Mladen Branković";
+      userEmail = "root@brankovic.dev";
     };
   };
 
