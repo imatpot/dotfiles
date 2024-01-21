@@ -1,4 +1,4 @@
-{ inputs, outputs, ... }:
+flake@{ inputs, outputs, ... }:
 
 rec {
   nixpkgsDefaultConfig = {
@@ -6,8 +6,10 @@ rec {
     allowUnfreePredicate = _: true;
   };
 
-  nixpkgsDefaultOverlays =
-    [ outputs.overlays.nixpkgs.unstable outputs.overlays.nixpkgs.nur ];
+  nixpkgsDefaultOverlays = [
+    (import ../overlays/nixpkgs/unstable.nix flake)
+    (import ../overlays/nixpkgs/nur.nix flake)
+  ];
 
   pkgsForSystem = system:
     import inputs.nixpkgs {
