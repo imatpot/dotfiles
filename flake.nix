@@ -34,8 +34,29 @@
     in rec {
       lib = import ./lib flake;
 
-      nixosConfigurations = import ./hosts flake;
-      homeConfigurations = import ./users flake;
+      nixosConfigurations.shinobi = lib.mkHost {
+        hostname = "shinobi";
+        stateVersion = "24.05";
+        users = [ "mladen" ];
+      };
+
+      nixosConfigurations.adele = lib.mkHost {
+        hostname = "adele";
+        stateVersion = "24.05";
+        users = [ "mladen" ];
+      };
+
+      homeConfigurations.mladen = lib.mkUser {
+        username = "mladen";
+        stateVersion = "24.05";
+      };
+
+      homeConfigurations."mladen@mcdonalds" = lib.mkUser {
+        username = "mladen";
+        stateVersion = "24.05";
+        system = "aarch64-darwin";
+        hostname = "mcdonalds";
+      };
 
       formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
     };
