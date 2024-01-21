@@ -2,7 +2,7 @@
 
 {
   nixpkgs = {
-    config = outputs.lib.nixpkgsDefaultConfig;
-    overlays = outputs.lib.nixpkgsDefaultOverlays;
+    config = outputs.lib.defaultNixpkgsConfig;
+    overlays = outputs.lib.defaultNixpkgsOverlays;
   };
 }

@@ -3,6 +3,6 @@
 _: prev: {
   unstable = import inputs.nixpkgs-unstable {
     system = prev.system;
-    config = outputs.lib.nixpkgsDefaultConfig;
+    config = outputs.lib.defaultNixpkgsConfig;
   };
 }

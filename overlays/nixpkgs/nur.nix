@@ -5,7 +5,7 @@ _: prev: {
     pkgs = prev;
     nurpkgs = import inputs.nixpkgs {
       system = prev.system;
-      config = outputs.lib.nixpkgsDefaultConfig;
+      config = outputs.lib.defaultNixpkgsConfig;
     };
   };
 }

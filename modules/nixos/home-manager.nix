@@ -1,4 +1,4 @@
-args@{ inputs, outputs, users ? [ ], ... }:
+args@{ inputs, outputs, users, ... }:
 
 let
   importUserConfig = name: {

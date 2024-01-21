@@ -1,21 +1,11 @@
-flake@{ inputs, outputs, ... }:
+{ inputs, outputs, ... }:
 
 rec {
-  nixpkgsDefaultConfig = {
-    allowUnfree = true;
-    allowUnfreePredicate = _: true;
-  };
-
-  nixpkgsDefaultOverlays = [
-    (import ../overlays/nixpkgs/unstable.nix flake)
-    (import ../overlays/nixpkgs/nur.nix flake)
-  ];
-
   pkgsForSystem = system:
     import inputs.nixpkgs {
       inherit system;
-      config = nixpkgsDefaultConfig;
-      overlays = nixpkgsDefaultOverlays;
+      config = outputs.lib.defaultNixpkgsConfig;
+      overlays = outputs.lib.defaultNixpkgsOverlays;
     };
 
   forEachSystem = systems: fn:

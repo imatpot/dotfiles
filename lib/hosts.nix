@@ -1,13 +1,14 @@
 flake@{ inputs, outputs, ... }:
 
 {
-  mkHost = args@{ hostname, system ? "x86_64-linux", users ? [ ], ... }:
+  mkHost = args@{ hostname, system ? outputs.lib.defaultSystem
+    , stateVersion ? outputs.lib.defaultStateVersion, users ? [ ], ... }:
     outputs.lib.nixosSystem {
       inherit system;
 
       specialArgs = flake // args // {
         # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
-        inherit system users;
+        inherit system stateVersion users;
       };
 
       modules = [

@@ -1,9 +1,9 @@
 args@{ outputs, users, ... }:
 
 let
-  userConfigs = builtins.map (name:
+  userConfigs = builtins.map (username:
     outputs.lib.mkUser {
-      inherit name;
+      inherit username;
       inherit (args) system hostname stateVersion;
     }) users;
 
