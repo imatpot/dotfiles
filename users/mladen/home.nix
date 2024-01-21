@@ -3,13 +3,13 @@
 outputs.lib.mkFor system hostname {
   common = {
     imports = [
-      ../common/sops.nix
-      ../common/nix.nix
-      ../common/java.nix
-      ../common/neovim.nix
-      ../common/zsh.nix
-      ../common/starship.nix
-      ../common/git.nix
+      ../../modules/users/sops.nix
+      ../../modules/users/nix.nix
+      ../../modules/users/java.nix
+      ../../modules/users/neovim.nix
+      ../../modules/users/zsh.nix
+      ../../modules/users/starship.nix
+      ../../modules/users/git.nix
 
       ./config/secrets.nix
     ];
@@ -64,10 +64,13 @@ outputs.lib.mkFor system hostname {
   };
 
   systems = {
-    linux = { imports = [ ../common/discord.nix ../common/vscode.nix ]; };
+    linux = {
+      imports =
+        [ ../../modules/users/discord.nix ../../modules/users/vscode.nix ];
+    };
 
     darwin = {
-      imports = [ ../common/utm.nix ];
+      imports = [ ../../modules/users/utm.nix ];
       home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
     };
   };

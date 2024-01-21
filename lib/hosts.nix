@@ -18,8 +18,8 @@ flake@{ inputs, outputs, ... }:
         ../hosts/${hostname}/configuration.nix
         ../hosts/${hostname}/hardware.nix
 
-        ../modules/common/nix.nix
-        ../modules/common/nixpkgs.nix
+        ../modules/nix/nix.nix
+        ../modules/nix/nixpkgs.nix
 
         ../modules/nixos/nix-legacy-consistency.nix
         ../modules/nixos/default-config.nix

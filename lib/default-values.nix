@@ -10,7 +10,7 @@ flake:
   };
 
   defaultNixpkgsOverlays = [
-    (import ../overlays/nixpkgs/unstable.nix flake)
-    (import ../overlays/nixpkgs/nur.nix flake)
+    (import ../overlays/unstable.nix flake)
+    (import ../overlays/nur.nix flake)
   ];
 }

@@ -25,8 +25,8 @@ flake@{ inputs, outputs, ... }:
 
         ../users/${username}/home.nix
 
-        ../modules/common/nix.nix
-        ../modules/common/nixpkgs.nix
+        ../modules/nix/nix.nix
+        ../modules/nix/nixpkgs.nix
 
         ../modules/home-manager/system-config-support.nix
         ../modules/home-manager/default-config.nix
