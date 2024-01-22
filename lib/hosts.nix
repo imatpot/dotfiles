@@ -14,6 +14,7 @@ flake@{ inputs, outputs, ... }:
       modules = [
         inputs.home-manager.nixosModules.home-manager
         inputs.sops-nix.nixosModules.sops
+        inputs.nix-index-database.nixosModules.nix-index
 
         ../hosts/${hostname}/configuration.nix
         ../hosts/${hostname}/hardware.nix

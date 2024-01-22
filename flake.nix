@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nix-index-database = {
+      url = "github:mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     vault = {
       url = "git+ssh://git@github.com/imatpot/vault";
       flake = false;
@@ -42,9 +47,7 @@
         users = [ "mladen" ];
       };
 
-      homeConfigurations.mladen = lib.mkUser {
-        username = "mladen";
-      };
+      homeConfigurations.mladen = lib.mkUser { username = "mladen"; };
 
       homeConfigurations."mladen@mcdonalds" = lib.mkUser {
         username = "mladen";

@@ -22,6 +22,7 @@ flake@{ inputs, outputs, ... }:
 
       modules = [
         inputs.sops-nix.homeManagerModules.sops
+        inputs.nix-index-database.hmModules.nix-index
 
         ../users/${username}/home.nix
 
