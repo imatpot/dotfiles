@@ -10,6 +10,7 @@ outputs.lib.mkFor system hostname {
       ../../modules/users/zsh.nix
       ../../modules/users/starship.nix
       ../../modules/users/git.nix
+      ../../modules/users/fonts.nix
 
       ./config/secrets.nix
     ];
@@ -45,13 +46,6 @@ outputs.lib.mkFor system hostname {
         typst
         poppler_utils
         android-tools
-        cascadia-code
-        fira-code
-        jetbrains-mono
-        inriafonts
-        libertine
-        liberation_ttf
-        atkinson-hyperlegible
         watchexec
       ];
     };

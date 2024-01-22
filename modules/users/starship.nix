@@ -1,8 +1,9 @@
-{ outputs, pkgs, ... }:
+{ outputs, ... }:
 
 {
-  home.packages = with pkgs;
-    [ (nerdfonts.override { fonts = [ "CascadiaCode" "CascadiaMono" ]; }) ];
+  imports = [
+    ./fonts.nix # Make sure Nerd Fonts are installed
+  ];
 
   programs.starship = {
     enable = true;
