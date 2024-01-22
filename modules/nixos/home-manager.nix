@@ -1,4 +1,4 @@
-args@{ inputs, outputs, users, ... }:
+args@{ outputs, users, ... }:
 
 let
   importUserConfig = name: {
@@ -23,13 +23,7 @@ in {
       inherit (args) inputs outputs hostname system stateVersion;
     };
 
-    sharedModules = [
-      inputs.sops-nix.homeManagerModules.sops
-      inputs.nix-index-database.hmModules.nix-index
-
-      ../nix/nixpkgs.nix
-      ../home-manager/system-config-support.nix
-    ];
+    sharedModules = [ ../home-manager/shared.nix ];
 
     # Prevents NixOS & non-NixOS user configurations from diverging.
     # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4

@@ -1,4 +1,4 @@
-flake@{ inputs, outputs, ... }:
+flake@{ outputs, ... }:
 
 {
   mkUser = args@{ username, hostname ? null, system ? outputs.lib.defaultSystem
@@ -21,19 +21,10 @@ flake@{ inputs, outputs, ... }:
       };
 
       modules = [
-        inputs.sops-nix.homeManagerModules.sops
-        inputs.nix-index-database.hmModules.nix-index
-
-        ../users/${username}/home.nix
-
-        ../modules/nix/nix.nix
-        ../modules/nix/nixpkgs.nix
-
-        ../modules/home-manager/system-config-support.nix
+        ../modules/home-manager/shared.nix
         ../modules/home-manager/default-config.nix
-      ] ++ (if outputs.lib.isDarwin system then
-        [ inputs.mac-app-util.homeManagerModules.default ]
-      else
-        [ ]);
+        ../modules/nix/nix.nix
+        ../users/${username}/home.nix
+      ];
     };
 }
