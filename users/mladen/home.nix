@@ -63,15 +63,8 @@ outputs.lib.mkFor system hostname {
   };
 
   systems = {
-    linux = {
-      imports =
-        [ ../../modules/users/discord.nix ../../modules/users/vscode.nix ];
-    };
-
-    darwin = {
-      imports = [ ../../modules/users/utm.nix ];
-      home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
-    };
+    linux = { imports = [ ../../modules/users/discord.nix ]; };
+    darwin = { home.shellAliases.nix-rosetta = "nix --system x86_64-darwin"; };
   };
 
   hosts = {
