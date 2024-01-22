@@ -13,8 +13,8 @@
       useFriendlyNames = true;
       plugins = [
         "hlissner/zsh-autopair"
-        "zsh-users/zsh-history-substring-search"
         "z-shell/zsh-diff-so-fancy"
+        "rupa/z"
       ];
     };
   };
