@@ -16,21 +16,6 @@ outputs.lib.mkFor system hostname {
       ./config/secrets.nix
     ];
 
-    home = {
-      shellAliases = rec {
-        nix-gc = "nix-collect-garbage";
-
-        shell = "nix shell";
-        develop = "nix develop --command zsh";
-
-        mkcd = "fn() { mkdir -p $1 && cd $1; }; fn";
-        ll = "ls -la";
-
-        python = "python3";
-        py = python;
-      };
-    };
-
     programs.git = {
       userName = "Mladen Branković";
       userEmail = "root@brankovic.dev";

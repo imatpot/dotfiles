@@ -51,17 +51,23 @@
 
       # Misc
       bat
+      exa
       toybox
       tldr
       watchexec
     ];
 
-    shellAliases = { cat = "bat"; };
+    shellAliases = rec {
+      cat = "bat";
+      ll = "exa -aFl --time-style long-iso";
+      python = "python3";
+      py = python;
+      mkcd = "fn() { mkdir -p $1 && cd $1; }; fn";
+    };
   };
 
   programs.java = {
     enable = true;
     package = pkgs.unstable.jdk21;
   };
-
 }
