@@ -1,32 +1,62 @@
-{ ... }:
+{ outputs, pkgs, ... }:
 
 {
+  home.packages = with pkgs;
+    [ (nerdfonts.override { fonts = [ "CascadiaCode" "CascadiaMono" ]; }) ];
+
   programs.starship = {
     enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
 
     settings = {
-      character = {
-        error_symbol = "»";
-        success_symbol = "»";
+      format = outputs.lib.concatStrings [
+        "($username(@$hostname) )"
+        "($directory)"
+        "( $git_branch( $git_commit)( $git_state)( $git_status))"
+        "( $package)" # TODO: Doesn't seem to work with Darwin?
+        "( $character)"
+      ];
+
+      right_format = outputs.lib.concatStrings [
+        "( $nix_shell)"
+        "( $shlvl)"
+        "( $cmd_duration)"
+      ];
+
+      username = {
+        format = "[$user]($style)";
+        style_root = "bold red";
+        style_user = "bold green";
+      };
+
+      hostname = {
+        format = "[$hostname]($style)";
+        ssh_symbol = "ssh:";
+        style = "bold green";
       };
 
       directory = {
+        format = "[$path]($style)[$read_only]($read_only_style)";
         read_only = ":ro";
-        read_only_style = "bold red";
         style = "bold yellow";
-        truncation_length = 0;
+        read_only_style = "bold red";
       };
 
-      docker_context = { disabled = true; };
-
-      gcloud = { disabled = true; };
-
       git_branch = {
-        format = "[$symbol$branch]($style) ";
+        format = "[$symbol$branch]($style)";
         style = "bold blue";
         symbol = "git:";
+      };
+
+      git_commit = {
+        format = "[commmit:$hash( $tag)]($style)";
+        tag_symbol = "tag:";
+        style = "bold blue";
+        tag_disabled = false;
+      };
+
+      git_state = {
+        format = "[($state( $progress_current/$progress_total))]($style)";
+        style = "bold cyan";
       };
 
       git_status = {
@@ -35,19 +65,42 @@
         conflicted = "ϟ";
         deleted = "×";
         diverged = "↕";
-        format = "([\\($all_status$ahead_behind\\)]($style) )";
-        # format = "in [$symbol$state($name)]($style) ";
+        format = "[(\\($all_status$ahead_behind\\))]($style)";
         modified = "*";
         renamed = ">";
         staged = "+";
         stashed = "S";
-        style = "bold purple";
         untracked = ":";
         up_to_date = "";
+        style = "bold purple";
+      };
+
+      package = {
+        format = "[$version]($style)";
+        style = "bold white";
       };
 
       nix_shell = {
-        format = "in [nix(:$name)](bold cyan) [\\($state\\)](bold purple) ";
+        format = "[$symbol( $name)](bold blue)( [\\($state\\)](bold purple))";
+        symbol = " ";
+        heuristic = true;
+      };
+
+      shlvl = {
+        disabled = false;
+        format = "$symbol[$shlvl]($style)";
+        symbol = "󰧾 ";
+        style = "yellow";
+      };
+
+      cmd_duration = {
+        format = "[took ](dimmed white)[$duration]($style)";
+        style = "dimmed yellow";
+      };
+
+      character = {
+        error_symbol = "[«](red)";
+        success_symbol = "»";
       };
     };
   };

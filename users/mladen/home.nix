@@ -47,7 +47,6 @@ outputs.lib.mkFor system hostname {
         android-tools
         cascadia-code
         fira-code
-        inconsolata-nerdfont
         jetbrains-mono
         inriafonts
         libertine
