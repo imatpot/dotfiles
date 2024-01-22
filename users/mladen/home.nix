@@ -1,16 +1,17 @@
-{ pkgs, outputs, system, hostname, ... }:
+{ outputs, system, hostname, ... }:
 
 outputs.lib.mkFor system hostname {
   common = {
     imports = [
-      ../../modules/users/sops.nix
-      ../../modules/users/nix.nix
-      ../../modules/users/java.nix
-      ../../modules/users/neovim.nix
-      ../../modules/users/zsh.nix
-      ../../modules/users/starship.nix
-      ../../modules/users/git.nix
+      ../../modules/users/development.nix
       ../../modules/users/fonts.nix
+      ../../modules/users/git.nix
+      ../../modules/users/neovim.nix
+      ../../modules/users/nix.nix
+      ../../modules/users/sops.nix
+      ../../modules/users/starship.nix
+      ../../modules/users/writing.nix
+      ../../modules/users/zsh.nix
 
       ./config/secrets.nix
     ];
@@ -28,26 +29,6 @@ outputs.lib.mkFor system hostname {
         python = "python3";
         py = python;
       };
-
-      packages = with pkgs; [
-        bat
-        flux
-        neofetch
-        tldr
-        gnugrep
-        nmap
-        deno
-        nodejs
-        (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 ])
-        graphviz
-        kubectl
-        cargo
-        rustc
-        typst
-        poppler_utils
-        android-tools
-        watchexec
-      ];
     };
 
     programs.git = {
