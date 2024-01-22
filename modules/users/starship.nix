@@ -1,14 +1,14 @@
 { outputs, ... }:
 
 {
-  imports = [
-    ./fonts.nix # Make sure Nerd Fonts are installed
-  ];
+  imports = [ ./fonts.nix ];
 
   programs.starship = {
     enable = true;
 
     settings = {
+      # https://starship.rs/config
+
       format = outputs.lib.concatStrings [
         "($username(@$hostname) )"
         "($directory)"
@@ -64,12 +64,12 @@
       };
 
       git_status = {
+        format = "[(\\($all_status$ahead_behind\\))]($style)";
         ahead = "↑";
         behind = "↓";
         conflicted = "ϟ";
         deleted = "×";
         diverged = "↕";
-        format = "[(\\($all_status$ahead_behind\\))]($style)";
         modified = "*";
         renamed = ">";
         staged = "+";
