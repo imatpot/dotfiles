@@ -83,7 +83,7 @@
       nix_shell = {
         format = "[$symbol( $name)](bold blue)( [\\($state\\)](bold purple))";
         symbol = " ";
-        heuristic = true;
+        heuristic = true; # Adds experimental support for `nix shell`
       };
 
       shlvl = {
@@ -94,8 +94,8 @@
       };
 
       cmd_duration = {
-        format = "[took ](dimmed white)[$duration]($style)";
-        style = "dimmed yellow";
+        format = "[took ](dimmed white)[$duration](dimmed yellow)";
+        min_time = 3000;
       };
 
       character = {
