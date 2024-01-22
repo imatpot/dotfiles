@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   mkSecretFile = { source, destination, ... }: {

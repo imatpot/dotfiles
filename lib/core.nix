@@ -10,7 +10,7 @@ rec {
   deepMerge = attrs:
     let
       merge = path:
-        extlib.zipAttrsWith (n: values:
+        builtins.zipAttrsWith (n: values:
           if builtins.tail values == [ ] then
             builtins.head values
           else if builtins.all builtins.isList values then
