@@ -1,7 +1,7 @@
 flake@{ outputs, ... }:
 
 {
-  mkUser = args@{ username, hostname ? null, system ? outputs.lib.defaultSystem
+  mkUser = args@{ username, hostname ? null, system ? "x86_64-linux"
     , stateVersion ? outputs.lib.defaultStateVersion, ... }:
     outputs.lib.homeManagerConfiguration {
       pkgs = outputs.lib.pkgsForSystem system;

@@ -2,15 +2,20 @@
 
 {
   options = {
-    system = outputs.lib.mkOption {
+    nixos = outputs.lib.mkOption {
       type = outputs.lib.types.deepMergedAttrs;
       default = { };
-
       description = ''
         Adds support to define additional NixOS system configurations.
-        Without this module, home-manager will complain about the "system" option not existing.
-
-        TODO: Document how it should be NixOS modules and the corresponding lib function.
+        Without this module, home-manager will complain about the "nixos" option not existing.
+      '';
+    };
+    darwin = outputs.lib.mkOption {
+      type = outputs.lib.types.deepMergedAttrs;
+      default = { };
+      description = ''
+        Adds support to define additional Nix-Darwin system configurations.
+        Without this module, home-manager will complain about the "darwin" option not existing.
       '';
     };
   };

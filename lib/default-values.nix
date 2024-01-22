@@ -1,7 +1,6 @@
 { inputs, outputs, ... }:
 
 {
-  defaultSystem = "x86_64-linux";
   defaultStateVersion = "24.05";
 
   defaultNixpkgsConfig = {

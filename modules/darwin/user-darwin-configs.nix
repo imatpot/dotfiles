@@ -7,6 +7,6 @@ let
       inherit (args) system hostname stateVersion;
     }) users;
 
-  systemConfigs = builtins.map (user: user.config.system) userConfigs;
+  darwinConfigs = builtins.map (user: user.config.darwin) userConfigs;
 
-in outputs.lib.deepMerge systemConfigs
+in outputs.lib.deepMerge darwinConfigs

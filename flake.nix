@@ -5,6 +5,11 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nur.url = "github:nix-community/nur";
 
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -16,7 +21,7 @@
     };
 
     nix-index-database = {
-      url = "github:mic92/nix-index-database";
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -44,11 +49,13 @@
       };
 
       nixosConfigurations.shinobi = lib.mkHost {
+        system = "x86_64-linux";
         hostname = "shinobi";
         users = [ "mladen" ];
       };
 
       nixosConfigurations.adele = lib.mkHost {
+        system = "x86_64-linux";
         hostname = "adele";
         users = [ "mladen" ];
       };
