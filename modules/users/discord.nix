@@ -1,5 +1,19 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ discord ];
+  # Krisp: https://github.com/NixOS/nixpkgs/issues/195512
+
+  home.packages = with pkgs;
+    if (outputs.lib.isWayland config) then [ vesktop ] else [ discord ];
+
+  nixpkgs = {
+    overlays = [
+      (_: prev: {
+        discord = prev.discord.override {
+          withOpenASAR = true;
+          withVencord = true;
+        };
+      })
+    ];
+  };
 }

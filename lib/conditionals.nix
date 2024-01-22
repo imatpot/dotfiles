@@ -6,6 +6,8 @@ with outputs.lib;
   isLinux = hasSuffix "linux";
   isDarwin = hasSuffix "darwin";
 
+  isWayland = config: config.home.sessionVariables ? NIXOS_OZONE_WL;
+
   mkFor = system: hostname:
     { common ? { }, systems ? { }, hosts ? { } }:
     let
