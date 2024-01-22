@@ -3,6 +3,7 @@
 outputs.lib.mkFor system hostname {
   common = {
     imports = [
+      ../../modules/users/convenience.nix
       ../../modules/users/development.nix
       ../../modules/users/fonts.nix
       ../../modules/users/git.nix
