@@ -11,11 +11,13 @@
       nixfmt
       # alejandra
       deadnix
+      statix
     ];
 
     shellAliases = {
       nix-gc = "nix-collect-garbage";
       shell = "nix shell";
+      develop = "nix develop";
     };
   };
 }

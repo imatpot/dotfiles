@@ -1,8 +1,8 @@
-{ ... }:
+{ outputs, ... }:
 
 {
   home.shellAliases = {
-    develop = "nix develop --command zsh";
+    develop = outputs.lib.mkForce "nix develop --command zsh";
   };
 
   programs.zsh = {
