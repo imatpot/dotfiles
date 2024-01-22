@@ -1,6 +1,9 @@
 { pkgs, ... }:
 
 {
+  # https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-or-functional-keys-like-arrow-keys-don-t-work
+  home.shellAliases.ssh = "TERM=xterm-256color ssh";
+
   programs.kitty = rec {
     enable = true;
 

@@ -27,7 +27,7 @@
 
       pull-all =
         "!fn() { find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull ';'; }; fn";
-      discard-all =
+      delete-all-branches =
         "!fn() { git checkout main; git branch | grep -v 'main' | xargs git branch -D; }; fn";
 
       purge =
