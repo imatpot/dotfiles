@@ -14,6 +14,7 @@
       alii = aliases;
 
       quick = ''!fn() { git add -A && git commit -m "$*" && git push; }; fn'';
+      again = "commit --amend --no-edit --gpg-sign";
 
       unstage = "reset --";
       discard = "!git reset --hard && git clean -df";
