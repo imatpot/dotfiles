@@ -11,6 +11,10 @@
 
   defaultNixpkgsOverlays = [
     (_: prev: {
+      master = import inputs.nixpkgs-master {
+        system = prev.system;
+        config = outputs.lib.defaultNixpkgsConfig;
+      };
       unstable = import inputs.nixpkgs-unstable {
         system = prev.system;
         config = outputs.lib.defaultNixpkgsConfig;
