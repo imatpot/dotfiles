@@ -25,8 +25,9 @@ in {
 
     sharedModules = [
       inputs.sops-nix.homeManagerModules.sops
+      inputs.nix-index-database.hmModules.nix-index
 
-      ../common/nixpkgs.nix
+      ../nix/nixpkgs.nix
       ../home-manager/system-config-support.nix
     ];
 
