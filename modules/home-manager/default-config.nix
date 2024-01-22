@@ -19,6 +19,8 @@ mkFor system hostname {
       # https://github.com/nix-community/home-manager/blob/ca4126e3c568be23a0981c4d69aed078486c5fce/nixos/common.nix#L18
       home-manager.enable = mkDefault (osConfig == null);
     };
+
+    news.display = "silent";
   };
 
   systems = {
