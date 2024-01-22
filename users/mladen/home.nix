@@ -7,6 +7,7 @@ outputs.lib.mkFor system hostname {
       ../../modules/users/development.nix
       ../../modules/users/fonts.nix
       ../../modules/users/git.nix
+      ../../modules/users/kitty.nix
       ../../modules/users/neovim.nix
       ../../modules/users/nix.nix
       ../../modules/users/sops.nix
