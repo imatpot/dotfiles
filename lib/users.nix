@@ -31,6 +31,9 @@ flake@{ inputs, outputs, ... }:
 
         ../modules/home-manager/system-config-support.nix
         ../modules/home-manager/default-config.nix
-      ];
+      ] ++ (if outputs.lib.isDarwin system then
+        [ inputs.mac-app-util.homeManagerModules.default ]
+      else
+        [ ]);
     };
 }

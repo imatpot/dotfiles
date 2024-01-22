@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     vault = {
       url = "git+ssh://git@github.com/imatpot/vault";
       flake = false;
