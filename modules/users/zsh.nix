@@ -15,8 +15,11 @@
     antidote = {
       enable = true;
       useFriendlyNames = true;
-      plugins =
-        [ "hlissner/zsh-autopair" "z-shell/zsh-diff-so-fancy" "rupa/z" ];
+      plugins = [
+        "hlissner/zsh-autopair"
+        "z-shell/zsh-diff-so-fancy"
+        "agkozak/zsh-z"
+      ];
     };
   };
 }
