@@ -1,4 +1,4 @@
-flake:
+{ inputs, outputs, ... }:
 
 {
   defaultSystem = "x86_64-linux";
@@ -10,7 +10,18 @@ flake:
   };
 
   defaultNixpkgsOverlays = [
-    (import ../overlays/unstable.nix flake)
-    (import ../overlays/nur.nix flake)
+    (_: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = prev.system;
+        config = outputs.lib.defaultNixpkgsConfig;
+      };
+      nur = import inputs.nur {
+        pkgs = prev;
+        nurpkgs = import inputs.nixpkgs {
+          system = prev.system;
+          config = outputs.lib.defaultNixpkgsConfig;
+        };
+      };
+    })
   ];
 }
