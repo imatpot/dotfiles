@@ -3,7 +3,7 @@
 {
   options = {
     nixos = outputs.lib.mkOption {
-      type = outputs.lib.types.deepMergedAttrs;
+      type = outputs.lib.types.attrs;
       default = { };
       description = ''
         Adds support to define additional NixOS system configurations.
@@ -11,11 +11,11 @@
       '';
     };
     macos = outputs.lib.mkOption {
-      type = outputs.lib.types.deepMergedAttrs;
+      type = outputs.lib.types.attrs;
       default = { };
       description = ''
         Adds support to define additional Nix-Darwin system configurations.
-        Without this module, home-manager will complain about the "darwin" option not existing.
+        Without this module, home-manager will complain about the "macos" option not existing.
       '';
     };
   };
