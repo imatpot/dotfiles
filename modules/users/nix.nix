@@ -5,7 +5,7 @@
 
   home = {
     packages = with pkgs; [
-      nom
+      nix-output-monitor
       nil
       # nixd
       nixfmt
