@@ -37,12 +37,11 @@ outputs.lib.mkFor system hostname {
     darwin = {
       home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
 
-      darwin.users.users.${config.home.username} = {
+      macos.users.users.${config.home.username} = {
         createHome = true;
         home = config.home.homeDirectory;
       };
     };
-
   };
 
   hosts = {

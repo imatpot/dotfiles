@@ -8,6 +8,6 @@ let
       stateVersion = outputs.lib.defaultStateVersion;
     }) users;
 
-  darwinConfigs = builtins.map (user: user.config.darwin) userConfigs;
+  macosConfigs = builtins.map (user: user.config.macos) userConfigs;
 
-in outputs.lib.deepMerge darwinConfigs
+in outputs.lib.deepMerge macosConfigs

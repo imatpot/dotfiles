@@ -1,6 +1,9 @@
 { outputs, ... }:
 
 {
+  # Forces Nix-Darwin to set up necessary hooks
+  macos.programs.zsh.enable = true;
+
   home.shellAliases = {
     develop = outputs.lib.mkForce "nix develop --command zsh";
   };
@@ -15,11 +18,8 @@
     antidote = {
       enable = true;
       useFriendlyNames = true;
-      plugins = [
-        "hlissner/zsh-autopair"
-        "z-shell/zsh-diff-so-fancy"
-        "agkozak/zsh-z"
-      ];
+      plugins =
+        [ "hlissner/zsh-autopair" "z-shell/zsh-diff-so-fancy" "agkozak/zsh-z" ];
     };
 
     initExtra = ''

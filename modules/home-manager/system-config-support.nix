@@ -10,7 +10,7 @@
         Without this module, home-manager will complain about the "nixos" option not existing.
       '';
     };
-    darwin = outputs.lib.mkOption {
+    macos = outputs.lib.mkOption {
       type = outputs.lib.types.deepMergedAttrs;
       default = { };
       description = ''
