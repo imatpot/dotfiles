@@ -21,11 +21,11 @@ rec {
   defaultNixpkgsOverlays = [
     (_: prev: {
       master = import inputs.nixpkgs-master {
-        inherit (prev) system;
+        inherit (prev) system overlays;
         config = outputs.lib.defaultNixpkgsConfig;
       };
       unstable = import inputs.nixpkgs-unstable {
-        inherit (prev) system;
+        inherit (prev) system overlays;
         config = outputs.lib.defaultNixpkgsConfig;
       };
       nur = import inputs.nur {
