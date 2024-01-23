@@ -24,14 +24,7 @@ mkFor system hostname {
   };
 
   systems = {
-    linux = { home.homeDirectory = mkDefault "/home/${name}"; };
-
-    darwin = {
-      home.homeDirectory = mkDefault "/Users/${name}";
-
-      # aarch64-darwin can also run x86_64-darwin binaries with Rosetta 2,
-      # so we can use the same config for all Darwin systems.
-      nix.settings.extra-platforms = [ "x86_64-darwin" ];
-    };
+    linux.home.homeDirectory = mkDefault "/home/${name}";
+    darwin.home.homeDirectory = mkDefault "/Users/${name}";
   };
 }
