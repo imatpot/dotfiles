@@ -10,17 +10,19 @@
     userName = outputs.lib.mkDefault (throw "programs.git.userName is not set");
 
     aliases = rec {
-      aliases = "config --get-regexp alias";
-      alii = aliases;
+      alias = "config --get-regexp alias";
+      aliases = alias;
+      alii = alias;
 
-      quick = ''!fn() { git add -A && git commit -m "$*" && git push; }; fn'';
-      again = "commit --amend --no-edit --gpg-sign";
+      quick = "!fn() { git add -A && git commit -m '$*' && git push; }; fn";
+      again = "!fn() { git add -A && git commit --amend --no-edit --gpg-sign; }; fn";
 
       unstage = "reset --";
       discard = "!git reset --hard && git clean -df";
 
-      latest = "log -1";
       recent = "log -3";
+      latest = "log -1";
+      last = latest;
 
       graph =
         "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
