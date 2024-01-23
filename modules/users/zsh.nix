@@ -21,5 +21,9 @@
         "agkozak/zsh-z"
       ];
     };
+
+    initExtra = ''
+      setopt nonomatch
+    '';
   };
 }

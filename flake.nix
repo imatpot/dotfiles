@@ -60,12 +60,14 @@
         users = [ "mladen" ];
       };
 
-      homeConfigurations.mladen = lib.mkUser { username = "mladen"; };
-
-      homeConfigurations."mladen@mcdonalds" = lib.mkUser {
-        username = "mladen";
+      darwinConfigurations.mcdonalds = lib.mkHost {
         system = "aarch64-darwin";
         hostname = "mcdonalds";
+        users = [ "mladen" ];
+      };
+
+      homeConfigurations.mladen = lib.mkUser {
+        username = "mladen";
       };
 
       formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);

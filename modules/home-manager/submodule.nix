@@ -26,7 +26,7 @@ in outputs.lib.mkFor system hostname {
 
       sharedModules = [ ../home-manager/shared.nix ];
 
-      # Prevents NixOS & non-NixOS user configurations from diverging.
+      # Prevents NixOS & Darwin & non-NixOS user configurations from diverging.
       # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4
       useGlobalPkgs = false;
       useUserPackages = false;
@@ -35,6 +35,15 @@ in outputs.lib.mkFor system hostname {
 
   systems = {
     linux.imports = [ inputs.home-manager.nixosModules.home-manager ];
-    darwin.imports = [ inputs.home-manager.darwinModules.home-manager ];
+
+    darwin = {
+      imports = [ inputs.home-manager.darwinModules.home-manager ];
+
+      home-manager.extraSpecialArgs = {
+        # Nix-Darwin does this funny thing where its own state version is an
+        # integer, but Home Manager's is a string.
+        stateVersion = outputs.lib.defaultStateVersion;
+      };
+    };
   };
 }

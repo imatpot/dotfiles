@@ -3,6 +3,10 @@
 {
   defaultStateVersion = "24.05";
 
+  # Nix-Darwin is cringe and has integer state versions
+  # https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion
+  defaultDarwinStateVersion = 4;
+
   defaultNixpkgsConfig = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;

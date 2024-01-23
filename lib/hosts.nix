@@ -9,16 +9,22 @@ let
   ];
 
 in rec {
-  mkHost = args@{ hostname, system
-    , stateVersion ? outputs.lib.defaultStateVersion, users ? [ ], ... }:
+  mkHost = args@{ hostname, system, stateVersion ? null, users ? [ ], ... }:
     let
       args' = args // {
         # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
-        inherit system stateVersion users;
+        inherit users;
+        stateVersion =
+          if stateVersion == null && outputs.lib.isLinux system then
+            outputs.lib.defaultStateVersion
+          else if stateVersion == null && outputs.lib.isDarwin system then
+            outputs.lib.defaultDarwinStateVersion
+          else
+            stateVersion;
       };
     in if outputs.lib.isLinux system then
       mkNixos args'
-    else if outputs.lib.isDarwin then
+    else if outputs.lib.isDarwin system then
       mkDarwin args'
     else
       throw "Unsupported system: ${system}";
@@ -43,9 +49,8 @@ in rec {
 
       modules = sharedModules ++ [
         ../hosts/${hostname}/configuration.nix
-        # ../modules/darwin/default-config.nix
-        # ../modules/darwin/user-darwin-configs.nix
+        ../modules/darwin/default-config.nix
+        ../modules/darwin/user-darwin-configs.nix
       ];
     };
-
 }

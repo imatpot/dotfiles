@@ -71,17 +71,17 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mladen = {
-    isNormalUser = true;
-    description = "mladen";
-    extraGroups = [ "networkmanager" "wheel" ];
-    # packages = with pkgs; [
-    #   firefox
-    #   vim
-    #   git
-    #   #  thunderbird
-    # ];
-  };
+  # users.users.mladen = {
+  #   isNormalUser = true;
+  #   description = "mladen";
+  #   extraGroups = [ "networkmanager" "wheel" ];
+  #   # packages = with pkgs; [
+  #   #   firefox
+  #   #   vim
+  #   #   git
+  #   #   #  thunderbird
+  #   # ];
+  # };
 
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;

@@ -1,4 +1,4 @@
-{ outputs, system, hostname, ... }:
+{ outputs, system, config, hostname, ... }:
 
 outputs.lib.mkFor system hostname {
   common = {
@@ -25,8 +25,24 @@ outputs.lib.mkFor system hostname {
   };
 
   systems = {
-    linux = { imports = [ ../../modules/users/discord.nix ]; };
-    darwin = { home.shellAliases.nix-rosetta = "nix --system x86_64-darwin"; };
+    linux = {
+      imports = [ ../../modules/users/discord.nix ];
+
+      nixos.users.users.${config.home.username} = {
+        isNormalUser = true;
+        extraGroups = [ "networkmanager" "wheel" ];
+      };
+    };
+
+    darwin = {
+      home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
+
+      darwin.users.users.${config.home.username} = {
+        createHome = true;
+        home = config.home.homeDirectory;
+      };
+    };
+
   };
 
   hosts = {
