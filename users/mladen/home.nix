@@ -37,9 +37,33 @@ outputs.lib.mkFor system hostname {
     darwin = {
       home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
 
-      macos.users.users.${config.home.username} = {
-        createHome = true;
-        home = config.home.homeDirectory;
+      macos = {
+        users.users.${config.home.username} = {
+          createHome = true;
+          home = config.home.homeDirectory;
+        };
+
+        system.defaults = {
+          ".GlobalPreferences"."com.apple.mouse.scaling" = 10.0;
+          NSGlobalDomain."com.apple.trackpad.scaling" = 3.0;
+
+          NSGlobalDomain = {
+            NSDocumentSaveNewDocumentsToCloud = false;
+            NSTableViewDefaultSizeMode = 1;
+            "com.apple.keyboard.fnState" = true;
+          };
+
+          dock = {
+            orientation = "left";
+            tilesize = 32;
+
+            # TODO: Check back later
+            wvous-tl-corner = 1;
+            wvous-br-corner = 1;
+            wvous-tr-corner = 1;
+            wvous-bl-corner = 1;
+          };
+        };
       };
     };
   };
