@@ -28,6 +28,7 @@ outputs.lib.mkFor system hostname {
     linux = {
       imports = [ ../../modules/users/discord.nix ];
 
+      # TODO: Autogenerate in default default configs
       nixos.users.users.${config.home.username} = {
         isNormalUser = true;
         extraGroups = [ "networkmanager" "wheel" ];
@@ -37,6 +38,7 @@ outputs.lib.mkFor system hostname {
     darwin = {
       home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
 
+      # TODO: Autogenerate in default default configs
       macos = {
         users.users.${config.home.username} = {
           createHome = true;
@@ -44,13 +46,9 @@ outputs.lib.mkFor system hostname {
         };
 
         system.defaults = {
-          ".GlobalPreferences"."com.apple.mouse.scaling" = 10.0;
-          NSGlobalDomain."com.apple.trackpad.scaling" = 3.0;
 
           NSGlobalDomain = {
             NSDocumentSaveNewDocumentsToCloud = false;
-            NSTableViewDefaultSizeMode = 1;
-            "com.apple.keyboard.fnState" = true;
           };
 
           dock = {
