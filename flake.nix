@@ -70,6 +70,12 @@
         username = "mladen";
       };
 
+      homeConfigurations."mladen@mcdonalds" = lib.mkUser {
+        system = "aarch64-darwin";
+        hostname = "mcdonalds";
+        username = "mladen";
+      };
+
       formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
     };
 }
