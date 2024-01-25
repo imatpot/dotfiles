@@ -3,6 +3,8 @@
 with outputs.lib;
 
 {
+  imports = [ ./user-macos-configs.nix ];
+
   system.stateVersion = mkDefault stateVersion;
   networking.hostName = mkDefault hostname;
 

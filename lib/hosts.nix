@@ -10,7 +10,7 @@ let
 
 in rec {
   mkHost = args@{ hostname, system, users ? [ ]
-    , stateVersion ? outputs.lib.defaultStateVersionFor system, ... }:
+    , stateVersion ? outputs.lib.defaultStateVersionForSystem system, ... }:
     let
       args' = args // {
         # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
@@ -32,7 +32,6 @@ in rec {
         ../hosts/${hostname}/configuration.nix
         ../hosts/${hostname}/hardware.nix
         ../modules/nixos/default-config.nix
-        ../modules/nixos/user-nixos-configs.nix
       ];
     };
 
@@ -44,7 +43,6 @@ in rec {
       modules = sharedModules ++ [
         ../hosts/${hostname}/configuration.nix
         ../modules/darwin/default-config.nix
-        ../modules/darwin/user-darwin-configs.nix
       ];
     };
 }
