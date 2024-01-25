@@ -31,7 +31,7 @@ in rec {
       modules = sharedModules ++ [
         ../hosts/${hostname}/configuration.nix
         ../hosts/${hostname}/hardware.nix
-        ../modules/nixos/default-config.nix
+        ../modules/linux/default-config.nix
       ];
     };
 
