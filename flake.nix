@@ -1,5 +1,5 @@
 {
-  description = "Teapot's Nix-powered dotfiles";
+  description = "teatpot's Nix-powered dotfiles";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
