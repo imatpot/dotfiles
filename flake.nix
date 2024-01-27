@@ -1,4 +1,6 @@
 {
+  description = "Teapot's Nix-powered dotfiles";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -39,14 +41,19 @@
   outputs = inputs:
     let
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
-      macosSystems = [ "x86_64-darwin" "aarch64-darwin" ];
-      allSystems = linuxSystems ++ macosSystems;
+      darwinSystems = [ "x86_64-darwin" "aarch64-darwin" ];
+      systems = linuxSystems ++ darwinSystems;
 
     in rec {
       lib = import ./lib {
         inherit inputs;
         inherit (inputs.self) outputs;
       };
+
+      packages = lib.forEachSystem systems (pkgs: rec {
+        dots = import ./packages/dots.nix { inherit pkgs; };
+        default = dots;
+      });
 
       nixosConfigurations.shinobi = lib.mkHost {
         system = "x86_64-linux";
@@ -76,6 +83,6 @@
         username = "mladen";
       };
 
-      formatter = lib.forEachSystem allSystems (pkgs: pkgs.nixfmt);
+      formatter = lib.forEachSystem systems (pkgs: pkgs.nixfmt);
     };
 }
