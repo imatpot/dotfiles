@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p bash nix-output-monitor jq
+#! nix-shell -i bash -p bash git jq nix-output-monitor
 
 #-----------------------------------------------------------------------------------#
 # Largely plagiarized from https://github.com/runarsf/dotfiles/blob/main/rebuild.sh #
@@ -110,6 +110,15 @@ find_config() {
 }
 
 apply_default_args() {
+    if [ ! -d "${DOTS_PATH}" ]; then
+        printf "\e[33m%s\e[0m " "${DOTS_PATH} doesn't exist yet."
+        read -p "Clone now? [y/N] " -n 1 -r
+        printf "\n"
+        if [ "${REPLY}" = "Y" ] || [ "${REPLY}" = "y" ]; then
+            git clone git@github.com:imatpot/dotfiles.git "${DOTS_PATH}" 2>/dev/null || git clone https://github.com/imatpot/dotfiles.git "${DOTS_PATH}3"
+        fi
+    fi
+
     URL="path:${DOTS_PATH}"
     NAME="" # Let Nix figure out the output name
     FLAKE="${URL}"
