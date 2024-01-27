@@ -9,6 +9,10 @@
 
     overlays = [
       (_: prev: {
+        dots = import ../../packages/dots.nix { pkgs = prev; };
+      })
+
+      (_: prev: {
         master = import inputs.nixpkgs-master {
           inherit (prev) system config overlays;
         };

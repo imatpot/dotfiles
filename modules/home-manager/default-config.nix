@@ -1,4 +1,4 @@
-{ outputs, name, system, hostname, stateVersion, osConfig, ... }:
+{ outputs, pkgs, name, system, hostname, stateVersion, osConfig, ... }:
 
 with outputs.lib;
 
@@ -7,6 +7,7 @@ mkFor system hostname {
     home = {
       username = mkDefault name;
       stateVersion = mkDefault stateVersion;
+      packages = with pkgs; [ dots ];
     };
 
     programs = {
