@@ -27,11 +27,17 @@
       (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 ])
 
       # Python
-      python3
+      (python3.withPackages (pip:
+        with pip;
+        [ black numpy pandas jupyter tabula-py camelot pyppeteer ]
+        ++ (with pandas.optional-dependencies; plot ++ excel ++ html)))
 
       # Haskell
       ghc
       cabal-install
+
+      # Java
+      maven
 
       # Other programming languages
       vlang
@@ -41,6 +47,7 @@
       # DevOps
       flux
       kubectl
+      postgresql
 
       # Diagrams
       plantuml
