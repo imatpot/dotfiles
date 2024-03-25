@@ -11,9 +11,9 @@
   programs.zsh = {
     enable = true;
 
-    enableAutosuggestions = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
 
     antidote = {
       enable = true;
