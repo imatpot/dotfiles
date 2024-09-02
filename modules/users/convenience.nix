@@ -6,7 +6,7 @@
       bat
       eza
       tldr
-      toybox
+      # toybox
       jq
     ];
 

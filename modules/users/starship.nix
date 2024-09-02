@@ -17,12 +17,13 @@
         "( $git_state)"
         "( $git_status)"
         "( $package)" # TODO: Doesn't seem to work on Darwin?
+        "( $python)"
         "( $character)"
       ];
 
       right_format = outputs.lib.concatStrings [
         "( $nix_shell)"
-        "( $shlvl)"
+        # "( $shlvl)"
         "( $cmd_duration)"
       ];
 
@@ -81,7 +82,13 @@
 
       package = {
         format = "[$version]($style)";
-        style = "bold white";
+        style = "bold green";
+      };
+
+      python = {
+        format = "([\\($virtualenv\\)]($style))";
+        symbol = "🐍 ";
+        style = "bold green";
       };
 
       nix_shell = {
