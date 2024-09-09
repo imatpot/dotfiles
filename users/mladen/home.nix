@@ -2,21 +2,24 @@
 
 outputs.lib.mkFor system hostname {
   common = {
-    imports = [
-      ../../modules/users/convenience.nix
-      ../../modules/users/development.nix
-      ../../modules/users/fonts.nix
-      ../../modules/users/git.nix
-      ../../modules/users/kitty.nix
-      ../../modules/users/neovim.nix
-      ../../modules/users/nix.nix
-      ../../modules/users/sops.nix
-      ../../modules/users/starship.nix
-      ../../modules/users/writing.nix
-      ../../modules/users/zsh.nix
+    # TODO: Move this to lib/users.nix
+    imports = outputs.lib.concatImports { path = ../../modules/users; };
 
-      ./config/secrets.nix
-    ];
+    modules.users = {
+      neovim.enable = true;
+      zsh.enable = true;
+      starship.enable = true;
+
+      dev = {
+        adb.enable = true;
+        databases.enable = true;
+        javascript.enable = true;
+        plantuml.enable = true;
+        python.enable = true;
+        rust.enable = true;
+        typst.enable = true;
+      };
+    };
 
     programs.git = {
       userName = "Mladen Branković";
@@ -26,7 +29,10 @@ outputs.lib.mkFor system hostname {
 
   systems = {
     linux = {
-      imports = [ ../../modules/users/discord.nix ];
+      modules.users = {
+        discord.enable = true;
+        wayland.enable = true;
+      };
 
       # TODO: Autogenerate in default default configs
       nixos.users.users.${config.home.username} = {
@@ -40,16 +46,21 @@ outputs.lib.mkFor system hostname {
 
       # TODO: Autogenerate in default default configs
       macos = {
+        modules.users = {
+          dev = {
+            csharp.enable = true;
+            java.enable = true;
+            kubernetes.enable = true;
+          };
+        };
+
         users.users.${config.home.username} = {
           createHome = true;
           home = config.home.homeDirectory;
         };
 
         system.defaults = {
-
-          NSGlobalDomain = {
-            NSDocumentSaveNewDocumentsToCloud = false;
-          };
+          NSGlobalDomain = { NSDocumentSaveNewDocumentsToCloud = false; };
 
           dock = {
             orientation = "left";

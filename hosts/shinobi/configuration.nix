@@ -35,8 +35,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
   # services.xserver = {
@@ -50,8 +50,15 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    firefox
+    vscode
+    backblaze-b2
+  ];
+
   # Enable sound with pipewire.
-  sound.enable = true;
+  # The option definition `sound' in `hosts/shinobi/configuration.nix' no longer has any effect; please remove it.
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {

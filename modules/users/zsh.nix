@@ -1,65 +1,81 @@
-{ outputs, ... }:
+{ outputs, config, pkgs, username, ... }:
 
 {
-  # Forces Nix-Darwin to set up necessary hooks
-  macos.programs.zsh.enable = true;
-
-  home.shellAliases = {
-    develop = outputs.lib.mkForce "nix develop --command zsh";
+  options = {
+    modules.users.zsh.enable = outputs.lib.mkEnableOption "Enable ZSH";
   };
 
-  programs.zoxide.enable = true;
+  config = outputs.lib.mkIf config.modules.users.zsh.enable {
 
-  programs.zsh = {
-    enable = true;
+    # Forces Nix-Darwin to set up necessary hooks
+    macos.programs.zsh.enable = true;
 
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
-
-    antidote = {
-      enable = true;
-      useFriendlyNames = true;
-      plugins = [ "hlissner/zsh-autopair" "z-shell/zsh-diff-so-fancy" ];
+    nixos = {
+      programs.zsh.enable = true;
+      users.users.${username}.shell = pkgs.zsh;
     };
 
-    initExtra = ''
-      setopt nonomatch
+    home.shellAliases = {
+      develop = outputs.lib.mkForce "nix develop --command zsh";
+      shell = outputs.lib.mkForce "nix shell --command zsh";
+    };
 
-      # Fix issues after macOS updates
-      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-      fi
+    programs.zoxide.enable = true;
 
-      zh() {
-        ZHERE_PATH="$(zoxide query "$(pwd)" "$@")"
+    programs.zsh = {
+      enable = true;
+      package = pkgs.zsh;
 
-        if [ -z "$ZHERE_PATH" ]; then
-          return 1
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      autosuggestion.enable = true;
+
+      antidote = {
+        enable = true;
+        useFriendlyNames = true;
+        plugins = [ "hlissner/zsh-autopair" "z-shell/zsh-diff-so-fancy" ];
+      };
+
+      initExtra = ''
+        setopt nonomatch
+
+        # Fix issues after macOS updates
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+          source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
         fi
 
-        cd "$ZHERE_PATH"
-      }
+        zh() {
+          ZHERE_PATH="$(zoxide query "$(pwd)" "$@")"
 
-      zcode() {
-        ZCODE_PATH="$(zoxide query "$@")"
+          if [ -z "$ZHERE_PATH" ]; then
+            return 1
+          fi
 
-        if [ -z "$ZCODE_PATH" ]; then
-          return 1
-        fi
+          cd "$ZHERE_PATH"
+        }
 
-        code "$ZCODE_PATH"
-      }
+        zcode() {
+          ZCODE_PATH="$(zoxide query "$@")"
 
-      zhcode() {
-        ZHCODE_PATH="$(zoxide query "$(pwd)" "$@")"
+          if [ -z "$ZCODE_PATH" ]; then
+            return 1
+          fi
 
-        if [ -z "$ZHCODE_PATH" ]; then
-          return 1
-        fi
+          code "$ZCODE_PATH"
+        }
 
-        code "$ZHCODE_PATH"
-      }
-    '';
+        zhcode() {
+          ZHCODE_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHCODE_PATH" ]; then
+            return 1
+          fi
+
+          code "$ZHCODE_PATH"
+        }
+
+        eval "$(ssh-agent -s)" &> /dev/null
+      '';
+    };
   };
 }

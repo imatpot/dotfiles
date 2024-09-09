@@ -11,12 +11,12 @@ with outputs.lib;
   time.timeZone = mkDefault "Europe/Zurich";
   i18n.defaultLocale = mkDefault "en_GB.UTF-8";
   console.keyMap = mkDefault "sg";
-  services.xserver = {
+  services.xserver.xkb = {
     layout = mkDefault "ch";
-    xkbVariant = mkDefault "legacy";
+    variant = mkDefault "legacy";
   };
 
-  environment.systemPackages = with pkgs; [ vim git wget curl dots ];
+  environment.systemPackages = with pkgs; [ vim git wget curl nmap dots ];
 
   nix.gc = {
     automatic = mkDefault true;
