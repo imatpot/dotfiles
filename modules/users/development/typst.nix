@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.typst.enable {
-    home.packages = with pkgs.unstable; [ typst pandoc poppler_utils ];
+    home.packages = with pkgs; [ unstable.typst pandoc poppler_utils ];
   };
 }

@@ -7,7 +7,7 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.java.enable {
-    home.packages = with pkgs.unstable; [ maven ];
+    home.packages = with pkgs; [ unstable.maven ];
 
     programs.java = {
       enable = true;

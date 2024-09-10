@@ -12,6 +12,4 @@
       dates = "03:30";
     };
   };
-
-  environment.systemPackages = with pkgs.unstable; [ docker-compose ];
 }

@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.javascript.enable {
-    home.packages = with pkgs.unstable; [ deno nodejs ];
+    home.packages = with pkgs; [ unstable.deno unstable.nodejs ];
   };
 }

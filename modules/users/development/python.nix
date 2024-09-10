@@ -8,9 +8,9 @@
 
   config = outputs.lib.mkIf config.modules.users.dev.python.enable {
     home = {
-      packages = with pkgs.unstable;
+      packages = with pkgs;
         [
-          (python3.withPackages
+          (unstable.python3.withPackages
             (pyPkgs: with pyPkgs; [ pip ipykernel jupyter ]))
         ];
 

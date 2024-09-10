@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.zig.enable {
-    home.packages = with pkgs.unstable; [ zig ];
+    home.packages = with pkgs; [ unstable.zig ];
   };
 }

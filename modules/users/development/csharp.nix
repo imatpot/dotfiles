@@ -7,9 +7,10 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.csharp.enable {
-    home.packages = with pkgs.unstable;
+    home.packages = with pkgs;
       [
-        (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 ])
+        (with unstable.dotnetCorePackages;
+          combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 ])
       ];
   };
 }

@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.vlang.enable {
-    home.packages = with pkgs.unstable; [ vlang ];
+    home.packages = with pkgs; [ unstable.vlang ];
   };
 }

@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.kubernetes.enable {
-    home.packages = with pkgs.unstable; [ flux kubectl ];
+    home.packages = with pkgs; [ flux kubectl ];
   };
 }

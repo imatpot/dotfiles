@@ -12,6 +12,7 @@ in {
     package = pkgs.unstable.lorri;
   };
 
-  environment.systemPackages = with pkgs.unstable;
-    [ rnix-lsp nixpkgs-fmt ] ++ (if gui then [ vscode ] else [ ]);
+  environment.systemPackages = with pkgs;
+    [ unstable.rnix-lsp unstable.nixpkgs-fmt ]
+    ++ (if gui then [ unstable.vscode ] else [ ]);
 }

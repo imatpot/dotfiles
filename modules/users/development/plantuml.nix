@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.plantuml.enable {
-    home.packages = with pkgs.unstable; [ plantuml graphviz ];
+    home.packages = with pkgs; [ plantuml graphviz ];
   };
 }

@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.adb.enable {
-    home.packages = with pkgs.unstable; [ android-tools scrcpy ];
+    home.packages = with pkgs; [ android-tools scrcpy ];
   };
 }

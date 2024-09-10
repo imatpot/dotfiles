@@ -7,6 +7,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.databases.enable {
-    home.packages = with pkgs.unstable; [ postgresql sqlite ];
+    home.packages = with pkgs; [ postgresql sqlite ];
   };
 }

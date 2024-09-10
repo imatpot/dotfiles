@@ -36,7 +36,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   # services.xserver = {
@@ -54,7 +54,10 @@
     firefox
     vscode
     backblaze-b2
+    obs-studio
   ];
+
+  programs.steam.enable = true;
 
   # Enable sound with pipewire.
   # The option definition `sound' in `hosts/shinobi/configuration.nix' no longer has any effect; please remove it.

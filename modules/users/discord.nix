@@ -9,8 +9,11 @@
   # Krisp: https://github.com/NixOS/nixpkgs/issues/195512
 
   config = outputs.lib.mkIf config.modules.users.discord.enable {
-    home.packages = with pkgs.unstable;
-      if (outputs.lib.isWayland config) then [ vesktop ] else [ discord ];
+    home.packages = with pkgs;
+      if (outputs.lib.isWayland config) then
+        [ unstable.vesktop ]
+      else
+        [ unstable.discord ];
 
     nixpkgs = {
       overlays = [
