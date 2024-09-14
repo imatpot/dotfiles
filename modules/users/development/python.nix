@@ -11,7 +11,7 @@
       packages = with pkgs;
         [
           (unstable.python3.withPackages
-            (pyPkgs: with pyPkgs; [ pip ipykernel jupyter ]))
+            (pyPkgs: with pyPkgs; [ pip ipykernel ]))
         ];
 
       shellAliases = rec {

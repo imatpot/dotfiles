@@ -9,6 +9,7 @@ outputs.lib.mkFor system hostname {
       neovim.enable = true;
       zsh.enable = true;
       starship.enable = true;
+      zen-browser.enable = true;
 
       dev = {
         adb.enable = true;
@@ -32,6 +33,13 @@ outputs.lib.mkFor system hostname {
       modules.users = {
         discord.enable = true;
         wayland.enable = true;
+        gnome.enable = true;
+
+        stylix = {
+          enable = true;
+          system-wide = true;
+          theme = "framer";
+        };
       };
 
       # TODO: Autogenerate in default default configs
