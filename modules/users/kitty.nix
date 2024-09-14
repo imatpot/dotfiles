@@ -12,27 +12,21 @@
     programs.kitty = rec {
       enable = true;
 
-      font = {
-        name = "CaskaydiaCove Nerd Font";
-        size = 12;
-        package = pkgs.nerdfonts.override { fonts = [ "CascadiaCode" ]; };
-      };
-
       keybindings = { };
 
       settings = {
         # https://sw.kovidgoyal.net/kitty/conf
 
-        background_opacity = "0.85";
+        # background_opacity = "0.85";
         background_blur = 40;
 
         cursor_shape = "underline";
         cursor_underline_thickness = 1;
         cursor_stop_blinking_after = 0;
 
-        wheel_scroll_multiplier = font.size;
+        wheel_scroll_multiplier = 12; # font.size;
         remember_window_size = "no";
-        window_padding_width = font.size / 3;
+        window_padding_width = 12 / 3; # font.size / 3;
 
         modify_font = "underline_position 2";
 

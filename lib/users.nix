@@ -1,4 +1,4 @@
-flake@{ outputs, ... }:
+flake@{ inputs, outputs, ... }:
 
 {
   mkUser = args@{ username, hostname ? null, system ? "x86_64-linux"
@@ -20,6 +20,9 @@ flake@{ outputs, ... }:
         ../modules/home-manager/shared.nix
         ../modules/home-manager/default-config.nix
         ../modules/nix/nix.nix
+
+        inputs.stylix.homeManagerModules.stylix
+
         ../users/${username}/home.nix
       ];
     };
