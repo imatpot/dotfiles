@@ -32,6 +32,17 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # TODO: https://github.com/NixOS/nixpkgs/issues/327982
+    zen-browser = {
+      url = "github:MarceColl/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # vault = {
     #   url = "git+ssh://git@github.com/imatpot/vault";
     #   flake = false;
@@ -73,9 +84,7 @@
         users = [ "mladen" ];
       };
 
-      homeConfigurations.mladen = lib.mkUser {
-        username = "mladen";
-      };
+      homeConfigurations.mladen = lib.mkUser { username = "mladen"; };
 
       homeConfigurations."mladen@mcdonalds" = lib.mkUser {
         system = "aarch64-darwin";
