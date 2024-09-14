@@ -35,8 +35,44 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  # services.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-photos
+    gnome-tour
+    gedit
+    gnome-music
+    epiphany
+    geary
+    tali
+    iagno
+    hitori
+    atomix
+    yelp
+    gnome-contacts
+    gnome-initial-setup
+  ];
+
+  programs.dconf.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    firefox
+    (vscode.overrideAttrs (self: prev: {
+      desktopItems = [
+        ((builtins.elemAt prev.desktopItems 0).override {
+          startupWMClass = "code-url-handler";
+        })
+      ];
+    }))
+    backblaze-b2
+    obs-studio
+
+    gnome-tweaks
+  ];
 
   # Configure keymap in X11
   # services.xserver = {
@@ -49,13 +85,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    firefox
-    vscode
-    backblaze-b2
-    obs-studio
-  ];
 
   programs.steam.enable = true;
 
