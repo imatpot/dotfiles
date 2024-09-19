@@ -1,4 +1,6 @@
-{ outputs, system, config, hostname, ... }:
+{ outputs, system, hostname, ... }:
+
+# TODO: Maybe this split be simplified and moved to default config with concatImports
 
 outputs.lib.mkFor system hostname {
   common = {
@@ -28,61 +30,8 @@ outputs.lib.mkFor system hostname {
   };
 
   systems = {
-    linux = {
-      modules.users = {
-        discord.enable = true;
-        wayland.enable = true;
-        gnome.enable = true;
-        zen-browser.enable = true;
-
-        stylix = {
-          enable = true;
-          system-wide = true;
-          theme = "framer";
-        };
-      };
-
-      # TODO: Autogenerate in default default configs
-      nixos.users.users.${config.home.username} = {
-        isNormalUser = true;
-        extraGroups = [ "networkmanager" "wheel" ];
-      };
-    };
-
-    darwin = {
-      home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
-
-      # TODO: Autogenerate in default default configs
-      macos = {
-        modules.users = {
-          dev = {
-            csharp.enable = true;
-            java.enable = true;
-            kubernetes.enable = true;
-          };
-        };
-
-        users.users.${config.home.username} = {
-          createHome = true;
-          home = config.home.homeDirectory;
-        };
-
-        system.defaults = {
-          NSGlobalDomain = { NSDocumentSaveNewDocumentsToCloud = false; };
-
-          dock = {
-            orientation = "left";
-            tilesize = 32;
-
-            # TODO: Check back later
-            wvous-tl-corner = 1;
-            wvous-br-corner = 1;
-            wvous-tr-corner = 1;
-            wvous-bl-corner = 1;
-          };
-        };
-      };
-    };
+    linux.imports = [ ./systems/linux.nix ];
+    darwin.imports = [ ./systems/darwin.nix ];
   };
 
   hosts = { mcdonalds.imports = [ ./hosts/mcdonalds.nix ]; };
