@@ -10,7 +10,7 @@
     home = {
       packages = with pkgs;
         [
-          (unstable.python310.withPackages
+          (unstable.python3.withPackages
             (pythonPkgs: with pythonPkgs; [ pip ipykernel ]))
         ];
 
