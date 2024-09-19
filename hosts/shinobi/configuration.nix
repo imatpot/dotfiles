@@ -71,6 +71,8 @@
     backblaze-b2
     obs-studio
 
+    nvtopPackages.full # NVIDIA GPU monitoring tool
+
     gnome-tweaks
   ];
 
@@ -160,4 +162,12 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   # system.stateVersion = stateVersion; # Did you read the comment?
 
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 }
