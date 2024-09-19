@@ -27,10 +27,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # mac-app-util = {
+    #   url = "github:hraban/mac-app-util";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
     # TODO: https://github.com/NixOS/nixpkgs/issues/327982
     zen-browser = {

@@ -11,6 +11,7 @@ outputs.lib.mkFor system hostname {
   ];
 
   systems.darwin.imports = [
-    inputs.mac-app-util.homeManagerModules.default
+    # TODO: Check back later if it compiles again
+    # inputs.mac-app-util.homeManagerModules.default
   ];
 }
