@@ -10,16 +10,13 @@
     home = {
       packages = with pkgs;
         [
-          (unstable.python3.withPackages
-            (pyPkgs: with pyPkgs; [ pip ipykernel ]))
+          (unstable.python310.withPackages
+            (pythonPkgs: with pythonPkgs; [ pip ipykernel ]))
         ];
 
       shellAliases = rec {
         python = "python3";
         py = python;
-        venv = "source .venv/bin/activate";
-        new-venv = "python -m venv .venv";
-        venv-new = new-venv;
       };
     };
   };
