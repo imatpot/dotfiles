@@ -8,8 +8,8 @@ let
     inherit version;
     src = builtins.fetchTarball {
       url =
-        "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-generic.tar.bz2";
-      sha256 = "sha256:0f86xhl66sqci8pskd7mk26vs9wc58kgfi3ci608d097gp4piams";
+        "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-specific.tar.bz2";
+      sha256 = "sha256:0an4i57736scjwlmiqj9w7fh950brkrlg82iyv86m51ycxsi58sk";
     };
   });
 
