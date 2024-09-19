@@ -9,7 +9,6 @@ outputs.lib.mkFor system hostname {
       neovim.enable = true;
       zsh.enable = true;
       starship.enable = true;
-      zen-browser.enable = true;
 
       dev = {
         adb.enable = true;
@@ -34,6 +33,7 @@ outputs.lib.mkFor system hostname {
         discord.enable = true;
         wayland.enable = true;
         gnome.enable = true;
+        zen-browser.enable = true;
 
         stylix = {
           enable = true;
@@ -85,16 +85,5 @@ outputs.lib.mkFor system hostname {
     };
   };
 
-  hosts = {
-    mcdonalds = {
-      programs.git = {
-        userName = "Mladen Branković";
-        userEmail = "mladen.brankovic@golog.ch";
-        signing = {
-          key = "588B95BE8E35DD34";
-          signByDefault = true;
-        };
-      };
-    };
-  };
+  hosts = { mcdonalds.imports = [ ./hosts/mcdonalds.nix ]; };
 }
