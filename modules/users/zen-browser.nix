@@ -1,7 +1,7 @@
 { inputs, outputs, config, system, ... }:
 
 let
-  version = "1.0.1-a.2";
+  version = "1.0.1-a.3";
   zen = inputs.zen-browser.packages.${system}.default;
 
   zen' = zen.overrideAttrs (oldAttrs: rec {
@@ -9,7 +9,7 @@ let
     src = builtins.fetchTarball {
       url =
         "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-specific.tar.bz2";
-      sha256 = "sha256:0an4i57736scjwlmiqj9w7fh950brkrlg82iyv86m51ycxsi58sk";
+      sha256 = "sha256:1xc30zr5zgfmnqajrppbq0mbzgd17lm3vld2l40xipmvkxqfcpi8";
     };
   });
 
