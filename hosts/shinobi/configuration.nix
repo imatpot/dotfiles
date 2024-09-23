@@ -88,8 +88,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  programs.steam.enable = true;
-
   # Enable sound with pipewire.
   # The option definition `sound' in `hosts/shinobi/configuration.nix' no longer has any effect; please remove it.
   # sound.enable = true;
@@ -163,7 +161,9 @@
   # system.stateVersion = stateVersion; # Did you read the comment?
 
   hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+
+  services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;

@@ -34,5 +34,8 @@ outputs.lib.mkFor system hostname {
     darwin.imports = [ ./systems/darwin.nix ];
   };
 
-  hosts = { mcdonalds.imports = [ ./hosts/mcdonalds.nix ]; };
+  hosts = {
+    shinobi.imports = [ ./hosts/shinobi.nix ];
+    mcdonalds.imports = [ ./hosts/mcdonalds.nix ];
+  };
 }

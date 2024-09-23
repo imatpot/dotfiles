@@ -43,6 +43,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # vault = {
     #   url = "git+ssh://git@github.com/imatpot/vault";
     #   flake = false;
