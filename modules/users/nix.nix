@@ -11,6 +11,7 @@
       nixfmt-classic
       deadnix
       statix
+      nix-tree
     ];
   };
 }
