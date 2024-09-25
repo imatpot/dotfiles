@@ -14,7 +14,7 @@ in {
     (outputs.lib.mkFor system hostname {
       systems.linux = {
         home = {
-          packages = (with pkgs; [ protonup lutris bottles ])
+          packages = (with pkgs; [ protonup lutris bottles prismlauncher ])
             ++ (with inputs.nix-gaming.packages.${system};
               [
                 # TODO: fix why this compiles instead of using a cache
