@@ -279,6 +279,15 @@ in {
             user-removed-buttons = [ "NightLightToggle" ];
           };
 
+          "org/gnome/shell/extensions/hibernate-status-button" = {
+            show-hybrid-sleep = false;
+            show-suspend-then-hibernate = false;
+
+            show-hibernate-dialog = true;
+            show-hybrid-sleep-dialog = false;
+            show-suspend-then-hibernate-dialog = false;
+          };
+
           "org/gnome/desktop/app-folders/folders/Utilities" = { apps = [ ]; };
 
           "org/gnome/shell" = {
@@ -293,6 +302,7 @@ in {
               "clipboard-indicator@tudmotu.com"
               "quick-settings-tweaks@qwreey"
               "AlphabeticalAppGrid@stuarthayhurst"
+              "hibernate-status@dromi"
             ];
           };
         };
@@ -306,6 +316,7 @@ in {
       clipboard-indicator
       quick-settings-tweaker
       alphabetical-app-grid
+      hibernate-status-button
     ];
   };
 }
