@@ -36,6 +36,41 @@ in {
           "org/gnome/shell/extensions/quick-settings-tweaks" = {
             user-removed-buttons = [ "PowerProfilesToggle" "NMWiredToggle" ];
           };
+
+          "org/gnome/shell/extensions/tilingshell" = {
+            # on a 21:9 monitor, this is
+            # - 4:3 + 2 vertical
+            # - 16:9 + 2 veritcal
+            # - even thirds
+            layouts-json = ''
+              [
+                {
+                  "id": "7548829",
+                  "tiles": [
+                    { "x": 0, "y": 0, "width": 0.545639534883721, "height": 1, "groups": [1] },
+                    { "x": 0.545639534883721, "y": 0, "width": 0.4543604651162786, "height": 0.5, "groups": [2, 1] },
+                    { "x": 0.545639534883721, "y": 0.5, "width": 0.4543604651162786, "height": 0.5, "groups": [2, 1] }
+                  ]
+                },
+                {
+                  "id": "7706768",
+                  "tiles": [
+                    { "x": 0, "y": 0, "width": 0.7276162790697674, "height": 1, "groups": [1] },
+                    { "x": 0.7276162790697674, "y": 0, "width": 0.2723837209302325, "height": 0.5, "groups": [2, 1] },
+                    { "x": 0.7276162790697674, "y": 0.5, "width": 0.2723837209302325, "height": 0.5, "groups": [2, 1] }
+                  ]
+                },
+                {
+                  "id": "7789749",
+                  "tiles": [
+                    { "x": 0, "y": 0, "width": 0.33313953488372094, "height": 1, "groups": [1] },
+                    { "x": 0.33313953488372094, "y": 0, "width": 0.3337209302325581, "height": 1, "groups": [2, 1] },
+                    { "x": 0.666860465116279, "y": 0, "width": 0.3331395348837209, "height": 1, "groups": [2] }
+                  ]
+                }
+              ]
+            '';
+          };
         };
 
         common = {
@@ -104,7 +139,18 @@ in {
 
           "org/gnome/settings-daemon/plugins/media-keys" = {
             control-center = [ "<Super>comma" ];
+            search = [ "<Super>space" ];
+            custom-keybinds = [
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/kgx/"
+            ];
           };
+
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/kgx" =
+            {
+              name = "Console";
+              command = "kgx";
+              binding = "<Super>Return";
+            };
 
           "org/gnome/mutter" = {
             edge-tiling = false; # We handle tiling with tiling-shell
@@ -165,14 +211,8 @@ in {
             show-window-previews-timeout = 250;
             leave-timeout = 0;
 
-            animate-appicon-hover-animation = "{'SIMPLE': 0.1, 'RIPPLE': 0.4, 'PLANK': 0.0}";
-
-            # TODO: This is not working despite dconf.nix suggesting it should: https://docs.gtk.org/glib/gvariant-text-format.html#dictionaries-and-dictionary-entries
-            # animate-application-hover-animation-traver = {
-            #   SIMPLE = 0.1;
-            #   RIPPLE = 0.4;
-            #   PLANK = 0.0;
-            # };
+            animate-appicon-hover-animation =
+              "{'SIMPLE': 0.1, 'RIPPLE': 0.4, 'PLANK': 0.0}";
 
             window-preview-size = 150;
             window-preview-padding = 0;
@@ -215,7 +255,7 @@ in {
             cache-size = 10;
             preview-size = 80;
             history-size = 50;
-            display-mode = 3;
+            display-mode = 0;
             clear-on-boot = false;
 
             toggle-menu = [ "<Super>v" ];
@@ -239,6 +279,8 @@ in {
             user-removed-buttons = [ "NightLightToggle" ];
           };
 
+          "org/gnome/desktop/app-folders/folders/Utilities" = { apps = [ ]; };
+
           "org/gnome/shell" = {
             disable-user-extensions = false;
             enabled-extensions = [
@@ -250,6 +292,7 @@ in {
               "dash-to-panel@jderose9.github.com"
               "clipboard-indicator@tudmotu.com"
               "quick-settings-tweaks@qwreey"
+              "AlphabeticalAppGrid@stuarthayhurst"
             ];
           };
         };
@@ -262,6 +305,7 @@ in {
       dash-to-panel
       clipboard-indicator
       quick-settings-tweaker
+      alphabetical-app-grid
     ];
   };
 }
