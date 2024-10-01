@@ -1,11 +1,15 @@
 { outputs, ... }:
 
-{
+let
+  extra = ''
+    ssh-add ~/.ssh/mladen.brankovic.at.golog.ch &> /dev/null
+    ssh-add ~/.ssh/mladen.brankovic.at.students.fhnw.ch &> /dev/null
+  '';
+
+in {
   programs = {
-    zsh.initExtra = ''
-      ssh-add ~/.ssh/mladen.brankovic.at.golog.ch &> /dev/null
-      ssh-add ~/.ssh/mladen.brankovic.at.students.fhnw.ch &> /dev/null
-    '';
+    bash.initExtra = extra;
+    zsh.initExtra = extra;
 
     git = {
       userName = outputs.lib.mkForce "Mladen Branković";
