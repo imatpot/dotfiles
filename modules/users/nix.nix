@@ -12,6 +12,7 @@
       deadnix
       statix
       nix-tree
+      alejandra
     ];
   };
 }
