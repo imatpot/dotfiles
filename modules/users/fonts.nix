@@ -9,7 +9,8 @@ let
 
     # Coding
     cascadia-code
-    (nerdfonts.override { fonts = [ "CascadiaCode" "CascadiaMono" ]; })
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.caskaydia-mono
   ];
 
 in {

@@ -7,7 +7,7 @@ outputs.lib.mkFor system hostname {
       settings = {
         auto-optimise-store = true;
         warn-dirty = false;
-        experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+        experimental-features = [ "nix-command" "flakes" ];
       };
     };
   };
