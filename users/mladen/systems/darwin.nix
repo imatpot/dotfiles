@@ -5,14 +5,6 @@
 
   # TODO: Autogenerate in default default configs
   macos = {
-    modules.users = {
-      dev = {
-        csharp.enable = true;
-        java.enable = true;
-        kubernetes.enable = true;
-      };
-    };
-
     users.users.${config.home.username} = {
       createHome = true;
       home = config.home.homeDirectory;
