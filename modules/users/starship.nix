@@ -91,7 +91,6 @@
 
         python = {
           format = "([\\($virtualenv\\)]($style))";
-          symbol = "🐍 ";
           style = "bold green";
         };
 

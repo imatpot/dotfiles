@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ watchexec ];
+  home.packages = with pkgs; [ watchexec just ];
 }
