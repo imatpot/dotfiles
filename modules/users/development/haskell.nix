@@ -7,6 +7,14 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.haskell.enable {
-    home.packages = with pkgs; [ unstable.ghc unstable.cabal-install ];
+    home.packages = with pkgs.unstable; [
+      ghc
+      cabal-install
+      stack
+
+      haskell-language-server
+      hlint
+      ormolu
+    ];
   };
 }
