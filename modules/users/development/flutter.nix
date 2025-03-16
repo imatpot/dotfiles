@@ -12,7 +12,7 @@
     # Once https://github.com/leoafarias/fvm/pull/775 is merged, everything
     # here could be replaced with a "lean" FVM installation.
 
-    home.packages = with pkgs; [ unstable.flutter ];
+    # home.packages = with pkgs; [ unstable.flutter ];
     programs = let
       extra = ''
         # Add FVM to PATH
