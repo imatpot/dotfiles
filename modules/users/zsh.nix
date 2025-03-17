@@ -74,6 +74,50 @@
           code "$ZHCODE_PATH"
         }
 
+        zvim() {
+          ZVIM_PATH="$(zoxide query "$@")"
+
+          if [ -z "$ZVIM_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZVIM_PATH"
+          vim
+        }
+
+        zhvim() {
+          ZHVIM_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHVIM_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZHVIM_PATH"
+          vim
+        }
+
+        zhx() {
+          ZHX_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHX_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZHX_PATH"
+          hx
+        }
+
+        zhhx() {
+          ZHHX_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHHX_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZHHX_PATH"
+          hx
+        }
+
         eval "$(ssh-agent -s)" &> /dev/null
 
         # TODO: put this somewhere else but make sure it's after the ssh-agent is started
