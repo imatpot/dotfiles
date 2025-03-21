@@ -3,7 +3,7 @@
 outputs.lib.mkFor system hostname {
   common = {
     nix = {
-      package = pkgs.nix;
+      package = pkgs.master.nix;
       settings = {
         auto-optimise-store = true;
         warn-dirty = false;
