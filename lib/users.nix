@@ -14,6 +14,7 @@ flake@{ inputs, outputs, ... }:
         # interopable across NixOS & non-NixOS systems.
         # https://github.com/nix-community/home-manager/blob/ca4126e3c568be23a0981c4d69aed078486c5fce/nixos/common.nix#L22
         name = username;
+        users = [ username ];
       };
 
       modules = [

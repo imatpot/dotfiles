@@ -1,4 +1,4 @@
-{ outputs, pkgs, system, hostname, ... }:
+{ outputs, pkgs, system, hostname, users, ... }:
 
 outputs.lib.mkFor system hostname {
   common = {
@@ -8,6 +8,11 @@ outputs.lib.mkFor system hostname {
         auto-optimise-store = true;
         warn-dirty = false;
         experimental-features = [ "nix-command" "flakes" ];
+
+        # if you want this to work with home-manager-only setups, you need to
+        # manually add the user to the trusted-users list in /etc/nix/nix.conf
+        # since home-manager itself cannot touch system files...
+        trusted-users = users;
       };
     };
   };
