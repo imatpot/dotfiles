@@ -13,9 +13,13 @@ let
       size = 24;
     };
 
+    targets = {
+      kde.enable = false;
+    };
+
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "CascadiaMono" ]; };
+        package = pkgs.nerd-fonts.caskaydia-mono;
         name = "Cascadia Mono NF";
       };
 
@@ -90,7 +94,8 @@ let
     };
 
     system-wide = {
-      stylix = stylix-config // { targets.grub.enable = false; };
+      stylix = stylix-config // { targets.grub.enable = false;
+      };
     };
   };
 

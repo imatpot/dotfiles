@@ -2,9 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, stateVersion, hostname, ... }:
+{ inputs, config, pkgs, stateVersion, hostname, ... }:
 
 {
+  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
+
   # nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
@@ -59,6 +61,13 @@
 
   programs.dconf.enable = true;
 
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
+  };
+
+  virtualisation.oci-containers.backend = "podman";
+
   environment.systemPackages = with pkgs; [
     firefox
     (vscode.overrideAttrs (self: prev: {
@@ -68,13 +77,25 @@
         })
       ];
     }))
-    backblaze-b2
+    unstable.backblaze-b2
     obs-studio
 
     nvtopPackages.full # NVIDIA GPU monitoring tool
 
     gnome-tweaks
+    ffmpeg
+
+    spotify
+    spicetify-cli
+    ungoogled-chromium
+    # unstable.open-webui
   ];
+
+  # services.ollama = {
+  #   enable = true;
+  #   package = pkgs.unstable.ollama-cuda;
+  #   acceleration = "cuda";
+  # };
 
   # Configure keymap in X11
   # services.xserver = {
@@ -144,7 +165,14 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
+
+  services.fail2ban = {
+    enable = true;
+    ignoreIP = [ "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" ];
+    maxretry = 3;
+    bantime = "24h";
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -169,5 +197,18 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  services.flatpak = {
+    enable = true;
+    packages = [ "hu.irl.cameractrls" ];
+
+    update = {
+      onActivation = true;
+      auto = {
+        enable = true;
+        onCalendar = "daily";
+      };
+    };
   };
 }

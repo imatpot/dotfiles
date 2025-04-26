@@ -2,7 +2,7 @@
 
 let
   STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-    "/home/${name}/.steam/root/compatibilitytools.d";
+    "${config.home.homeDirectory}/.steam/root/compatibilitytools.d";
 
 in {
   options = {
@@ -75,7 +75,16 @@ in {
         hardware.graphics.enable = outputs.lib.mkIf isGamingEnabled true;
 
         programs = {
-          gamemode.enable = outputs.lib.mkIf isGamingEnabled true;
+          gamemode = {
+	    enable = outputs.lib.mkIf isGamingEnabled true;
+	    enableRenice = true;
+            settings = {
+              general = {
+                softrealtime = "auto";
+                renice = 10;
+              };
+            };
+	  };
 
           steam = outputs.lib.mkIf config.modules.users.gaming.steam.enable {
             enable = true;

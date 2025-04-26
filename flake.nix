@@ -7,6 +7,8 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nur.url = "github:nix-community/nur";
 
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,10 +34,9 @@
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
 
-    # TODO: https://github.com/NixOS/nixpkgs/issues/327982
     zen-browser = {
-      url = "github:MarceColl/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix = {

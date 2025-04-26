@@ -19,8 +19,8 @@ in {
   config = outputs.lib.mkIf config.modules.users.gnome.enable {
     # Always start Gnome on Wayland
     # https://discourse.nixos.org/t/fix-gdm-does-not-start-gnome-wayland-even-if-it-is-selected-by-default-starts-x11-instead/24498
-    nixos.services.displayManager.defaultSession =
-      outputs.lib.mkIf config.modules.users.wayland.enable "gnome";
+    nixos.services.displayManager.defaultSession =  outputs.lib.mkIf config.modules.users.wayland.enable "gnome";
+    nixos.programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
 
     gtk = {
       iconTheme = {
@@ -308,15 +308,27 @@ in {
         };
       };
 
-    home.packages = with pkgs.gnomeExtensions; [
-      user-themes
-      tiling-shell
-      vitals
-      dash-to-panel
-      clipboard-indicator
-      quick-settings-tweaker
-      alphabetical-app-grid
-      hibernate-status-button
-    ];
+    home = {
+      packages = with pkgs.gnomeExtensions; [
+        user-themes
+        tiling-shell
+        vitals
+        dash-to-panel
+        clipboard-indicator
+        quick-settings-tweaker
+        alphabetical-app-grid
+        hibernate-status-button
+      ];
+
+      # https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1278954466
+      sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
+        outputs.lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0"
+        (with pkgs.gst_all_1; [
+          gst-plugins-good
+          gst-plugins-bad
+          gst-plugins-ugly
+          gst-libav
+        ]);
+    };
   };
 }
