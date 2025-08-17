@@ -76,19 +76,19 @@ in {
 
         programs = {
           gamemode = {
-	    enable = outputs.lib.mkIf isGamingEnabled true;
-	    enableRenice = true;
+            enable = outputs.lib.mkIf isGamingEnabled true;
+            enableRenice = true;
             settings = {
               general = {
                 softrealtime = "auto";
                 renice = 10;
               };
             };
-	  };
+          };
 
           steam = outputs.lib.mkIf config.modules.users.gaming.steam.enable {
             enable = true;
-            gamescopeSession.enable = true;
+            # gamescopeSession.enable = true;
           };
         };
       };

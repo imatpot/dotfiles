@@ -77,10 +77,15 @@
         })
       ];
     }))
+    code-cursor
     unstable.backblaze-b2
     obs-studio
 
-    nvtopPackages.full # NVIDIA GPU monitoring tool
+    # nvtopPackages.full # NVIDIA GPU monitoring tool
+    # nvidia-docker
+    # nvidia-container-toolkit
+    vdhcoapp
+    vlc
 
     gnome-tweaks
     ffmpeg
@@ -88,6 +93,7 @@
     spotify
     spicetify-cli
     ungoogled-chromium
+    master.r2modman
     # unstable.open-webui
   ];
 
@@ -190,14 +196,18 @@
 
   hardware.graphics.enable = true;
 
-  services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+  services.xserver.videoDrivers = [ "amdgpu" ]; # "nvidia"
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+  #hardware.nvidia-container-toolkit.enable = true;
+  #hardware.nvidia = {
+  #  modesetting.enable = true;
+  #  powerManagement.enable = false;
+  #  powerManagement.finegrained = false;
+  #  open = false;
+  #  nvidiaSettings = false;
+  #  nvidiaPersistenced = false;
+  #  package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #};
 
   services.flatpak = {
     enable = true;

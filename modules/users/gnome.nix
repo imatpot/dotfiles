@@ -32,7 +32,7 @@ in {
     dconf.settings = with outputs.lib.hm.gvariant;
       outputs.lib.mkFor system hostname {
         hosts.shinobi = {
-          "org/gnome/desktop/peripherals/mouse" = { speed = -0.6; };
+          "org/gnome/desktop/peripherals/mouse" = { speed = -0; };
           "org/gnome/shell/extensions/quick-settings-tweaks" = {
             user-removed-buttons = [ "PowerProfilesToggle" "NMWiredToggle" ];
           };

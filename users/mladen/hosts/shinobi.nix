@@ -42,6 +42,9 @@
   #  "__GL_MaxFramesAllowed" = "1";
   #};
   nixos = {
+    environment.systemPackages = with pkgs; [lact];
+    systemd.packages = with pkgs; [lact];
+    systemd.services.lactd.wantedBy = ["multi-user.target"];
     hardware = {
       amdgpu = {
         initrd.enable = true;
@@ -59,29 +62,31 @@
     services.xserver.videoDrivers = [ "modesetting" ];
   
     boot = {
-      kernelPackages = pkgs.linuxPackages_latest;
+       # kernelPackages = pkgs.linuxPackages_latest;
+       # kernelPackages = pkgs.unstable.linuxKernel.kernels.linux_zen;
+       kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   
       initrd.kernelModules = [ "amdgpu" ];
-      kernel.sysctl = {
-        "fs.file-max" = 262144;
-      };
+      # kernel.sysctl = {
+        # "fs.file-max" = 262144;
+      # };
     };
   
-    security.pam.loginLimits = [
-      {
-        domain = "*";
-        item = "nofile";
-        type = "-";
-        value = "262144";
-      }
-      {
-        domain = "*";
-        item = "memlock";
-        type = "-";
-        value = "262144";
-      }
-    ];
-    systemd.user.extraConfig = "DefaultLimitNOFILE=262144";
+    # security.pam.loginLimits = [
+      # {
+        # domain = "*";
+        # item = "nofile";
+        # type = "-";
+        # value = "262144";
+      # }
+      # {
+        # domain = "*";
+        # item = "memlock";
+        # type = "-";
+        # value = "262144";
+      # }
+    # ];
+    # systemd.user.extraConfig = "DefaultLimitNOFILE=262144";
     
     services.sunshine = {
       enable = true;

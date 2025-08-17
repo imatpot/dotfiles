@@ -126,7 +126,7 @@ in {
   config = outputs.lib.mkIf config.modules.users.stylix.enable
     (outputs.lib.mkMerge [
       (outputs.lib.mkIf config.modules.users.stylix.system-wide {
-        nixos = outputs.lib.trace
+        nixos = outputs.lib.warn
           "info: Enabling Stylix system-wide. This will override the configs of all users with ${name}'s config."
           settings.system-wide;
       })

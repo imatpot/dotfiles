@@ -118,6 +118,39 @@
           hx
         }
 
+        alias nixvim="nix run path:/home/mladen/Development/life/nixvim --"
+        alias nv="nixvim"
+
+        znixvim() {
+          ZNIXVIM_PATH="$(zoxide query "$@")"
+
+          if [ -z "$ZNIXVIM_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZNIXVIM_PATH"
+          nixvim
+        }
+
+        zhnixvim() {
+          ZHNIXVIM_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHNIXVIM_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZHNIXVIM_PATH"
+          nixvim
+        }
+
+        znv() {
+          znixvim "$@"
+        }
+
+        zhnv() {
+          zhnixvim "$(pwd)" "$@"
+        }
+
         eval "$(ssh-agent -s)" &> /dev/null
 
         # TODO: put this somewhere else but make sure it's after the ssh-agent is started

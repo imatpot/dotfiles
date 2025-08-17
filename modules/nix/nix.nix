@@ -7,7 +7,7 @@ outputs.lib.mkFor system hostname {
       settings = {
         auto-optimise-store = true;
         warn-dirty = false;
-        experimental-features = [ "nix-command" "flakes" ];
+        experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
 
         # if you want this to work with home-manager-only setups, you need to
         # manually add the user to the trusted-users list in /etc/nix/nix.conf
