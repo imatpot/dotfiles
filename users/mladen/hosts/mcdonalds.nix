@@ -1,4 +1,4 @@
-{ outputs, pkgs, ... }:
+{ config, outputs, pkgs, ... }:
 
 let
   extra = ''
@@ -8,6 +8,11 @@ let
 
     export DIRENV_LOG_FORMAT=""
     eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+
+    alias nixvim="nix run path:/Users/mladen/Developer/life/nixvim --"
+    alias nv="nixvim"
+
+    export PATH="$PATH:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/npm/bin:/opt/homebrew/bin"
   '';
 
 in {
@@ -21,11 +26,14 @@ in {
     };
   };
 
-  home.packages = [ pkgs.direnv ];
+  home.packages = with pkgs; [
+    direnv
+    backblaze-b2
+  ];
 
   programs = {
     bash.initExtra = extra;
-    zsh.initExtra = extra;
+    zsh.initContent = extra;
 
     git = {
       userName = outputs.lib.mkForce "Mladen Branković";

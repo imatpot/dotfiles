@@ -36,7 +36,7 @@
         plugins = [ "hlissner/zsh-autopair" "z-shell/zsh-diff-so-fancy" ];
       };
 
-      initExtra = ''
+      initContent = ''
         setopt nonomatch
 
         # Fix issues after macOS updates
@@ -74,6 +74,26 @@
           code "$ZHCODE_PATH"
         }
 
+        zcursor() {
+          ZCURSOR_PATH="$(zoxide query "$@")"
+
+          if [ -z "$ZCURSOR_PATH" ]; then
+            return 1
+          fi
+
+          cursor "$ZCURSOR_PATH"
+        }
+
+        zhcursor() {
+          ZHCURSOR_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHCURSOR_PATH" ]; then
+            return 1
+          fi
+
+          cursor "$ZHCURSOR_PATH"
+        }
+
         zvim() {
           ZVIM_PATH="$(zoxide query "$@")"
 
@@ -94,6 +114,36 @@
 
           cd "$ZHVIM_PATH"
           vim
+        }
+
+        znixvim() {
+          ZNIXVIM_PATH="$(zoxide query "$@")"
+
+          if [ -z "$ZNIXVIM_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZNIXVIM_PATH"
+          nixvim
+        }
+
+        zhnixvim() {
+          ZHNIXVIM_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHNIXVIM_PATH" ]; then
+            return 1
+          fi
+
+          cd "$ZHNIXVIM_PATH"
+          nixvim
+        }
+
+        znv() {
+          znixvim "$@"
+        }
+
+        zhnv() {
+          zhnixvim "$(pwd)" "$@"
         }
 
         zhx() {
