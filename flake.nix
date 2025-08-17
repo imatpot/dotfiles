@@ -49,6 +49,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    minegrub-theme = {
+      url = "github:Lxtharia/minegrub-theme";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # vault = {
     #   url = "git+ssh://git@github.com/imatpot/vault";
     #   flake = false;

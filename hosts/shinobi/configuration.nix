@@ -11,11 +11,40 @@
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+
+    gfxmodeEfi = "3440x1440";
+    extraConfig = ''
+      set gfxpayload=keep
+    '';
+
+    minegrub-theme = {
+      enable = true;
+      splash = "Nix isch besser!";
+      background = "background_options/1.8  - [Classic Minecraft].png";
+      boot-options-count = 3;
+    };
+
+    useOSProber = false;
+
+    # this will add Windows 11 after "NixOS - All configurations" instead of in the middle
+    extraInstallCommands = ''
+      ${pkgs.coreutils}/bin/cat << EOF >> /boot/grub/grub.cfg
+
+      menuentry "Windows 11" {
+        insmod part_gpt
+        insmod fat
+        search --fs-uuid --no-floppy --set=root 16CB-DB29
+        chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+      }
+      EOF
+   '';
+  };
 
   # networking.hostName = hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

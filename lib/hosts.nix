@@ -33,6 +33,7 @@ in rec {
         ../hosts/${hostname}/hardware.nix
         ../modules/linux/default-config.nix
         inputs.stylix.nixosModules.stylix
+        inputs.minegrub-theme.nixosModules.default
       ];
     };
 
