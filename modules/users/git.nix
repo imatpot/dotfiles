@@ -9,6 +9,11 @@
     userEmail = outputs.lib.mkDefault (throw "programs.git.userEmail is not set");
     userName = outputs.lib.mkDefault (throw "programs.git.userName is not set");
 
+    extraConfig = {
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
+    };
+
     aliases = rec {
       alias = "config --get-regexp alias";
       aliases = alias;
