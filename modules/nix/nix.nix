@@ -1,11 +1,12 @@
-{ outputs, pkgs, system, hostname, users, ... }:
+{ inputs, outputs, pkgs, system, hostname, users, ... }:
 
 outputs.lib.mkFor system hostname {
   common = {
     nix = {
       package = pkgs.master.nix;
+      nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       settings = {
-        auto-optimise-store = true;
+        auto-optimise-store = !(outputs.lib.isDarwin system); # https://github.com/NixOS/nix/issues/7273
         warn-dirty = false;
         experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
 

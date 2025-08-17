@@ -7,6 +7,7 @@
   home = {
     packages = with pkgs; [
       nix-output-monitor
+      nixd
       nil
       nixfmt-classic
       deadnix
