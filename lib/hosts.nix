@@ -29,14 +29,14 @@ in rec {
       specialArgs = flake // args;
 
       modules = sharedModules ++ [
-        ../hosts/${hostname}/configuration.nix
-        ../hosts/${hostname}/hardware.nix
         ../modules/linux/default-config.nix
 
         inputs.disko.nixosModules.disko
         inputs.stylix.nixosModules.stylix
         inputs.minegrub-theme.nixosModules.default
-      ];
+      ] ++ (outputs.lib.concatImports {
+        path = ../hosts/${hostname};
+      });
     };
 
   mkDarwin = args@{ hostname, system, stateVersion, users }:
