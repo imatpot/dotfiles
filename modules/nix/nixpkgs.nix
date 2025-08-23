@@ -13,6 +13,10 @@
       })
 
       (_: prev: {
+        nixvim = inputs.nixvim.packages.${prev.system}.nvim;
+      })
+
+      (_: prev: {
         master = import inputs.nixpkgs-master {
           inherit (prev) system config overlays;
         };

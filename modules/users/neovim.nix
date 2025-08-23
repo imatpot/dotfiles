@@ -1,4 +1,4 @@
-{ outputs, config, ... }:
+{ outputs, config, pkgs, ... }:
 
 {
   options = {
@@ -6,10 +6,6 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.neovim.enable {
-    programs.neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-    };
+    home.packages = with pkgs; [ nixvim ];
   };
 }
