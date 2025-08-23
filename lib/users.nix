@@ -22,7 +22,7 @@ flake@{ inputs, outputs, ... }:
         ../modules/home-manager/default-config.nix
         ../modules/nix/nix.nix
 
-        inputs.stylix.homeManagerModules.stylix
+        inputs.stylix.homeModules.stylix
 
         ../users/${username}/home.nix
       ];
