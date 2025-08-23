@@ -14,6 +14,6 @@ in {
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.adb.enable {
-    home.packages = with pkgs; [ android-tools master.qtscrcpy adbitch ];
+    home.packages = with pkgs; [ android-tools master.scrcpy adbitch ];
   };
 }
