@@ -9,6 +9,11 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -80,6 +85,12 @@
       nixosConfigurations.shinobi = lib.mkHost {
         system = "x86_64-linux";
         hostname = "shinobi";
+        users = [ "mladen" ];
+      };
+
+      nixosConfigurations.atlas = lib.mkHost {
+        system = "x86_64-linux";
+        hostname = "atlas";
         users = [ "mladen" ];
       };
 

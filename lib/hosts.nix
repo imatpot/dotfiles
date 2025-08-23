@@ -32,8 +32,14 @@ in rec {
         ../hosts/${hostname}/configuration.nix
         ../hosts/${hostname}/hardware.nix
         ../modules/linux/default-config.nix
+
+        inputs.disko.nixosModules.disko
         inputs.stylix.nixosModules.stylix
         inputs.minegrub-theme.nixosModules.default
+
+        {
+          imports = outputs.lib.concatImports {path = ../modules/hosts;};
+        }
       ];
     };
 
