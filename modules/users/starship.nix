@@ -14,7 +14,7 @@
         # https://starship.rs/config
 
         format = outputs.lib.concatStrings [
-          "($username(@$hostname) )"
+          "($username(:$hostname) )"
           "($directory)"
           "( $git_branch)"
           "( $git_commit)"
@@ -38,7 +38,7 @@
         };
 
         hostname = {
-          format = "[$hostname]($style)";
+          format = "[($ssh_symbol)$hostname]($style)";
           ssh_symbol = "ssh:";
           style = "bold green";
         };
