@@ -18,11 +18,17 @@ let
 in {
   modules.users = {
     dev = {
+      adb.enable = true;
       csharp.enable = true;
-      java.enable = true;
-      kubernetes.enable = true;
+      databases.enable = true;
       flutter.enable = true;
-      helix.enable = true;
+      haskell.enable = true;
+      javascript.enable = true;
+      kubernetes.enable = true;
+      plantuml.enable = true;
+      python.enable = true;
+      rust.enable = true;
+      typst.enable = true;
     };
   };
 

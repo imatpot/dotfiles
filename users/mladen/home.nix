@@ -6,18 +6,9 @@ outputs.lib.mkFor system hostname {
   common = {
     modules.users = {
       neovim.enable = true;
+      helix.enable = true;
       zsh.enable = true;
       starship.enable = true;
-
-      dev = {
-        adb.enable = true;
-        databases.enable = true;
-        javascript.enable = true;
-        plantuml.enable = true;
-        python.enable = true;
-        rust.enable = true;
-        typst.enable = true;
-      };
     };
 
     programs.git = {

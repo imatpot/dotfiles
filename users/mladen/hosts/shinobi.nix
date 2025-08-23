@@ -2,6 +2,29 @@
 
 {
   modules.users = {
+    discord.enable = true;
+    wayland.enable = true;
+    gnome.enable = true;
+    zen-browser.enable = true;
+
+    stylix = {
+      enable = true;
+      system-wide = true;
+      theme = "framer";
+    };
+
+    dev = {
+      adb.enable = true;
+      databases.enable = true;
+      flutter.enable = true;
+      haskell.enable = true;
+      javascript.enable = true;
+      plantuml.enable = true;
+      python.enable = true;
+      rust.enable = true;
+      typst.enable = true;
+    };
+
     gaming = {
       wine.enable = true;
       proton.enable = true;
@@ -14,7 +37,7 @@
       };
     };
   };
-  
+
   services.easyeffects.enable = true;
 
   nixos = {
@@ -58,20 +81,20 @@
         enable32Bit = true;
       };
     };
-  
+
     services.xserver.videoDrivers = [ "modesetting" ];
-  
+
     boot = {
        # kernelPackages = pkgs.linuxPackages_latest;
        # kernelPackages = pkgs.unstable.linuxKernel.kernels.linux_zen;
        kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  
+
       initrd.kernelModules = [ "amdgpu" ];
       # kernel.sysctl = {
         # "fs.file-max" = 262144;
       # };
     };
-  
+
     # security.pam.loginLimits = [
       # {
         # domain = "*";
@@ -87,7 +110,7 @@
       # }
     # ];
     # systemd.user.extraConfig = "DefaultLimitNOFILE=262144";
-    
+
     services.sunshine = {
       enable = true;
       autoStart = false;
