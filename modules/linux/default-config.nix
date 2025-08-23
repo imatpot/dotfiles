@@ -3,7 +3,8 @@
 with outputs.lib;
 
 {
-  imports = [ ./user-nixos-configs.nix ];
+  imports = [ ./user-nixos-configs.nix ]
+    ++ (concatImports { path = ../../modules/hosts; });
 
   system.stateVersion = mkDefault stateVersion;
   networking.hostName = mkDefault hostname;

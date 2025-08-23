@@ -4,6 +4,10 @@ with outputs.lib;
 
 mkFor system hostname {
   common = {
+    imports = outputs.lib.concatImports {
+      path = ../../modules/users;
+    };
+
     home = {
       username = mkDefault name;
       stateVersion = mkDefault stateVersion;

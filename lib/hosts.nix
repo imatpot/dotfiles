@@ -36,12 +36,6 @@ in rec {
         inputs.disko.nixosModules.disko
         inputs.stylix.nixosModules.stylix
         inputs.minegrub-theme.nixosModules.default
-
-        {
-          imports = outputs.lib.concatImports {
-            path = ../modules/hosts;
-          };
-        }
       ];
     };
 
