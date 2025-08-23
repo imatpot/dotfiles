@@ -1,4 +1,4 @@
-{ outputs, ... }:
+{ outputs, pkgs, ... }:
 
 {
   programs.git = {
@@ -41,4 +41,8 @@
         "!fn() { git delete-all-branches; git fetch --prune; git reset --hard origin/main; git clean -df; }; fn";
     };
   };
+
+  home.packages = with pkgs; [
+    gitui
+  ];
 }
