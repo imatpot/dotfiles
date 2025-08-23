@@ -25,5 +25,6 @@ outputs.lib.mkFor system hostname {
   hosts = {
     shinobi.imports = [ ./hosts/shinobi.nix ];
     mcdonalds.imports = [ ./hosts/mcdonalds.nix ];
+    atlas.imports = [ ./hosts/atlas.nix ];
   };
 }
