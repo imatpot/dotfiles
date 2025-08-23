@@ -2,6 +2,7 @@
   modules.hosts = {
     btrfs.enable = true;
     nvidia.enable = true;
+    fail2ban.enable = true;
   };
 
   boot.loader.systemd-boot.enable = true;
