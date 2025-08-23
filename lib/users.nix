@@ -27,7 +27,9 @@ flake@{ inputs, outputs, ... }:
         ../users/${username}/home.nix
 
         {
-          imports = outputs.lib.concatImports {path = ../../modules/users;};
+          imports = outputs.lib.concatImports {
+            path = ../modules/users;
+          };
         }
       ];
     };

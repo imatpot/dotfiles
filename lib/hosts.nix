@@ -38,7 +38,9 @@ in rec {
         inputs.minegrub-theme.nixosModules.default
 
         {
-          imports = outputs.lib.concatImports {path = ../modules/hosts;};
+          imports = outputs.lib.concatImports {
+            path = ../modules/hosts;
+          };
         }
       ];
     };
