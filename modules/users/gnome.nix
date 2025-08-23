@@ -157,7 +157,10 @@ in {
             dynamic-workspaces = true;
           };
 
-          "org/gnome/Console" = { audible-bell = false; };
+          "org/gnome/Console" = {
+            audible-bell = false;
+            custom-font = "CaskaydiaMono Nerd Font 10";
+          };
 
           "org/gnome/shell" = {
             favorite-apps = [

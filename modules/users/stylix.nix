@@ -20,7 +20,7 @@ let
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.caskaydia-mono;
-        name = "Cascadia Mono NF";
+        name = "CaskaydiaMono Nerd Font";
       };
 
       sansSerif = {
@@ -127,7 +127,7 @@ in {
     (outputs.lib.mkMerge [
       (outputs.lib.mkIf config.modules.users.stylix.system-wide {
         nixos = outputs.lib.warn
-          "info: Enabling Stylix system-wide. This will override the configs of all users with ${name}'s config."
+          "dotfiles: enabling Stylix system-wide. This will override the configs of all users with ${name}'s config."
           settings.system-wide;
       })
       (outputs.lib.mkIf (!config.modules.users.stylix.system-wide)
