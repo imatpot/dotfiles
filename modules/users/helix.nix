@@ -43,7 +43,7 @@
       };
 
       settings = {
-        theme = "code";
+        theme = outputs.lib.mkForce "code";
 
         editor = {
           mouse = false;
