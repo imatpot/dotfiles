@@ -89,11 +89,7 @@
   ];
 
   programs.dconf.enable = true;
-
-  virtualisation.docker = {
-    enable = true;
-    enableNvidia = true;
-  };
+  virtualisation.docker.enable = true;
 
   virtualisation.oci-containers.backend = "podman";
 
