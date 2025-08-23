@@ -4,9 +4,6 @@
 
 outputs.lib.mkFor system hostname {
   common = {
-    # TODO: Move this to lib/users.nix
-    imports = outputs.lib.concatImports { path = ../../modules/users; };
-
     modules.users = {
       neovim.enable = true;
       zsh.enable = true;

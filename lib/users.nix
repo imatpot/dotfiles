@@ -25,6 +25,10 @@ flake@{ inputs, outputs, ... }:
         inputs.stylix.homeManagerModules.stylix
 
         ../users/${username}/home.nix
+
+        {
+          imports = outputs.lib.concatImports {path = ../../modules/users;};
+        }
       ];
     };
 }
