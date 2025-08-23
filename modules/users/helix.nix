@@ -5,11 +5,11 @@
   ...
 }: {
   options = {
-    modules.users.dev.helix.enable =
+    modules.users.helix.enable =
       outputs.lib.mkEnableOption "Enable Helix editor";
   };
 
-  config = outputs.lib.mkIf config.modules.users.dev.helix.enable {
+  config = outputs.lib.mkIf config.modules.users.helix.enable {
     programs.helix = {
       enable = true;
       package = pkgs.unstable.helix;
