@@ -20,12 +20,12 @@ let
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.caskaydia-mono;
-        name = "CaskaydiaMono Nerd Font";
+        name = "CaskaydiaCove Nerd Font";
       };
 
       sansSerif = {
-        package = pkgs.atkinson-hyperlegible;
-        name = "Atkinson Hyperlegible";
+        package = pkgs.atkinson-hyperlegible-next;
+        name = "Atkinson Hyperlegible Next";
       };
 
       serif = {
@@ -48,7 +48,7 @@ let
 
     opacity = {
       applications = 1.0;
-      terminal = 0.8;
+      terminal = 0.9;
       desktop = 1.0;
       popups = 1.0;
     };
@@ -94,8 +94,7 @@ let
     };
 
     system-wide = {
-      stylix = stylix-config // { targets.grub.enable = false;
-      };
+      stylix = stylix-config // { targets.grub.enable = false; };
     };
   };
 

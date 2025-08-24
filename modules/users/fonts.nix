@@ -4,7 +4,7 @@ let
   fonts = with pkgs; [
     # Writing
     libertine
-    atkinson-hyperlegible
+    atkinson-hyperlegible-next
     noto-fonts
 
     # Coding
