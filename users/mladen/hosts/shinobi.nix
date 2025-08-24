@@ -6,6 +6,7 @@
     wayland.enable = true;
     gnome.enable = true;
     zen-browser.enable = true;
+    ghostty.enable = true;
 
     stylix = {
       enable = true;
