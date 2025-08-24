@@ -9,6 +9,8 @@
       ls = "eza";
       ll = "eza --all --classify --long --time-style long-iso";
       lll = "ll --total-size";
+      tree = "ls --tree";
+      ltree = "ll --tree";
       cat = "bat";
     };
 
