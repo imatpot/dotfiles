@@ -54,7 +54,7 @@ let
     };
 
     base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/${config.modules.users.stylix.theme}.yaml";
+      "${pkgs.master.base16-schemes}/share/themes/${config.modules.users.stylix.theme}.yaml";
   };
 
   settings = {
@@ -115,7 +115,7 @@ in {
         # https://github.com/tinted-theming/schemes
         theme = outputs.lib.mkOption {
           type = outputs.lib.types.str;
-          default = "kanagawa-dragon";
+          default = "selenized-black";
           description = "The Base16 theme to use.";
         };
       };
