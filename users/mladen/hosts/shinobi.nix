@@ -11,7 +11,6 @@
     stylix = {
       enable = true;
       system-wide = true;
-      theme = "framer";
     };
 
     dev = {

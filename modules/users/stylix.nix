@@ -115,7 +115,7 @@ in {
         # https://github.com/tinted-theming/schemes
         theme = outputs.lib.mkOption {
           type = outputs.lib.types.str;
-          default = "framer";
+          default = "kanagawa-dragon";
           description = "The Base16 theme to use.";
         };
       };
