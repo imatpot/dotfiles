@@ -1,6 +1,7 @@
 {
   outputs,
   config,
+  pkgs,
   ...
 }: {
   options = {
@@ -17,8 +18,8 @@
 
       settings = {
         background-blur = 20;
-        window-padding-x = 6;
-        window-padding-y = 6;
+        window-padding-x = 8;
+        window-padding-y = 8;
         window-inherit-working-directory = false;
       };
     };

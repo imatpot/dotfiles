@@ -16,6 +16,7 @@ with outputs.lib;
   services.xserver.xkb.layout = mkDefault "ch";
 
   environment.systemPackages = with pkgs; [ vim git wget curl nmap dots ];
+  environment.enableAllTerminfo = true;
 
   nix.gc = {
     automatic = mkDefault true;
