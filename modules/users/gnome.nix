@@ -165,10 +165,10 @@ in {
           "org/gnome/shell" = {
             favorite-apps = [
               "org.gnome.Nautilus.desktop"
-              "org.gnome.Console.desktop"
+              "com.mitchellh.ghostty.desktop"
               "zen.desktop"
-              "code.desktop"
               "vesktop.desktop"
+              "spotify.desktop"
             ];
           };
 
@@ -293,6 +293,17 @@ in {
 
           "org/gnome/desktop/app-folders/folders/Utilities" = { apps = [ ]; };
 
+          "org/gnome/shell/extensions/blur-my-shell/applications" = {
+            blur = true;
+            sigma = 20;
+            opacity = 255;
+            dynamic-opacity = false;
+            whitelist = [
+              "org.gnome.Console"
+              "com.mitchellh.ghostty"
+            ];
+          };
+
           "org/gnome/shell" = {
             disable-user-extensions = false;
             enabled-extensions = [
@@ -306,6 +317,7 @@ in {
               "quick-settings-tweaks@qwreey"
               "AlphabeticalAppGrid@stuarthayhurst"
               "hibernate-status@dromi"
+              "blur-my-shell@aunetx"
             ];
           };
         };
@@ -321,6 +333,7 @@ in {
         quick-settings-tweaker
         alphabetical-app-grid
         hibernate-status-button
+        blur-my-shell
       ];
 
       # https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1278954466
