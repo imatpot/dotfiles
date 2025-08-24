@@ -1,7 +1,7 @@
 { outputs, ... }:
 
 rec {
-  defaultStateVersion = "24.05";
+  defaultStateVersion = "25.11";
 
   # Nix-Darwin is cringe and has integer state versions.
   # https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion
