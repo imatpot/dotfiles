@@ -54,6 +54,26 @@
           cd "$ZHERE_PATH"
         }
 
+        znvim() {
+          ZNVIM_PATH="$(zoxide query "$@")"
+
+          if [ -z "$ZNVIM_PATH" ]; then
+            return 1
+          fi
+
+          code "$ZNVIM_PATH"
+        }
+
+        zhnvim() {
+          ZHNVIM_PATH="$(zoxide query "$(pwd)" "$@")"
+
+          if [ -z "$ZHNVIM_PATH" ]; then
+            return 1
+          fi
+
+          code "$ZHNVIM_PATH"
+        }
+
         zcode() {
           ZCODE_PATH="$(zoxide query "$@")"
 
@@ -92,58 +112,6 @@
           fi
 
           cursor "$ZHCURSOR_PATH"
-        }
-
-        zvim() {
-          ZVIM_PATH="$(zoxide query "$@")"
-
-          if [ -z "$ZVIM_PATH" ]; then
-            return 1
-          fi
-
-          cd "$ZVIM_PATH"
-          vim
-        }
-
-        zhvim() {
-          ZHVIM_PATH="$(zoxide query "$(pwd)" "$@")"
-
-          if [ -z "$ZHVIM_PATH" ]; then
-            return 1
-          fi
-
-          cd "$ZHVIM_PATH"
-          vim
-        }
-
-        znixvim() {
-          ZNIXVIM_PATH="$(zoxide query "$@")"
-
-          if [ -z "$ZNIXVIM_PATH" ]; then
-            return 1
-          fi
-
-          cd "$ZNIXVIM_PATH"
-          nixvim
-        }
-
-        zhnixvim() {
-          ZHNIXVIM_PATH="$(zoxide query "$(pwd)" "$@")"
-
-          if [ -z "$ZHNIXVIM_PATH" ]; then
-            return 1
-          fi
-
-          cd "$ZHNIXVIM_PATH"
-          nixvim
-        }
-
-        znv() {
-          znixvim "$@"
-        }
-
-        zhnv() {
-          zhnixvim "$(pwd)" "$@"
         }
 
         zhx() {
