@@ -17,7 +17,6 @@ in core.deepMerge [
     ./conditionals.nix
     ./hosts.nix
     ./pkgs.nix
-    ./secrets.nix
     ./state.nix
     ./users.nix
   ] flake)

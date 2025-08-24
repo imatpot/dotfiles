@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, outputs, config, pkgs, ... }:
 
 {
   modules.users = {
@@ -40,6 +40,8 @@
   };
 
   services.easyeffects.enable = true;
+
+  # home.file."sops.test.txt".source = config.secrets.backblaze.id.path;
 
   nixos = {
     hardware.logitech.wireless.enable = true;

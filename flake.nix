@@ -64,10 +64,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # vault = {
-    #   url = "git+ssh://git@github.com/imatpot/vault";
-    #   flake = false;
-    # };
+    vault = {
+      url = "git+ssh://git@github.com/imatpot/vault";
+      flake = true;
+    };
   };
 
   outputs = inputs:

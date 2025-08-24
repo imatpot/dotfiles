@@ -2,5 +2,5 @@
 
 {
   home.packages = with pkgs; [ sops ];
-  sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/aegissh" ];
+  sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/aegis" ];
 }

@@ -574,6 +574,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1755829505,
+        "narHash": "sha256-4/Jd+LkQ2ssw8luQVkqVs9spDBVE6h/u/hC/tzngsPo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f937f8ecd1c70efd7e9f90ba13dfb400cf559de4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixvim": {
       "inputs": {
         "alejandra": "alejandra",
@@ -726,6 +742,7 @@
         "nur": "nur",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
+        "vault": "vault",
         "zen-browser": "zen-browser"
       }
     },
@@ -750,6 +767,27 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754988908,
+        "narHash": "sha256-t+voe2961vCgrzPFtZxha0/kmFSHFobzF00sT8p9h0U=",
+        "owner": "mic92",
+        "repo": "sops-nix",
+        "rev": "3223c7a92724b5d804e9988c6b447a0d09017d48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mic92",
+        "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "sops-nix_2": {
+      "inputs": {
+        "nixpkgs": [
+          "vault",
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -939,6 +977,25 @@
         "owner": "tinted-theming",
         "repo": "base16-zed",
         "type": "github"
+      }
+    },
+    "vault": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4",
+        "sops-nix": "sops-nix_2"
+      },
+      "locked": {
+        "lastModified": 1756130871,
+        "narHash": "sha256-qxrUdEvxaI8wWSKUvHnpbOjrDJuVF2N6+9shzAh7doY=",
+        "ref": "refs/heads/main",
+        "rev": "c95b7fc2a781596ecd6018eb7bf4ff4f4516c299",
+        "revCount": 9,
+        "type": "git",
+        "url": "ssh://git@github.com/imatpot/vault"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/imatpot/vault"
       }
     },
     "zen-browser": {

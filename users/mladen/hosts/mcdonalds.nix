@@ -1,8 +1,11 @@
-{ config, outputs, pkgs, ... }:
-
-let
+{
+  config,
+  outputs,
+  pkgs,
+  ...
+}: let
   extra = ''
-    ssh-add ~/.ssh/aegissh &> /dev/null
+    ssh-add ~/.ssh/aegis &> /dev/null
     ssh-add ~/.ssh/mladen.brankovic.at.golog.ch &> /dev/null
     ssh-add ~/.ssh/mladen.brankovic.at.students.fhnw.ch &> /dev/null
 
@@ -14,7 +17,6 @@ let
 
     export PATH="$PATH:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/npm/bin:/opt/homebrew/bin"
   '';
-
 in {
   modules.users = {
     dev = {
@@ -37,6 +39,15 @@ in {
     backblaze-b2
   ];
 
+  home.file.backblaze-id.source = config.lib.file.mkOutOfStoreSymlink config.sops.secrets."backblaze/id".path;
+
+  sops.templates.git.content =
+    # toml
+    ''
+      # interpolated comment for testing
+      # backblaze.id = ${config.sops.placeholder."backblaze/id"}
+    '';
+
   programs = {
     bash.initExtra = extra;
     zsh.initContent = extra;
@@ -48,6 +59,12 @@ in {
         key = "588B95BE8E35DD34";
         signByDefault = true;
       };
+
+      includes = [
+        {
+          path = config.sops.templates.git.path;
+        }
+      ];
     };
 
     ssh.extraConfig = ''

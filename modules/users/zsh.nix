@@ -136,7 +136,7 @@
           hx
         }
 
-        alias nixvim="nix run path:/home/mladen/Development/life/nixvim --"
+        alias nixvim="nix run path:/Users/mladen/Developer/life/nixvim --"
         alias nv="nixvim"
 
         znixvim() {
@@ -172,7 +172,7 @@
         eval "$(ssh-agent -s)" &> /dev/null
 
         # TODO: put this somewhere else but make sure it's after the ssh-agent is started
-        ssh-add ~/.ssh/aegissh &> /dev/null
+        ssh-add ~/.ssh/aegis &> /dev/null
         ssh-add ~/.ssh/mladen.brankovic.at.golog.ch &> /dev/null
         ssh-add ~/.ssh/mladen.brankovic.at.students.fhnw.ch &> /dev/null
       '';
