@@ -7,6 +7,7 @@
     gnome.enable = true;
     zen-browser.enable = true;
     ghostty.enable = true;
+    bitwarden.enable = true;
 
     stylix = {
       enable = true;
