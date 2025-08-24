@@ -43,10 +43,6 @@
   };
 
   home = {
-    sessionVariables = {
-      GIT_EDITOR = outputs.lib.getExe pkgs.vim;
-    };
-
     packages = with pkgs; [
       gitui
     ];

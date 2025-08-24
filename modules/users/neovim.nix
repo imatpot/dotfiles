@@ -6,6 +6,14 @@
   };
 
   config = outputs.lib.mkIf config.modules.users.neovim.enable {
-    home.packages = with pkgs; [ nixvim ];
+    home = {
+      packages = with pkgs; [ nixvim ];
+
+      sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+        GIT_EDITOR = "nvim";
+      };
+    };
   };
 }
