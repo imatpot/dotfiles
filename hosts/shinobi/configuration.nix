@@ -93,6 +93,7 @@
     spicetify-cli
     ungoogled-chromium
     master.r2modman
+    master.stremio
   ];
 
   services.printing.enable = true;
