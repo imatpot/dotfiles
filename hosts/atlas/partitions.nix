@@ -49,10 +49,22 @@
 
               extraArgs = builtins.concatLists [
                 ["--force"]
-                ["--label" "nixos"]
-                ["--data" "single"]
-                ["--metadata" "raid1"]
-                ["/dev/disk/by-partlabel/root0" "/dev/disk/by-partlabel/root1"]
+                [
+                  "--label"
+                  "nixos"
+                ]
+                [
+                  "--data"
+                  "single"
+                ]
+                [
+                  "--metadata"
+                  "raid1"
+                ]
+                [
+                  "/dev/disk/by-partlabel/root0"
+                  "/dev/disk/by-partlabel/root1"
+                ]
               ];
 
               subvolumes = {
@@ -60,29 +72,44 @@
 
                 "/root/active" = {
                   mountpoint = "/";
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
                 };
 
                 "/root/snapshots" = {
                   mountpoint = "/snapshots";
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
                 };
 
                 "/home" = {};
 
                 "/home/active" = {
                   mountpoint = "/home";
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
                 };
 
                 "/home/snaphosts" = {
                   mountpoint = "/snapshots/home";
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
                 };
 
                 "/nix" = {
                   mountpoint = "/nix";
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
                 };
               };
             };

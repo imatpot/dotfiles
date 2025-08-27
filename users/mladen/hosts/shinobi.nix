@@ -1,6 +1,10 @@
-{ inputs, outputs, config, pkgs, ... }:
-
 {
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  ...
+}: {
   modules.users = {
     discord.enable = true;
     wayland.enable = true;
@@ -85,32 +89,32 @@
       };
     };
 
-    services.xserver.videoDrivers = [ "modesetting" ];
+    services.xserver.videoDrivers = ["modesetting"];
 
     boot = {
-       # kernelPackages = pkgs.linuxPackages_latest;
-       # kernelPackages = pkgs.unstable.linuxKernel.kernels.linux_zen;
-       kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+      # kernelPackages = pkgs.linuxPackages_latest;
+      # kernelPackages = pkgs.unstable.linuxKernel.kernels.linux_zen;
+      kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
-      initrd.kernelModules = [ "amdgpu" ];
+      initrd.kernelModules = ["amdgpu"];
       # kernel.sysctl = {
-        # "fs.file-max" = 262144;
+      # "fs.file-max" = 262144;
       # };
     };
 
     # security.pam.loginLimits = [
-      # {
-        # domain = "*";
-        # item = "nofile";
-        # type = "-";
-        # value = "262144";
-      # }
-      # {
-        # domain = "*";
-        # item = "memlock";
-        # type = "-";
-        # value = "262144";
-      # }
+    # {
+    # domain = "*";
+    # item = "nofile";
+    # type = "-";
+    # value = "262144";
+    # }
+    # {
+    # domain = "*";
+    # item = "memlock";
+    # type = "-";
+    # value = "262144";
+    # }
     # ];
     # systemd.user.extraConfig = "DefaultLimitNOFILE=262144";
 
@@ -121,9 +125,9 @@
       openFirewall = true;
     };
 
-  # services.desktopManager.plasma6.enable = true;
-  # services.xserver.displayManager.sddm.wayland.enable = true;
-  # services.displayManager.sddm.enable = true;
-  # services.displayManager.defaultSession = "plasma";
-};
+    # services.desktopManager.plasma6.enable = true;
+    # services.xserver.displayManager.sddm.wayland.enable = true;
+    # services.displayManager.sddm.enable = true;
+    # services.displayManager.defaultSession = "plasma";
+  };
 }

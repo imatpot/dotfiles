@@ -1,12 +1,15 @@
-{ outputs, config, pkgs, username, ... }:
-
 {
+  outputs,
+  config,
+  pkgs,
+  username,
+  ...
+}: {
   options = {
     modules.users.zsh.enable = outputs.lib.mkEnableOption "Enable ZSH";
   };
 
   config = outputs.lib.mkIf config.modules.users.zsh.enable {
-
     # Forces Nix-Darwin to set up necessary hooks
     macos.programs.zsh.enable = true;
 
@@ -33,7 +36,10 @@
       antidote = {
         enable = true;
         useFriendlyNames = true;
-        plugins = [ "hlissner/zsh-autopair" "z-shell/zsh-diff-so-fancy" ];
+        plugins = [
+          "hlissner/zsh-autopair"
+          "z-shell/zsh-diff-so-fancy"
+        ];
       };
 
       initContent = ''

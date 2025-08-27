@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.nix-index-database.comma.enable = true;
   home.shellAliases.nix-gc = "nix-collect-garbage";
 

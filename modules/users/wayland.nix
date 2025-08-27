@@ -1,6 +1,9 @@
-{ outputs, config, pkgs, ... }:
-
-let
+{
+  outputs,
+  config,
+  pkgs,
+  ...
+}: let
   waylandVariables = {
     _JAVA_AWT_WM_NONREPARENTING = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
@@ -12,14 +15,13 @@ let
     WLR_NO_HARDWARE_CURSORS = "1";
     XDG_SESSION_TYPE = "wayland";
   };
-
 in {
   options = {
     modules.users.wayland.enable = outputs.lib.mkEnableOption "Enable Wayland";
   };
 
   config = outputs.lib.mkIf config.modules.users.wayland.enable {
-    home.packages = with pkgs; [ xorg.xeyes ];
+    home.packages = with pkgs; [xorg.xeyes];
 
     # For application launchers. Breaks XServer users on the same system!
     # nixos.environment.sessionVariables = waylandVariables;

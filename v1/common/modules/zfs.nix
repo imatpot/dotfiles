@@ -1,6 +1,6 @@
 {
   boot = {
-    supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = ["zfs"];
     zfs.requestEncryptionCredentials = true;
   };
 
@@ -9,4 +9,3 @@
     autoScrub.enable = true;
   };
 }
-

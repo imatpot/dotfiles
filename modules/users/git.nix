@@ -1,6 +1,8 @@
-{ outputs, pkgs, ... }:
-
 {
+  outputs,
+  pkgs,
+  ...
+}: {
   programs.git = {
     enable = true;
 
@@ -29,16 +31,12 @@
       latest = "log -1";
       last = latest;
 
-      graph =
-        "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      graph = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
 
-      pull-all =
-        "!fn() { find . -type d -maxdepth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull ';'; }; fn";
-      delete-all-branches =
-        "!fn() { git checkout main; git branch | grep -v 'main' | xargs git branch -D; }; fn";
+      pull-all = "!fn() { find . -type d -maxdepth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull ';'; }; fn";
+      delete-all-branches = "!fn() { git checkout main; git branch | grep -v 'main' | xargs git branch -D; }; fn";
 
-      purge =
-        "!fn() { git delete-all-branches; git fetch --prune; git reset --hard origin/main; git clean -df; }; fn";
+      purge = "!fn() { git delete-all-branches; git fetch --prune; git reset --hard origin/main; git clean -df; }; fn";
     };
   };
 

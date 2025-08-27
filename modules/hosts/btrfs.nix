@@ -1,4 +1,8 @@
-{outputs, config, ...}: {
+{
+  outputs,
+  config,
+  ...
+}: {
   options = {
     modules.hosts.btrfs.enable = outputs.lib.mkEnableOption "Enable BTRFS";
   };

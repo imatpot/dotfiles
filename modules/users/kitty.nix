@@ -1,6 +1,9 @@
-{ outputs, pkgs, config, ... }:
-
 {
+  outputs,
+  pkgs,
+  config,
+  ...
+}: {
   options = {
     modules.users.kitty.enable = outputs.lib.mkEnableOption "Enable kitty";
   };
@@ -12,7 +15,7 @@
     programs.kitty = rec {
       enable = true;
 
-      keybindings = { };
+      keybindings = {};
 
       settings = {
         # https://sw.kovidgoyal.net/kitty/conf

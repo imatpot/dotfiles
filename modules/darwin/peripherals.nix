@@ -1,6 +1,4 @@
-_:
-
-{
+_: {
   system.defaults = {
     ".GlobalPreferences"."com.apple.mouse.scaling" = 10.0;
 

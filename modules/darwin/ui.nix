@@ -1,6 +1,4 @@
-_:
-
-{
+_: {
   system.defaults = {
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";

@@ -1,7 +1,5 @@
-{ config, ... }:
-
+{config, ...}:
 # $ sudo smbpasswd -a yourusername
-
 {
   services.samba = {
     enable = true;

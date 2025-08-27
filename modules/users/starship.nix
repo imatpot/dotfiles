@@ -1,9 +1,10 @@
-{ outputs, config, ... }:
-
 {
+  outputs,
+  config,
+  ...
+}: {
   options = {
-    modules.users.starship.enable =
-      outputs.lib.mkEnableOption "Enable Starship";
+    modules.users.starship.enable = outputs.lib.mkEnableOption "Enable Starship";
   };
 
   config = outputs.lib.mkIf config.modules.users.starship.enable {
@@ -119,5 +120,4 @@
       };
     };
   };
-
 }

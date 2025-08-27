@@ -1,46 +1,59 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  gui = config.services.xserver.enable;
+in
+  with lib; {
+    # Use latest Discord tarball
+    nixpkgs.overlays = [
+      (self: super: {
+        discord = super.discord.overrideAttrs (_: {
+          src = builtins.fetchTarball "https://discord.com/api/download?platform=linux&format=tar.gz";
+        });
+      })
+    ];
 
-let gui = config.services.xserver.enable;
+    imports = [./home.nix];
 
-in with lib; {
-  # Use latest Discord tarball
-  nixpkgs.overlays = [
-    (self: super: {
-      discord = super.discord.overrideAttrs (_: {
-        src = builtins.fetchTarball
-          "https://discord.com/api/download?platform=linux&format=tar.gz";
-      });
-    })
-  ];
+    hardware.keyboard.zsa.enable = true;
 
-  imports = [ ./home.nix ];
+    environment.systemPackages = with pkgs;
+      [any-nix-shell]
+      ++ (
+        if gui
+        then [
+          spotify
+          discord
+          bitwarden
+          libreoffice
+          shutter
+          gimp
+          audacity
+          inkscape
+          wally-cli
+        ]
+        else []
+      );
 
-  hardware.keyboard.zsa.enable = true;
+    services = mkIf gui {inherit (import ./services/syncthing.nix) syncthing;};
 
-  environment.systemPackages = with pkgs;
-    [ any-nix-shell ] ++ (if gui then [
-      spotify
-      discord
-      bitwarden
-      libreoffice
-      shutter
-      gimp
-      audacity
-      inkscape
-      wally-cli
-    ] else
-      [ ]);
+    users.users.mladen = {
+      description = "Mladen Branković";
+      initialPassword = "changeme";
+      extraGroups = [
+        "wheel"
+        "video"
+        "audio"
+        "users"
+        "docker"
+      ];
 
-  services = mkIf gui { inherit (import ./services/syncthing.nix) syncthing; };
+      isNormalUser = true;
+      createHome = true;
 
-  users.users.mladen = {
-    description = "Mladen Branković";
-    initialPassword = "changeme";
-    extraGroups = [ "wheel" "video" "audio" "users" "docker" ];
-
-    isNormalUser = true;
-    createHome = true;
-
-    shell = pkgs.fish; # I like fish. Don't judge me.
-  };
-}
+      shell = pkgs.fish; # I like fish. Don't judge me.
+    };
+  }

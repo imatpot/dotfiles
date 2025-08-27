@@ -1,6 +1,9 @@
-{ outputs, config, pkgs, ... }:
-
-let
+{
+  outputs,
+  config,
+  pkgs,
+  ...
+}: let
   discordPatcher = pkgs.writers.writePython3Bin "discord-krisp-patcher" {
     libraries = with pkgs.python3Packages; [
       pyelftools
@@ -14,18 +17,18 @@ let
       "W391"
     ];
   } (builtins.readFile ./discord-krisp-patcher.py);
-in
-
-{
+in {
   options = {
-    modules.users.discord.enable =
-      outputs.lib.mkEnableOption "Enable Discord/Vesktop (Wayland)";
+    modules.users.discord.enable = outputs.lib.mkEnableOption "Enable Discord/Vesktop (Wayland)";
   };
 
   # Krisp: https://github.com/NixOS/nixpkgs/issues/195512
 
   config = outputs.lib.mkIf config.modules.users.discord.enable {
-    home.packages = with pkgs.unstable; [ vesktop discord ];
+    home.packages = with pkgs.unstable; [
+      vesktop
+      discord
+    ];
 
     home.activation.krispPatch = config.lib.dag.entryAfter ["writeBoundary"] ''
       run ${pkgs.findutils}/bin/find -L ${config.home.homeDirectory}/.config/discord -name 'discord_krisp.node' -exec ${discordPatcher}/bin/discord-krisp-patcher {} \;

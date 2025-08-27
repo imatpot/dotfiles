@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware.nix
 
@@ -24,10 +26,12 @@
     useDHCP = false;
     interfaces.enp0s31f6 = {
       useDHCP = false;
-      ipv4.addresses = [{
-        address = "192.168.1.69";
-        prefixLength = 24;
-      }];
+      ipv4.addresses = [
+        {
+          address = "192.168.1.69";
+          prefixLength = 24;
+        }
+      ];
     };
 
     defaultGateway = {

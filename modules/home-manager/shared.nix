@@ -1,7 +1,11 @@
 # Modules shared across NixOS, Darwin, and standalone Home Configurations
-
-{ inputs, outputs, system, hostname, ... }:
-
+{
+  inputs,
+  outputs,
+  system,
+  hostname,
+  ...
+}:
 outputs.lib.mkFor system hostname {
   common.imports = [
     inputs.sops-nix.homeManagerModules.sops

@@ -3,7 +3,9 @@
     enable = true;
 
     settings = {
-      selection = { save_to_clipboard = true; };
+      selection = {
+        save_to_clipboard = true;
+      };
 
       # https://github.com/arcticicestudio/nord-alacritty
 

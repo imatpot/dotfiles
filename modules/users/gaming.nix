@@ -1,9 +1,14 @@
-{ inputs, outputs, config, pkgs, system, hostname, name, ... }:
-
-let
-  STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-    "${config.home.homeDirectory}/.steam/root/compatibilitytools.d";
-
+{
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  system,
+  hostname,
+  name,
+  ...
+}: let
+  STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${config.home.homeDirectory}/.steam/root/compatibilitytools.d";
 in {
   options = {
     modules.users.gaming = {
@@ -21,7 +26,8 @@ in {
 
   config = let
     # TODO: awful, can i use != null or something?
-    isGamingEnabled = config.modules.users.gaming.wine.enable
+    isGamingEnabled =
+      config.modules.users.gaming.wine.enable
       || config.modules.users.gaming.proton.enable
       || config.modules.users.gaming.steam.enable
       || config.modules.users.gaming.lutris.enable
@@ -32,42 +38,42 @@ in {
       home = {
         packages = let
           # TODO: awful formatting
-          winePkgs =
-            outputs.lib.optionals config.modules.users.gaming.wine.enable
-            ((with pkgs; [ bottles ])
-              ++ (with inputs.nix-gaming.packages.${system};
-                [
-                  # TODO: fix why this compiles instead of using a cache
-                  # wine-ge
-                  # wine-discord-ipc-bridge
-                ]));
-          protonPkgs =
-            outputs.lib.optionals config.modules.users.gaming.proton.enable
-            (with pkgs; [ protonup ]);
-          lutrisPkgs =
-            outputs.lib.optionals config.modules.users.gaming.lutris.enable
-            (with pkgs; [ lutris ]);
-          minecraftPkgs = outputs.lib.optionals
-            config.modules.users.gaming.games.minecraft.enable
-            (with pkgs; [ prismlauncher ]);
-          pokemmoPkgs = outputs.lib.optionals
-            config.modules.users.gaming.games.pokemmo.enable
-            (with pkgs; [ pokemmo-installer ]);
-        in winePkgs ++ protonPkgs ++ lutrisPkgs ++ minecraftPkgs ++ pokemmoPkgs;
+          winePkgs = outputs.lib.optionals config.modules.users.gaming.wine.enable (
+            (with pkgs; [bottles])
+            ++ (with inputs.nix-gaming.packages.${system}; [
+              # TODO: fix why this compiles instead of using a cache
+              # wine-ge
+              # wine-discord-ipc-bridge
+            ])
+          );
+          protonPkgs = outputs.lib.optionals config.modules.users.gaming.proton.enable (
+            with pkgs; [protonup]
+          );
+          lutrisPkgs = outputs.lib.optionals config.modules.users.gaming.lutris.enable (
+            with pkgs; [lutris]
+          );
+          minecraftPkgs = outputs.lib.optionals config.modules.users.gaming.games.minecraft.enable (
+            with pkgs; [prismlauncher]
+          );
+          pokemmoPkgs = outputs.lib.optionals config.modules.users.gaming.games.pokemmo.enable (
+            with pkgs; [pokemmo-installer]
+          );
+        in
+          winePkgs ++ protonPkgs ++ lutrisPkgs ++ minecraftPkgs ++ pokemmoPkgs;
 
-        sessionVariables =
-          outputs.lib.mkIf config.modules.users.gaming.steam.enable {
-            inherit STEAM_EXTRA_COMPAT_TOOLS_PATHS;
-          };
+        sessionVariables = outputs.lib.mkIf config.modules.users.gaming.steam.enable {
+          inherit STEAM_EXTRA_COMPAT_TOOLS_PATHS;
+        };
 
         activation = {
           # Run protonup once
-          protonup = outputs.lib.mkIf config.modules.users.gaming.proton.enable
-            (outputs.lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          protonup = outputs.lib.mkIf config.modules.users.gaming.proton.enable (
+            outputs.lib.hm.dag.entryAfter ["writeBoundary"] ''
               if [ ! -d "${STEAM_EXTRA_COMPAT_TOOLS_PATHS}" ]; then
                 yes | ${pkgs.protonup}/bin/protonup
               fi
-            '');
+            ''
+          );
         };
       };
 

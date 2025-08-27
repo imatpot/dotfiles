@@ -1,12 +1,17 @@
-{ outputs, config, pkgs, ... }:
-
 {
+  outputs,
+  config,
+  pkgs,
+  ...
+}: {
   options = {
-    modules.users.dev.databases.enable =
-      outputs.lib.mkEnableOption "Enable database tools";
+    modules.users.dev.databases.enable = outputs.lib.mkEnableOption "Enable database tools";
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.databases.enable {
-    home.packages = with pkgs; [ postgresql sqlite ];
+    home.packages = with pkgs; [
+      postgresql
+      sqlite
+    ];
   };
 }

@@ -1,6 +1,4 @@
-_:
-
-{
+_: {
   imports = [
     ../../modules/darwin/accessibility.nix
     ../../modules/darwin/finder.nix

@@ -1,9 +1,12 @@
-{ outputs, pkgs, hostname, stateVersion, ... }:
-
-with outputs.lib;
-
 {
-  imports = [ ./user-macos-configs.nix ];
+  outputs,
+  pkgs,
+  hostname,
+  stateVersion,
+  ...
+}:
+with outputs.lib; {
+  imports = [./user-macos-configs.nix];
 
   networking.hostName = mkDefault hostname;
 
@@ -18,7 +21,13 @@ with outputs.lib;
 
   time.timeZone = mkDefault "Europe/Zurich";
 
-  environment.systemPackages = with pkgs; [ vim git wget curl dots ];
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    wget
+    curl
+    dots
+  ];
 
   services.nix-daemon.enable = mkDefault true;
 

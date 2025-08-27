@@ -1,9 +1,11 @@
-{ outputs, config, pkgs, ... }:
-
 {
+  outputs,
+  config,
+  pkgs,
+  ...
+}: {
   options = {
-    modules.users.dev.flutter.enable =
-      outputs.lib.mkEnableOption "Enable Flutter toolchain";
+    modules.users.dev.flutter.enable = outputs.lib.mkEnableOption "Enable Flutter toolchain";
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.flutter.enable {

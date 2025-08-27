@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   unstable-tar = "https://github.com/nixos/nixpkgs/tarball/nixos-unstable";
   nur-tar = "https://github.com/nix-community/NUR/tarball/master";
-
 in {
   nixpkgs.config = {
     allowUnfree = true;
@@ -15,11 +16,11 @@ in {
       };
 
       # Add Nix User Repository
-      nur = import (builtins.fetchTarball nur-tar) { inherit pkgs; };
+      nur = import (builtins.fetchTarball nur-tar) {inherit pkgs;};
     };
   };
 
-  imports = [ ./minimal.nix ];
+  imports = [./minimal.nix];
 
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4

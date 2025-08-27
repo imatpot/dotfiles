@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   home.shellAliases.nix-rosetta = "nix --system x86_64-darwin";
 
   # TODO: Autogenerate in default default configs
@@ -11,7 +9,9 @@
     };
 
     system.defaults = {
-      NSGlobalDomain = { NSDocumentSaveNewDocumentsToCloud = false; };
+      NSGlobalDomain = {
+        NSDocumentSaveNewDocumentsToCloud = false;
+      };
 
       dock = {
         orientation = "left";

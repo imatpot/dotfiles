@@ -1,9 +1,11 @@
-{ outputs, config, pkgs, ... }:
-
 {
+  outputs,
+  config,
+  pkgs,
+  ...
+}: {
   options = {
-    modules.users.dev.typst.enable =
-      outputs.lib.mkEnableOption "Enable Typst toolchain";
+    modules.users.dev.typst.enable = outputs.lib.mkEnableOption "Enable Typst toolchain";
   };
 
   config = outputs.lib.mkIf config.modules.users.dev.typst.enable {

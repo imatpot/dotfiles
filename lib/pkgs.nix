@@ -1,7 +1,9 @@
-flake@{ inputs, outputs, ... }:
-
-let nixpkgsConfig = (import ../modules/nix/nixpkgs.nix flake).nixpkgs;
-
+flake @ {
+  inputs,
+  outputs,
+  ...
+}: let
+  nixpkgsConfig = (import ../modules/nix/nixpkgs.nix flake).nixpkgs;
 in rec {
   pkgsForSystem = system:
     import inputs.nixpkgs {
@@ -9,6 +11,5 @@ in rec {
       inherit (nixpkgsConfig) config overlays;
     };
 
-  forEachSystem = systems: fn:
-    outputs.lib.genAttrs systems (system: fn (pkgsForSystem system));
+  forEachSystem = systems: fn: outputs.lib.genAttrs systems (system: fn (pkgsForSystem system));
 }

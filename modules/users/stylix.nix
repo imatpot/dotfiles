@@ -1,6 +1,10 @@
-{ outputs, config, pkgs, name, ... }:
-
-let
+{
+  outputs,
+  config,
+  pkgs,
+  name,
+  ...
+}: let
   stylix-config = {
     enable = true;
 
@@ -53,8 +57,7 @@ let
       popups = 1.0;
     };
 
-    base16Scheme =
-      "${pkgs.master.base16-schemes}/share/themes/${config.modules.users.stylix.theme}.yaml";
+    base16Scheme = "${pkgs.master.base16-schemes}/share/themes/${config.modules.users.stylix.theme}.yaml";
   };
 
   settings = {
@@ -67,37 +70,46 @@ let
 
       gtk = {
         enable = true;
-        gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
-        gtk4.extraConfig = { gtk-application-prefer-dark-theme = true; };
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+        };
+        gtk4.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+        };
       };
 
       systemd.user.services.rm-gtk = {
         Unit = {
           Description = "Remove GTK files built by Home Manager";
-          PartOf = [ "home-manager-${name}.target" ];
+          PartOf = ["home-manager-${name}.target"];
         };
 
-        Service.ExecStart = builtins.toString (pkgs.writeShellScript "rm-gtk" ''
-          #!/run/current-system/sw/bin/bash
-          set -o errexit
-          set -o nounset
+        Service.ExecStart = builtins.toString (
+          pkgs.writeShellScript "rm-gtk" ''
+            #!/run/current-system/sw/bin/bash
+            set -o errexit
+            set -o nounset
 
-          printf "Removing GTK files built by Home Manager\n"
+            printf "Removing GTK files built by Home Manager\n"
 
-          rm -rf ~/.config/gtk-3.0
-          rm -rf ~/.config/gtk-4.0
-          rm -f .gtkrc-2.0
-        '');
+            rm -rf ~/.config/gtk-3.0
+            rm -rf ~/.config/gtk-4.0
+            rm -f .gtkrc-2.0
+          ''
+        );
 
-        Install.WantedBy = [ "default.target" ];
+        Install.WantedBy = ["default.target"];
       };
     };
 
     system-wide = {
-      stylix = stylix-config // { targets.grub.enable = false; };
+      stylix =
+        stylix-config
+        // {
+          targets.grub.enable = false;
+        };
     };
   };
-
 in {
   options = {
     modules.users = {
@@ -109,8 +121,7 @@ in {
 
       stylix = {
         enable = outputs.lib.mkEnableOption "Enable Stylix";
-        system-wide = outputs.lib.mkEnableOption
-          "Enable Stylix system-wide. This will install Stylix for all users.";
+        system-wide = outputs.lib.mkEnableOption "Enable Stylix system-wide. This will install Stylix for all users.";
 
         # https://github.com/tinted-theming/schemes
         theme = outputs.lib.mkOption {
@@ -122,14 +133,12 @@ in {
     };
   };
 
-  config = outputs.lib.mkIf config.modules.users.stylix.enable
-    (outputs.lib.mkMerge [
+  config = outputs.lib.mkIf config.modules.users.stylix.enable (
+    outputs.lib.mkMerge [
       (outputs.lib.mkIf config.modules.users.stylix.system-wide {
-        nixos = outputs.lib.warn
-          "dotfiles: enabling Stylix system-wide. This will override the configs of all users with ${name}'s config."
-          settings.system-wide;
+        nixos = outputs.lib.warn "dotfiles: enabling Stylix system-wide. This will override the configs of all users with ${name}'s config." settings.system-wide;
       })
-      (outputs.lib.mkIf (!config.modules.users.stylix.system-wide)
-        settings.user)
-    ]);
+      (outputs.lib.mkIf (!config.modules.users.stylix.system-wide) settings.user)
+    ]
+  );
 }

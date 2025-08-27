@@ -1,16 +1,26 @@
-{ outputs, system, hostname, config, pkgs, ... }:
+{
+  outputs,
+  system,
+  hostname,
+  config,
+  pkgs,
+  ...
+}: let
+  isGtk3DarkTheme =
+    (
+      config.gtk.gtk3.extraConfig ? gtk-application-prefer-dark-theme
+      && config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme
+    )
+    == 1;
 
-let
-  isGtk3DarkTheme = (config.gtk.gtk3.extraConfig
-    ? gtk-application-prefer-dark-theme
-    && config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme) == 1;
-
-  isGtk4DarkTheme = (config.gtk.gtk4.extraConfig
-    ? gtk-application-prefer-dark-theme
-    && config.gtk.gtk4.extraConfig.gtk-application-prefer-dark-theme) == 1;
+  isGtk4DarkTheme =
+    (
+      config.gtk.gtk4.extraConfig ? gtk-application-prefer-dark-theme
+      && config.gtk.gtk4.extraConfig.gtk-application-prefer-dark-theme
+    )
+    == 1;
 
   isDarkTheme = isGtk3DarkTheme || isGtk4DarkTheme;
-
 in {
   options = {
     modules.users.gnome.enable = outputs.lib.mkEnableOption "Enable Gnome";
@@ -19,12 +29,15 @@ in {
   config = outputs.lib.mkIf config.modules.users.gnome.enable {
     # Always start Gnome on Wayland
     # https://discourse.nixos.org/t/fix-gdm-does-not-start-gnome-wayland-even-if-it-is-selected-by-default-starts-x11-instead/24498
-    nixos.services.displayManager.defaultSession =  outputs.lib.mkIf config.modules.users.wayland.enable "gnome";
+    nixos.services.displayManager.defaultSession = outputs.lib.mkIf config.modules.users.wayland.enable "gnome";
     nixos.programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
 
     gtk = {
       iconTheme = {
-        name = if isDarkTheme then "Papirus-Dark" else "Papirus-Light";
+        name =
+          if isDarkTheme
+          then "Papirus-Dark"
+          else "Papirus-Light";
         package = pkgs.papirus-icon-theme;
       };
     };
@@ -32,9 +45,14 @@ in {
     dconf.settings = with outputs.lib.hm.gvariant;
       outputs.lib.mkFor system hostname {
         hosts.shinobi = {
-          "org/gnome/desktop/peripherals/mouse" = { speed = -0; };
+          "org/gnome/desktop/peripherals/mouse" = {
+            speed = -0;
+          };
           "org/gnome/shell/extensions/quick-settings-tweaks" = {
-            user-removed-buttons = [ "PowerProfilesToggle" "NMWiredToggle" ];
+            user-removed-buttons = [
+              "PowerProfilesToggle"
+              "NMWiredToggle"
+            ];
           };
 
           "org/gnome/shell/extensions/tilingshell" = {
@@ -75,22 +93,22 @@ in {
 
         common = {
           "org/gnome/desktop/wm/preferences" = {
-            mouse-button-modifier = [ "<Super>" ];
+            mouse-button-modifier = ["<Super>"];
           };
 
           "org/gnome/desktop/wm/keybindings" = {
-            show-desktop = [ "<Super>d" ];
-            switch-to-workspace-right = [ "<Super>Page_Up" ];
-            switch-to-workspace-left = [ "<Super>Page_Down" ];
-            panel-run-dialog = [ "<Super>r" ];
-            toggle-fullscreen = [ "<Super>f" ];
+            show-desktop = ["<Super>d"];
+            switch-to-workspace-right = ["<Super>Page_Up"];
+            switch-to-workspace-left = ["<Super>Page_Down"];
+            panel-run-dialog = ["<Super>r"];
+            toggle-fullscreen = ["<Super>f"];
           };
 
           "org/gnome/shell/keybindings" = {
-            screenshot = [ "Print" ];
-            show-screenshot-ui = [ "<Control>Print" ];
-            show-screen-recording-ui = [ "<Shift><Control>Print" ];
-            toggle-message-tray = [ "<Super>c" ];
+            screenshot = ["Print"];
+            show-screenshot-ui = ["<Control>Print"];
+            show-screen-recording-ui = ["<Shift><Control>Print"];
+            toggle-message-tray = ["<Super>c"];
           };
 
           "org/gnome/desktop/interface" = {
@@ -98,7 +116,9 @@ in {
             enable-hot-corners = false;
           };
 
-          "org/gnome/desktop/notifications" = { show-in-lock-screen = false; };
+          "org/gnome/desktop/notifications" = {
+            show-in-lock-screen = false;
+          };
 
           "org/gnome/desktop/privacy" = {
             recent-files-max-age = 3;
@@ -110,7 +130,9 @@ in {
             show-weekdate = true;
           };
 
-          "org/gnome/desktop/datetime" = { automatic-timezone = true; };
+          "org/gnome/desktop/datetime" = {
+            automatic-timezone = true;
+          };
 
           "org/gnome/desktop/search-providers" = {
             sort-order = [
@@ -138,19 +160,18 @@ in {
           };
 
           "org/gnome/settings-daemon/plugins/media-keys" = {
-            control-center = [ "<Super>comma" ];
-            search = [ "<Super>space" ];
+            control-center = ["<Super>comma"];
+            search = ["<Super>space"];
             custom-keybinds = [
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/kgx/"
             ];
           };
 
-          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/kgx" =
-            {
-              name = "Console";
-              command = "kgx";
-              binding = "<Super>Return";
-            };
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/kgx" = {
+            name = "Console";
+            command = "kgx";
+            binding = "<Super>Return";
+          };
 
           "org/gnome/mutter" = {
             edge-tiling = false; # We handle tiling with tiling-shell
@@ -181,8 +202,8 @@ in {
           "org/gnome/shell/extensions/tilingshell" = {
             inner-gaps = mkUint32 0;
             outer-gaps = mkUint32 0;
-            tilitng-system-activation-key = [ "0" ];
-            span-multiple-tiles-activation-key = [ "1" ];
+            tilitng-system-activation-key = ["0"];
+            span-multiple-tiles-activation-key = ["1"];
             restore-window-original-size = true;
             edge-tiling = true;
             top-edge-maximites = true;
@@ -192,7 +213,10 @@ in {
             position-in-panel = 4;
             menu-centered = true;
             icon-style = 1;
-            hot-sensors = [ "_memory_usage_" "_processor_usage_" ];
+            hot-sensors = [
+              "_memory_usage_"
+              "_processor_usage_"
+            ];
           };
 
           "org/gnome/shell/extensions/dash-to-panel" = {
@@ -217,8 +241,7 @@ in {
             show-window-previews-timeout = 250;
             leave-timeout = 0;
 
-            animate-appicon-hover-animation =
-              "{'SIMPLE': 0.1, 'RIPPLE': 0.4, 'PLANK': 0.0}";
+            animate-appicon-hover-animation = "{'SIMPLE': 0.1, 'RIPPLE': 0.4, 'PLANK': 0.0}";
 
             window-preview-size = 150;
             window-preview-padding = 0;
@@ -264,11 +287,11 @@ in {
             display-mode = 0;
             clear-on-boot = false;
 
-            toggle-menu = [ "<Super>v" ];
-            private-mode-bindings = [ "<Alt><Super>v" ];
-            clear-historx = [ ];
-            prev-entry = [ ];
-            next-entry = [ ];
+            toggle-menu = ["<Super>v"];
+            private-mode-bindings = ["<Alt><Super>v"];
+            clear-historx = [];
+            prev-entry = [];
+            next-entry = [];
           };
 
           "org/gnome/shell/extensions/quick-settings-tweaks" = rec {
@@ -282,7 +305,7 @@ in {
             datemenu-remove-media-control = media-control-enabled;
 
             volume-mixer-show-description = true;
-            user-removed-buttons = [ "NightLightToggle" ];
+            user-removed-buttons = ["NightLightToggle"];
           };
 
           "org/gnome/shell/extensions/hibernate-status-button" = {
@@ -294,7 +317,9 @@ in {
             show-suspend-then-hibernate-dialog = false;
           };
 
-          "org/gnome/desktop/app-folders/folders/Utilities" = { apps = [ ]; };
+          "org/gnome/desktop/app-folders/folders/Utilities" = {
+            apps = [];
+          };
 
           "org/gnome/shell/extensions/blur-my-shell/applications" = {
             blur = true;
@@ -342,12 +367,14 @@ in {
       # https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1278954466
       sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
         outputs.lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0"
-        (with pkgs.gst_all_1; [
-          gst-plugins-good
-          gst-plugins-bad
-          gst-plugins-ugly
-          gst-libav
-        ]);
+        (
+          with pkgs.gst_all_1; [
+            gst-plugins-good
+            gst-plugins-bad
+            gst-plugins-ugly
+            gst-libav
+          ]
+        );
     };
   };
 }

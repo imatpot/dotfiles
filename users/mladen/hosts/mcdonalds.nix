@@ -39,7 +39,9 @@ in {
     backblaze-b2
   ];
 
-  home.file.backblaze-id.source = config.lib.file.mkOutOfStoreSymlink config.sops.secrets."backblaze/id".path;
+  home.file.backblaze-id.source =
+    config.lib.file.mkOutOfStoreSymlink
+    config.sops.secrets."backblaze/id".path;
 
   sops.templates.git.content =
     # toml

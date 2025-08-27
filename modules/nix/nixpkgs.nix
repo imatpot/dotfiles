@@ -1,6 +1,4 @@
-{ inputs, ... }:
-
-{
+{inputs, ...}: {
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -9,7 +7,7 @@
 
     overlays = [
       (_: prev: {
-        dots = import ../../packages/dots.nix { pkgs = prev; };
+        dots = import ../../packages/dots.nix {pkgs = prev;};
       })
 
       (_: prev: {
@@ -28,7 +26,7 @@
         };
       })
 
-      (_: prev: { nur = import inputs.nur { pkgs = prev; }; })
+      (_: prev: {nur = import inputs.nur {pkgs = prev;};})
     ];
   };
 }

@@ -3,10 +3,18 @@
     enable = true;
 
     # TODO: Download files declaretively (also not into Downloads)
-    startupPrograms =
-      [ "sxhkd" "feh --bg-center /home/mladen/Downloads/firewatch.png" ];
+    startupPrograms = [
+      "sxhkd"
+      "feh --bg-center /home/mladen/Downloads/firewatch.png"
+    ];
 
-    monitors = { DP-2 = [ "I" "II" "III" ]; };
+    monitors = {
+      DP-2 = [
+        "I"
+        "II"
+        "III"
+      ];
+    };
 
     settings = {
       border_width = 2;

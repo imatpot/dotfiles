@@ -5,8 +5,7 @@
   ...
 }: {
   options = {
-    modules.users.helix.enable =
-      outputs.lib.mkEnableOption "Enable Helix editor";
+    modules.users.helix.enable = outputs.lib.mkEnableOption "Enable Helix editor";
   };
 
   config = outputs.lib.mkIf config.modules.users.helix.enable {
@@ -22,7 +21,9 @@
             unit = "  ";
           };
           language-servers = ["nil"];
-          formatter = {command = "alejandra";};
+          formatter = {
+            command = "alejandra";
+          };
         }
         {
           name = "rust";
@@ -31,7 +32,9 @@
             unit = "    ";
           };
           language-servers = ["rust-analyzer"];
-          formatter = {command = "rustfmt";};
+          formatter = {
+            command = "rustfmt";
+          };
         }
       ];
 
@@ -60,9 +63,20 @@
               select = "S";
             };
 
-            left = ["mode" "spinner" "read-only-indicator" "version-control" "workspace-diagnostics"];
+            left = [
+              "mode"
+              "spinner"
+              "read-only-indicator"
+              "version-control"
+              "workspace-diagnostics"
+            ];
             center = [];
-            right = ["file-encoding" "selections" "position" "register"];
+            right = [
+              "file-encoding"
+              "selections"
+              "position"
+              "register"
+            ];
           };
 
           lsp = {

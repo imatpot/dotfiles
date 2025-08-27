@@ -70,55 +70,64 @@
     };
   };
 
-  outputs = inputs:
-    let
-      linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
-      darwinSystems = [ "x86_64-darwin" "aarch64-darwin" ];
-      systems = linuxSystems ++ darwinSystems;
-
-    in rec {
-      lib = import ./lib {
-        inherit inputs;
-        inherit (inputs.self) outputs;
-      };
-
-      packages = lib.forEachSystem systems (pkgs: rec {
-        dots = import ./packages/dots.nix { inherit pkgs; };
-        default = dots;
-      });
-
-      nixosConfigurations.shinobi = lib.mkHost {
-        system = "x86_64-linux";
-        hostname = "shinobi";
-        users = [ "mladen" ];
-      };
-
-      nixosConfigurations.atlas = lib.mkHost {
-        system = "x86_64-linux";
-        hostname = "atlas";
-        users = [ "mladen" ];
-      };
-
-      nixosConfigurations.adele = lib.mkHost {
-        system = "x86_64-linux";
-        hostname = "adele";
-        users = [ "mladen" ];
-      };
-
-      darwinConfigurations.mcdonalds = lib.mkHost {
-        system = "aarch64-darwin";
-        hostname = "mcdonalds";
-        users = [ "mladen" ];
-      };
-
-      homeConfigurations.mladen = lib.mkUser { username = "mladen"; };
-
-      homeConfigurations."mladen@mcdonalds" = lib.mkUser {
-        system = "aarch64-darwin";
-        hostname = "mcdonalds";
-        username = "mladen";
-      };
-
-      formatter = lib.forEachSystem systems (pkgs: pkgs.nixfmt-classic);
+  outputs = inputs: let
+    linuxSystems = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    darwinSystems = [
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
+    systems = linuxSystems ++ darwinSystems;
+  in rec {
+    lib = import ./lib {
+      inherit inputs;
+      inherit (inputs.self) outputs;
     };
+
+    packages = lib.forEachSystem systems (pkgs: rec {
+      dots = import ./packages/dots.nix {inherit pkgs;};
+      default = dots;
+    });
+
+    nixosConfigurations.shinobi = lib.mkHost {
+      system = "x86_64-linux";
+      hostname = "shinobi";
+      users = ["mladen"];
+    };
+
+    nixosConfigurations.atlas = lib.mkHost {
+      system = "x86_64-linux";
+      hostname = "atlas";
+      users = ["mladen"];
+    };
+
+    nixosConfigurations.adele = lib.mkHost {
+      system = "x86_64-linux";
+      hostname = "adele";
+      users = ["mladen"];
+    };
+
+    darwinConfigurations.mcdonalds = lib.mkHost {
+      system = "aarch64-darwin";
+      hostname = "mcdonalds";
+      users = ["mladen"];
+    };
+
+    homeConfigurations.mladen = lib.mkUser {username = "mladen";};
+
+    homeConfigurations."mladen@mcdonalds" = lib.mkUser {
+      system = "aarch64-darwin";
+      hostname = "mcdonalds";
+      username = "mladen";
+    };
+
+    formatter = lib.forEachSystem systems (
+      pkgs:
+        pkgs.writeShellScriptBin "alejandra" ''
+          exec ${lib.getExe pkgs.alejandra} --quiet "$@"
+        ''
+    );
+  };
 }

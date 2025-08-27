@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   fonts = with pkgs; [
     # Writing
     libertine
@@ -12,7 +10,6 @@ let
     nerd-fonts.caskaydia-cove
     nerd-fonts.caskaydia-mono
   ];
-
 in {
   home.packages = fonts;
 

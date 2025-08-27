@@ -1,10 +1,12 @@
-{ outputs, pkgs, hostname, stateVersion, ... }:
-
-with outputs.lib;
-
 {
-  imports = [ ./user-nixos-configs.nix ]
-    ++ (concatImports { path = ../../modules/hosts; });
+  outputs,
+  pkgs,
+  hostname,
+  stateVersion,
+  ...
+}:
+with outputs.lib; {
+  imports = [./user-nixos-configs.nix] ++ (concatImports {path = ../../modules/hosts;});
 
   system.stateVersion = mkDefault stateVersion;
   networking.hostName = mkDefault hostname;
@@ -15,7 +17,14 @@ with outputs.lib;
   console.keyMap = mkDefault "sg";
   services.xserver.xkb.layout = mkDefault "ch";
 
-  environment.systemPackages = with pkgs; [ vim git wget curl nmap dots ];
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    wget
+    curl
+    nmap
+    dots
+  ];
   environment.enableAllTerminfo = true;
 
   nix.gc = {
