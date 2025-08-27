@@ -6,7 +6,7 @@
   ...
 }:
 with outputs.lib; {
-  imports = [./user-nixos-configs.nix] ++ (concatImports {path = ../../modules/hosts;});
+  imports = [./user-nixos-configs.nix] ++ (enumeratePaths {path = ../../modules/hosts;});
 
   system.stateVersion = mkDefault stateVersion;
   networking.hostName = mkDefault hostname;

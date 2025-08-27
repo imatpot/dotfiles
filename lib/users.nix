@@ -34,8 +34,8 @@ flake @ {
         };
 
       modules = [
-        ../modules/home-manager/shared.nix
-        ../modules/home-manager/default-config.nix
+        ../modules/home-manager/shared-modules.nix
+        ../modules/users/default-config.nix
         ../modules/nix/nix.nix
 
         inputs.stylix.homeModules.stylix

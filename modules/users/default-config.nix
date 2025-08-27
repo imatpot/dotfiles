@@ -11,8 +11,9 @@
 with outputs.lib;
   mkFor system hostname {
     common = {
-      imports = outputs.lib.concatImports {
+      imports = outputs.lib.enumeratePaths {
         path = ../../modules/users;
+        exclude = [./default-config.nix];
       };
 
       home = {
@@ -32,11 +33,21 @@ with outputs.lib;
         home-manager.enable = mkDefault (osConfig == null);
       };
 
-      news.display = "silent";
+      news.display = mkDefault "silent";
     };
 
     systems = {
-      linux.home.homeDirectory = mkDefault "/home/${name}";
-      darwin.home.homeDirectory = mkDefault "/Users/${name}";
+      linux = {
+        home.homeDirectory = mkDefault "/home/${name}";
+      };
+
+      darwin = {
+        imports = [
+          # TODO: Check back later if it compiles again
+          # inputs.mac-app-util.homeManagerModules.default
+        ];
+
+        home.homeDirectory = mkDefault "/Users/${name}";
+      };
     };
   }

@@ -6,12 +6,11 @@ flake @ {
   sharedModules = [
     ../modules/nix/nix.nix
     ../modules/nix/nixpkgs.nix
-    ../modules/nix/legacy-consistency.nix
-    ../modules/home-manager/submodule.nix
+    ../modules/nix/legacy.nix
+    ../modules/home-manager/system-submodule.nix
   ];
 in rec {
   mkHost = args @ {
-    hostname,
     system,
     users ? [],
     stateVersion ? outputs.lib.defaultStateVersionForSystem system,
@@ -33,8 +32,7 @@ in rec {
   mkNixos = args @ {
     hostname,
     system,
-    stateVersion,
-    users,
+    ...
   }:
     outputs.lib.nixosSystem {
       inherit system;
@@ -49,7 +47,7 @@ in rec {
           inputs.stylix.nixosModules.stylix
           inputs.minegrub-theme.nixosModules.default
         ]
-        ++ (outputs.lib.concatImports {
+        ++ (outputs.lib.enumeratePaths {
           path = ../hosts/${hostname};
         });
     };
@@ -57,8 +55,7 @@ in rec {
   mkDarwin = args @ {
     hostname,
     system,
-    stateVersion,
-    users,
+    ...
   }:
     outputs.lib.darwinSystem {
       inherit system;

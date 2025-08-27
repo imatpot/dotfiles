@@ -13,7 +13,7 @@ args @ {
       # This works because the Home Manager NixOS module passes `name`, which is
       # the attribute name of `users.<name>`, to all submodules automatically.
       # https://github.com/nix-community/home-manager/blob/ca4126e3c568be23a0981c4d69aed078486c5fce/nixos/common.nix#L22
-      ../home-manager/default-config.nix
+      ../users/default-config.nix
     ];
   };
 in
@@ -36,7 +36,9 @@ in
             ;
         };
 
-        sharedModules = [../home-manager/shared.nix];
+        sharedModules = [
+          ./shared-modules.nix
+        ];
 
         # Prevents NixOS & Darwin & non-NixOS user configurations from diverging.
         # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4
@@ -46,14 +48,18 @@ in
     };
 
     systems = {
-      linux.imports = [inputs.home-manager.nixosModules.home-manager];
+      linux.imports = [
+        inputs.home-manager.nixosModules.home-manager
+      ];
 
       darwin = {
-        imports = [inputs.home-manager.darwinModules.home-manager];
+        imports = [
+          inputs.home-manager.darwinModules.home-manager
+        ];
 
         home-manager.extraSpecialArgs = {
           # Nix-Darwin does this funny thing where its own state version is an
-          # integer, but Home Manager's is a string.
+          # integer, but Home Manager's is a string (like it should)
           stateVersion = outputs.lib.defaultStateVersion;
         };
       };
