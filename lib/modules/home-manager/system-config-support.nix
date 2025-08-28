@@ -1,7 +1,6 @@
 # Prevents Nix from complaining that sysmtem.nixos and system.macos options
 # in Home configurations don't exist. The actual application of these happens
-# in ../linux/user-nixos-configs and ../darwin/user-macos-configs.nix
-
+# in modules/linux/user-nixos-configs and modules/darwin/user-macos-configs.nix
 {outputs, ...}: {
   options = {
     nixos = outputs.lib.mkOption {

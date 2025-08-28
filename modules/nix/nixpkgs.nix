@@ -7,7 +7,7 @@
 
     overlays = [
       (_: prev: {
-        dots = import ../../packages/dots.nix {pkgs = prev;};
+        dots = import "${inputs.self}/packages/dots.nix" {pkgs = prev;};
       })
 
       (_: prev: {

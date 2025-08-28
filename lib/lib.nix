@@ -14,7 +14,10 @@ in
     (core.importPaths {
       args = flake;
       path = ./.;
-      preferDefaultNixFile = false;
-      exclude = [./default.nix ./core.nix];
+      exclude = [
+        ./lib.nix
+        ./core.nix
+        ./modules
+      ];
     })
   ]

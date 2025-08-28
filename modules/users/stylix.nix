@@ -2,7 +2,7 @@
   outputs,
   config,
   pkgs,
-  name,
+  username,
   ...
 }: let
   stylix-config = {
@@ -81,7 +81,7 @@
       systemd.user.services.rm-gtk = {
         Unit = {
           Description = "Remove GTK files built by Home Manager";
-          PartOf = ["home-manager-${name}.target"];
+          PartOf = ["home-manager-${username}.target"];
         };
 
         Service.ExecStart = builtins.toString (
@@ -136,7 +136,7 @@ in {
   config = outputs.lib.mkIf config.modules.users.stylix.enable (
     outputs.lib.mkMerge [
       (outputs.lib.mkIf config.modules.users.stylix.system-wide {
-        nixos = outputs.lib.warn "dotfiles: enabling Stylix system-wide. This will override the configs of all users with ${name}'s config." settings.system-wide;
+        nixos = outputs.lib.warn "dotfiles: enabling Stylix system-wide. This will override the configs of all users with ${username}'s config." settings.system-wide;
       })
       (outputs.lib.mkIf (!config.modules.users.stylix.system-wide) settings.user)
     ]

@@ -81,7 +81,7 @@
     ];
     systems = linuxSystems ++ darwinSystems;
   in rec {
-    lib = import ./lib {
+    lib = import ./lib/lib.nix {
       inherit inputs;
       inherit (inputs.self) outputs;
     };

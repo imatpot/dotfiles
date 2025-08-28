@@ -3,7 +3,7 @@ flake @ {
   outputs,
   ...
 }: let
-  nixpkgsConfig = (import ../modules/nix/nixpkgs.nix flake).nixpkgs;
+  nixpkgsConfig = (import "${inputs.self}/modules/nix/nixpkgs.nix" flake).nixpkgs;
 in rec {
   pkgsForSystem = system:
     import inputs.nixpkgs {

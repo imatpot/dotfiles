@@ -11,8 +11,9 @@ outputs.lib.mkFor system hostname {
     inputs.sops-nix.homeManagerModules.sops
     inputs.vault.homeModules.default
     inputs.nix-index-database.homeModules.nix-index
-    ../nix/nixpkgs.nix
-    ./system-config-support.nix
+
+    "${inputs.self}/modules/nix/nixpkgs.nix"
+    "${inputs.self}/lib/modules/home-manager/system-config-support.nix"
   ];
 
   systems.darwin.imports = [

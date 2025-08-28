@@ -5,7 +5,6 @@
   pkgs,
   system,
   hostname,
-  name,
   ...
 }: let
   STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${config.home.homeDirectory}/.steam/root/compatibilitytools.d";

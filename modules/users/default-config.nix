@@ -1,7 +1,8 @@
 {
+  inputs,
   outputs,
   pkgs,
-  name,
+  username,
   system,
   hostname,
   stateVersion,
@@ -13,12 +14,12 @@ with outputs.lib;
   mkFor system hostname {
     common = {
       imports = outputs.lib.enumeratePaths {
-        path = ../../modules/users;
+        path = /. + "${builtins.unsafeDiscardStringContext inputs.self}/modules/users";
         exclude = [./default-config.nix];
       };
 
       home = {
-        username = mkDefault name;
+        username = mkDefault username;
         stateVersion = mkDefault stateVersion;
         packages = with pkgs; [dots];
 
@@ -58,7 +59,7 @@ with outputs.lib;
 
     systems = {
       linux = {
-        home.homeDirectory = mkDefault "/home/${name}";
+        home.homeDirectory = mkDefault "/home/${username}";
       };
 
       darwin = {
@@ -67,7 +68,7 @@ with outputs.lib;
           # inputs.mac-app-util.homeManagerModules.default
         ];
 
-        home.homeDirectory = mkDefault "/Users/${name}";
+        home.homeDirectory = mkDefault "/Users/${username}";
       };
     };
   }

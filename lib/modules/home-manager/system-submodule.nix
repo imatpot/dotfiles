@@ -8,12 +8,12 @@ args @ {
 }: let
   importUserConfig = name: {
     imports = [
-      ../../users/${name}/home.nix
+      "${inputs.self}/users/${name}/home.nix"
 
       # This works because the Home Manager NixOS module passes `name`, which is
       # the attribute name of `users.<name>`, to all submodules automatically.
       # https://github.com/nix-community/home-manager/blob/ca4126e3c568be23a0981c4d69aed078486c5fce/nixos/common.nix#L22
-      ../users/default-config.nix
+      "${inputs.self}/modules/users/default-config.nix"
     ];
   };
 in
@@ -37,7 +37,7 @@ in
         };
 
         sharedModules = [
-          ./shared-modules.nix
+          "${inputs.self}/modules/home-manager/shared-modules.nix"
         ];
 
         # Prevents NixOS & Darwin & non-NixOS user configurations from diverging.

@@ -24,6 +24,7 @@ flake @ {
             hostname
             stateVersion
             osConfig
+            username
             ;
 
           # Actual name required by submodules. This makes sure everything is
@@ -34,13 +35,13 @@ flake @ {
         };
 
       modules = [
-        ../modules/home-manager/shared-modules.nix
-        ../modules/users/default-config.nix
-        ../modules/nix/nix.nix
+        "${inputs.self}/modules/home-manager/shared-modules.nix"
+        "${inputs.self}/modules/users/default-config.nix"
+        "${inputs.self}/modules/nix/nix.nix"
 
         inputs.stylix.homeModules.stylix
 
-        ../users/${username}/home.nix
+        "${inputs.self}/users/${username}/home.nix"
       ];
     };
 }

@@ -1,9 +1,9 @@
-_: {
+{inputs, ...}: {
   imports = [
-    ../../modules/darwin/accessibility.nix
-    ../../modules/darwin/finder.nix
-    ../../modules/darwin/peripherals.nix
-    ../../modules/darwin/ui.nix
+    "${inputs.self}/modules/darwin/accessibility.nix"
+    "${inputs.self}/modules/darwin/finder.nix"
+    "${inputs.self}/modules/darwin/peripherals.nix"
+    "${inputs.self}/modules/darwin/ui.nix"
   ];
 
   # TODO: Maybe don't commit contact details to git

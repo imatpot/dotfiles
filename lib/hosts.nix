@@ -4,10 +4,10 @@ flake @ {
   ...
 }: let
   sharedModules = [
-    ../modules/nix/nix.nix
-    ../modules/nix/nixpkgs.nix
-    ../modules/nix/legacy.nix
-    ../modules/home-manager/system-submodule.nix
+    "${inputs.self}/modules/nix/nix.nix"
+    "${inputs.self}/modules/nix/nixpkgs.nix"
+    "${inputs.self}/modules/nix/legacy.nix"
+    "${inputs.self}/lib/modules/home-manager/system-submodule.nix"
   ];
 in rec {
   mkHost = args @ {
@@ -24,12 +24,12 @@ in rec {
       };
   in
     if outputs.lib.isLinux system
-    then mkNixos args'
+    then mkLinux args'
     else if outputs.lib.isDarwin system
     then mkDarwin args'
     else throw "Unsupported system: ${system}";
 
-  mkNixos = args @ {
+  mkLinux = args @ {
     hostname,
     system,
     ...
@@ -41,14 +41,14 @@ in rec {
       modules =
         sharedModules
         ++ [
-          ../modules/linux/default-config.nix
+          "${inputs.self}/modules/linux/default-config.nix"
 
           inputs.disko.nixosModules.disko
           inputs.stylix.nixosModules.stylix
           inputs.minegrub-theme.nixosModules.default
         ]
         ++ (outputs.lib.enumeratePaths {
-          path = ../hosts/${hostname};
+          path = /. + "${builtins.unsafeDiscardStringContext inputs.self}/hosts/${hostname}";
         });
     };
 
@@ -64,8 +64,8 @@ in rec {
       modules =
         sharedModules
         ++ [
-          ../hosts/${hostname}/configuration.nix
-          ../modules/darwin/default-config.nix
+          "${inputs.self}/hosts/${hostname}/configuration.nix"
+          "${inputs.self}/modules/darwin/default-config.nix"
         ];
     };
 }

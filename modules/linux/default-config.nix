@@ -1,4 +1,5 @@
 {
+  inputs,
   outputs,
   pkgs,
   hostname,
@@ -6,7 +7,7 @@
   ...
 }:
 with outputs.lib; {
-  imports = [./user-nixos-configs.nix] ++ (enumeratePaths {path = ../../modules/hosts;});
+  imports = [./user-nixos-configs.nix] ++ (enumeratePaths {path = /. + "${builtins.unsafeDiscardStringContext inputs.self}/modules/hosts";});
 
   system.stateVersion = mkDefault stateVersion;
   networking.hostName = mkDefault hostname;

@@ -69,7 +69,7 @@
       isExcluded = path:
         if elem path excludedFiles
         then true
-        else (filter (excludedDir: outputs.lib.path.hasPrefix excludedDir path) excludedDirs) != [];
+        else (filter (excludedDir: extlib.path.hasPrefix excludedDir path) excludedDirs) != [];
 
       myFiles = unique (
         (
