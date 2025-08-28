@@ -48,7 +48,7 @@ in rec {
           inputs.minegrub-theme.nixosModules.default
         ]
         ++ (outputs.lib.enumeratePaths {
-          path = /. + "${builtins.unsafeDiscardStringContext inputs.self}/hosts/${hostname}";
+          path = "${inputs.self}/hosts/${hostname}";
         });
     };
 

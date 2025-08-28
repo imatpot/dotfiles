@@ -14,7 +14,7 @@ with outputs.lib;
   mkFor system hostname {
     common = {
       imports = outputs.lib.enumeratePaths {
-        path = /. + "${builtins.unsafeDiscardStringContext inputs.self}/modules/users";
+        path = "${inputs.self}/modules/users";
         exclude = [./default-config.nix];
       };
 

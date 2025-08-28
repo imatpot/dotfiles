@@ -64,8 +64,23 @@
   }:
     with extlib;
     with fileset; let
-      excludedFiles = filter (path: pathIsRegularFile path) exclude;
-      excludedDirs = filter (path: pathIsDirectory path) exclude;
+      # Parse strings as absolute paths.
+      # Calls builtlins.unsafeDiscardStringContext to allow paths in the Nix store
+      asAbsolutePath = path:
+        if path == null
+        then null
+        else if builtins.isString path
+        then /. + (builtins.unsafeDiscardStringContext path)
+        else path;
+
+      path' = asAbsolutePath path;
+      paths' = builtins.map asAbsolutePath paths;
+      include' = builtins.map asAbsolutePath include;
+      exclude' = builtins.map asAbsolutePath exclude;
+
+      excludedFiles = filter (path: pathIsRegularFile path) exclude';
+      excludedDirs = filter (path: pathIsDirectory path) exclude';
+
       isExcluded = path:
         if elem path excludedFiles
         then true
@@ -91,16 +106,16 @@
                       )
                   ) (builtins.readDir _path)
             ) (unique (
-              if path == null
-              then paths
-              else [path] ++ paths
+              if path' == null
+              then paths'
+              else [path'] ++ paths'
             ))
           )
         )
         ++ (
           if recursive
-          then concatMap (path: toList path) (unique include)
-          else unique include
+          then concatMap (path: toList path) (unique include')
+          else unique include'
         )
       );
 
