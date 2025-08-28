@@ -17,6 +17,7 @@ with outputs.lib; {
   console.keyMap = mkDefault "sg";
   services.xserver.xkb.layout = mkDefault "ch";
 
+  environment.enableAllTerminfo = true;
   environment.systemPackages = with pkgs; [
     vim
     git
@@ -25,11 +26,13 @@ with outputs.lib; {
     nmap
     dots
   ];
-  environment.enableAllTerminfo = true;
 
-  nix.gc = {
-    automatic = mkDefault true;
-    dates = mkDefault "weekly";
-    options = mkDefault "--delete-older-than 14d";
+  programs.nh = {
+    enable = mkDefault true;
+    clean = {
+      enable = mkDefault true;
+      dates = mkDefault "weekly";
+      extraArgs = mkDefault "--keep 3 --keep-since-7d";
+    };
   };
 }
