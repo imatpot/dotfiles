@@ -9,7 +9,7 @@
 with outputs.lib; {
   imports =
     [
-      ./user-nixos-configs.nix
+      "${inputs.self}/lib/modules/nixos/user-nixos-configs.nix"
     ]
     ++ (enumeratePaths {
       path = "${inputs.self}/modules/hosts";

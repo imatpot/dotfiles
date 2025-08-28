@@ -1,4 +1,5 @@
 {
+  inputs,
   outputs,
   pkgs,
   hostname,
@@ -6,7 +7,9 @@
   ...
 }:
 with outputs.lib; {
-  imports = [./user-macos-configs.nix];
+  imports = [
+    "${inputs.self}/lib/modules/user/user-macos-configs.nix"
+  ];
 
   networking.hostName = mkDefault hostname;
 
