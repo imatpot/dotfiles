@@ -7,9 +7,14 @@
   ...
 }:
 with outputs.lib; {
-  imports = [
-    "${inputs.self}/lib/modules/user/user-macos-configs.nix"
-  ];
+  imports =
+    [
+      "${inputs.self}/lib/modules/macos/user-macos-configs.nix"
+    ]
+    ++ (enumeratePaths {
+      path = "${inputs.self}/modules/macos";
+      exclude = [./default-config.nix];
+    });
 
   networking.hostName = mkDefault hostname;
 

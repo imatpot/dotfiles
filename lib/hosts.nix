@@ -7,7 +7,7 @@ flake @ {
     "${inputs.self}/modules/nix/nix.nix"
     "${inputs.self}/modules/nix/nixpkgs.nix"
     "${inputs.self}/modules/nix/legacy.nix"
-    "${inputs.self}/lib/modules/home-manager/system-submodule.nix"
+    "${inputs.self}/lib/modules/home/system-submodule.nix"
   ];
 in rec {
   mkHost = args @ {
@@ -41,7 +41,7 @@ in rec {
       modules =
         sharedModules
         ++ [
-          "${inputs.self}/modules/linux/default-config.nix"
+          "${inputs.self}/modules/nixos/default-config.nix"
 
           inputs.disko.nixosModules.disko
           inputs.stylix.nixosModules.stylix
@@ -65,7 +65,7 @@ in rec {
         sharedModules
         ++ [
           "${inputs.self}/hosts/${hostname}/configuration.nix"
-          "${inputs.self}/modules/darwin/default-config.nix"
+          "${inputs.self}/modules/macos/default-config.nix"
         ];
     };
 }

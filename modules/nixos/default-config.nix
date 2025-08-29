@@ -12,7 +12,8 @@ with outputs.lib; {
       "${inputs.self}/lib/modules/nixos/user-nixos-configs.nix"
     ]
     ++ (enumeratePaths {
-      path = "${inputs.self}/modules/hosts";
+      path = "${inputs.self}/modules/nixos";
+      exclude = [./default-config.nix];
     });
 
   system.stateVersion = mkDefault stateVersion;
