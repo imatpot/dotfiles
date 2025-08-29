@@ -1,26 +1,21 @@
 {
-  inputs,
   outputs,
   pkgs,
-  username,
   system,
   hostname,
-  stateVersion,
+  username,
   osConfig,
   config,
+  stateVersion,
   ...
 }:
 with outputs.lib;
   mkFor system hostname {
     common = {
-      imports = outputs.lib.enumeratePaths {
-        path = "${inputs.self}/modules/users";
-        exclude = [./default-config.nix];
-      };
-
       home = {
-        username = mkDefault username;
-        stateVersion = mkDefault stateVersion;
+        inherit stateVersion;
+
+        username = username;
         packages = with pkgs; [dots];
 
         sessionVariables = {
@@ -57,18 +52,24 @@ with outputs.lib;
       news.display = mkDefault "silent";
     };
 
-    systems = {
-      linux = {
-        home.homeDirectory = mkDefault "/home/${username}";
+    systems.linux = {
+      home.homeDirectory = outputs.lib.mkDefault "/home/${username}";
+
+      nixos.users.users.${username} = {
+        isNormalUser = true;
+        extraGroups = ["networkmanager" "wheel" "docker"];
+      };
+    };
+
+    systems.darwin = rec {
+      home = {
+        homeDirectory = outputs.lib.mkDefault "/Users/${username}";
+        shellAliases.nix-rosetta = "nix --system x86_64-darwin";
       };
 
-      darwin = {
-        imports = [
-          # TODO: Check back later if it compiles again
-          # inputs.mac-app-util.homeManagerModules.default
-        ];
-
-        home.homeDirectory = mkDefault "/Users/${username}";
+      users.users.${username} = {
+        createHome = true;
+        home = home.homeDirectory;
       };
     };
   }

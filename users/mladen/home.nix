@@ -4,7 +4,6 @@
   hostname,
   ...
 }:
-# TODO: Maybe this split be simplified and moved to default config with concatImports
 outputs.lib.mkFor system hostname {
   common = {
     modules.users = {
@@ -18,11 +17,6 @@ outputs.lib.mkFor system hostname {
       userName = "Mladen Branković";
       userEmail = "root@brankovic.dev";
     };
-  };
-
-  systems = {
-    linux.imports = [./systems/linux.nix];
-    darwin.imports = [./systems/darwin.nix];
   };
 
   hosts = {
