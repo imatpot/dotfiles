@@ -1,5 +1,5 @@
 {...}: {
-  modules.hosts = {
+  modules = {
     btrfs.enable = true;
     nvidia.enable = true;
     fail2ban.enable = true;
