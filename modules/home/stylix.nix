@@ -9,7 +9,7 @@
     enable = true;
 
     polarity = "dark";
-    image = config.modules.users.wallpaper;
+    image = config.modules.gui.wallpaper;
 
     cursor = {
       package = pkgs.bibata-cursors;
@@ -57,7 +57,7 @@
       popups = 1.0;
     };
 
-    base16Scheme = "${pkgs.master.base16-schemes}/share/themes/${config.modules.users.stylix.theme}.yaml";
+    base16Scheme = "${pkgs.master.base16-schemes}/share/themes/${config.modules.stylix.theme}.yaml";
   };
 
   settings = {
@@ -66,7 +66,7 @@
 
       # This needs to always be set for the Stylix system configuation to be valid,
       # even if Stylix is disabled system-wide
-      nixos.stylix.image = config.modules.users.wallpaper;
+      nixos.stylix.image = config.modules.gui.wallpaper;
 
       gtk = {
         enable = true;
@@ -110,35 +110,27 @@
         };
     };
   };
-in {
-  options = {
-    modules.users = {
-      wallpaper = outputs.lib.mkOption {
-        type = outputs.lib.types.path;
-        default = ./images/wallpaper.default.png;
-        description = "Path to the wallpaper.";
-      };
+in
+  outputs.lib.mkModule config true "stylix" {
+    system-wide = outputs.lib.mkDefaultEnableOption false;
 
-      stylix = {
-        enable = outputs.lib.mkEnableOption "Enable Stylix";
-        system-wide = outputs.lib.mkEnableOption "Enable Stylix system-wide. This will install Stylix for all users.";
-
-        # https://github.com/tinted-theming/schemes
-        theme = outputs.lib.mkOption {
-          type = outputs.lib.types.str;
-          default = "selenized-black";
-          description = "The Base16 theme to use.";
-        };
-      };
+    # https://github.com/tinted-theming/schemes
+    theme = outputs.lib.mkOption {
+      type = outputs.lib.types.str;
+      default = "selenized-black";
+      description = "The Base16 theme to use.";
     };
-  };
-
-  config = outputs.lib.mkIf config.modules.users.stylix.enable (
+  } (
     outputs.lib.mkMerge [
-      (outputs.lib.mkIf config.modules.users.stylix.system-wide {
-        nixos = outputs.lib.warn "dotfiles: enabling Stylix system-wide. This will override the configs of all users with ${username}'s config." settings.system-wide;
-      })
-      (outputs.lib.mkIf (!config.modules.users.stylix.system-wide) settings.user)
+      (
+        outputs.lib.mkIf config.modules.stylix.system-wide {
+          nixos =
+            outputs.lib.warn "dotfiles: enabling Stylix system-wide. This will override the configs of all users with ${username}'s config."
+            settings.system-wide;
+        }
+      )
+      (
+        outputs.lib.mkIf (!config.modules.stylix.system-wide) settings.user
+      )
     ]
-  );
-}
+  )

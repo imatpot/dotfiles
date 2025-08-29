@@ -3,21 +3,17 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.hosts.nvidia.enable = outputs.lib.mkEnableOption "Enable NVIDIA drivers & tools";
+}:
+outputs.lib.mkModule' config false "nvidia"
+{
+  hardware = {
+    graphics.enable = true;
+    nvidia.open = true;
   };
 
-  config = outputs.lib.mkIf config.modules.hosts.nvidia.enable {
-    hardware = {
-      graphics.enable = true;
-      nvidia.open = true;
-    };
+  services.xserver.videoDrivers = ["nvidia"];
 
-    services.xserver.videoDrivers = ["nvidia"];
-
-    environment.systemPackages = with pkgs; [
-      nvtopPackages.full
-    ];
-  };
+  environment.systemPackages = with pkgs; [
+    nvtopPackages.full
+  ];
 }

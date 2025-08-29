@@ -3,17 +3,12 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.users.dev.java.enable = outputs.lib.mkEnableOption "Enable Java toolchain";
-  };
+}:
+outputs.lib.mkModule' config false "dev.java" {
+  home.packages = with pkgs; [unstable.maven];
 
-  config = outputs.lib.mkIf config.modules.users.dev.java.enable {
-    home.packages = with pkgs; [unstable.maven];
-
-    programs.java = {
-      enable = true;
-      package = pkgs.unstable.jdk21;
-    };
+  programs.java = {
+    enable = true;
+    package = pkgs.unstable.jdk21;
   };
 }

@@ -14,11 +14,30 @@ with outputs.lib;
     common = {
       home = {
         inherit stateVersion;
-
         username = username;
-        packages = with pkgs; [dots];
+
+        packages = with pkgs; [
+          dots
+          bat
+          eza
+          tldr
+          jq
+          watchexec
+          just
+        ];
+
+        shellAliases = {
+          mkcd = "fn() { mkdir -p $1 && cd $1; }; fn";
+          ls = "eza";
+          ll = "eza --all --classify --long --time-style long-iso";
+          lll = "ll --total-size";
+          tree = "ls --tree";
+          ltree = "ll --tree";
+          cat = "bat";
+        };
 
         sessionVariables = {
+          TLDR_AUTO_UPDATE_DISABLED = "1";
           NH_FLAKE = mkDefault config.programs.nh.flake;
           NIXPKGS_ALLOW_UNFREE = mkDefault (
             if config.nixpkgs.config.allowUnfree

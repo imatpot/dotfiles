@@ -3,20 +3,15 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.users.dev.haskell.enable = outputs.lib.mkEnableOption "Enable Haskell toolchain";
-  };
+}:
+outputs.lib.mkModule' config false "dev.haskell" {
+  home.packages = with pkgs.unstable; [
+    ghc
+    cabal-install
+    stack
 
-  config = outputs.lib.mkIf config.modules.users.dev.haskell.enable {
-    home.packages = with pkgs.unstable; [
-      ghc
-      cabal-install
-      stack
-
-      haskell-language-server
-      hlint
-      ormolu
-    ];
-  };
+    haskell-language-server
+    hlint
+    ormolu
+  ];
 }

@@ -3,15 +3,14 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.users.bitwarden.enable = outputs.lib.mkEnableOption "Enable Bitwarden";
-  };
-
-  config = outputs.lib.mkIf config.modules.users.bitwarden.enable {
-    home.packages = with pkgs; [
+}:
+outputs.lib.mkModule' config true "bitwarden"
+{
+  home.packages = with pkgs;
+    [
       bitwarden-cli
+    ]
+    ++ outputs.lib.optionals config.modules.gui.enable [
       bitwarden-desktop
     ];
-  };
 }

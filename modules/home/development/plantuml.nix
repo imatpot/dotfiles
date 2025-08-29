@@ -3,15 +3,10 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.users.dev.plantuml.enable = outputs.lib.mkEnableOption "Enable PlantUML toolchain";
-  };
-
-  config = outputs.lib.mkIf config.modules.users.dev.plantuml.enable {
-    home.packages = with pkgs; [
-      plantuml
-      graphviz
-    ];
-  };
+}:
+outputs.lib.mkModule' config false "dev.plantuml" {
+  home.packages = with pkgs; [
+    plantuml
+    graphviz
+  ];
 }

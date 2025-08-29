@@ -1,8 +1,11 @@
 {
   outputs,
   pkgs,
+  config,
   ...
-}: {
+}:
+outputs.lib.mkModule' config true "git"
+{
   programs.git = {
     enable = true;
 

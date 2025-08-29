@@ -2,30 +2,25 @@
   outputs,
   config,
   ...
-}: {
-  options = {
-    modules.users.ghostty.enable = outputs.lib.mkEnableOption "Enable GhosTTY";
-  };
+}:
+outputs.lib.mkModule' config config.modules.gui.enable "ghostty" {
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+    enableFishIntegration = true;
+    installVimSyntax = true;
+    installBatSyntax = true;
 
-  config = outputs.lib.mkIf config.modules.users.ghostty.enable {
-    programs.ghostty = {
-      enable = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
-      installVimSyntax = true;
-      installBatSyntax = true;
+    settings = {
+      adjust-cell-height = "15%";
+      background-blur = 20;
+      window-padding-x = 8;
+      window-padding-y = 8;
+      window-inherit-working-directory = false;
+    };
 
-      settings = {
-        adjust-cell-height = "15%";
-        background-blur = 20;
-        window-padding-x = 8;
-        window-padding-y = 8;
-        window-inherit-working-directory = false;
-      };
-
-      themes.stylix = {
-        background = "#080808";
-      };
+    themes.stylix = {
+      background = "#080808";
     };
   };
 }

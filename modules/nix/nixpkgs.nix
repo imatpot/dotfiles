@@ -26,7 +26,15 @@
         };
       })
 
-      (_: prev: {nur = import inputs.nur {pkgs = prev;};})
+      (_: prev: {
+        nur = import inputs.nur {
+          pkgs = prev;
+        };
+      })
+
+      (_: prev: {
+        zen-browser = inputs.zen-browser.packages.${prev.system}.default;
+      })
     ];
   };
 }

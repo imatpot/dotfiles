@@ -7,6 +7,8 @@
 }: {
   imports = [inputs.nix-flatpak.nixosModules.nix-flatpak];
 
+  modules.gui.enable = true;
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.loader.grub = {

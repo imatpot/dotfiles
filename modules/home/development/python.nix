@@ -3,27 +3,23 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.users.dev.python.enable = outputs.lib.mkEnableOption "Enable Python toolchain";
-  };
+}:
+outputs.lib.mkModule' config false "dev.python"
+{
+  home = {
+    packages = with pkgs; [
+      (unstable.python3.withPackages (
+        pythonPkgs:
+          with pythonPkgs; [
+            pip
+            ipykernel
+          ]
+      ))
+    ];
 
-  config = outputs.lib.mkIf config.modules.users.dev.python.enable {
-    home = {
-      packages = with pkgs; [
-        (unstable.python3.withPackages (
-          pythonPkgs:
-            with pythonPkgs; [
-              pip
-              ipykernel
-            ]
-        ))
-      ];
-
-      shellAliases = rec {
-        python = "python3";
-        py = python;
-      };
+    shellAliases = rec {
+      python = "python3";
+      py = python;
     };
   };
 }

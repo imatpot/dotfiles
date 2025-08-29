@@ -17,14 +17,10 @@
       "W391"
     ];
   } (builtins.readFile ./discord-krisp-patcher.py);
-in {
-  options = {
-    modules.users.discord.enable = outputs.lib.mkEnableOption "Enable Discord/Vesktop (Wayland)";
-  };
+in
+  outputs.lib.mkModule' config config.modules.gui.enable "discord" {
+    # Krisp: https://github.com/NixOS/nixpkgs/issues/195512
 
-  # Krisp: https://github.com/NixOS/nixpkgs/issues/195512
-
-  config = outputs.lib.mkIf config.modules.users.discord.enable {
     home.packages = with pkgs.unstable; [
       vesktop
       discord
@@ -53,5 +49,4 @@ in {
         })
       ];
     };
-  };
-}
+  }

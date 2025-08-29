@@ -21,16 +21,16 @@
     == 1;
 
   isDarkTheme = isGtk3DarkTheme || isGtk4DarkTheme;
-in {
-  options = {
-    modules.users.gnome.enable = outputs.lib.mkEnableOption "Enable Gnome";
-  };
+in
+  outputs.lib.mkModule' config config.modules.gui.enable "gnome"
+  {
+    nixos = {
+      programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
 
-  config = outputs.lib.mkIf config.modules.users.gnome.enable {
-    # Always start Gnome on Wayland
-    # https://discourse.nixos.org/t/fix-gdm-does-not-start-gnome-wayland-even-if-it-is-selected-by-default-starts-x11-instead/24498
-    nixos.services.displayManager.defaultSession = outputs.lib.mkIf config.modules.users.wayland.enable "gnome";
-    nixos.programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
+      # Always start Gnome on Wayland
+      # https://discourse.nixos.org/t/fix-gdm-does-not-start-gnome-wayland-even-if-it-is-selected-by-default-starts-x11-instead/24498
+      services.displayManager.defaultSession = outputs.lib.mkIf config.modules.wayland.enable "gnome";
+    };
 
     gtk = {
       iconTheme = {
@@ -174,7 +174,7 @@ in {
           };
 
           "org/gnome/mutter" = {
-            edge-tiling = false; # We handle tiling with tiling-shell
+            edge-tiling = false; # handled by tiling-shell
             dynamic-workspaces = true;
           };
 
@@ -376,5 +376,4 @@ in {
           ]
         );
     };
-  };
-}
+  }

@@ -1,4 +1,9 @@
-{pkgs, ...}: let
+{
+  outputs,
+  config,
+  pkgs,
+  ...
+}: let
   fonts = with pkgs; [
     # Writing
     libertine
@@ -10,11 +15,13 @@
     nerd-fonts.caskaydia-cove
     nerd-fonts.caskaydia-mono
   ];
-in {
-  home.packages = fonts;
+in
+  outputs.lib.mkModule' config config.modules.gui.enable "fonts"
+  {
+    home.packages = fonts;
 
-  macos.fonts = {
-    inherit fonts;
-    fontDir.enable = true;
-  };
-}
+    macos.fonts = {
+      inherit fonts;
+      fontDir.enable = true;
+    };
+  }

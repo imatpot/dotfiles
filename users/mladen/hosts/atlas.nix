@@ -1,5 +1,5 @@
 {...}: {
-  modules.users = {
+  modules = {
     samba.enable = true;
 
     stylix = {

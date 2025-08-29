@@ -3,20 +3,16 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.users.neovim.enable = outputs.lib.mkEnableOption "Enable Neovim";
-  };
+}:
+outputs.lib.mkModule' config true "neovim"
+{
+  home = {
+    packages = with pkgs; [nixvim];
 
-  config = outputs.lib.mkIf config.modules.users.neovim.enable {
-    home = {
-      packages = with pkgs; [nixvim];
-
-      sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-        GIT_EDITOR = "nvim";
-      };
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      GIT_EDITOR = "nvim";
     };
   };
 }

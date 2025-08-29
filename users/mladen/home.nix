@@ -6,13 +6,6 @@
 }:
 outputs.lib.mkFor system hostname {
   common = {
-    modules.users = {
-      neovim.enable = true;
-      helix.enable = true;
-      zsh.enable = true;
-      starship.enable = true;
-    };
-
     programs.git = {
       userName = "Mladen Branković";
       userEmail = "root@brankovic.dev";

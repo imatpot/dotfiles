@@ -3,15 +3,10 @@
   config,
   pkgs,
   ...
-}: {
-  options = {
-    modules.users.dev.kubernetes.enable = outputs.lib.mkEnableOption "Enable Kubernetes tools";
-  };
-
-  config = outputs.lib.mkIf config.modules.users.dev.kubernetes.enable {
-    home.packages = with pkgs; [
-      flux
-      kubectl
-    ];
-  };
+}:
+outputs.lib.mkModule' config false "dev.kubernetes" {
+  home.packages = with pkgs; [
+    flux
+    kubectl
+  ];
 }

@@ -9,16 +9,12 @@
     echo "Connecting to $1..."
     adb connect $1:$(${pkgs.nmap}/bin/nmap $1 -p 30000-49999 | ${pkgs.gawk}/bin/awk "/\/tcp/" | cut -d/ -f1)
   '';
-in {
-  options = {
-    modules.users.dev.adb.enable = outputs.lib.mkEnableOption "Enable ADB tools";
-  };
-
-  config = outputs.lib.mkIf config.modules.users.dev.adb.enable {
+in
+  outputs.lib.mkModule' config true "dev.adb"
+  {
     home.packages = with pkgs; [
       android-tools
       master.scrcpy
       adbitch
     ];
-  };
-}
+  }

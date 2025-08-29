@@ -15,16 +15,12 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     XDG_SESSION_TYPE = "wayland";
   };
-in {
-  options = {
-    modules.users.wayland.enable = outputs.lib.mkEnableOption "Enable Wayland";
-  };
-
-  config = outputs.lib.mkIf config.modules.users.wayland.enable {
+in
+  outputs.lib.mkModule' config config.modules.gui.enable "wayland" {
     home.packages = with pkgs; [xorg.xeyes wl-clipboard];
 
     # For application launchers. Breaks XServer users on the same system!
-    # nixos.environment.sessionVariables = waylandVariables;
+    nixos.environment.sessionVariables = waylandVariables;
     home.sessionVariables = waylandVariables;
 
     nixos.services.libinput.enable = true;
@@ -35,5 +31,4 @@ in {
       dataFile."applications/mimeapps.list".force = true;
       mimeApps.enable = true;
     };
-  };
-}
+  }

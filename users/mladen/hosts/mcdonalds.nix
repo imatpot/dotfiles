@@ -18,7 +18,7 @@
     export PATH="$PATH:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/npm/bin:/opt/homebrew/bin"
   '';
 in {
-  modules.users = {
+  modules = {
     dev = {
       adb.enable = true;
       csharp.enable = true;
