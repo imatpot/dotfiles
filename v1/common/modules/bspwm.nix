@@ -1,1 +1,0 @@
-{windowManager.bspwm.enable = true;}
