@@ -16,8 +16,8 @@ with outputs.lib; {
   mkConfigModule = config: default: name: moduleConfig:
     mkModule config default name {} moduleConfig;
 
-  mkOptionsModule = config: name: moduleOptions:
-    mkModule config true name moduleOptions {};
+  mkOptionsModule = config: default: name: moduleOptions:
+    mkModule config default name moduleOptions {};
 
   mkDefaultEnableOption = default:
     mkOption {
