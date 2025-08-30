@@ -43,9 +43,11 @@ in rec {
         ++ [
           "${inputs.self}/modules/nixos/default-config.nix"
 
+          inputs.vault.nixosModules.secrets
           inputs.disko.nixosModules.disko
           inputs.stylix.nixosModules.stylix
           inputs.minegrub-theme.nixosModules.default
+          inputs.nix-flatpak.nixosModules.nix-flatpak
         ]
         ++ (outputs.lib.enumeratePaths {
           path = "${inputs.self}/hosts/${hostname}";

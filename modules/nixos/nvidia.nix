@@ -7,8 +7,12 @@
 outputs.lib.mkConfigModule config false "nvidia"
 {
   hardware = {
-    graphics.enable = true;
     nvidia.open = true;
+
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
 
   services.xserver.videoDrivers = ["nvidia"];

@@ -5,7 +5,7 @@
 }:
 outputs.lib.mkConfigModule config false "kitty"
 {
-  programs.kitty = rec {
+  programs.kitty = {
     enable = true;
 
     keybindings = {};

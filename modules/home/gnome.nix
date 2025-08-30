@@ -6,30 +6,44 @@
   pkgs,
   ...
 }: let
-  isGtk3DarkTheme =
-    (
-      config.gtk.gtk3.extraConfig ? gtk-application-prefer-dark-theme
-      && config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme
-    )
-    == 1;
-
-  isGtk4DarkTheme =
-    (
-      config.gtk.gtk4.extraConfig ? gtk-application-prefer-dark-theme
-      && config.gtk.gtk4.extraConfig.gtk-application-prefer-dark-theme
-    )
-    == 1;
-
+  isGtk3DarkTheme = (config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme or 0) == 1;
+  isGtk4DarkTheme = (config.gtk.gtk4.extraConfig.gtk-application-prefer-dark-theme or 0) == 1;
   isDarkTheme = isGtk3DarkTheme || isGtk4DarkTheme;
 in
   outputs.lib.mkConfigModule config config.modules.gui.enable "gnome"
   {
     nixos = {
-      programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
+      programs = {
+        dconf.enable = true;
+        ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
+      };
 
-      # Always start Gnome on Wayland
-      # https://discourse.nixos.org/t/fix-gdm-does-not-start-gnome-wayland-even-if-it-is-selected-by-default-starts-x11-instead/24498
-      services.displayManager.defaultSession = outputs.lib.mkIf config.modules.wayland.enable "gnome";
+      environment.gnome.excludePackages = with pkgs; [
+        gnome-photos
+        gnome-tour
+        gedit
+        gnome-music
+        epiphany
+        geary
+        tali
+        iagno
+        hitori
+        atomix
+        yelp
+        gnome-contacts
+        gnome-initial-setup
+      ];
+
+      services = {
+        xserver = {
+          desktopManager.gnome.enable = true;
+          displayManager.gdm.enable = true;
+        };
+
+        # Always start Gnome on Wayland
+        # https://discourse.nixos.org/t/fix-gdm-does-not-start-gnome-wayland-even-if-it-is-selected-by-default-starts-x11-instead/24498
+        displayManager.defaultSession = outputs.lib.mkIf config.modules.wayland.enable "gnome";
+      };
     };
 
     gtk = {
@@ -46,8 +60,9 @@ in
       outputs.lib.mkFor system hostname {
         hosts.shinobi = {
           "org/gnome/desktop/peripherals/mouse" = {
-            speed = -0;
+            speed = 0;
           };
+
           "org/gnome/shell/extensions/quick-settings-tweaks" = {
             user-removed-buttons = [
               "PowerProfilesToggle"
@@ -352,17 +367,21 @@ in
       };
 
     home = {
-      packages = with pkgs.gnomeExtensions; [
-        user-themes
-        tiling-shell
-        vitals
-        dash-to-panel
-        clipboard-indicator
-        quick-settings-tweaker
-        alphabetical-app-grid
-        hibernate-status-button
-        blur-my-shell
-      ];
+      packages = with pkgs;
+        [
+          gnome-tweaks
+        ]
+        ++ (with pkgs.gnomeExtensions; [
+          user-themes
+          tiling-shell
+          vitals
+          dash-to-panel
+          clipboard-indicator
+          quick-settings-tweaker
+          alphabetical-app-grid
+          hibernate-status-button
+          blur-my-shell
+        ]);
 
       # https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1278954466
       sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =

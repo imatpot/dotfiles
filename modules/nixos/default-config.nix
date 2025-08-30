@@ -4,6 +4,7 @@
   pkgs,
   hostname,
   stateVersion,
+  config,
   ...
 }:
 with outputs.lib; {
@@ -17,23 +18,40 @@ with outputs.lib; {
     });
 
   system.stateVersion = mkDefault stateVersion;
-  networking.hostName = mkDefault hostname;
-  networking.networkmanager.enable = true;
+
+  networking = {
+    hostName = mkDefault hostname;
+    networkmanager.enable = mkDefault true;
+  };
 
   time.timeZone = mkDefault "Europe/Zurich";
   i18n.defaultLocale = mkDefault "en_GB.UTF-8";
   console.keyMap = mkDefault "sg";
   services.xserver.xkb.layout = mkDefault "ch";
 
-  environment.enableAllTerminfo = true;
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    curl
-    nmap
-    dots
-  ];
+  environment = {
+    enableAllTerminfo = true;
+    systemPackages = with pkgs;
+      [
+        vim
+        git
+        wget
+        curl
+        nmap
+        dots
+        ffmpeg
+      ]
+      ++ outputs.lib.optionals config.modules.gui.enable [
+        firefox
+        ungoogled-chromium
+        vlc
+      ];
+  };
+
+  systemd = {
+    packages = with pkgs; [lact];
+    services.lactd.wantedBy = ["multi-user.target"];
+  };
 
   programs.nh = {
     enable = mkDefault true;

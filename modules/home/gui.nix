@@ -5,11 +5,7 @@
   ...
 }:
 outputs.lib.mkOptionsModule config "gui" {
-  enable = outputs.lib.mkDefaultEnableOption (
-    if osConfig ? modules.gui.enable
-    then osConfig.modules.gui.enable
-    else false
-  );
+  enable = outputs.lib.mkDefaultEnableOption <| osConfig.modules.gui.enable or false;
 
   wallpaper = outputs.lib.mkOption {
     type = outputs.lib.types.path;

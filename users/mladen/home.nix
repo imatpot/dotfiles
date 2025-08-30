@@ -10,6 +10,11 @@ outputs.lib.mkFor system hostname {
       userName = "Mladen Branković";
       userEmail = "root@brankovic.dev";
     };
+
+    modules = {
+      bitwarden.enable = true;
+      stylix.enable = true;
+    };
   };
 
   hosts = {

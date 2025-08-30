@@ -1,10 +1,6 @@
 {...}: {
   modules = {
     samba.enable = true;
-
-    stylix = {
-      enable = true;
-      system-wide = true;
-    };
+    stylix.system-wide = true;
   };
 }

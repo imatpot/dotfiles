@@ -56,7 +56,14 @@ in
             with pkgs; [pokemmo-installer]
           );
         in
-          winePkgs ++ protonPkgs ++ lutrisPkgs ++ minecraftPkgs ++ pokemmoPkgs;
+          winePkgs
+          ++ protonPkgs
+          ++ lutrisPkgs
+          ++ minecraftPkgs
+          ++ pokemmoPkgs
+          ++ [
+            pkgs.master.r2modman
+          ];
 
         sessionVariables = outputs.lib.mkIf config.modules.gaming.steam.enable {
           inherit STEAM_EXTRA_COMPAT_TOOLS_PATHS;
