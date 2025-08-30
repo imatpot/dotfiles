@@ -7,14 +7,6 @@
 
     overlays = [
       (_: prev: {
-        dots = import "${inputs.self}/packages/dots.nix" {pkgs = prev;};
-      })
-
-      (_: prev: {
-        nixvim = inputs.nixvim.packages.${prev.system}.nvim;
-      })
-
-      (_: prev: {
         master = import inputs.nixpkgs-master {
           inherit (prev) system config overlays;
         };
@@ -30,6 +22,10 @@
         nur = import inputs.nur {
           pkgs = prev;
         };
+      })
+
+      (_: prev: {
+        nixvim = inputs.nixvim.packages.${prev.system}.nvim;
       })
 
       (_: prev: {

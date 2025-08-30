@@ -86,11 +86,6 @@
       inherit (inputs.self) outputs;
     };
 
-    packages = lib.forEachSystem systems (pkgs: rec {
-      dots = import ./packages/dots.nix {inherit pkgs;};
-      default = dots;
-    });
-
     nixosConfigurations.shinobi = lib.mkHost {
       system = "x86_64-linux";
       hostname = "shinobi";

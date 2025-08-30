@@ -34,7 +34,6 @@ with outputs.lib; {
     git
     wget
     curl
-    dots
   ];
 
   services.nix-daemon.enable = mkDefault true;

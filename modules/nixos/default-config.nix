@@ -38,7 +38,6 @@ with outputs.lib; {
         wget
         curl
         nmap
-        dots
         ffmpeg
       ]
       ++ outputs.lib.optionals config.modules.gui.enable [

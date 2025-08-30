@@ -18,7 +18,6 @@ with outputs.lib;
 
         packages = with pkgs;
           [
-            dots
             bat
             eza
             tldr
