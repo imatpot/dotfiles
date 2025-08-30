@@ -23,7 +23,7 @@ outputs.lib.mkModule config false "windows"
     extraInstallCommands = ''
       ${pkgs.coreutils}/bin/cat << EOF >> /boot/grub/grub.cfg
 
-      menuentry "Windows${outputs.lib.trim " ${config.modules.windows.version}"}" {
+      menuentry "${outputs.lib.trim "Windows ${config.modules.windows.version}"}" {
         insmod part_gpt
         insmod fat
         search --fs-uuid --no-floppy --set=root ${config.modules.windows.disk.uuid}
