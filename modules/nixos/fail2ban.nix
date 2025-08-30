@@ -3,7 +3,7 @@
   config,
   ...
 }:
-outputs.lib.mkModule' config true "fail2ban" {
+outputs.lib.mkConfigModule config true "fail2ban" {
   services.fail2ban = outputs.lib.mkIf config.networking.firewall.enable {
     enable = true;
     ignoreIP = [

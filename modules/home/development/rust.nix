@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.rust"
+outputs.lib.mkConfigModule config false "dev.rust"
 {
   home.packages = with pkgs; [
     cargo

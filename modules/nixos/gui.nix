@@ -3,6 +3,6 @@
   config,
   ...
 }:
-outputs.lib.mkModule'' config "gui" {
+outputs.lib.mkOptionsModule config "gui" {
   enable = outputs.lib.mkDefaultEnableOption false;
 }

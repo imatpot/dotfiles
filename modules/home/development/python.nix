@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.python"
+outputs.lib.mkConfigModule config false "dev.python"
 {
   home = {
     packages = with pkgs; [

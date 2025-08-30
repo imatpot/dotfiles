@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.csharp" {
+outputs.lib.mkConfigModule config false "dev.csharp" {
   home.packages = with pkgs; [
     (
       with unstable.dotnetCorePackages;

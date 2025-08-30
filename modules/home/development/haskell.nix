@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.haskell" {
+outputs.lib.mkConfigModule config false "dev.haskell" {
   home.packages = with pkgs.unstable; [
     ghc
     cabal-install

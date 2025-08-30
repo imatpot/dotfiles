@@ -3,7 +3,7 @@
   config,
   ...
 }:
-outputs.lib.mkModule' config true "starship"
+outputs.lib.mkConfigModule config true "starship"
 {
   programs.starship = {
     enable = true;

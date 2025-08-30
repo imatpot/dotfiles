@@ -6,7 +6,7 @@
   system,
   ...
 }:
-outputs.lib.mkModule' config true "zsh" {
+outputs.lib.mkConfigModule config true "zsh" {
   # Forces Nix-Darwin to set up necessary hooks
   macos.programs.zsh.enable = true;
 

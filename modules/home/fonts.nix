@@ -16,7 +16,7 @@
     nerd-fonts.caskaydia-mono
   ];
 in
-  outputs.lib.mkModule' config config.modules.gui.enable "fonts"
+  outputs.lib.mkConfigModule config config.modules.gui.enable "fonts"
   {
     home.packages = fonts;
 

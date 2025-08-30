@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.databases"
+outputs.lib.mkConfigModule config false "dev.databases"
 {
   home.packages = with pkgs; [
     postgresql

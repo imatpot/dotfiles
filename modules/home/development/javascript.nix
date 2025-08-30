@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.javascript"
+outputs.lib.mkConfigModule config false "dev.javascript"
 {
   home.packages = with pkgs; [
     unstable.deno

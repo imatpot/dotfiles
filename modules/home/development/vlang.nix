@@ -4,6 +4,6 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.vlang" {
+outputs.lib.mkConfigModule config false "dev.vlang" {
   home.packages = with pkgs; [unstable.vlang];
 }

@@ -4,7 +4,7 @@
   osConfig,
   ...
 }:
-outputs.lib.mkModule'' config "gui" {
+outputs.lib.mkOptionsModule config "gui" {
   enable = outputs.lib.mkDefaultEnableOption (
     if osConfig ? modules.gui.enable
     then osConfig.modules.gui.enable

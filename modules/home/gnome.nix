@@ -22,7 +22,7 @@
 
   isDarkTheme = isGtk3DarkTheme || isGtk4DarkTheme;
 in
-  outputs.lib.mkModule' config config.modules.gui.enable "gnome"
+  outputs.lib.mkConfigModule config config.modules.gui.enable "gnome"
   {
     nixos = {
       programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";

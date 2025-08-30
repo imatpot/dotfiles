@@ -10,7 +10,7 @@
     adb connect $1:$(${pkgs.nmap}/bin/nmap $1 -p 30000-49999 | ${pkgs.gawk}/bin/awk "/\/tcp/" | cut -d/ -f1)
   '';
 in
-  outputs.lib.mkModule' config true "dev.adb"
+  outputs.lib.mkConfigModule config true "dev.adb"
   {
     home.packages = with pkgs; [
       android-tools

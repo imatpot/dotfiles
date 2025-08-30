@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.nim" {
+outputs.lib.mkConfigModule config false "dev.nim" {
   home.packages = with pkgs; [
     unstable.nim
   ];

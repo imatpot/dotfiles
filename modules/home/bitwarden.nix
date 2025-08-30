@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config true "bitwarden"
+outputs.lib.mkConfigModule config true "bitwarden"
 {
   home.packages = with pkgs;
     [

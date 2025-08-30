@@ -3,7 +3,7 @@
   config,
   ...
 }:
-outputs.lib.mkModule' config config.modules.gui.enable "ghostty" {
+outputs.lib.mkConfigModule config config.modules.gui.enable "ghostty" {
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;

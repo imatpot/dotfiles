@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config true "dev.nix"
+outputs.lib.mkConfigModule config true "dev.nix"
 {
   programs.nix-index-database.comma.enable = true;
   home.shellAliases.nix-gc = "nix-collect-garbage";

@@ -18,7 +18,7 @@
     ];
   } (builtins.readFile ./discord-krisp-patcher.py);
 in
-  outputs.lib.mkModule' config config.modules.gui.enable "discord" {
+  outputs.lib.mkConfigModule config config.modules.gui.enable "discord" {
     # Krisp: https://github.com/NixOS/nixpkgs/issues/195512
 
     home.packages = with pkgs.unstable; [

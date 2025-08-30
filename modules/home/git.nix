@@ -4,7 +4,7 @@
   config,
   ...
 }:
-outputs.lib.mkModule' config true "git"
+outputs.lib.mkConfigModule config true "git"
 {
   programs.git = {
     enable = true;

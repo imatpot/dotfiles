@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config true "helix" {
+outputs.lib.mkConfigModule config true "helix" {
   programs.helix = {
     enable = true;
     package = pkgs.unstable.helix;

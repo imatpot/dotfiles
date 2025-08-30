@@ -16,7 +16,7 @@
     XDG_SESSION_TYPE = "wayland";
   };
 in
-  outputs.lib.mkModule' config config.modules.gui.enable "wayland" {
+  outputs.lib.mkConfigModule config config.modules.gui.enable "wayland" {
     home.packages = with pkgs; [xorg.xeyes wl-clipboard];
 
     # For application launchers. Breaks XServer users on the same system!

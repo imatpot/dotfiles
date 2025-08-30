@@ -13,10 +13,10 @@ with outputs.lib; {
     config = mkIf (getAttrFromPath path config.modules).enable moduleConfig;
   };
 
-  mkModule' = config: default: name: moduleConfig:
+  mkConfigModule = config: default: name: moduleConfig:
     mkModule config default name {} moduleConfig;
 
-  mkModule'' = config: name: moduleOptions:
+  mkOptionsModule = config: name: moduleOptions:
     mkModule config true name moduleOptions {};
 
   mkDefaultEnableOption = default:

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config true "neovim"
+outputs.lib.mkConfigModule config true "neovim"
 {
   home = {
     packages = with pkgs; [nixvim];

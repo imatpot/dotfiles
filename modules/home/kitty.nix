@@ -3,7 +3,7 @@
   config,
   ...
 }:
-outputs.lib.mkModule' config false "kitty"
+outputs.lib.mkConfigModule config false "kitty"
 {
   programs.kitty = rec {
     enable = true;

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "nvidia"
+outputs.lib.mkConfigModule config false "nvidia"
 {
   hardware = {
     graphics.enable = true;

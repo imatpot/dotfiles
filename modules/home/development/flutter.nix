@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.flutter"
+outputs.lib.mkConfigModule config false "dev.flutter"
 {
   modules.dev.adb.enable = true;
 

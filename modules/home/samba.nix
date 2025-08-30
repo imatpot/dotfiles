@@ -7,7 +7,7 @@
   username,
   ...
 }:
-outputs.lib.mkModule' config false "samba" (
+outputs.lib.mkConfigModule config false "samba" (
   outputs.lib.mkFor system hostname {
     systems.linux.nixos = {
       services = {

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config config.modules.gui.enable "zen-browser"
+outputs.lib.mkConfigModule config config.modules.gui.enable "zen-browser"
 {
   home.packages = with pkgs; [zen-browser];
 

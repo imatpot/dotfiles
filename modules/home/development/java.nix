@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.java" {
+outputs.lib.mkConfigModule config false "dev.java" {
   home.packages = with pkgs; [unstable.maven];
 
   programs.java = {

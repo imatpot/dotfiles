@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-outputs.lib.mkModule' config false "dev.typst"
+outputs.lib.mkConfigModule config false "dev.typst"
 {
   home.packages = with pkgs; [
     unstable.typst
