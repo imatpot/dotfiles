@@ -29,15 +29,7 @@
 
     gaming = {
       enable = true;
-      wine.enable = true;
-      proton.enable = true;
-      steam.enable = true;
-      lutris.enable = true;
-
-      games = {
-        minecraft.enable = true;
-        pokemmo.enable = true;
-      };
+      steam.gamescope.enable = false;
     };
   };
 }
