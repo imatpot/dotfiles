@@ -1,6 +1,7 @@
 {...}: {
   modules = {
     gui.enable = true;
+
     amd.enable = true;
     audio.enable = true;
     camera.enable = true;

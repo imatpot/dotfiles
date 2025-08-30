@@ -16,18 +16,15 @@ with outputs.lib;
         inherit stateVersion;
         username = username;
 
-        packages = with pkgs;
-          [
-            bat
-            eza
-            tldr
-            jq
-            watchexec
-            just
-          ]
-          ++ outputs.lib.optionals config.modules.gui.enable [
-            lact
-          ];
+        packages = with pkgs; [
+          bat
+          eza
+          tldr
+          jq
+          watchexec
+          just
+          lact
+        ];
 
         shellAliases = {
           mkcd = "fn() { mkdir -p $1 && cd $1; }; fn";
