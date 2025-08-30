@@ -17,10 +17,6 @@
       size = 24;
     };
 
-    targets = {
-      kde.enable = false;
-    };
-
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.caskaydia-mono;
@@ -37,16 +33,16 @@
         name = "Linux Libertine O";
       };
 
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+
       sizes = {
         applications = 10;
         terminal = 10;
         desktop = 10;
         popups = 10;
-      };
-
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
       };
     };
 
@@ -70,12 +66,8 @@
 
       gtk = {
         enable = true;
-        gtk3.extraConfig = {
-          gtk-application-prefer-dark-theme = true;
-        };
-        gtk4.extraConfig = {
-          gtk-application-prefer-dark-theme = true;
-        };
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+        gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
       };
 
       systemd.user.services.rm-gtk = {

@@ -13,9 +13,10 @@ outputs.lib.mkConfigModule config false "samba" (
       services = {
         samba = {
           enable = true;
-          enableNmbd = false;
-          enableWinbindd = false;
           openFirewall = true;
+
+          nmbd.enable = false;
+          winbindd.enable = false;
 
           settings = {
             global = {

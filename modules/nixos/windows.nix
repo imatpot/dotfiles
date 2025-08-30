@@ -7,13 +7,13 @@
 outputs.lib.mkModule config false "windows"
 {
   version = outputs.lib.mkOption {
-    type = outputs.lib.types.string;
+    type = outputs.lib.types.str;
     default = "";
     example = "11";
   };
 
   disk.uuid = outputs.lib.mkOption {
-    type = outputs.lib.types.string;
+    type = outputs.lib.types.str;
     default = builtins.throw "dotfiles: modules.windows.disk.uuid not set";
   };
 }

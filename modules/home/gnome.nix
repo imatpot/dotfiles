@@ -35,10 +35,8 @@ in
       ];
 
       services = {
-        xserver = {
-          desktopManager.gnome.enable = true;
-          displayManager.gdm.enable = true;
-        };
+        desktopManager.gnome.enable = true;
+        displayManager.gdm.enable = true;
 
         # Always start Gnome on Wayland
         # https://discourse.nixos.org/t/fix-gdm-does-not-start-gnome-wayland-even-if-it-is-selected-by-default-starts-x11-instead/24498
