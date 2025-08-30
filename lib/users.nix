@@ -35,17 +35,20 @@ flake @ {
             users = [username];
           };
 
-        modules = [
-          outputs.lib.mkHomeManagerCoreModules
-          "${inputs.self}/users/${username}/home.nix"
+        modules =
+          [
+            outputs.lib.mkHomeManagerCoreModules
 
-          # Standalone-only, to not override the system's config
-          "${inputs.self}/modules/nix/nix.nix"
+            # Standalone-only, to not override the system's config
+            "${inputs.self}/modules/nix/nix.nix"
 
-          # Standalone-only, as it's incompatible with stylix.nixosModules.stylix
-          # https://github.com/nix-community/stylix/issues/1719
-          inputs.stylix.homeModules.stylix
-        ];
+            # Standalone-only, as it's incompatible with stylix.nixosModules.stylix
+            # https://github.com/nix-community/stylix/issues/1719
+            inputs.stylix.homeModules.stylix
+          ]
+          ++ (outputs.lib.enumeratePaths {
+            path = "${inputs.self}/users/${username}";
+          });
       };
 
   mkHomeManagerCoreModules = {system, ...}: {

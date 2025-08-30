@@ -25,9 +25,9 @@ in
         # Submodules only pass `name`, but I want `username` as well
         _module.args.username = username;
 
-        imports = [
-          "${inputs.self}/users/${username}/home.nix"
-        ];
+        imports = outputs.lib.enumeratePaths {
+          path = "${inputs.self}/users/${username}";
+        };
       });
 
       extraSpecialArgs = {

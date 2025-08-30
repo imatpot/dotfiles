@@ -11,14 +11,14 @@ with outputs.lib; {
     hosts ? {},
   }: let
     systemConfig =
-      if isLinux system && systems ? "linux"
-      then systems.linux
-      else if isDarwin system && systems ? "darwin"
-      then systems.darwin
+      if isLinux system
+      then systems.linux or {}
+      else if isDarwin system
+      then systems.darwin or {}
       else {};
     hostConfig =
-      if hostname != null && hosts ? ${hostname}
-      then hosts.${hostname}
+      if hostname != null
+      then hosts.${hostname} or {}
       else {};
   in
     deepMerge [
