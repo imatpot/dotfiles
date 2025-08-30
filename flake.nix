@@ -98,12 +98,6 @@
       users = ["mladen"];
     };
 
-    nixosConfigurations.adele = lib.mkHost {
-      system = "x86_64-linux";
-      hostname = "adele";
-      users = ["mladen"];
-    };
-
     darwinConfigurations.mcdonalds = lib.mkHost {
       system = "aarch64-darwin";
       hostname = "mcdonalds";
