@@ -1,6 +1,7 @@
 {
   outputs,
   config,
+  pkgs,
   ...
 }:
 outputs.lib.mkConfigModule config config.modules.gui.enable "ghostty" {
@@ -23,4 +24,9 @@ outputs.lib.mkConfigModule config config.modules.gui.enable "ghostty" {
       background = "#080808";
     };
   };
+
+  home.packages = with pkgs;
+    outputs.lib.optionals config.modules.gnome.enable [
+      nautilus-python
+    ];
 }
