@@ -15,9 +15,12 @@ outputs.lib.mkModule config config.modules.gaming.enable "gaming.steam"
     systems.linux = let
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${config.home.homeDirectory}/.steam/root/compatibilitytools.d";
     in {
-      nixos.programs.steam = {
-        enable = true;
-        gamescopeSession.enable = config.modules.gaming.steam.gamescope.enable;
+      nixos = {
+        hardware.steam-hardware.enable = true;
+        programs.steam = {
+          enable = true;
+          gamescopeSession.enable = config.modules.gaming.steam.gamescope.enable;
+        };
       };
 
       home = {
