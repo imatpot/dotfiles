@@ -22,8 +22,8 @@ with outputs.lib;
           tldr
           jq
           watchexec
+          direnv
           just
-          lact
         ];
 
         shellAliases = {
@@ -86,7 +86,7 @@ with outputs.lib;
         shellAliases.nix-rosetta = "nix --system x86_64-darwin";
       };
 
-      users.users.${username} = {
+      macos.users.users.${username} = {
         createHome = true;
         home = home.homeDirectory;
       };

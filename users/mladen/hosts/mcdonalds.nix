@@ -23,6 +23,7 @@ in
   outputs.lib.mkFor system hostname {
     hosts.mcdonalds = {
       modules = {
+        fonts.enable = true;
         dev = {
           adb.enable = true;
           csharp.enable = true;
@@ -37,11 +38,6 @@ in
           typst.enable = true;
         };
       };
-
-      home.packages = with pkgs; [
-        direnv
-        backblaze-b2
-      ];
 
       home.file.backblaze-id.source =
         config.lib.file.mkOutOfStoreSymlink
