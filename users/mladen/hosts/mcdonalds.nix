@@ -3,16 +3,12 @@
   outputs,
   system,
   hostname,
-  pkgs,
   ...
 }: let
   extra = ''
     ssh-add ~/.ssh/aegis &> /dev/null
     ssh-add ~/.ssh/mladen.brankovic.at.golog.ch &> /dev/null
     ssh-add ~/.ssh/mladen.brankovic.at.students.fhnw.ch &> /dev/null
-
-    export DIRENV_LOG_FORMAT=""
-    eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
 
     alias nixvim="nix run path:/Users/mladen/Developer/life/nixvim --"
     alias nv="nixvim"

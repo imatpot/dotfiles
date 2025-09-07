@@ -22,7 +22,6 @@ with outputs.lib;
           tldr
           jq
           watchexec
-          direnv
           just
         ];
 
