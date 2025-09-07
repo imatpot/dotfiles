@@ -93,7 +93,7 @@ outputs.lib.mkConfigModule config true "starship"
       };
 
       nix_shell = {
-        format = "[$symbol( $name)](bold blue)( [\\($state\\)](bold purple))";
+        format = "[$symbol($name)](bold blue)( [\\($state\\)](bold purple))";
         symbol = " ";
         heuristic = true; # Adds experimental support for `nix shell`
       };

@@ -29,6 +29,7 @@ outputs.lib.mkConfigModule config true "zsh" {
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
+    defaultKeymap = "emacs";
 
     antidote = {
       enable = true;
