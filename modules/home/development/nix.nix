@@ -14,11 +14,12 @@ outputs.lib.mkConfigModule config true "dev.nix"
       nix-output-monitor
       nixd
       nil
-      nixfmt-classic
       deadnix
       statix
       nix-tree
       alejandra
+      nixpkgs-review
+      nixfmt
     ];
   };
 }
