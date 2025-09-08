@@ -619,6 +619,21 @@
         "type": "github"
       }
     },
+    "nixpkgsTeapot": {
+      "locked": {
+        "lastModified": 1757345397,
+        "narHash": "sha256-kUuEjAfQxhEQDVvoKHywxALCGZysAxNs2lnzVKtPi+k=",
+        "owner": "imatpot",
+        "repo": "nixpkgs",
+        "rev": "a61e8df1448a5d7ae370c50d7f8fe63c423c5359",
+        "type": "github"
+      },
+      "original": {
+        "owner": "imatpot",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1757034884,
@@ -674,15 +689,16 @@
         "flakeUtils": "flakeUtils",
         "nixpkgs": "nixpkgs_2",
         "nixpkgsMaster": "nixpkgsMaster",
+        "nixpkgsTeapot": "nixpkgsTeapot",
         "nixvim": "nixvim_2",
         "nypkgs": "nypkgs"
       },
       "locked": {
-        "lastModified": 1757276697,
-        "narHash": "sha256-YlloQPuHuH4eDH1BM7hoIB5U7JIEp3Go6DUtyZkdnYQ=",
+        "lastModified": 1757347167,
+        "narHash": "sha256-1uwUSmBI4nbZbqcATXoFTLOi86fpCygRDl2U0T53QFg=",
         "owner": "imatpot",
         "repo": "nixvim",
-        "rev": "27bd197bdfeab0b7dff9de6419991d4359a0ec81",
+        "rev": "1a7529fc9bef8d75fcf5fac48c4e2cd83bc6bcf1",
         "type": "github"
       },
       "original": {
