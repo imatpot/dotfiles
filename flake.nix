@@ -7,12 +7,9 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nur.url = "github:nix-community/nur";
 
+    vault.url = "git+ssh://git@github.com/imatpot/vault";
+    nixvim.url = "github:imatpot/nixvim";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-
-    nixvim = {
-      url = "github:imatpot/nixvim";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
 
     disko = {
       url = "github:nix-community/disko";
@@ -62,11 +59,6 @@
     minegrub-theme = {
       url = "github:Lxtharia/minegrub-theme";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    vault = {
-      url = "git+ssh://git@github.com/imatpot/vault";
-      flake = true;
     };
   };
 
