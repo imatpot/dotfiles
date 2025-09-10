@@ -23,6 +23,7 @@ with outputs.lib;
           jq
           watchexec
           just
+          ncdu
         ];
 
         shellAliases = {
