@@ -48,7 +48,9 @@
               type = "btrfs";
 
               extraArgs = builtins.concatLists [
-                ["--force"]
+                [
+                  "--force"
+                ]
                 [
                   "--label"
                   "nixos"
