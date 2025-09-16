@@ -5,7 +5,7 @@
   ...
 }:
 outputs.lib.mkFor system hostname {
-  hosts.atlas = {
+  hosts.fhnw-syspr = {
     modules = {
       stylix.system-wide = true;
 
@@ -13,7 +13,7 @@ outputs.lib.mkFor system hostname {
       bitwarden.enable = false;
       video.enable = false;
 
-      development.adb.enable = false;
+      dev.adb.enable = false;
     };
   };
 }

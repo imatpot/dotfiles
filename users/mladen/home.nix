@@ -1,11 +1,11 @@
-{...}: {
+{lib, ...}: {
   programs.git = {
-    userName = "Mladen Branković";
-    userEmail = "root@brankovic.dev";
+    userName = lib.mkDefault "Mladen Branković";
+    userEmail = lib.mkDefault "root@brankovic.dev";
   };
 
   modules = {
-    bitwarden.enable = true;
-    stylix.enable = true;
+    bitwarden.enable = lib.mkDefault true;
+    stylix.enable = lib.mkDefault true;
   };
 }
