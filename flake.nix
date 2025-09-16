@@ -90,6 +90,12 @@
       users = ["mladen"];
     };
 
+    nixosConfigurations.fhnw-syspr = lib.mkHost {
+      system = "aarch64-linux";
+      hostname = "fhnw-syspr";
+      users = ["mladen"];
+    };
+
     darwinConfigurations.mcdonalds = lib.mkHost {
       system = "aarch64-darwin";
       hostname = "mcdonalds";
