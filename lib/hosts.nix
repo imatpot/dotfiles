@@ -14,6 +14,7 @@ in rec {
     system,
     users ? [],
     stateVersion ? outputs.lib.defaultStateVersionForSystem system,
+    isVM ? false,
     ...
   }: let
     args' =
@@ -32,6 +33,7 @@ in rec {
   mkLinux = args @ {
     hostname,
     system,
+    isVM,
     ...
   }:
     outputs.lib.nixosSystem {
@@ -49,14 +51,23 @@ in rec {
           inputs.minegrub-theme.nixosModules.default
           inputs.nix-flatpak.nixosModules.nix-flatpak
         ]
-        ++ (outputs.lib.enumeratePaths {
-          path = "${inputs.self}/hosts/${hostname}";
-        });
+        ++ (
+          if isVM
+          then
+            (outputs.lib.enumeratePaths {
+              path = "${inputs.self}/hosts/vms/${hostname}";
+            })
+          else
+            (outputs.lib.enumeratePaths {
+              path = "${inputs.self}/hosts/${hostname}";
+            })
+        );
     };
 
   mkDarwin = args @ {
     hostname,
     system,
+    isVM,
     ...
   }:
     outputs.lib.darwinSystem {
@@ -66,8 +77,16 @@ in rec {
       modules =
         sharedModules
         ++ [
-          "${inputs.self}/hosts/${hostname}/configuration.nix"
           "${inputs.self}/modules/macos/default-config.nix"
-        ];
+        ]
+        ++ (
+          if isVM
+          then [
+            "${inputs.self}/hosts/vms/${hostname}/configuration.nix"
+          ]
+          else [
+            "${inputs.self}/hosts/${hostname}/configuration.nix"
+          ]
+        );
     };
 }

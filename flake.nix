@@ -94,6 +94,7 @@
       system = "aarch64-linux";
       hostname = "fhnw-syspr";
       users = ["mladen"];
+      isVM = true;
     };
 
     darwinConfigurations.mcdonalds = lib.mkHost {
