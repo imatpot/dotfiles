@@ -694,11 +694,11 @@
         "nypkgs": "nypkgs"
       },
       "locked": {
-        "lastModified": 1758037898,
-        "narHash": "sha256-9EWr6iZVPfZ8UsZujeonIv+BCLihOkMuyOBfsjItIjQ=",
+        "lastModified": 1758227605,
+        "narHash": "sha256-SdtiSrz+ya4xUIwt0Jt6JLyXjIiLlSlFFf7/KjqR/AY=",
         "owner": "imatpot",
         "repo": "nixvim",
-        "rev": "555bed3a0c17184f28cf32b28fe9bd1a4c9aaa22",
+        "rev": "6976bcda11323f9315e16aa72c3ae72c58562517",
         "type": "github"
       },
       "original": {
