@@ -11,8 +11,8 @@ outputs.lib.mkConfigModule config true "git"
 
     diff-so-fancy.enable = true;
 
-    userEmail = outputs.lib.mkDefault (throw "programs.git.userEmail is not set");
-    userName = outputs.lib.mkDefault (throw "programs.git.userName is not set");
+    userEmail = outputs.lib.mkOptionDefault (throw "programs.git.userEmail is not set");
+    userName = outputs.lib.mkOptionDefault (throw "programs.git.userName is not set");
 
     extraConfig = {
       init.defaultBranch = "main";
