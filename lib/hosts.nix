@@ -21,7 +21,7 @@ in rec {
       args
       // {
         # https://nixos.wiki/wiki/Nix_Language_Quirks#Default_values_are_not_bound_in_.40_syntax
-        inherit users stateVersion;
+        inherit users stateVersion isVM;
       };
   in
     if outputs.lib.isLinux system
