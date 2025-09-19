@@ -49,6 +49,11 @@ outputs.lib.mkModule config false "nvidia"
     nvidia-container-toolkit.enable = true;
   };
 
+  virtualisation = {
+    docker.enableNvidia = true;
+    podman.enableNvidia = true;
+  };
+
   environment.systemPackages = with pkgs;
     [
       nvtopPackages.full
