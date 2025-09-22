@@ -6,7 +6,11 @@
 outputs.lib.mkConfigModule config false "amd"
 {
   boot.initrd.kernelModules = ["amdgpu"];
-  services.xserver.videoDrivers = ["amdgpu" "modesetting"];
+
+  services = {
+    xserver.videoDrivers = ["amdgpu" "modesetting"];
+    lact.enable = true;
+  };
 
   hardware = {
     amdgpu.initrd.enable = true;

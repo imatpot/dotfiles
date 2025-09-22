@@ -10,7 +10,11 @@ outputs.lib.mkModule config false "nvidia"
 }
 {
   nixpkgs.config.cudaSupport = config.modules.nvidia.cuda.enable;
-  services.xserver.videoDrivers = ["nvidia"];
+
+  services = {
+    xserver.videoDrivers = ["nvidia"];
+    lact.enable = true;
+  };
 
   hardware = {
     graphics = {
