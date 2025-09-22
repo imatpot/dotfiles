@@ -2,6 +2,7 @@
   outputs,
   config,
   lib,
+  pkgs,
   ...
 }:
 outputs.lib.mkModule config true "virtualisation" {
@@ -15,4 +16,9 @@ outputs.lib.mkModule config true "virtualisation" {
     podman.enable = true;
     oci-containers.backend = lib.mkOptionDefault config.modules.virtualisation.backend;
   };
+
+  environment.systemPackages = with pkgs; [
+    docker-compose
+    podman-compose
+  ];
 }
