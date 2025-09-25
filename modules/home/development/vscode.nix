@@ -16,7 +16,5 @@ outputs.lib.mkConfigModule config config.modules.gui.enable "dev.vscode"
         ];
       }
     ))
-
-    code-cursor
   ];
 }
