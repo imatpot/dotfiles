@@ -10,7 +10,7 @@ outputs.lib.mkConfigModule config config.modules.gaming.enable "gaming.wine" (ou
   systems.linux = {
     home.packages = with pkgs;
       [
-        bottles
+        (bottles.override {removeWarningPopup = true;})
       ]
       ++ (
         if config.modules.wayland.enable
