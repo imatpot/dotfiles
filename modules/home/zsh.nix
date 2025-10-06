@@ -71,7 +71,7 @@ outputs.lib.mkConfigModule config true "zsh" {
           return 1
         fi
 
-        code "$ZNVIM_PATH"
+        nvim "$ZNVIM_PATH"
       }
 
       zhnvim() {
@@ -81,7 +81,7 @@ outputs.lib.mkConfigModule config true "zsh" {
           return 1
         fi
 
-        code "$ZHNVIM_PATH"
+        nvim "$ZHNVIM_PATH"
       }
 
       zcode() {
