@@ -19,11 +19,16 @@ with outputs.lib;
         packages = with pkgs; [
           bat
           eza
-          tldr
+          gotop
           jq
-          watchexec
           just
           ncdu
+          pigz
+          pv
+          tldr
+          watchexec
+          yazi
+          zellij
         ];
 
         shellAliases = {
