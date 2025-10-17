@@ -59,7 +59,6 @@ flake @ {
       ++ [
         "${inputs.self}/modules/nix/nixpkgs.nix"
         "${inputs.self}/lib/modules/home/system-config-support.nix"
-        inputs.sops-nix.homeManagerModules.sops
         inputs.vault.homeModules.default
         inputs.nix-index-database.homeModules.nix-index
       ]
