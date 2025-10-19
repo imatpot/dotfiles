@@ -20,6 +20,7 @@ outputs.lib.mkFor system hostname {
       streaming.enable = true;
       spotify.enable = true;
       virtualisation.enable = true;
+      matrix.enable = true;
 
       stylix.system-wide = true;
 
