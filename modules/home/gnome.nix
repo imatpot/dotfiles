@@ -246,7 +246,7 @@ in
             focus-highlight-color = "#ffffff";
             focus-highlight-opacity = 10;
             isolate-locations = false;
-            show-apps-icon-file = builtins.toString ./images/nix.white.png;
+            show-apps-icon-file = builtins.toString ./images/icons/nix.png;
             show-apps-icon-side-padding = 8;
             trans-use-custom-bg = true;
             trans-use-custom-opacity = true;
