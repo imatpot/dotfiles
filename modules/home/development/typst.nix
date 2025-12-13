@@ -13,6 +13,6 @@ outputs.lib.mkConfigModule config false "dev.typst"
     tinymist
     pandoc
     texliveSmall
-    poppler_utils
+    poppler-utils
   ];
 }

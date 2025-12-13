@@ -8,13 +8,15 @@
     overlays = [
       (_: prev: {
         master = import inputs.nixpkgs-master {
-          inherit (prev) system config overlays;
+          inherit (prev) config;
+          system = prev.stdenv.hostPlatform.system;
         };
       })
 
       (_: prev: {
         unstable = import inputs.nixpkgs-unstable {
-          inherit (prev) system config overlays;
+          inherit (prev) config;
+          system = prev.stdenv.hostPlatform.system;
         };
       })
 
@@ -24,16 +26,27 @@
         };
       })
 
+      # https://github.com/NixOS/nixpkgs/issues/437992#issuecomment-3380880457
       (_: prev: {
-        nixvim = inputs.nixvim.packages.${prev.system}.nvim;
+        inherit
+          (import inputs.nixpkgs-stremio {
+            inherit (prev) config;
+            system = prev.stdenv.hostPlatform.system;
+          })
+          stremio
+          ;
       })
 
       (_: prev: {
-        nix-alien = inputs.nix-alien.packages.${prev.system}.default;
+        nixvim = inputs.nixvim.packages.${prev.stdenv.hostPlatform.system}.nvim;
       })
 
       (_: prev: {
-        zen-browser = inputs.zen-browser.packages.${prev.system}.default;
+        nix-alien = inputs.nix-alien.packages.${prev.stdenv.hostPlatform.system}.default;
+      })
+
+      (_: prev: {
+        zen-browser = inputs.zen-browser.packages.${prev.stdenv.hostPlatform.system}.default;
       })
     ];
   };

@@ -1,7 +1,7 @@
 {lib, ...}: {
-  programs.git = {
-    userName = lib.mkDefault "Mladen Branković";
-    userEmail = lib.mkDefault "root@brankovic.dev";
+  programs.git.settings.user = {
+    name = lib.mkDefault "Mladen Branković";
+    email = lib.mkDefault "root@brankovic.dev";
   };
 
   modules = {

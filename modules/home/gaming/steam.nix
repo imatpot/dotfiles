@@ -25,7 +25,7 @@ outputs.lib.mkModule config config.modules.gaming.enable "gaming.steam"
 
       home = {
         packages = with pkgs; [
-          protonup
+          protonup-ng
         ];
 
         sessionVariables = {
@@ -37,7 +37,7 @@ outputs.lib.mkModule config config.modules.gaming.enable "gaming.steam"
           # bash
           ''
             if [ ! -d "${STEAM_EXTRA_COMPAT_TOOLS_PATHS}" ]; then
-              yes | ${pkgs.protonup}/bin/protonup
+              yes | ${pkgs.protonup-ng}/bin/protonup
             fi
           '';
       };
