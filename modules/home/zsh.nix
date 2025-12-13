@@ -124,6 +124,26 @@ outputs.lib.mkConfigModule config true "zsh" {
         cursor "$ZHCURSOR_PATH"
       }
 
+      zzed() {
+        ZZED_PATH="$(zoxide query "$@")"
+
+        if [ -z "$ZZED_PATH" ]; then
+          return 1
+        fi
+
+        zed "$ZZED_PATH"
+      }
+
+      zhzed() {
+        ZHZED_PATH="$(zoxide query "$(pwd)" "$@")"
+
+        if [ -z "$ZHZED_PATH" ]; then
+          return 1
+        fi
+
+        zed "$ZHZED_PATH"
+      }
+
       zhx() {
         ZHX_PATH="$(zoxide query "$(pwd)" "$@")"
 
