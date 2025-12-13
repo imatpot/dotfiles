@@ -29,6 +29,10 @@
       })
 
       (_: prev: {
+        nix-alien = inputs.nix-alien.packages.${prev.system}.default;
+      })
+
+      (_: prev: {
         zen-browser = inputs.zen-browser.packages.${prev.system}.default;
       })
     ];

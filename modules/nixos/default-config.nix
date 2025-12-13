@@ -39,6 +39,7 @@ with outputs.lib; {
         curl
         nmap
         ffmpeg
+        nix-alien
       ]
       ++ outputs.lib.optionals config.modules.gui.enable [
         firefox

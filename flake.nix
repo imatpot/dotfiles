@@ -36,6 +36,14 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        nix-index-database.follows = "nix-index-database";
+      };
+    };
+
     # mac-app-util = {
     #   url = "github:hraban/mac-app-util";
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";

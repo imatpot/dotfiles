@@ -103,6 +103,21 @@
         "type": "github"
       }
     },
+    "flake-compat": {
+      "locked": {
+        "lastModified": 1761588595,
+        "narHash": "sha256-XKUZz9zewJNUj46b4AJdiRZJAvSZ0Dqj2BNfXvFlJC4=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "f387cd2afec9419c8ee37694406ca490c3f34ee5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -321,6 +336,30 @@
       "original": {
         "owner": "Lxtharia",
         "repo": "minegrub-theme",
+        "type": "github"
+      }
+    },
+    "nix-alien": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nix-index-database": [
+          "nix-index-database"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762007860,
+        "narHash": "sha256-wDaM4D0Fqt0nCoFbZsi3mtAkIzzsbGdmuj+356KHEvU=",
+        "owner": "thiagokokada",
+        "repo": "nix-alien",
+        "rev": "2c770275b2fb78c813a52a4d52ba2d27789d8ec3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thiagokokada",
+        "repo": "nix-alien",
         "type": "github"
       }
     },
@@ -553,11 +592,11 @@
         "prettypst": "prettypst"
       },
       "locked": {
-        "lastModified": 1760196781,
-        "narHash": "sha256-5cEK5X9vMP9lQEWnJeP/lSgo+Mr6ifogrwW6AAcmviY=",
+        "lastModified": 1762271863,
+        "narHash": "sha256-+mY8ZBzQ2+m3yWSS8w0u1OGIR6rUX+srEv31yE/Dt7s=",
         "owner": "imatpot",
         "repo": "nixvim",
-        "rev": "b675dd66a78b3eb2397b0a88c5fc1e3c76645671",
+        "rev": "711b2f014a4fae1eaa46c69a20326935495cfb51",
         "type": "github"
       },
       "original": {
@@ -700,6 +739,7 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "minegrub-theme": "minegrub-theme",
+        "nix-alien": "nix-alien",
         "nix-darwin": "nix-darwin",
         "nix-flatpak": "nix-flatpak",
         "nix-gaming": "nix-gaming",
@@ -957,11 +997,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759982773,
-        "narHash": "sha256-HlTQoXRytul3jjek7vRV0Qk7voDB3Fy8RSIzDSvHIAQ=",
+        "lastModified": 1764216441,
+        "narHash": "sha256-wvxWNSm19K5zSmTkQNkYwxMBZXOuZCbA45jiT1R9myU=",
         "owner": "youwen5",
         "repo": "zen-browser-flake",
-        "rev": "f2f8aff94529e763665b807bad23396aed9d1fe8",
+        "rev": "d620f0b8fac4e9b6ee2369fca071f4ea854399f6",
         "type": "github"
       },
       "original": {

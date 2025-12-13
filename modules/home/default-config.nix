@@ -29,6 +29,7 @@ with outputs.lib;
           watchexec
           yazi
           zellij
+          nix-alien
         ];
 
         shellAliases = {
