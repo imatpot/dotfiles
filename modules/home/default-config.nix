@@ -30,6 +30,7 @@ with outputs.lib;
           yazi
           zellij
           nix-alien
+          television
         ];
 
         shellAliases = {
