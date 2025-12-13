@@ -15,6 +15,8 @@ outputs.lib.mkConfigModule config config.modules.gui.enable "ghostty" {
     settings = {
       adjust-cell-height = "15%";
       background-blur = 20;
+      window-width = 128;
+      window-height = 32;
       window-padding-x = 8;
       window-padding-y = 8;
       window-inherit-working-directory = false;
