@@ -17,8 +17,17 @@ outputs.lib.mkModule config true "virtualisation" {
     oci-containers.backend = lib.mkOptionDefault config.modules.virtualisation.backend;
   };
 
-  environment.systemPackages = with pkgs; [
-    docker-compose
-    podman-compose
-  ];
+  environment = {
+    variables = {
+      PODMAN_COMPOSE_PROVIDER =
+        if config.modules.virtualisation.backend == "podman"
+        then lib.getExe pkgs.podman-compose
+        else null;
+    };
+
+    systemPackages = with pkgs; [
+      docker-compose
+      podman-compose
+    ];
+  };
 }
