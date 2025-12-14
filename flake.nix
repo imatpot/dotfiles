@@ -8,7 +8,7 @@
     nur.url = "github:nix-community/nur";
 
     # https://github.com/NixOS/nixpkgs/issues/437992#issuecomment-3380880457
-    nixpkgs-stremio.url = "github:nixos/nixpkgs/5135c59491985879812717f4c9fea69604e7f26f";
+    nixpkgs-stremio.url = "github:nixos/nixpkgs/25845a52fee515073b0bcf8503ed0f2f78ce89a5";
 
     vault.url = "git+ssh://git@github.com/imatpot/vault";
     nixvim.url = "github:imatpot/nixvim";

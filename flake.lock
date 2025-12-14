@@ -491,17 +491,17 @@
     },
     "nixpkgs-stremio": {
       "locked": {
-        "lastModified": 1740560979,
-        "narHash": "sha256-Vr3Qi346M+8CjedtbyUevIGDZW8LcA1fTG0ugPY/Hic=",
+        "lastModified": 1756055385,
+        "narHash": "sha256-f5hXGV3V3kNNTn7k9cApbJVvndZPwLmi7NpECG0qiKQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5135c59491985879812717f4c9fea69604e7f26f",
+        "rev": "25845a52fee515073b0bcf8503ed0f2f78ce89a5",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5135c59491985879812717f4c9fea69604e7f26f",
+        "rev": "25845a52fee515073b0bcf8503ed0f2f78ce89a5",
         "type": "github"
       }
     },
