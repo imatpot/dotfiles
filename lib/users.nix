@@ -56,9 +56,14 @@ flake @ {
       outputs.lib.enumeratePaths {
         path = "${inputs.self}/modules/home";
       }
+      ++ (
+        outputs.lib.enumeratePaths rec {
+          path = "${inputs.self}/lib/modules/home";
+          exclude = ["${path}/system-submodule.nix"];
+        }
+      )
       ++ [
         "${inputs.self}/modules/nix/nixpkgs.nix"
-        "${inputs.self}/lib/modules/home/system-config-support.nix"
         inputs.vault.homeModules.default
         inputs.nix-index-database.homeModules.nix-index
       ]

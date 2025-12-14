@@ -9,9 +9,9 @@
 }:
 with outputs.lib; {
   imports =
-    [
-      "${inputs.self}/lib/modules/nixos/user-nixos-configs.nix"
-    ]
+    (enumeratePaths {
+      path = "${inputs.self}/lib/modules/nixos";
+    })
     ++ (enumeratePaths {
       path = "${inputs.self}/modules/nixos";
       exclude = [./default-config.nix];
