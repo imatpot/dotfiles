@@ -12,6 +12,5 @@ outputs.lib.mkConfigModule config true "ssh"
 
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = false;
   };
 }
