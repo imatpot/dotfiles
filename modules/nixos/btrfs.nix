@@ -6,7 +6,7 @@
 outputs.lib.mkConfigModule config false "btrfs" {
   services.btrfs.autoScrub = {
     enable = true;
-    interval = "weekly";
+    interval = "Mon *-*-* 03:00:00 UTC";
     fileSystems = ["/"];
   };
 }
