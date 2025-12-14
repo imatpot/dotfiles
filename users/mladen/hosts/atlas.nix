@@ -23,6 +23,15 @@ outputs.lib.mkFor system hostname {
           };
         };
 
+        jellyfin = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/jellyfin";
+            media = data;
+          };
+        };
+
         qbittorrent = {
           enable = true;
 
