@@ -23,6 +23,14 @@ outputs.lib.mkFor system hostname {
           };
         };
 
+        qbittorrent = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/qbittorrent";
+          };
+        };
+
         gluetun = {
           enable = true;
 
