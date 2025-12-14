@@ -22,6 +22,19 @@ outputs.lib.mkFor system hostname {
             root = containers + "/lunaro-manager";
           };
         };
+
+        gluetun = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/gluetun";
+          };
+
+          vpn = {
+            provider = "protonvpn";
+            type = "wireguard";
+          };
+        };
       };
     };
   };
