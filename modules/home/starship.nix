@@ -55,7 +55,7 @@ outputs.lib.mkConfigModule config true "starship"
       };
 
       git_commit = {
-        format = "[commmit:$hash( $tag)]($style)";
+        format = "[commit:$hash( $tag)]($style)";
         tag_symbol = "tag:";
         style = "bold blue";
         tag_disabled = false;
