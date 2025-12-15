@@ -24,6 +24,8 @@ outputs.lib.mkConfigModule config true "git"
           aliases = alias;
           alii = alias;
 
+          count = "rev-list --all --count HEAD";
+
           quick = "!fn() { git add -A && git commit --allow-empty -m \"$*\" && git push; }; fn";
           again = "!fn() { git add -A && git commit --amend --no-edit --gpg-sign; }; fn";
 
