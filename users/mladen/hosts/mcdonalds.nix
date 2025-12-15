@@ -32,6 +32,7 @@ in
           plantuml.enable = true;
           python.enable = true;
           rust.enable = true;
+          rust.rustup.enable = true;
           typst.enable = true;
         };
       };

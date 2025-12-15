@@ -4,25 +4,40 @@
   pkgs,
   ...
 }:
-outputs.lib.mkConfigModule config false "dev.rust"
+outputs.lib.mkModule config false "dev.rust"
 {
-  home = {
-    packages = with pkgs; [
-      cargo
-      rustc
-      rustfmt
-      clippy
+  rustup.enable = outputs.lib.mkDefaultEnableOption false;
+}
+{
+  home =
+    if config.modules.dev.rust.rustup.enable
+    then {
+      packages = with pkgs; [
+        rustup
+      ];
 
-      gcc
-      stdenv.cc.cc.lib
-      libgcc.lib
+      sessionVariables = {
+        RUSTUP_HOME = "${config.home.homeDirectory}/.rustup";
+        CARGO_HOME = "${config.home.homeDirectory}/.cargo";
+      };
+    }
+    else {
+      packages = with pkgs; [
+        cargo
+        rustc
+        rustfmt
+        clippy
 
-      openssl
-      pkg-config
-    ];
+        gcc
+        stdenv.cc.cc.lib
+        libgcc.lib
 
-    sessionVariables = {
-      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+        openssl
+        pkg-config
+      ];
+
+      sessionVariables = {
+        RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+      };
     };
-  };
 }
