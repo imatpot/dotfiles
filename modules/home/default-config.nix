@@ -29,7 +29,6 @@ with outputs.lib;
           watchexec
           yazi
           zellij
-          nix-alien
           television
         ];
 
@@ -79,7 +78,12 @@ with outputs.lib;
     };
 
     systems.linux = {
-      home.homeDirectory = outputs.lib.mkDefault "/home/${username}";
+      home = {
+        homeDirectory = outputs.lib.mkDefault "/home/${username}";
+        packages = with pkgs; [
+          nix-alien
+        ];
+      };
 
       nixos.users.users.${username} = {
         isNormalUser = true;

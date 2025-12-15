@@ -21,6 +21,13 @@
       })
 
       (_: prev: {
+        stable = import inputs.nixpkgs-stable {
+          inherit (prev) config;
+          system = prev.stdenv.hostPlatform.system;
+        };
+      })
+
+      (_: prev: {
         nur = import inputs.nur {
           pkgs = prev;
         };
@@ -41,7 +48,7 @@
         nixvim = inputs.nixvim.packages.${prev.stdenv.hostPlatform.system}.nvim;
       })
 
-      (_: prev: {
+      (_: prev: prev.lib.mkIf (prev.stdenv.hostPlatform.isLinux) {
         nix-alien = inputs.nix-alien.packages.${prev.stdenv.hostPlatform.system}.default;
       })
 

@@ -2,6 +2,7 @@
   outputs,
   pkgs,
   config,
+  system,
   ...
 }:
 outputs.lib.mkConfigModule config true "git"
@@ -53,7 +54,9 @@ outputs.lib.mkConfigModule config true "git"
   };
 
   home = {
-    packages = with pkgs; [
+    packages = with pkgs; if outputs.lib.isDarwin system then [
+      stable.gitui # https://github.com/NixOS/nixpkgs/issues/450861
+    ] else [
       gitui
     ];
   };

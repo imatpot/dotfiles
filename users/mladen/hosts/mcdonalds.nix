@@ -13,7 +13,7 @@
     alias nixvim="nix run path:/Users/mladen/Developer/life/nixvim --"
     alias nv="nixvim"
 
-    export PATH="$PATH:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/npm/bin:/opt/homebrew/bin"
+    export PATH="$PATH:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/npm/bin:/opt/homebrew/bin:${config.home.homeDirectory}/.risc0/bin"
   '';
 in
   outputs.lib.mkFor system hostname {
@@ -53,11 +53,9 @@ in
         zsh.initContent = extra;
 
         git = {
-          userName = outputs.lib.mkForce "Mladen Branković";
-          userEmail = outputs.lib.mkForce "mladen.brankovic@golog.ch";
-          signing = outputs.lib.mkForce {
-            key = "588B95BE8E35DD34";
-            signByDefault = true;
+          settings.user = {
+            name = outputs.lib.mkForce "Mladen Branković";
+            email = outputs.lib.mkForce "mladen.brankovic@golog.ch";
           };
 
           includes = [
