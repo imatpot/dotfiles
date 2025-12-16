@@ -19,6 +19,7 @@ outputs.lib.mkConfigModule config true "git"
 
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
+        pull.rebase = true;
 
         alias = rec {
           alias = "config --get-regexp alias";
