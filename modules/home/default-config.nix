@@ -81,7 +81,7 @@ with outputs.lib;
       home = {
         homeDirectory = outputs.lib.mkDefault "/home/${username}";
         packages = with pkgs; [
-          nix-alien
+          # nix-alien
         ];
       };
 

@@ -3,10 +3,18 @@
   system,
   hostname,
   config,
+  pkgs,
   ...
 }:
 outputs.lib.mkFor system hostname {
   hosts.atlas = {
+    home.packages = with pkgs; [
+      zellij
+      pv
+      pigz
+      yazi
+    ];
+
     modules = {
       samba.enable = true;
       stylix.system-wide = true;
@@ -32,11 +40,45 @@ outputs.lib.mkFor system hostname {
           };
         };
 
+        lidarr = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/lidarr";
+            media = data + "/audio/music";
+          };
+        };
+
+        jackett = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/jackett";
+          };
+        };
+
+        prowlarr = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/prowlarr";
+          };
+        };
+
         qbittorrent = {
           enable = true;
 
           dirs = {
             root = containers + "/qbittorrent";
+          };
+        };
+
+        slskd = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/slskd";
+            downloads = data + "/audio/slskd";
           };
         };
 

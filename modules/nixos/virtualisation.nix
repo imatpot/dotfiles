@@ -19,6 +19,7 @@ outputs.lib.mkModule config true "virtualisation" {
 
   environment = {
     variables = {
+      PODMAN_COMPOSE_WARNING_LOGS = "false";
       PODMAN_COMPOSE_PROVIDER =
         if config.modules.virtualisation.backend == "podman"
         then lib.getExe pkgs.podman-compose

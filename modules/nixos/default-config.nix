@@ -39,7 +39,7 @@ with outputs.lib; {
         curl
         nmap
         ffmpeg
-        nix-alien
+        # nix-alien
         nixos-firewall-tool
       ]
       ++ outputs.lib.optionals config.modules.gui.enable [
