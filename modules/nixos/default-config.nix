@@ -40,6 +40,7 @@ with outputs.lib; {
         nmap
         ffmpeg
         nix-alien
+        nixos-firewall-tool
       ]
       ++ outputs.lib.optionals config.modules.gui.enable [
         firefox
