@@ -201,6 +201,7 @@ in
               "org.gnome.Nautilus.desktop"
               "com.mitchellh.ghostty.desktop"
               "zen.desktop"
+              "dev.zed.Zed.desktop"
               "code.desktop"
               "vesktop.desktop"
               "spotify.desktop"
