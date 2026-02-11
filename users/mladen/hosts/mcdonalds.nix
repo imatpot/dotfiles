@@ -22,7 +22,6 @@ in
         fonts.enable = true;
         dev = {
           adb.enable = true;
-          csharp.enable = true;
           databases.enable = true;
           flutter.enable = true;
           haskell.enable = true;
