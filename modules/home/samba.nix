@@ -57,7 +57,7 @@ outputs.lib.mkConfigModule config false "samba" (
       system.activationScripts.sambaUsers.text =
         # bash
         ''
-          if ! ${outputs.lib.getExe' pkgs.samba "pdbedit"} -L | grep -q "^${username}:"; then
+          if ! ${outputs.lib.getExe' pkgs.samba "pdbedit"} -L | ${outputs.lib.getExe' pkgs.gawk "awk"} -F: '$1 == "${username}" {found=1; exit} END {exit !found}'; then
             (echo "changeme"; echo "changeme") | ${outputs.lib.getExe' pkgs.samba "smbpasswd"} -s -a ${username}
           fi
         '';

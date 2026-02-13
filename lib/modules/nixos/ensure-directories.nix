@@ -11,9 +11,10 @@
   };
 
   config = {
-    system.userActivationScripts."dotfiles-ensure-directories".text = let
+    system.activationScripts."dotfiles-ensure-directories".text = let
       dirs =
-        outputs.lib.concatMapStrings
+        outputs.lib.concatMapStringsSep
+        " "
         (dir: ''"${dir}"'')
         config.system.ensureDirectories;
     in ''
