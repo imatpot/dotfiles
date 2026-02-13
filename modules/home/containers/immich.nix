@@ -98,7 +98,7 @@ outputs.lib.mkModule config false "containers.immich"
           };
 
           immich-machine-learning = {
-            image = "ghcr.io/immich-app/immich-machine-learning:release";
+            image = "ghcr.io/immich-app/immich-machine-learning:release-cuda";
             pull = "newer";
 
             hostname = "immich_machine_learning";
