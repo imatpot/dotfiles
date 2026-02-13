@@ -31,6 +31,15 @@ outputs.lib.mkFor system hostname {
           };
         };
 
+        immich = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/immich";
+            media = data;
+          };
+        };
+
         jellyfin = {
           enable = true;
 

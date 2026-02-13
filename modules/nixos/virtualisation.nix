@@ -13,7 +13,12 @@ outputs.lib.mkModule config true "virtualisation" {
 } {
   virtualisation = {
     docker.enable = true;
-    podman.enable = true;
+
+    podman = {
+      enable = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+
     oci-containers.backend = lib.mkOptionDefault config.modules.virtualisation.backend;
   };
 
