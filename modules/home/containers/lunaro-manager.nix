@@ -18,6 +18,13 @@ outputs.lib.mkModule config false "containers.lunaro-manager"
     logDir = "${cfg.dirs.root}/data/lunaro-manager/log";
     dataDir = "${cfg.dirs.root}/data/lunaro-manager/data";
   in {
+    sops.templates.gluetun-env.content = ''
+      CLIENT_ID=${config.sops.placeholder."containers/lunaro-manager/client_id"}
+      CLIENT_TOKEN=${config.sops.placeholder."containers/lunaro-manager/client_token"}
+      HOME_GUILD_ID=${config.sops.placeholder."containers/lunaro-manager/home_guild_id"}
+      PLAYING_ROLE_ID=${config.sops.placeholder."containers/lunaro-manager/playing_role_id"}
+    '';
+
     nixos = {
       system.ensureDirectories = [
         logDir
@@ -39,7 +46,7 @@ outputs.lib.mkModule config false "containers.lunaro-manager"
             };
 
             environmentFiles = [
-              (cfg.dirs.root + "/.env")
+              config.sops.templates.gluetun-env.path
             ];
 
             volumes = [

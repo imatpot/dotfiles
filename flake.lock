@@ -1014,11 +1014,11 @@
         "sops-nix": "sops-nix_2"
       },
       "locked": {
-        "lastModified": 1756211567,
-        "narHash": "sha256-sfpeJ6lZOuQi486HC/86qeSEpmuWXEaSC76FinUffoA=",
+        "lastModified": 1770980836,
+        "narHash": "sha256-eURsC8op4tNgFjYkBUhQWrPFlaax0phSuSLo5J4UPJ8=",
         "ref": "refs/heads/main",
-        "rev": "af56290d56154e80a3684fc3fa83a8f3a5d39190",
-        "revCount": 11,
+        "rev": "9399e52afa9ac3a804d9a7fc6090603bc726fad3",
+        "revCount": 15,
         "type": "git",
         "url": "ssh://git@github.com/imatpot/vault"
       },

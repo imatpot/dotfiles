@@ -33,6 +33,11 @@ outputs.lib.mkModule config false "containers.gluetun"
     cfg = config.modules.containers.gluetun;
     configDir = "${cfg.dirs.root}/data/gluetun/config";
   in {
+    sops.templates.gluetun-env.content = ''
+      WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."containers/gluetun/wireguard_key"}
+      SERVER_COUNTRIES=${config.sops.placeholder."containers/gluetun/servers"}
+    '';
+
     nixos = {
       system.ensureDirectories = [
         configDir
@@ -58,7 +63,7 @@ outputs.lib.mkModule config false "containers.gluetun"
             };
 
             environmentFiles = [
-              (cfg.dirs.root + "/.env")
+              config.sops.templates.gluetun-env.path
             ];
 
             capabilities = {
