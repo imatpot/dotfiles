@@ -50,7 +50,7 @@ outputs.lib.mkFor system hostname {
         };
 
         jackett = {
-          enable = true;
+          enable = false;
 
           dirs = {
             root = containers + "/jackett";
@@ -58,7 +58,7 @@ outputs.lib.mkFor system hostname {
         };
 
         prowlarr = {
-          enable = true;
+          enable = false;
 
           dirs = {
             root = containers + "/prowlarr";
