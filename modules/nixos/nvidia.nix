@@ -53,10 +53,10 @@ outputs.lib.mkModule config false "nvidia"
     nvidia-container-toolkit.enable = true;
   };
 
-  virtualisation = {
-    docker.enableNvidia = true;
-    podman.enableNvidia = true;
-  };
+  virtualisation.containers.containersConf.settings.engine.cdi_spec_dirs = [
+    "/etc/cdi"
+    "/var/run/cdi"
+  ];
 
   environment.systemPackages = with pkgs;
     [
