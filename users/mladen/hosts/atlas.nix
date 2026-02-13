@@ -40,8 +40,16 @@ outputs.lib.mkFor system hostname {
           };
         };
 
-        lidarr = {
+        stremio = {
           enable = true;
+
+          dirs = {
+            root = containers + "/stremio";
+          };
+        };
+
+        lidarr = {
+          enable = false;
 
           dirs = {
             root = containers + "/lidarr";
