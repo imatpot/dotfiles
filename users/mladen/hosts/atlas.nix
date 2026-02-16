@@ -111,6 +111,18 @@ outputs.lib.mkFor system hostname {
             type = "wireguard";
           };
         };
+
+        comfyui = {
+          enable = true;
+
+          dirs = {
+            root = "${containers}/comfyui";
+            models = "${data}/software/ai/stable-diffusion/models";
+            nodes = "${data}/software/ai/stable-diffusion/nodes";
+            workflows = "${data}/software/ai/stable-diffusion/workflows";
+            outputs = data;
+          };
+        };
       };
     };
   };
