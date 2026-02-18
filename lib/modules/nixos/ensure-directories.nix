@@ -10,7 +10,7 @@
     };
   };
 
-  config = {
+  config = outputs.lib.mkIf (builtins.length config.system.ensureDirectories > 0) {
     system.activationScripts."dotfiles-ensure-directories".text = let
       dirs =
         outputs.lib.concatMapStringsSep
