@@ -14,7 +14,8 @@ in
   {
     home.packages = with pkgs; [
       android-tools
-      master.scrcpy
+      scrcpy
+      qtscrcpy
       adbitch
     ];
   }

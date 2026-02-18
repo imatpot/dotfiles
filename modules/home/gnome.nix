@@ -203,8 +203,11 @@ in
               "zen.desktop"
               "dev.zed.Zed.desktop"
               "code.desktop"
+              "Fluffychat.desktop"
               "vesktop.desktop"
+              "feishin.desktop"
               "spotify.desktop"
+              "QtScrcpy.desktop"
             ];
           };
 

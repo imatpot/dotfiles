@@ -6,6 +6,6 @@
 }:
 outputs.lib.mkConfigModule config false "streaming" {
   home.packages = with pkgs; [
-    stremio
+    # stremio # build broken >:(
   ];
 }

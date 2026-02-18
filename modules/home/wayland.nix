@@ -17,7 +17,7 @@
   };
 in
   outputs.lib.mkConfigModule config config.modules.gui.enable "wayland" {
-    home.packages = with pkgs; [xorg.xeyes wl-clipboard];
+    home.packages = with pkgs; [xeyes wl-clipboard];
 
     # For application launchers. Breaks XServer users on the same system!
     nixos.environment.sessionVariables = waylandVariables;
