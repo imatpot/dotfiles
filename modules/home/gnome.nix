@@ -203,7 +203,7 @@ in
               "zen.desktop"
               "dev.zed.Zed.desktop"
               "code.desktop"
-              "Fluffychat.desktop"
+              "element-desktop.desktop"
               "vesktop.desktop"
               "feishin.desktop"
               "spotify.desktop"
