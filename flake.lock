@@ -579,11 +579,11 @@
         "prettypst": "prettypst"
       },
       "locked": {
-        "lastModified": 1771354480,
-        "narHash": "sha256-9YWd+YiiOCgQXmZYDlwybL49BQAe4RTG+duXR73cHMg=",
+        "lastModified": 1771363908,
+        "narHash": "sha256-ltdsab5EllW0O+6dM+Btn9v0j/iOOOrG+deuyLqGgU4=",
         "owner": "imatpot",
         "repo": "nixvim",
-        "rev": "501d7749307fca33b1dd73eb91f6951c96030fad",
+        "rev": "ac4bf35b5bbf91f6c56ce89386f250e308f7ff67",
         "type": "github"
       },
       "original": {
