@@ -4,9 +4,10 @@
   pkgs,
   ...
 }:
-outputs.lib.mkConfigModule config false "spotify" {
+outputs.lib.mkConfigModule config false "music" {
   home.packages = with pkgs; [
     spotify
     spicetify-cli
+    feishin
   ];
 }

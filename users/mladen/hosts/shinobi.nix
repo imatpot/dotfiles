@@ -18,7 +18,7 @@ outputs.lib.mkFor system hostname {
       backblaze.enable = true;
       sunshine.enable = true;
       streaming.enable = true;
-      spotify.enable = true;
+      music.enable = true;
       virtualisation.enable = true;
       matrix.enable = true;
 
