@@ -95,6 +95,7 @@ with outputs.lib;
       home = {
         homeDirectory = outputs.lib.mkDefault "/Users/${username}";
         shellAliases.nix-rosetta = "nix --system x86_64-darwin";
+        sessionVariables.HOMEBREW_NO_AUTO_UPDATE = "1";
       };
 
       macos.users.users.${username} = {
