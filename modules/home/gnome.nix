@@ -203,6 +203,7 @@ in
               "zen.desktop"
               "dev.zed.Zed.desktop"
               "code.desktop"
+              "in.cinny.Cinny.desktop"
               "element-desktop.desktop"
               "vesktop.desktop"
               "feishin.desktop"
