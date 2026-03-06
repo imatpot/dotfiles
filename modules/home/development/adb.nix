@@ -2,6 +2,8 @@
   outputs,
   config,
   pkgs,
+  system,
+  hostname,
   ...
 }: let
   adbitch = pkgs.writeShellScriptBin "adbitch" ''
@@ -11,11 +13,15 @@
   '';
 in
   outputs.lib.mkConfigModule config true "dev.adb"
+  <| outputs.lib.mkFor system hostname
   {
-    home.packages = with pkgs; [
+    common.home.packages = with pkgs; [
       android-tools
       scrcpy
-      qtscrcpy
       adbitch
+    ];
+    
+    systems.linux.home.packages = with pkgs; [
+      qtscrcpy
     ];
   }
