@@ -2,10 +2,15 @@
   outputs,
   system,
   hostname,
+  pkgs,
   ...
 }:
 outputs.lib.mkFor system hostname {
   hosts.shinobi = {
+    home.packages = with pkgs; [
+      telegram-desktop
+    ];
+
     modules = {
       gui.enable = true;
 
