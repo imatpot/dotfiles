@@ -20,6 +20,7 @@ outputs.lib.mkConfigModule config true "dev.nix"
       alejandra
       nixpkgs-review
       nixfmt
+      nurl
     ];
   };
 }
