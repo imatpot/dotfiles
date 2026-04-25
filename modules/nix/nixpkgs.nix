@@ -33,15 +33,11 @@
         };
       })
 
-      # https://github.com/NixOS/nixpkgs/issues/437992#issuecomment-3380880457
       (_: prev: {
-        inherit
-          (import inputs.nixpkgs-stremio {
-            inherit (prev) config;
-            system = prev.stdenv.hostPlatform.system;
-          })
-          stremio
-          ;
+        ntrviewer-hr = (import inputs.nixpkgs-ntrviewer-hr {
+          # inherit (prev) config;
+          system = prev.stdenv.hostPlatform.system;
+        }).ntrviewer-hr;
       })
 
       (_: prev: {

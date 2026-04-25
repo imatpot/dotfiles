@@ -40,6 +40,7 @@ with outputs.lib; {
         nmap
         ffmpeg
         # nix-alien
+        inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.default
         nixos-firewall-tool
       ]
       ++ outputs.lib.optionals config.modules.gui.enable [

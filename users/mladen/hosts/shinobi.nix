@@ -7,8 +7,13 @@
 }:
 outputs.lib.mkFor system hostname {
   hosts.shinobi = {
+    nixos.networking.firewall.enable = false;
+
     home.packages = with pkgs; [
       telegram-desktop
+      qbittorrent-enhanced
+      parsec-bin
+      ntrviewer-hr
     ];
 
     modules = {

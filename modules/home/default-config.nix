@@ -80,9 +80,6 @@ with outputs.lib;
     systems.linux = {
       home = {
         homeDirectory = outputs.lib.mkDefault "/home/${username}";
-        packages = with pkgs; [
-          # nix-alien
-        ];
       };
 
       nixos.users.users.${username} = {

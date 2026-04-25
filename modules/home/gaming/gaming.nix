@@ -10,6 +10,7 @@ outputs.lib.mkConfigModule config false "gaming" (outputs.lib.mkFor system hostn
   systems.linux = {
     home.packages = with pkgs; [
       master.r2modman
+      master.owmods-gui
     ];
   };
 })
