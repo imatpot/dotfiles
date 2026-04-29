@@ -51,6 +51,12 @@
       (_: prev: {
         zen-browser = inputs.zen-browser.packages.${prev.stdenv.hostPlatform.system}.default;
       })
+
+      inputs.niri.overlays.niri
+
+      (_: prev: {
+        noctalia-shell = inputs.noctalia-shell.packages.${prev.stdenv.hostPlatform.system}.default;
+      })
     ];
   };
 }

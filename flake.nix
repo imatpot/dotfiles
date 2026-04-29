@@ -71,6 +71,19 @@
       url = "github:Lxtharia/minegrub-theme";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+      };
+    };
+    
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell"; # https://github.com/noctalia-dev/noctalia-shell/issues/2458
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let

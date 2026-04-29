@@ -50,6 +50,8 @@ in rec {
           inputs.stylix.nixosModules.stylix
           inputs.minegrub-theme.nixosModules.default
           inputs.nix-flatpak.nixosModules.nix-flatpak
+          inputs.niri.nixosModules.niri
+          inputs.noctalia-shell.nixosModules.default
         ]
         ++ (
           if isVM

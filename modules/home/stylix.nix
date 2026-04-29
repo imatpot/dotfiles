@@ -7,6 +7,8 @@
 }: let
   stylix-config = {
     enable = true;
+    
+    targets.noctalia-shell.enable = true;
 
     polarity = "dark";
     image = config.modules.gui.wallpaper;

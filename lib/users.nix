@@ -45,6 +45,9 @@ flake @ {
             # Standalone-only, as it's incompatible with stylix.nixosModules.stylix
             # https://github.com/nix-community/stylix/issues/1719
             inputs.stylix.homeModules.stylix
+
+            # Standalone-only, as it's incompatible with niri.nixosModules.niri
+            inputs.niri.homeModules.niri
           ]
           ++ (outputs.lib.enumeratePaths {
             path = "${inputs.self}/users/${username}";
@@ -66,6 +69,7 @@ flake @ {
         "${inputs.self}/modules/nix/nixpkgs.nix"
         inputs.vault.homeModules.default
         inputs.nix-index-database.homeModules.nix-index
+        inputs.noctalia-shell.homeModules.default
       ]
       ++ outputs.lib.optionals (outputs.lib.isDarwin system) [
         # TODO: Check back later if it compiles again

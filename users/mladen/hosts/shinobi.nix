@@ -19,11 +19,15 @@ outputs.lib.mkFor system hostname {
     modules = {
       gui.enable = true;
 
+      wayland.enable = true;
+      gnome.enable = true;
+
+      niri.enable = true;
+      noctalia.enable = true;
+
       equalizer.enable = true;
       discord.enable = true;
       ghostty.enable = true;
-      gnome.enable = true;
-      wayland.enable = true;
       zen-browser.enable = true;
       backblaze.enable = true;
       sunshine.enable = true;
