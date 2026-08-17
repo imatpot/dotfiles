@@ -27,8 +27,6 @@ in
           haskell.enable = true;
           javascript.enable = true;
           kubernetes.enable = true;
-          azure.enable = true;
-          plantuml.enable = true;
           python.enable = true;
           rust.enable = true;
           rust.rustup.enable = true;
