@@ -21,6 +21,7 @@ outputs.lib.mkConfigModule config true "dev.nix"
       nixpkgs-review
       nixfmt
       nurl
+      hydra-check
     ];
   };
 }
