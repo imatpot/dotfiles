@@ -3,6 +3,7 @@
   outputs,
   system,
   hostname,
+  pkgs,
   ...
 }: let
   extra = ''
@@ -33,6 +34,8 @@ in
           typst.enable = true;
         };
       };
+
+      home.packages = [ pkgs.master.d2 ];
 
       home.file.backblaze-id.source =
         config.lib.file.mkOutOfStoreSymlink
