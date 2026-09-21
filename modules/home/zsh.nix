@@ -36,175 +36,178 @@ outputs.lib.mkConfigModule config true "zsh" {
       useFriendlyNames = true;
       plugins = [
         "hlissner/zsh-autopair"
-        "z-shell/zsh-diff-so-fancy"
       ];
     };
 
-    initContent = let
-      nixvimPath = "${config.home.homeDirectory}/${
-        if outputs.lib.isDarwin system
-        then "Developer"
-        else "Development"
-      }/life";
-    in ''
-      setopt nonomatch
+    initContent =
+      let
+        nixvimPath = "${config.home.homeDirectory}/${
+          if outputs.lib.isDarwin system then "Developer" else "Development"
+        }/life";
+      in
+      outputs.lib.mkMerge [
+        (outputs.lib.mkBefore ''
+          # macOS updates restore the stock /etc/zshrc and drop the Nix installer's block, so we need to revert that every time just in case :)
+          if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+            source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+          fi
+        '')
 
-      # Fix issues after macOS updates
-      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-      fi
+        ''
+          setopt nonomatch
 
-      zh() {
-        ZHERE_PATH="$(zoxide query "$(pwd)" "$@")"
+          zh() {
+            ZHERE_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHERE_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHERE_PATH" ]; then
+              return 1
+            fi
 
-        cd "$ZHERE_PATH"
-      }
+            cd "$ZHERE_PATH"
+          }
 
-      znvim() {
-        ZNVIM_PATH="$(zoxide query "$@")"
+          znvim() {
+            ZNVIM_PATH="$(zoxide query "$@")"
 
-        if [ -z "$ZNVIM_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZNVIM_PATH" ]; then
+              return 1
+            fi
 
-        nvim "$ZNVIM_PATH"
-      }
+            nvim "$ZNVIM_PATH"
+          }
 
-      zhnvim() {
-        ZHNVIM_PATH="$(zoxide query "$(pwd)" "$@")"
+          zhnvim() {
+            ZHNVIM_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHNVIM_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHNVIM_PATH" ]; then
+              return 1
+            fi
 
-        nvim "$ZHNVIM_PATH"
-      }
+            nvim "$ZHNVIM_PATH"
+          }
 
-      zcode() {
-        ZCODE_PATH="$(zoxide query "$@")"
+          zcode() {
+            ZCODE_PATH="$(zoxide query "$@")"
 
-        if [ -z "$ZCODE_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZCODE_PATH" ]; then
+              return 1
+            fi
 
-        code "$ZCODE_PATH"
-      }
+            code "$ZCODE_PATH"
+          }
 
-      zhcode() {
-        ZHCODE_PATH="$(zoxide query "$(pwd)" "$@")"
+          zhcode() {
+            ZHCODE_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHCODE_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHCODE_PATH" ]; then
+              return 1
+            fi
 
-        code "$ZHCODE_PATH"
-      }
+            code "$ZHCODE_PATH"
+          }
 
-      zcursor() {
-        ZCURSOR_PATH="$(zoxide query "$@")"
+          zcursor() {
+            ZCURSOR_PATH="$(zoxide query "$@")"
 
-        if [ -z "$ZCURSOR_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZCURSOR_PATH" ]; then
+              return 1
+            fi
 
-        cursor "$ZCURSOR_PATH"
-      }
+            cursor "$ZCURSOR_PATH"
+          }
 
-      zhcursor() {
-        ZHCURSOR_PATH="$(zoxide query "$(pwd)" "$@")"
+          zhcursor() {
+            ZHCURSOR_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHCURSOR_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHCURSOR_PATH" ]; then
+              return 1
+            fi
 
-        cursor "$ZHCURSOR_PATH"
-      }
+            cursor "$ZHCURSOR_PATH"
+          }
 
-      zzed() {
-        ZZED_PATH="$(zoxide query "$@")"
+          zzed() {
+            ZZED_PATH="$(zoxide query "$@")"
 
-        if [ -z "$ZZED_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZZED_PATH" ]; then
+              return 1
+            fi
 
-        zed "$ZZED_PATH"
-      }
+            zed "$ZZED_PATH"
+          }
 
-      zhzed() {
-        ZHZED_PATH="$(zoxide query "$(pwd)" "$@")"
+          zhzed() {
+            ZHZED_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHZED_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHZED_PATH" ]; then
+              return 1
+            fi
 
-        zed "$ZHZED_PATH"
-      }
+            zed "$ZHZED_PATH"
+          }
 
-      zhx() {
-        ZHX_PATH="$(zoxide query "$(pwd)" "$@")"
+          zhx() {
+            ZHX_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHX_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHX_PATH" ]; then
+              return 1
+            fi
 
-        cd "$ZHX_PATH"
-        hx
-      }
+            cd "$ZHX_PATH"
+            hx
+          }
 
-      zhhx() {
-        ZHHX_PATH="$(zoxide query "$(pwd)" "$@")"
+          zhhx() {
+            ZHHX_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHHX_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHHX_PATH" ]; then
+              return 1
+            fi
 
-        cd "$ZHHX_PATH"
-        hx
-      }
+            cd "$ZHHX_PATH"
+            hx
+          }
 
-      alias nixvim="nix run path:${nixvimPath}/nixvim --"
-      alias nv="nixvim"
+          alias nixvim="nix run path:${nixvimPath}/nixvim --"
+          alias nv="nixvim"
 
-      znixvim() {
-        ZNIXVIM_PATH="$(zoxide query "$@")"
+          znixvim() {
+            ZNIXVIM_PATH="$(zoxide query "$@")"
 
-        if [ -z "$ZNIXVIM_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZNIXVIM_PATH" ]; then
+              return 1
+            fi
 
-        cd "$ZNIXVIM_PATH"
-        nixvim
-      }
+            cd "$ZNIXVIM_PATH"
+            nixvim
+          }
 
-      zhnixvim() {
-        ZHNIXVIM_PATH="$(zoxide query "$(pwd)" "$@")"
+          zhnixvim() {
+            ZHNIXVIM_PATH="$(zoxide query "$(pwd)" "$@")"
 
-        if [ -z "$ZHNIXVIM_PATH" ]; then
-          return 1
-        fi
+            if [ -z "$ZHNIXVIM_PATH" ]; then
+              return 1
+            fi
 
-        cd "$ZHNIXVIM_PATH"
-        nixvim
-      }
+            cd "$ZHNIXVIM_PATH"
+            nixvim
+          }
 
-      znv() {
-        znixvim "$@"
-      }
+          znv() {
+            znixvim "$@"
+          }
 
-      zhnv() {
-        zhnixvim "$(pwd)" "$@"
-      }
+          zhnv() {
+            zhnixvim "$(pwd)" "$@"
+          }
 
-      eval "$(ssh-agent -s)" &> /dev/null
+          eval "$(ssh-agent -s)" &> /dev/null
 
-      # TODO: put this somewhere else but make sure it's after the ssh-agent is started
-      ssh-add ~/.ssh/aegis &> /dev/null
-      ssh-add ~/.ssh/mladen.brankovic.at.golog.ch &> /dev/null
-      ssh-add ~/.ssh/mladen.brankovic.at.students.fhnw.ch &> /dev/null
-    '';
+          # TODO: put this somewhere else but make sure it's after the ssh-agent is started
+          ssh-add ~/.ssh/aegis &> /dev/null
+          ssh-add ~/.ssh/mladen.brankovic.at.golog.ch &> /dev/null
+          ssh-add ~/.ssh/mladen.brankovic.at.students.fhnw.ch &> /dev/null
+        ''
+      ];
   };
 }
