@@ -4,8 +4,7 @@
   config,
   ...
 }:
-outputs.lib.mkConfigModule config true "git"
-{
+outputs.lib.mkConfigModule config true "git" {
   programs = {
     git = {
       enable = true;
@@ -19,6 +18,7 @@ outputs.lib.mkConfigModule config true "git"
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
         pull.rebase = true;
+        merge.conflictStyle = "zdiff3";
 
         alias = rec {
           alias = "config --get-regexp alias";
@@ -30,8 +30,9 @@ outputs.lib.mkConfigModule config true "git"
           quick = "!fn() { git add -A && git commit --allow-empty -m \"$*\" && git push; }; fn";
           again = "!fn() { git add -A && git commit --amend --no-edit --gpg-sign; }; fn";
 
+          undo = "reset --soft HEAD~1";
           unstage = "reset --";
-          discard = "!git reset --hard && git clean -df";
+          drop = "!git reset --hard && git clean -df";
 
           recent = "log -3";
           latest = "log -1";
@@ -43,13 +44,30 @@ outputs.lib.mkConfigModule config true "git"
           delete-all-branches = "!fn() { git checkout main; git branch | grep -v 'main' | xargs git branch -D; }; fn";
 
           purge = "!fn() { git delete-all-branches; git fetch --prune; git reset --hard origin/main; git clean -df; }; fn";
+
+          hidden = "git ls-files -v | grep '^S'";
+
+          hide = "update-index --skip-worktree";
+          unhide = "git update-index --no-skip-worktree";
+
+          unhide-all = "!fn() { git hidden | cut -c3- | xargs git unhide; }; fn";
+          stash-hidden = "!fn() { git unhide-all; git stash; git hide; }; fn";
         };
       };
     };
 
-    diff-so-fancy = {
+    delta = {
       enable = true;
       enableGitIntegration = true;
+
+      options = {
+        syntax-theme = "Visual Studio Dark+";
+        line-numbers = true;
+
+        side-by-side = true;
+        # line-numbers-left-format="";
+        # line-numbers-right-format="│";
+      };
     };
   };
 
