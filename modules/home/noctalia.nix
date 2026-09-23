@@ -90,15 +90,15 @@ outputs.lib.mkConfigModule config false "noctalia" {
       controlCenter = {
         shortcuts = {
           left = [
-            { id = "Network"; }
-            { id = "Bluetooth"; }
-            { id = "Notifications"; }
+            {id = "Network";}
+            {id = "Bluetooth";}
+            {id = "Notifications";}
           ];
 
           right = [
-            { id = "PowerProfile"; }
-            { id = "KeepAwake"; }
-            { id = "NightLight"; }
+            {id = "PowerProfile";}
+            {id = "KeepAwake";}
+            {id = "NightLight";}
           ];
         };
       };
@@ -120,7 +120,7 @@ outputs.lib.mkConfigModule config false "noctalia" {
           batteryWarningThreshold = 15;
         };
       };
-      
+
       wallpaper = {
         skipStartupTransition = true;
       };

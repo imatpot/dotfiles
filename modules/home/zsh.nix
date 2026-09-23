@@ -39,12 +39,13 @@ outputs.lib.mkConfigModule config true "zsh" {
       ];
     };
 
-    initContent =
-      let
-        nixvimPath = "${config.home.homeDirectory}/${
-          if outputs.lib.isDarwin system then "Developer" else "Development"
-        }/life";
-      in
+    initContent = let
+      nixvimPath = "${config.home.homeDirectory}/${
+        if outputs.lib.isDarwin system
+        then "Developer"
+        else "Development"
+      }/life";
+    in
       outputs.lib.mkMerge [
         (outputs.lib.mkBefore ''
           # macOS updates restore the stock /etc/zshrc and drop the Nix installer's block, so we need to revert that every time just in case :)

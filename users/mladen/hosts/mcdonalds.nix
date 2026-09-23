@@ -35,7 +35,7 @@ in
         };
       };
 
-      home.packages = [ pkgs.master.d2 ];
+      home.packages = [pkgs.master.d2];
 
       home.file.backblaze-id.source =
         config.lib.file.mkOutOfStoreSymlink

@@ -10,9 +10,9 @@ outputs.lib.mkConfigModule config false "niri" {
   programs.niri = {
     settings = {
       spawn-at-startup = outputs.lib.optionals config.modules.noctalia.enable [
-        { argv = [(outputs.lib.getExe pkgs.noctalia-shell)]; }
+        {argv = [(outputs.lib.getExe pkgs.noctalia-shell)];}
       ];
-      
+
       binds = {
         # https://www.reddit.com/r/niri/comments/1smvgno/how_can_i_use_super_as_key_instead_of_as_modifier/
         # "Mod".action.toggle-overview = null; # ???????
@@ -20,7 +20,7 @@ outputs.lib.mkConfigModule config false "niri" {
         "Mod+Return".action.spawn = outputs.lib.getExe pkgs.ghostty;
         "Mod+Space".action.spawn = [(outputs.lib.getExe pkgs.noctalia-shell) "ipc" "call" "launcher" "toggle"];
         "Mod+Q".action.close-window = {};
-        
+
         # https://github.com/sodiboo/niri-flake/issues/483
 
         "Mod+Left".action.focus-column-left = {};

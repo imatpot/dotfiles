@@ -20,7 +20,7 @@ in
       scrcpy
       adbitch
     ];
-    
+
     systems.linux.home.packages = with pkgs; [
       qtscrcpy
     ];
