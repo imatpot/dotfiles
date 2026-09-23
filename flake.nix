@@ -8,6 +8,7 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nur.url = "github:nix-community/nur";
 
+    treefmt-nix.url = "github:numtide/treefmt-nix";
     nixpkgs-ntrviewer-hr.url = "github:alejoheu/nixpkgs/ntrviewer-hr";
 
     vault.url = "git+ssh://git@github.com/imatpot/vault";
@@ -71,7 +72,7 @@
       url = "github:Lxtharia/minegrub-theme";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    
+
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs = {
@@ -79,7 +80,7 @@
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
     };
-    
+
     noctalia-shell = {
       url = "github:noctalia-dev/noctalia-shell"; # https://github.com/noctalia-dev/noctalia-shell/issues/2458
       inputs.nixpkgs.follows = "nixpkgs";
@@ -96,7 +97,19 @@
       "aarch64-darwin"
     ];
     systems = linuxSystems ++ darwinSystems;
+
+    formatter = inputs.self.lib.forEachSystem systems (
+      pkgs: let
+        treefmt = inputs.treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs.alejandra.enable = true;
+        };
+      in
+        treefmt.config.build.wrapper
+    );
   in rec {
+    inherit formatter;
+
     lib = import ./lib/lib.nix {
       inherit inputs;
       inherit (inputs.self) outputs;
@@ -134,12 +147,5 @@
       hostname = "mcdonalds";
       username = "mladen";
     };
-
-    formatter = lib.forEachSystem systems (
-      pkgs:
-        pkgs.writeShellScriptBin "alejandra" ''
-          exec ${lib.getExe pkgs.alejandra} --quiet "$@"
-        ''
-    );
   };
 }
