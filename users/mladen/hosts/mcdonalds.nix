@@ -52,6 +52,17 @@ in
         bash.initExtra = extra;
         zsh.initContent = extra;
 
+        zsh.profileExtra = ''
+          # MacPorts
+          export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+        
+          # Homebrew
+          export PATH="/opt/homebrew/bin:$PATH"
+        
+          # rbenv
+          eval "$(rbenv init - --no-rehash zsh)"
+        '';
+
         git = {
           settings.user = {
             name = outputs.lib.mkForce "Mladen Branković";

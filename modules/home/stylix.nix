@@ -3,6 +3,7 @@
   config,
   pkgs,
   username,
+  lib,
   ...
 }: let
   stylix-config = {
@@ -13,7 +14,7 @@
     polarity = "dark";
     image = config.modules.gui.wallpaper;
 
-    cursor = {
+    cursor = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
       size = 24;
