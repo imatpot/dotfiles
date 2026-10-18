@@ -11,6 +11,10 @@ outputs.lib.mkConfigModule config false "gaming" (outputs.lib.mkFor system hostn
     home.packages = with pkgs; [
       master.r2modman
       master.owmods-gui
+      # stable.me3 # 0.11.0
+
+      pkg-config
+      mono
     ];
   };
 })

@@ -13,7 +13,7 @@ outputs.lib.mkConfigModule config false "matrix"
     enable = true;
     packages = ["in.cinny.Cinny"];
 
-    update = {
+    update = outputs.lib.mkDefault {
       onActivation = true;
       auto = {
         enable = true;
