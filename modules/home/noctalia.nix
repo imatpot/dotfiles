@@ -5,7 +5,7 @@
   ...
 }:
 outputs.lib.mkConfigModule config false "noctalia" {
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
 
     settings = {
