@@ -6,7 +6,7 @@
 }: {
   programs.git.settings.user = {
     name = lib.mkDefault "Mladen Branković";
-    email = lib.mkDefault "root@brankovic.dev";
+    email = lib.mkDefault "git@brnk.vc";
   };
 
   modules = {
