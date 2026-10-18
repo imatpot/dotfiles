@@ -12,6 +12,8 @@
 with outputs.lib;
   mkFor system hostname {
     common = {
+      manual.manpages.enable = false;
+
       home = {
         inherit stateVersion;
         username = username;

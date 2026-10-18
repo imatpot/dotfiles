@@ -17,6 +17,7 @@ with outputs.lib; {
       exclude = [./default-config.nix];
     });
 
+  documentation.nixos.enable = false;
   system.stateVersion = mkDefault stateVersion;
 
   networking = {
