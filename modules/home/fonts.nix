@@ -9,6 +9,7 @@
     libertine
     atkinson-hyperlegible-next
     noto-fonts
+    newcomputermodern
 
     # Coding
     cascadia-code
