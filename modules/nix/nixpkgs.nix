@@ -59,6 +59,8 @@
       (_: prev: {
         noctalia-shell = inputs.noctalia-shell.packages.${prev.stdenv.hostPlatform.system}.default;
       })
+      
+      inputs.llm-agents.overlays.shared-nixpkgs
     ];
   };
 }

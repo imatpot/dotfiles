@@ -14,6 +14,7 @@ outputs.lib.mkFor system hostname {
       qbittorrent-enhanced
       parsec-bin
       ntrviewer-hr
+      llm-agents.claude-code
     ];
 
     modules = {

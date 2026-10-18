@@ -2,10 +2,10 @@
   description = "teatpot's Nix-powered dotfiles";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
+    nixpkgs-stable.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
+    nixpkgs-unstable.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master"; # no nixexprs :(
     nur.url = "github:nix-community/nur";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -14,6 +14,7 @@
     vault.url = "git+ssh://git@github.com/imatpot/vault";
     nixvim.url = "github:imatpot/nixvim";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
     disko = {
       url = "github:nix-community/disko";
