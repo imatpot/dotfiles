@@ -85,7 +85,7 @@ with outputs.lib;
 
       nixos.users.users.${username} = {
         isNormalUser = true;
-        extraGroups = ["networkmanager" "wheel" "docker"];
+        extraGroups = ["networkmanager" "wheel" "docker" "input" "uinput" "plugdev"];
       };
     };
 

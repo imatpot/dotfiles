@@ -1,0 +1,7 @@
+# Disable DualSense Touchpad acting as mouse
+# USB
+ATTRS{name}=="*DualSense*Touchpad*", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+# Bluetooth
+ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+# IDK
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0b05", ATTRS{idProduct}=="17cb", TEST=="power/control", ATTR{power/control}="on"
