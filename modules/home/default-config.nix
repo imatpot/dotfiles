@@ -31,6 +31,7 @@ with outputs.lib;
           zellij
           television
           process-compose
+          ookla-speedtest
         ];
 
         shellAliases = {
