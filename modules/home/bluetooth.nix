@@ -12,7 +12,6 @@ outputs.lib.mkConfigModule config pkgs.stdenv.hostPlatform.isLinux "bluetooth" {
   modules.udev.extraRules = [ ./dualsense.rules ];
 
   nixos = {
-    services.blueman-applet.enable = true;
     services.upower.enable = outputs.lib.mkForce false;
     boot.kernelParams = [ "usbcore.autosuspend=-1" ];
     boot.extraModprobeConfig = ''
