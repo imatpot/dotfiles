@@ -153,6 +153,14 @@ outputs.lib.mkFor system hostname {
           adminUids = ["KRux5f0bo-fvxlPo"];
           inviteOnly = true;
         };
+
+        dind = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/dind";
+          };
+        };
       };
     };
   };
