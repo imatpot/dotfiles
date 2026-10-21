@@ -10,6 +10,11 @@ outputs.lib.mkModule config false "containers.qbittorrent"
       type = outputs.lib.types.path;
       default = throw "dotfiles: containers.qbittorrent.dirs.root is not set";
     };
+
+    downloads = outputs.lib.mkOption {
+      type = outputs.lib.types.path;
+      default = throw "dotfiles: containers.qbittorrent.dirs.downloads is not set";
+    };
   };
 }
 (
@@ -53,6 +58,7 @@ outputs.lib.mkModule config false "containers.qbittorrent"
 
             volumes = [
               "${configDir}:/config"
+              "${cfg.dirs.downloads}:/downloads"
             ];
           };
 
