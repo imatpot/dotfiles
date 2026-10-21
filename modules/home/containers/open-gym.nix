@@ -143,6 +143,12 @@ outputs.lib.mkModule config false "containers.open-gym"
         '';
       };
 
+      # open-gym-media only seeds the media dirs and exits, so the default Restart=always turns into a restart loop
+      systemd.services."${backend}-open-gym-media".serviceConfig = {
+        Restart = outputs.lib.mkForce "on-failure";
+        RemainAfterExit = true;
+      };
+
       virtualisation.oci-containers = {
         containers = {
           open-gym-media = {
