@@ -8,6 +8,12 @@
 }:
 outputs.lib.mkFor system hostname {
   hosts.atlas = {
+    nixos.networking.firewall = {
+      enable = false;
+      allowedTCPPorts = [10022];
+      allowedUDPPorts = [10022];
+    };
+
     home.packages = with pkgs; [
       zellij
       pv
@@ -87,6 +93,7 @@ outputs.lib.mkFor system hostname {
 
           dirs = {
             root = containers + "/qbittorrent";
+            downloads = data + "/archives/torrents";
           };
         };
 
@@ -95,7 +102,17 @@ outputs.lib.mkFor system hostname {
 
           dirs = {
             root = containers + "/slskd";
-            downloads = data + "/audio/slskd";
+            downloads = data + "/audio/music/.downloads";
+          };
+        };
+
+        wrtag = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/wrtag";
+            music = data + "/audio/music";
+            downloads = data + "/audio/music/.downloads";
           };
         };
 
@@ -122,6 +139,18 @@ outputs.lib.mkFor system hostname {
             workflows = "${data}/software/ai/stable-diffusion/workflows";
             outputs = data;
           };
+        };
+
+        open-gym = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/open-gym";
+          };
+
+          domain = "gym.brnk.vc";
+          adminUids = ["KRux5f0bo-fvxlPo"];
+          inviteOnly = true;
         };
       };
     };
