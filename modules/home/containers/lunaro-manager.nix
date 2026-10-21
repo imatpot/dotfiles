@@ -23,6 +23,7 @@ outputs.lib.mkModule config false "containers.lunaro-manager"
       CLIENT_TOKEN=${config.sops.placeholder."containers/lunaro-manager/client_token"}
       HOME_GUILD_ID=${config.sops.placeholder."containers/lunaro-manager/home_guild_id"}
       PLAYING_ROLE_ID=${config.sops.placeholder."containers/lunaro-manager/playing_role_id"}
+      NOTIFICATION_CHANNEL_ID=${config.sops.placeholder."containers/lunaro-manager/notification_channel_id"}
     '';
 
     nixos = {
