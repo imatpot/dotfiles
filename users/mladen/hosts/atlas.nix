@@ -19,6 +19,7 @@ outputs.lib.mkFor system hostname {
       pv
       pigz
       yazi
+      llm-agents.claude-code
     ];
 
     modules = {
