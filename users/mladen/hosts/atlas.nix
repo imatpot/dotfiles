@@ -161,6 +161,14 @@ outputs.lib.mkFor system hostname {
             root = containers + "/dind";
           };
         };
+
+        forgejo-runner = {
+          enable = true;
+
+          dirs = {
+            root = containers + "/forgejo-runner";
+          };
+        };
       };
     };
   };
