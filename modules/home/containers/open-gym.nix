@@ -35,6 +35,8 @@ outputs.lib.mkModule config false "containers.open-gym"
 
     webPort = 8090;
 
+    nginxPort = 8080;
+
     repo = "https://github.com/DuarteSantos8/openGym";
 
     backend = osConfig.virtualisation.oci-containers.backend;
@@ -191,7 +193,7 @@ outputs.lib.mkModule config false "containers.open-gym"
             autoRemoveOnStop = false;
 
             ports = [
-              "${toString webPort}:80"
+              "${toString webPort}:${toString nginxPort}"
             ];
 
             environment =
@@ -231,7 +233,7 @@ outputs.lib.mkModule config false "containers.open-gym"
             ];
 
             environment = {
-              NGINX_PORT = "80";
+              NGINX_PORT = toString nginxPort;
               BACKEND = "127.0.0.1";
               PORT = "3000";
             };
