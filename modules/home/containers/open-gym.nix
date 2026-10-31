@@ -61,6 +61,13 @@ outputs.lib.mkModule config false "containers.open-gym"
       RUN npm ci --omit=dev && npm cache clean --force
     '';
 
+    registriesConf = (pkgs.formats.toml {}).generate "opengym-registries.conf" (
+      osConfig.virtualisation.containers.registries.settings
+      // {
+        unqualified-search-registries = ["docker.io"];
+      }
+    );
+
     apiDataDir = "${cfg.dirs.root}/data/open-gym-api/data";
     mediaImgDir = "${cfg.dirs.root}/data/open-gym-media/img";
     mediaGifDir = "${cfg.dirs.root}/data/open-gym-media/gif";
@@ -95,6 +102,8 @@ outputs.lib.mkModule config false "containers.open-gym"
           backendPackage
           pkgs.gitMinimal
         ];
+
+        environment.CONTAINERS_REGISTRIES_CONF = registriesConf;
 
         # Not RemainAfterExit, so that every start of the container re-checks
         # upstream, just like the pull policy of the other containers does.
