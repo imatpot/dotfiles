@@ -53,6 +53,7 @@ in
       };
     };
 
+    # dconf watch /
     dconf.settings = with outputs.lib.hm.gvariant;
       outputs.lib.mkFor system hostname {
         hosts.shinobi = {
@@ -201,13 +202,10 @@ in
               "com.mitchellh.ghostty.desktop"
               "zen.desktop"
               "dev.zed.Zed.desktop"
-              "code.desktop"
-              "in.cinny.Cinny.desktop"
-              "element-desktop.desktop"
+              "moe.sable.client.desktop"
               "vesktop.desktop"
               "feishin.desktop"
               "spotify.desktop"
-              "QtScrcpy.desktop"
             ];
           };
 
