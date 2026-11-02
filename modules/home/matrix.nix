@@ -11,10 +11,7 @@ outputs.lib.mkConfigModule config false "matrix"
 
   nixos.services.flatpak = {
     enable = true;
-    packages = [
-      "in.cinny.Cinny"
-      "moe.sable.client"
-    ];
+    packages = ["moe.sable.client"];
 
     update = outputs.lib.mkDefault {
       onActivation = true;
