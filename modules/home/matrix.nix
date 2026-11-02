@@ -1,7 +1,6 @@
 {
   outputs,
   config,
-  pkgs,
   ...
 }:
 outputs.lib.mkConfigModule config false "matrix"
@@ -10,13 +9,12 @@ outputs.lib.mkConfigModule config false "matrix"
     enable = true;
   };
 
-  home.packages = with pkgs; [
-    sable-next
-  ];
-
   nixos.services.flatpak = {
     enable = true;
-    packages = ["in.cinny.Cinny"];
+    packages = [
+      "in.cinny.Cinny"
+      "moe.sable.client"
+    ];
 
     update = outputs.lib.mkDefault {
       onActivation = true;
