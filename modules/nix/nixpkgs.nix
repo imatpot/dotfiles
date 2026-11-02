@@ -73,6 +73,10 @@
         noctalia-shell = inputs.noctalia-shell.packages.${prev.stdenv.hostPlatform.system}.default;
       })
       
+      (_: prev: {
+        sable-next = inputs.sable-next.packages.${prev.stdenv.hostPlatform.system}.default;
+      })
+      
       inputs.llm-agents.overlays.shared-nixpkgs
     ];
   };

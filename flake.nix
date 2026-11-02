@@ -86,6 +86,11 @@
       url = "github:noctalia-dev/noctalia-shell"; # https://github.com/noctalia-dev/noctalia-shell/issues/2458
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sable-next = {
+      url = "git+https://git.sable.moe/SableClient/sable-next";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let
