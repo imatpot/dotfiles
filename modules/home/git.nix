@@ -4,6 +4,21 @@
   config,
   ...
 }:
+
+let
+  git-hide = "!${git-hide-src}/bin/git-hide";
+  git-hide-src = pkgs.writeShellApplication {
+    name = "git-hide";
+    text = builtins.readFile ./git-hide.bash;
+    runtimeInputs = with pkgs; [
+      git
+      gawk
+      gnugrep
+      coreutils
+    ];
+  };
+in
+
 outputs.lib.mkConfigModule config true "git" {
   programs = {
     git = {
@@ -15,6 +30,7 @@ outputs.lib.mkConfigModule config true "git" {
           name = outputs.lib.mkOptionDefault (throw "programs.git.userName is not set");
         };
 
+        core.excludesFile = config.home.homeDirectory + "/.config/git/ignore";
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
         pull.rebase = true;
@@ -29,6 +45,7 @@ outputs.lib.mkConfigModule config true "git" {
 
           quick = "!fn() { git add -A && git commit --allow-empty -m \"$*\" && git push; }; fn";
           again = "!fn() { git add -A && git commit --amend --no-edit --gpg-sign; }; fn";
+          repush = "!git pull --rebase && git push";
 
           undo = "reset --soft HEAD~1";
           unstage = "reset --";
@@ -45,13 +62,12 @@ outputs.lib.mkConfigModule config true "git" {
 
           purge = "!fn() { git delete-all-branches; git fetch --prune; git reset --hard origin/main; git clean -df; }; fn";
 
-          hidden = "git ls-files -v | grep '^S'";
-
-          hide = "update-index --skip-worktree";
-          unhide = "git update-index --no-skip-worktree";
-
-          unhide-all = "!fn() { git hidden | cut -c3- | xargs git unhide; }; fn";
-          stash-hidden = "!fn() { git unhide-all; git stash; git hide; }; fn";
+          hidden = "${git-hide} list";
+          hide = "${git-hide} hide";
+          unhide = "${git-hide} unhide";
+          unhide-all = "${git-hide} unhide-all";
+          stash-hidden = "${git-hide} stash";
+          unstash-hidden = "${git-hide} unstash";
         };
       };
     };
@@ -74,6 +90,7 @@ outputs.lib.mkConfigModule config true "git" {
   home = {
     packages = with pkgs; [
       gitui
+      git-hide-src
     ];
   };
 }
