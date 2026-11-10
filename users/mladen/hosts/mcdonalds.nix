@@ -14,7 +14,7 @@
     alias nixvim="nix run path:/Users/mladen/Developer/life/nixvim --"
     alias nv="nixvim"
 
-    export PATH="$PATH:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/npm/bin:/opt/homebrew/bin:${config.home.homeDirectory}/.risc0/bin"
+    export PATH="$PATH:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/npm/bin:/opt/homebrew/bin:${config.home.homeDirectory}/.risc0/bin:${config.home.homeDirectory}/.sp1/bin"
   '';
 in
   outputs.lib.mkFor system hostname {
