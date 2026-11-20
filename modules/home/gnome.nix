@@ -61,12 +61,12 @@ in
             speed = 0;
           };
 
-          "org/gnome/shell/extensions/quick-settings-tweaks" = {
-            user-removed-buttons = [
-              "PowerProfilesToggle"
-              "NMWiredToggle"
-            ];
-          };
+          # "org/gnome/shell/extensions/quick-settings-tweaks" = {
+          #   user-removed-buttons = [
+          #     "PowerProfilesToggle"
+          #     "NMWiredToggle"
+          #   ];
+          # };
 
           "org/gnome/shell/extensions/tilingshell" = {
             # on a 21:9 monitor, this is
@@ -169,7 +169,7 @@ in
 
           "org/gnome/settings-daemon/plugins/power" = {
             sleep-inactive-ac-type = "nothing";
-            power-button-action = "hibernate";
+            power-button-action = "nothing";
           };
 
           "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -324,15 +324,6 @@ in
             user-removed-buttons = ["NightLightToggle"];
           };
 
-          "org/gnome/shell/extensions/hibernate-status-button" = {
-            show-hybrid-sleep = false;
-            show-suspend-then-hibernate = false;
-
-            show-hibernate-dialog = true;
-            show-hybrid-sleep-dialog = false;
-            show-suspend-then-hibernate-dialog = false;
-          };
-
           "org/gnome/desktop/app-folders/folders/Utilities" = {
             apps = [];
           };
@@ -348,6 +339,16 @@ in
             ];
           };
 
+          "/org/gnome/shell/extensions/hibernate-power-menu" = {
+            show-hibernate = true;
+            show-hybrid-sleep = false;
+
+            hibernate-countdown = 60;
+            skip-hibernate-dialog = false;
+            hybrid-sleep-countdown = 60;
+            skip-hybrid-sleep-dialog = false;
+          };
+
           "org/gnome/shell" = {
             disable-user-extensions = false;
             enabled-extensions = [
@@ -358,10 +359,10 @@ in
               "Vitals@CoreCoding.com"
               "dash-to-panel@jderose9.github.com"
               "clipboard-indicator@tudmotu.com"
-              "quick-settings-tweaks@qwreey"
+              # "quick-settings-tweaks@qwreey"
               "AlphabeticalAppGrid@stuarthayhurst"
-              "hibernate-status@dromi"
               "blur-my-shell@aunetx"
+              "hibernate-power-menu@arnakazim"
             ];
           };
         };
@@ -378,9 +379,9 @@ in
           vitals
           dash-to-panel
           clipboard-indicator
-          quick-settings-tweaker
+          # quick-settings-tweaker
           alphabetical-app-grid
-          hibernate-status-button
+          hibernate-power-menu
           blur-my-shell
         ]);
 
