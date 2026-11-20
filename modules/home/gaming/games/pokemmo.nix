@@ -3,13 +3,19 @@
   system,
   hostname,
   config,
-  pkgs,
   ...
 }:
 outputs.lib.mkConfigModule config config.modules.gaming.enable "gaming.games.pokemmo" (outputs.lib.mkFor system hostname {
-  systems.linux = {
-    home.packages = with pkgs; [
-      pokemmo-installer
-    ];
+  systems.linux.nixos.services.flatpak = {
+    enable = true;
+    packages = ["com.pokemmo.PokeMMO"];
+
+    update = {
+      onActivation = true;
+      auto = {
+        enable = true;
+        onCalendar = "daily";
+      };
+    };
   };
 })
