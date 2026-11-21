@@ -339,7 +339,7 @@ in
             ];
           };
 
-          "/org/gnome/shell/extensions/hibernate-power-menu" = {
+          "org/gnome/shell/extensions/hibernate-power-menu" = {
             show-hibernate = true;
             show-hybrid-sleep = false;
 
