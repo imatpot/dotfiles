@@ -90,7 +90,6 @@ outputs.lib.mkConfigModule config true "git" {
   home = {
     packages = with pkgs; [
       gitui
-      git-hide-src
       pre-commit
     ];
   };
