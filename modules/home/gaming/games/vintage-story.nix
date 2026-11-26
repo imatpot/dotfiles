@@ -5,7 +5,7 @@
   config,
   ...
 }:
-outputs.lib.mkConfigModule config config.modules.gaming.enable "gaming.games.vintage-story" (
+outputs.lib.mkConfigModule config false "gaming.games.vintage-story" (
   outputs.lib.mkFor system hostname {
     systems.linux.nixos = {
       services.flatpak = {
